@@ -26,6 +26,9 @@ public class MedewerkerController {
 
     @PostMapping("/registreer")
     public String registreer (@ModelAttribute("userForm")Medewerker userForm, BindingResult bindingResult){
+        if (bindingResult.hasErrors()) {
+            return "registration";
+        }
         medewerkerRepository.save(userForm);
         return "registratieFormulier";
     }
