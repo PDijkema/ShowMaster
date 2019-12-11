@@ -1,17 +1,17 @@
 package nl.makeitwork.Showmaster.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Medewerker {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer medewerkerId;
 
-    private String gebruikersNaam;
+    @Column(unique = true)
+    private String gebruikersnaam;
+
     private String wachtwoord;
 
     public Integer getMedewerkerId() {
@@ -22,12 +22,12 @@ public class Medewerker {
         this.medewerkerId = medewerkerId;
     }
 
-    public String getGebruikersNaam() {
-        return gebruikersNaam;
+    public String getGebruikersnaam() {
+        return gebruikersnaam;
     }
 
-    public void setGebruikersNaam(String gebruikersNaam) {
-        this.gebruikersNaam = gebruikersNaam;
+    public void setGebruikersnaam(String gebruikersnaam) {
+        this.gebruikersnaam = gebruikersnaam;
     }
 
     public String getWachtwoord() {
