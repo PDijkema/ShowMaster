@@ -14,6 +14,7 @@ public class Voorstelling {
     private Integer voorstellingId;
     private String naam;
     private Date datum = new Date();
+    ;
 
     public Integer getVoorstellingId() {
         return voorstellingId;
@@ -23,12 +24,12 @@ public class Voorstelling {
         this.voorstellingId = voorstellingId;
     }
 
-    public String getName() {
+    public String getNaam() {
         return naam;
     }
 
-    public void setName(String name) {
-        this.naam = name;
+    public void setNaam(String naam) {
+        this.naam = naam;
     }
 
     public Date getDatum() {
