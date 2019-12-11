@@ -5,6 +5,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+/**
+ * @author Karin Zoetendal
+ * 11-12-19: Met deze klasse kun je een generieke taak aanmaken die -uitzonderingen daargelaten- voor elke voorstelling
+ * geldt, met een standaard aantal personen dat voor die taak moet worden ingepland (standaard bezetting).
+ * Voor showspecifieke extra taken zal later een apart veld moeten worden toegevoegd in de jsp voor voorstelling.
+ */
+
 @Entity
 public class Taak {
 

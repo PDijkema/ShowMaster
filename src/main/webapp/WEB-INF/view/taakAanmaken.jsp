@@ -8,18 +8,18 @@
     <body>
         <h1>Maak een nieuwe taak aan</h1>
 
-        <form:form action="/taak/aanmaken" modelAttribute="taak">
+        <form:form action="/taak/aanmaken" modelAttribute="taak" method="post">
             <table>
                 <tr>
-                    <td>Title:</td>
+                    <td>Taaknaam:</td>
                     <td>
-                        <form:input path="taaknaam" />
+                        <form:input path="taakNaam" />
                     </td>
                 </tr>
                 <tr>
-                    <td>Auteur:</td>
+                    <td>Standaard bezetting:</td>
                     <td>
-                        <form:input path="standaard_bezetting">
+                        <form:input path="standaardBezetting" />
                     </td>
                 </tr>
 
