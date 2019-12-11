@@ -1,4 +1,6 @@
 package nl.makeitwork.Showmaster.repository;
 
-public interface MedewerkerRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface MedewerkerRepository extends JpaRepository {
 }
