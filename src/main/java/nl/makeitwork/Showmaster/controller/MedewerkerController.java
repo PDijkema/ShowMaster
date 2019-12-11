@@ -1,4 +1,10 @@
 package nl.makeitwork.Showmaster.controller;
 
-public class MedewerkerController {
-}
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+
+public class MedewerkerController {}
+
