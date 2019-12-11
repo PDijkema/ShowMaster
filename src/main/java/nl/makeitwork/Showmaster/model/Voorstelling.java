@@ -27,7 +27,6 @@ public class Voorstelling {
         return naam;
     }
 
-
     public void setName(String name) {
         this.naam = name;
     }
