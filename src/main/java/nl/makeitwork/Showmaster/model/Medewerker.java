@@ -14,6 +14,17 @@ public class Medewerker {
 
     private String wachtwoord;
 
+    @Transient
+    private String wachtwoordBevestigen;
+
+    public String getWachtwoordBevestigen() {
+        return wachtwoordBevestigen;
+    }
+
+    public void setWachtwoordBevestigen(String wachtwoordBevestigen) {
+        this.wachtwoordBevestigen = wachtwoordBevestigen;
+    }
+
     public Integer getMedewerkerId() {
         return medewerkerId;
     }

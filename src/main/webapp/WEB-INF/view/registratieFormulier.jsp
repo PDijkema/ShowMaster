@@ -33,6 +33,13 @@
                     <form:errors path="wachtwoord"></form:errors>
                 </div>
             </spring:bind>
+            <spring:bind path="wachtwoordBevestigen">
+                            <div class="form-group ${status.error ? 'has-error' : ''}">
+                                <form:input type="password" path="wachtwoordBevestigen" class="form-control"
+                                            placeholder="Wachtwoord bevestigen"></form:input>
+                                <form:errors path="wachtwoordBevestigen"></form:errors>
+                            </div>
+                        </spring:bind>
 
 
 
