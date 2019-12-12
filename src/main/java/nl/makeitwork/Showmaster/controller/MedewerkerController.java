@@ -30,7 +30,7 @@ public class MedewerkerController {
             return "registration";
         }
         medewerkerRepository.save(userForm);
-        return "registratieFormulier";
+        return "redirect:/registreer";
     }
 
 

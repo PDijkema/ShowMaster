@@ -14,6 +14,16 @@ public class Medewerker {
 
     private String wachtwoord;
 
+    private Boolean planner;
+
+    public Boolean getPlanner() {
+        return planner;
+    }
+
+    public void setPlanner(Boolean planner) {
+        this.planner = planner;
+    }
+
     @Transient
     private String wachtwoordBevestigen;
 

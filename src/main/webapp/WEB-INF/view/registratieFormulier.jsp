@@ -40,6 +40,10 @@
                                 <form:errors path="wachtwoordBevestigen"></form:errors>
                             </div>
                         </spring:bind>
+             <spring:bind path="planner">
+            <form:checkbox path="planner" value="Planner" /> Planner
+            </spring:bind>
+
 
 
 
