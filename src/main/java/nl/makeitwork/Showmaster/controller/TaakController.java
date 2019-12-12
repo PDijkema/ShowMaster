@@ -26,7 +26,7 @@ public class TaakController {
 
 
     @PostMapping("/taak/aanmaken")
-    protected String saveTaakAanmaken(Taak taak) {
+    protected String saveOrUpdateTaakAanmaken(Taak taak) {
         if (taak.getTaakNaam() != null && !taak.getTaakNaam().isEmpty() &&
                 taak.getStandaardBezetting() != null) {
             taakRepository.save(taak);
