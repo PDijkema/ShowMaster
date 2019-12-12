@@ -18,7 +18,7 @@ public class VoorstellingController {
     VoorstellingRepository voorstellingRepository;
 
     @GetMapping("/voorstelling/toevoegen")
-    protected String showBooks(Model model){
+    protected String showVoorstellingen(Model model){
         model.addAttribute("alleVoorstellingen", voorstellingRepository.findAll());
         model.addAttribute("voorstelling", new Voorstelling());
         return "nieuweVoorstelling";
