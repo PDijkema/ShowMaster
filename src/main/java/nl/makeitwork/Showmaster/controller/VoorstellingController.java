@@ -29,12 +29,12 @@ public class VoorstellingController {
         if (result.hasErrors()) {
             return "nieuweVoorstelling";
         } else {
-            System.out.println(voorstelling.getDatum());
-            voorstellingRepository.save(voorstelling);
+            if(!voorstelling.getNaam().isEmpty() && voorstelling.getDatum() != null) {
+                voorstellingRepository.save(voorstelling);
+            } else {
+                return "nieuweVoorstelling";
+            }
             return "redirect:/voorstelling/toevoegen";
         }
     }
-
-
-
 }
