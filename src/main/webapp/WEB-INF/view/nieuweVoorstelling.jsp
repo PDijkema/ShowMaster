@@ -27,7 +27,7 @@
 
     <body>
         <h1>Nieuwe voorstelling</h1>
-        <form:form action="/voorstelling/toevoegen" modelAttribute="voorstelling">
+        <form:form action="/voorstelling/toevoegen" modelAttribute="voorstelling" method="post">
             <table>
                 <tr>
                     <td>Naam voorstelling:</td>
@@ -35,16 +35,12 @@
                         <form:input path="naam"/>
                     </td>
                 </tr>
-
-
                 <tr>
                      <td>Datum en tijdstip:</td>
                      <td>
                         <input type="datetime-local" name="datum"/>
                      </td>
                 </tr>
-
-
                 <tr>
                     <td colspan="2">
                         <input type="submit" value="Opslaan"/>

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+
 @Controller
 public class VoorstellingController {
 
@@ -26,12 +27,11 @@ public class VoorstellingController {
     @PostMapping("/voorstelling/toevoegen")
     protected String saveOrUpdateVoorstelling(@ModelAttribute("voorstelling") Voorstelling voorstelling, BindingResult result){
         if (result.hasErrors()) {
-            System.out.println(voorstelling.getNaam());
-            System.out.println(voorstelling.getDatum());
             return "nieuweVoorstelling";
         } else {
+            System.out.println(voorstelling.getDatum());
             voorstellingRepository.save(voorstelling);
-            return "redirect:/nieuweVoorstelling";
+            return "redirect:/voorstelling/toevoegen";
         }
     }
 

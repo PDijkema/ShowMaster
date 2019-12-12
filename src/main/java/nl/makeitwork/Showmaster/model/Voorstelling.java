@@ -1,10 +1,14 @@
 package nl.makeitwork.Showmaster.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.util.Calendar;
+
 
 @Entity
 public class Voorstelling {
@@ -13,8 +17,10 @@ public class Voorstelling {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer voorstellingId;
     private String naam;
-    private Date datum = new Date();
-    ;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    private LocalDateTime datum;
+
 
     public Integer getVoorstellingId() {
         return voorstellingId;
@@ -32,11 +38,11 @@ public class Voorstelling {
         this.naam = naam;
     }
 
-    public Date getDatum() {
+    public LocalDateTime getDatum() {
         return datum;
     }
 
-    public void setDatum(Date datum) {
+    public void setDatum(LocalDateTime datum) {
         this.datum = datum;
     }
 }
