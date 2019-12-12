@@ -2,11 +2,14 @@ package nl.makeitwork.Showmaster.model;
 
 import javax.persistence.*;
 
+/**
+ * @Author Gert Postma
+ */
 @Entity
 public class Medewerker {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer medewerkerId;
 
     @Column(unique = true)

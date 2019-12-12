@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 
+/**
+ * @Author Gert Postma
+ */
 @Controller
 public class MedewerkerController {
 

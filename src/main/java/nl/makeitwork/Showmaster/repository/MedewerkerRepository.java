@@ -6,6 +6,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+/**
+ * @Author Gert Postma
+ */
 @Repository
 public interface MedewerkerRepository extends JpaRepository<Medewerker, Integer> {
     Optional<Medewerker> findByGebruikersnaam(String gebruikersnaam);
