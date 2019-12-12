@@ -19,6 +19,8 @@
 
         <form:form method="POST" modelAttribute="userForm" class="form-signin">
             <h2 class="form-signin-heading">Gebruiker aanmaken</h2>
+
+
             <spring:bind path="gebruikersnaam">
                 <div class="form-group ${status.error ? 'has-error' : ''}">
                     <form:input type="text" path="gebruikersnaam" class="form-control" placeholder="Gebruikersnaam"
@@ -27,12 +29,15 @@
                 </div>
             </spring:bind>
 
+
             <spring:bind path="wachtwoord">
                 <div class="form-group ${status.error ? 'has-error' : ''}">
                     <form:input type="password" path="wachtwoord" class="form-control" placeholder="Wachtwoord"></form:input>
                     <form:errors path="wachtwoord"></form:errors>
                 </div>
             </spring:bind>
+
+
             <spring:bind path="wachtwoordBevestigen">
                             <div class="form-group ${status.error ? 'has-error' : ''}">
                                 <form:input type="password" path="wachtwoordBevestigen" class="form-control"
@@ -40,14 +45,17 @@
                                 <form:errors path="wachtwoordBevestigen"></form:errors>
                             </div>
                         </spring:bind>
+
+
              <spring:bind path="planner">
-            <form:checkbox path="planner" value="Planner" /> Planner
+             <div class="form-group ${status.error ? 'has-error' : ''}">
+                <form:checkbox path="planner" value="Planner" /> Planner
+              </div>
             </spring:bind>
 
 
-
-
             <button class="btn btn-lg btn-primary btn-block" type="submit">Verstuur</button>
-        </form:form>
 
+
+        </form:form>
     </div>
