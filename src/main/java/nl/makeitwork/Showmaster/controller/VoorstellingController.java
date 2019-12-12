@@ -1,5 +1,4 @@
 package nl.makeitwork.Showmaster.controller;
-
 import nl.makeitwork.Showmaster.model.Voorstelling;
 import nl.makeitwork.Showmaster.repository.VoorstellingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+/**
+ * @author Pieter Dijkema
+ * opgeslagen voorstellingen weergeven en een nieuwe voorstelling opslaan
+ */
 
 @Controller
 public class VoorstellingController {
@@ -31,6 +34,7 @@ public class VoorstellingController {
         } else {
             if(!voorstelling.getNaam().isEmpty() && voorstelling.getDatum() != null) {
                 voorstellingRepository.save(voorstelling);
+                System.out.println(voorstellingRepository.getOne(5));
             } else {
                 return "nieuweVoorstelling";
             }
