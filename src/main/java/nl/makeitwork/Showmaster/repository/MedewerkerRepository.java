@@ -12,6 +12,6 @@ import java.util.Optional;
  */
 @Repository
 public interface MedewerkerRepository extends JpaRepository<Medewerker, Integer> {
-    Optional<Medewerker> findByGebruikersnaam(String gebruikersnaam);
+    Medewerker findByGebruikersnaam(String gebruikersnaam);
 }
 

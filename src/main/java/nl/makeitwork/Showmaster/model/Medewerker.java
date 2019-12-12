@@ -1,12 +1,19 @@
 package nl.makeitwork.Showmaster.model;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * @Author Gert Postma
  */
 @Entity
-public class Medewerker {
+public class Medewerker implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -61,5 +68,43 @@ public class Medewerker {
     public void setWachtwoord(String wachtwoord) {
         this.wachtwoord = wachtwoord;
     }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+            List<GrantedAuthority> authorities = new ArrayList<>();
+            authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+            return authorities;
+        }
+
+    @Override
+    public String getPassword() {
+        return wachtwoord;
+    }
+
+    @Override
+    public String getUsername() {
+        return gebruikersnaam;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
 }
 
