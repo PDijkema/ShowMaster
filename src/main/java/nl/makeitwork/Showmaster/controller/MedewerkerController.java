@@ -22,16 +22,13 @@ public class MedewerkerController {
     MedewerkerRepository medewerkerRepository;
 
     @GetMapping("/registreer")
-    protected String registreer(Model model) {
-        model.addAttribute("userForm",new Medewerker());
+    protected String showRegistratieFormulier(Model model) {
+        model.addAttribute("registratieFormulier",new Medewerker());
         return "registratieFormulier";
     }
 
     @PostMapping("/registreer")
-    public String registreer (@ModelAttribute("userForm")Medewerker userForm, BindingResult bindingResult){
-        if (bindingResult.hasErrors()) {
-            return "registration";
-        }
+    public String saveGebruiker (@ModelAttribute("registratieFormulier")Medewerker userForm){
         medewerkerRepository.save(userForm);
         return "redirect:/registreer";
     }
