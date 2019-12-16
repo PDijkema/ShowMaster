@@ -19,6 +19,7 @@
                     <tr>
                         <td><c:out value="${voorstelling.naam}"/></td>
                         <td><c:out value="${voorstelling.datum}"/></td>
+                        <td><a href="/voorstelling/verwijderen/<c:out value="${voorstelling.voorstellingId}" />">Verwijderen</a></td>
                     </tr>
                     </c:forEach>
                 </tbody>
