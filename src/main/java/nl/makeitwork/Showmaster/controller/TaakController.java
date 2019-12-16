@@ -4,6 +4,7 @@ import nl.makeitwork.Showmaster.model.Taak;
 import nl.makeitwork.Showmaster.repository.TaakRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -25,16 +26,22 @@ public class TaakController {
     }
 
 
-
     @PostMapping("/taak/aanmaken")
     protected String saveOrUpdateTaakAanmaken(Taak taak) {
         if (taak.getTaakNaam() != null && !taak.getTaakNaam().isEmpty() &&
                 taak.getStandaardBezetting() != null) {
             taakRepository.save(taak);
-            return "redirect:/taak";
+            return "redirect:/takenLijst";
         } else {
             return "taakAanmaken";
         }
+    }
+
+    @GetMapping("/takenlijst")
+    protected String showTakenlijst(Model model){
+        model.addAttribute("alleTaken", taakRepository.findAll());
+        model.addAttribute("taak", new Taak());
+        return "takenlijst";
     }
 
     @GetMapping("/taak/setup")
@@ -79,7 +86,7 @@ public class TaakController {
         taak8.setStandaardBezetting(1);
         taakRepository.save(taak8);
 
-        return "redirect:/taak";
+        return "redirect:/takenlijst";
     }
 
 }
