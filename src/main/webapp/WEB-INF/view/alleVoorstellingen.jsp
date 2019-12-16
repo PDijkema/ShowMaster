@@ -17,8 +17,8 @@
                 <tbody>
                     <c:forEach items="${alleVoorstellingen}" var="voorstelling">
                     <tr>
-                        <td><c:out value="${voorstelling.naam}" /></td>
-                        <td><c:out value="${voorstelling.datum}" /></td>
+                        <td><c:out value="${voorstelling.naam}"/></td>
+                        <td><c:out value="${voorstelling.datum}"/></td>
                     </tr>
                     </c:forEach>
                 </tbody>

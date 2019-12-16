@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 /**
@@ -18,8 +19,9 @@ public class Voorstelling {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer voorstellingId;
+    @NotNull
     private String naam;
-
+    @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime datum;
 
