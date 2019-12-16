@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author Pieter Dijkema
@@ -41,6 +42,12 @@ public class VoorstellingController {
         } else {
             return "nieuweVoorstelling";
         }
+        return "redirect:/voorstellingen";
+    }
+
+    @GetMapping("/voorstelling/verwijderen/{voorstellingId}")
+    protected String verwijderVoorstelling(@PathVariable Integer voorstellingId) {
+        voorstellingRepository.deleteById(voorstellingId);
         return "redirect:/voorstellingen";
     }
 }
