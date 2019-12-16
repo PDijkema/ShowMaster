@@ -33,6 +33,11 @@ public class MedewerkerController {
         return "redirect:/registreer";
     }
 
+    @GetMapping("/profielpagina")
+    protected String showProfielpagina(Model model) {
+        model.addAttribute("profielPagina", new Medewerker());
+        return "profielPagina";
+    }
 
 
     }
