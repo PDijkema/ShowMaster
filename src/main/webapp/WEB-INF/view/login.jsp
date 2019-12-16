@@ -21,9 +21,9 @@
 
         <div class="form-group ${error != null ? 'has-error' : ''}">
             <span>${message}</span>
-            <input name="gebruikersnaam" type="text" class="form-control" placeholder="Gebruikersnaam"
+            <input name="username" type="text" class="form-control" placeholder="Gebruikersnaam"
                    autofocus="true"/>
-            <input name="wachtwoord" type="password" class="form-control" placeholder="Wachtwoord"/>
+            <input name="password" type="password" class="form-control" placeholder="Wachtwoord"/>
             <span>${error}</span>
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 

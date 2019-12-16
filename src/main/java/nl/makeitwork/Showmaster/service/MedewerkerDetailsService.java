@@ -26,9 +26,9 @@ public class MedewerkerDetailsService implements UserDetailsService {
         Medewerker medewerker = medewerkerRepository.findByGebruikersnaam(gebruikersnaam);
         if (medewerker == null) throw new UsernameNotFoundException(gebruikersnaam);
 
+
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
         grantedAuthorities.add(new SimpleGrantedAuthority("medewerker"));
-
 
         return new org.springframework.security.core.userdetails.User(medewerker.getUsername(), medewerker.getPassword(), grantedAuthorities);
     }

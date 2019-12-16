@@ -52,9 +52,6 @@ public class MedewerkerController {
             return "registratieFormulier";
         }
 
-        System.out.println(registratieFormulier.getWachtwoord());
-
-
         medewekerService.save(registratieFormulier);
 
         securityService.autoLogin(registratieFormulier.getGebruikersnaam(),registratieFormulier.getWachtwoordBevestigen());
@@ -64,7 +61,6 @@ public class MedewerkerController {
 
     @GetMapping("/login")
     public String login(Model model, String error, String logout) {
-
 
         if (error != null)
             model.addAttribute("error", "Your username and password is invalid.");
