@@ -28,7 +28,6 @@ public class VoorstellingController {
 
     @GetMapping("/voorstelling/toevoegen")
     protected String toevoegenVoorstellingen(Voorstelling voorstelling) {
-        //model.addAttribute("alleVoorstellingen", voorstellingRepository.findAll());
         return "nieuweVoorstelling";
     }
 
