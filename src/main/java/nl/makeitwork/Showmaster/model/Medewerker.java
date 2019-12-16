@@ -78,12 +78,12 @@ public class Medewerker implements UserDetails {
 
     @Override
     public String getPassword() {
-        return wachtwoord;
+        return this.wachtwoord;
     }
 
     @Override
     public String getUsername() {
-        return gebruikersnaam;
+        return this.gebruikersnaam;
     }
 
     @Override

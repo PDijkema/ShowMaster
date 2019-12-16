@@ -10,7 +10,7 @@ import java.util.Optional;
 /**
  * @Author Gert Postma
  */
-@Repository
+
 public interface MedewerkerRepository extends JpaRepository<Medewerker, Integer> {
     Medewerker findByGebruikersnaam(String gebruikersnaam);
 }
