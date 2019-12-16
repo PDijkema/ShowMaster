@@ -6,7 +6,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.List;
 
 /**
  * @author Pieter Dijkema
@@ -19,10 +22,15 @@ public class VoorstellingController {
     @Autowired
     private VoorstellingRepository voorstellingRepository;
 
-    @GetMapping("/voorstelling/toevoegen")
+
+    @GetMapping("/voorstellingen")
     protected String alleVoorstellingen(Model model) {
         model.addAttribute("alleVoorstellingen", voorstellingRepository.findAll());
-        model.addAttribute("voorstelling", new Voorstelling());
+        return "alleVoorstellingen";
+    }
+
+    @GetMapping("/voorstelling/toevoegen")
+    protected String toevoegenVoorstellingen(Voorstelling voorstelling) {
         return "nieuweVoorstelling";
     }
 
@@ -33,6 +41,6 @@ public class VoorstellingController {
         } else {
             return "nieuweVoorstelling";
         }
-        return "redirect:/voorstelling/toevoegen";
+        return "redirect:/voorstellingen";
     }
 }
