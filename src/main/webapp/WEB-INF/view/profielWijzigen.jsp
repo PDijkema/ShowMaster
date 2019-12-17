@@ -50,16 +50,12 @@
                         <input type="password" id="wachtwoord" placeholder="Wachtwoord" class="form-control">
                     </div>
                 </div>
-
-                <!-- deze is nu nog niet aan de orde, is voor later -->
-                <!-- <div class="form-group"> -->
-                <!-- <label for="wachtwoord" class="col-sm-3 control-label">Herhaal wachtwoord* </label> -->
-                <!-- <div class="col-sm-9"> -->
-                <!-- <input type="password" id="wachtwoord" placeholder="Wachtwoord" class="form-control"> -->
-                <!-- </div> -->
-                <!-- </div> -->
-
-
+                <div class="form-group">
+                    <label for="wachtwoordBevestigen" class="col-sm-3 control-label">Bevestig wachtwoord* </label>
+                    <div class="col-sm-9">
+                        <input type="password" id="wachtwoordBevestigen" placeholder="Wachtwoord" class="form-control">
+                    </div>
+                </div>
                 <div class="form-group">
                     <label for="voornaam" class="col-sm-3 control-label">Voornaam* </label>
                     <div class="col-sm-9">
@@ -151,5 +147,6 @@
             </form>
         </div>
     </form:form>
+    <hr>
     </body>
 </html>
