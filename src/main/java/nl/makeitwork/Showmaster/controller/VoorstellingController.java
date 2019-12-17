@@ -1,5 +1,6 @@
 package nl.makeitwork.Showmaster.controller;
 import nl.makeitwork.Showmaster.model.Voorstelling;
+import nl.makeitwork.Showmaster.repository.TaakRepository;
 import nl.makeitwork.Showmaster.repository.VoorstellingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,6 +26,8 @@ public class VoorstellingController {
 
     @Autowired
     private VoorstellingRepository voorstellingRepository;
+    @Autowired
+    private TaakRepository taakRepository;
 
 
     @GetMapping("/voorstellingen")
@@ -34,18 +37,20 @@ public class VoorstellingController {
     }
 
     @GetMapping("/voorstelling/toevoegen")
-    protected String toevoegenVoorstellingen(Voorstelling voorstelling) {
+    protected String toevoegenVoorstellingen(Voorstelling voorstelling, Model model) {
+        model.addAttribute("alleTaken", taakRepository.findAll());
         return "wijzigVoorstelling";
     }
 
     @GetMapping("/voorstelling/wijzigen/{voorstellingId}")
     protected String wijzigenVoorstellingen(@PathVariable Integer voorstellingId, Model model) {
         Optional<Voorstelling> voorstelling = voorstellingRepository.findById(voorstellingId);
+        model.addAttribute("alleTaken", taakRepository.findAll());
         if (!voorstelling.isPresent()) {
             return "redirect:/alleVoorstellingen";
         } else {
             model.addAttribute("voorstelling", voorstelling.get());
-            System.out.println(voorstelling);
+
             return "wijzigVoorstelling";
         }
     }

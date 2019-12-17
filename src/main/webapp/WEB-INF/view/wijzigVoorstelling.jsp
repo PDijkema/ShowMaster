@@ -13,26 +13,34 @@
   <title>Nieuwe/Wijzig voorstelling</title>
 </head>
     <body>
-        <h1>Nieuwe/Wijzig voorstelling</h1>
+        <h1>Beheer voorstelling</h1>
         <form:form action="/voorstelling/toevoegen" modelAttribute="voorstelling" method="post">
             <form:hidden path="voorstellingId"/>
             <table>
-                <tr>
-                    <td>Naam voorstelling:</td>
-                    <td>
-                        <form:input path="naam" required="required" />
-                    </td>
-                </tr>
-                <tr>
-                     <td>Datum en tijdstip:</td>
-                     <td>
-                        <fmt:formatDate value="${voorstelling.datum}" var="dateString" pattern="yyyy-MM-dd'T'HH:mm" />
-                        <form:input type="datetime-local" path="datum" value="${dateString}" required="required" />
-                     </td>
-                </tr>
+                <div>
+                    <tr>
+                        <td>Naam voorstelling:</td>
+                        <td>
+                            <form:input class="form-control mb-2 mr-sm-2" path="naam" required="required" />
+                        </td>
+                    </tr>
+                    <tr>
+                         <td>Datum en tijdstip:</td>
+                         <td>
+                            <form:input type="datetime-local" class="form-control mb-2 mr-sm-2" path="datum" value="${dateString}" required="required" />
+                         </td>
+                    </tr>
+                </div>
+                <div>
+                    <c:forEach items="${alleTaken}" var="taak">
+                        <tr>
+                          <td><c:out value="${taak.taakNaam}"/></td>
+                        </tr>
+                    </c:forEach>
+                </div>
                 <tr>
                     <td colspan="2">
-                        <input type="submit" value="Opslaan"/>
+                        <input type="submit" class="btn btn-primary" value="Opslaan"/>
                     </td>
                 </tr>
             </table>
