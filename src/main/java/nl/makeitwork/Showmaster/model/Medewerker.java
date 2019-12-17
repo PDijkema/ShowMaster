@@ -48,15 +48,15 @@ public class Medewerker {
 
     private String telefoonnummer;
 
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Taak.class)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "voorkeurstaakId", referencedColumnName = "taakId")
     @OnDelete(action = OnDeleteAction.NO_ACTION)
-    private Integer voorkeurstaak;
+    private Taak voorkeurstaak;
 
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Taak.class)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "vasteTaakId", referencedColumnName = "taakId")
     @OnDelete(action = OnDeleteAction.NO_ACTION)
-    private Integer vasteTaak;
+    private Taak vasteTaak;
 
     public Boolean getPlanner() {
         return planner;
@@ -189,19 +189,19 @@ public class Medewerker {
         this.telefoonnummer = telefoonnummer;
     }
 
-    public Integer getVoorkeurstaak() {
+    public Taak getVoorkeurstaak() {
         return voorkeurstaak;
     }
 
-    public void setVoorkeurstaak(Integer voorkeurstaak) {
+    public void setVoorkeurstaak(Taak voorkeurstaak) {
         this.voorkeurstaak = voorkeurstaak;
     }
 
-    public Integer getVasteTaak() {
+    public Taak getVasteTaak() {
         return vasteTaak;
     }
 
-    public void setVasteTaak(Integer vasteTaak) {
+    public void setVasteTaak(Taak vasteTaak) {
         this.vasteTaak = vasteTaak;
     }
 }
