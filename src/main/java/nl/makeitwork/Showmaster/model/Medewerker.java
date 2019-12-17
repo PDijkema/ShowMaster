@@ -1,5 +1,7 @@
 package nl.makeitwork.Showmaster.model;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -46,11 +48,15 @@ public class Medewerker {
 
     private String telefoonnummer;
 
-    private int voorkeurstaakId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "voorkeurstaakId", referencedColumnName = "taakId")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private int voorkeurstaak;
 
-    private int vasteTaakId;
-
-
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "vasteTaakId", referencedColumnName = "taakId")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private int vasteTaak;
 
     public Boolean getPlanner() {
         return planner;
@@ -183,20 +189,20 @@ public class Medewerker {
         this.telefoonnummer = telefoonnummer;
     }
 
-    public int getVoorkeurstaakId() {
-        return voorkeurstaakId;
+    public int getVoorkeurstaak() {
+        return voorkeurstaak;
     }
 
-    public void setVoorkeurstaakId(int voorkeurstaakId) {
-        this.voorkeurstaakId = voorkeurstaakId;
+    public void setVoorkeurstaak(int voorkeurstaak) {
+        this.voorkeurstaak = voorkeurstaak;
     }
 
-    public int getVasteTaakId() {
-        return vasteTaakId;
+    public int getVasteTaak() {
+        return vasteTaak;
     }
 
-    public void setVasteTaakId(int vasteTaakId) {
-        this.vasteTaakId = vasteTaakId;
+    public void setVasteTaak(int vasteTaak) {
+        this.vasteTaak = vasteTaak;
     }
 }
 

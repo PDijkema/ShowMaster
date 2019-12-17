@@ -100,7 +100,7 @@
                 <div class="form-group" xmlns:form="http://www.w3.org/1999/xhtml">
                     <label class="col-sm-3 control-label">Voorkeurstaak </label>  <!-- for="voorkeurstaakId"  dit werkt niet-->
                     <div class="col-sm-9">
-                        <form:select path="voorkeurstaakId">
+                        <form:select path="voorkeurstaak">
                             <form:option value="0" label="Select" />
                             <form:options items="${takenLijst}" itemValue="taakId" itemLabel="taakNaam" />
                         </form:select>
