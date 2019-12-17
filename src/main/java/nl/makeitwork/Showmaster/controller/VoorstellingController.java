@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,6 +35,17 @@ public class VoorstellingController {
     @GetMapping("/voorstelling/toevoegen")
     protected String toevoegenVoorstellingen(Voorstelling voorstelling) {
         return "nieuweVoorstelling";
+    }
+
+    @GetMapping("/voorstelling/wijzigen/{voorstellingId}")
+    protected String wijzigenVoorstellingen(@PathVariable Integer voorstellingId, Model model) {
+        Optional<Voorstelling> voorstelling = voorstellingRepository.findById(voorstellingId);
+        if (!voorstelling.isPresent()) {
+            return "redirect:/alleVoorstellingen";
+        } else {
+            model.addAttribute("voorstelling", voorstelling.get());
+            return "wijzigVoorstelling";
+        }
     }
 
     @PostMapping("/voorstelling/toevoegen")

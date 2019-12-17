@@ -9,12 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.time.Month;
-
-import static org.mockito.Mockito.*;
 
 
 @RunWith(SpringRunner.class)
@@ -29,7 +26,7 @@ class VoorstellingControllerTest {
     private VoorstellingRepository voorstellingRepository;
 
     @Test
-    void saveOrUpdateVoorstelling() {
+    void saveorupdateVoorstelling() {
 
         //arrange
         Voorstelling voorstelling = new Voorstelling();
@@ -62,7 +59,7 @@ class VoorstellingControllerTest {
 
         //activate
         voorstellingController.saveOrUpdateVoorstelling(voorstelling);
-        voorstellingRepository.delete(voorstelling);
+        voorstellingController.verwijderVoorstelling(voorstelling.getVoorstellingId());
 
         //assert
         Assert.assertFalse(voorstellingRepository.existsById(voorstelling.getVoorstellingId()));
