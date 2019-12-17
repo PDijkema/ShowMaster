@@ -36,7 +36,7 @@ public class Medewerker {
 
     private String straatnaam;
 
-    private int huisnummer;
+    private Integer huisnummer;
 
     private String toevoeging;
 
@@ -48,15 +48,15 @@ public class Medewerker {
 
     private String telefoonnummer;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Taak.class)
     @JoinColumn(name = "voorkeurstaakId", referencedColumnName = "taakId")
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private int voorkeurstaak;
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
+    private Integer voorkeurstaak;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Taak.class)
     @JoinColumn(name = "vasteTaakId", referencedColumnName = "taakId")
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private int vasteTaak;
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
+    private Integer vasteTaak;
 
     public Boolean getPlanner() {
         return planner;
@@ -141,11 +141,11 @@ public class Medewerker {
         this.straatnaam = straatnaam;
     }
 
-    public int getHuisnummer() {
+    public Integer getHuisnummer() {
         return huisnummer;
     }
 
-    public void setHuisnummer(int huisnummer) {
+    public void setHuisnummer(Integer huisnummer) {
         this.huisnummer = huisnummer;
     }
 
@@ -189,19 +189,19 @@ public class Medewerker {
         this.telefoonnummer = telefoonnummer;
     }
 
-    public int getVoorkeurstaak() {
+    public Integer getVoorkeurstaak() {
         return voorkeurstaak;
     }
 
-    public void setVoorkeurstaak(int voorkeurstaak) {
+    public void setVoorkeurstaak(Integer voorkeurstaak) {
         this.voorkeurstaak = voorkeurstaak;
     }
 
-    public int getVasteTaak() {
+    public Integer getVasteTaak() {
         return vasteTaak;
     }
 
-    public void setVasteTaak(int vasteTaak) {
+    public void setVasteTaak(Integer vasteTaak) {
         this.vasteTaak = vasteTaak;
     }
 }
