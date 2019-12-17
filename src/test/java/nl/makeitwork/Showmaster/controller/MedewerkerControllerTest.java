@@ -67,8 +67,8 @@ class MedewerkerControllerTest {
     public void saveGebruikerTest() throws Exception {
 
         //Arrange
-        BindingResult result = mock(BindingResult.class);
-        when(result.hasErrors()).thenReturn(false);
+        BindingResult bindingResult = mock(BindingResult.class);
+        when(bindingResult.hasErrors()).thenReturn(false);
         Medewerker medewerker1 = new Medewerker();
 
         medewerker1.setGebruikersnaam("test1234");
@@ -76,7 +76,7 @@ class MedewerkerControllerTest {
         medewerker1.setWachtwoordBevestigen("test1234");
 
         //Activate
-        medewerkerController.saveGebruiker(medewerker1, result);
+        medewerkerController.saveGebruiker(medewerker1, bindingResult);
 
         //Assert
         Assert.assertNotNull(medewerkerRepository.findByGebruikersnaam("test1234"));
