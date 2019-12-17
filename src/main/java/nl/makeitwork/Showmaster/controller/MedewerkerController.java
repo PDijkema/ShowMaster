@@ -2,13 +2,11 @@ package nl.makeitwork.Showmaster.controller;
 
 import nl.makeitwork.Showmaster.model.Medewerker;
 import nl.makeitwork.Showmaster.repository.MedewerkerRepository;
-import nl.makeitwork.Showmaster.service.MedewekerService;
+import nl.makeitwork.Showmaster.service.MedewerkerService;
 import nl.makeitwork.Showmaster.service.MedewerkerServiceImplementatie;
 import nl.makeitwork.Showmaster.service.SecurityService;
 import nl.makeitwork.Showmaster.validator.MedewerkerValidator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,7 +22,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class MedewerkerController {
 
     @Autowired
-    private MedewekerService medewekerService;
+    private MedewerkerService medewerkerService;
 
     @Autowired
     private MedewerkerServiceImplementatie medewerkerServiceImplementatie;
@@ -48,14 +46,12 @@ public class MedewerkerController {
     public String saveGebruiker (@ModelAttribute("registratieFormulier")Medewerker registratieFormulier, BindingResult bindingResult){
         medewerkerValidator.validate(registratieFormulier,bindingResult);
 
+
         if (bindingResult.hasErrors()){
             return "registratieFormulier";
         }
-
-        medewekerService.save(registratieFormulier);
-
+        medewerkerService.save(registratieFormulier);
         securityService.autoLogin(registratieFormulier.getGebruikersnaam(),registratieFormulier.getWachtwoordBevestigen());
-        //medewerkerRepository.save(registratieFormulier);
         return "redirect:/welcome";
     }
 
@@ -75,7 +71,6 @@ public class MedewerkerController {
     public String welcome(Model model) {
         return "welcome";
     }
-
 
     }
 

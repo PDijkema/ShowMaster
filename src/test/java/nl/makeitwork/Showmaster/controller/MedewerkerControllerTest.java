@@ -4,26 +4,39 @@ package nl.makeitwork.Showmaster.controller;
 import nl.makeitwork.Showmaster.model.Medewerker;
 import nl.makeitwork.Showmaster.repository.MedewerkerRepository;
 
+import nl.makeitwork.Showmaster.service.MedewerkerService;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.TestPropertySource;
+import org.springframework.mock.web.MockServletContext;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.DataBinder;
+import org.springframework.web.context.WebApplicationContext;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 
-import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import javax.servlet.ServletContext;
+import java.util.Map;
 
 @RunWith(SpringRunner.class)
+@WebAppConfiguration
 @SpringBootTest
-@TestPropertySource(locations = "classpath:test.properties")
 @AutoConfigureMockMvc
 class MedewerkerControllerTest {
+
+    @Autowired
+    MedewerkerService medewerkerService;
 
     @Autowired
     MedewerkerController medewerkerController;
@@ -34,22 +47,51 @@ class MedewerkerControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
+    @Autowired
+    private WebApplicationContext webApplicationContext;
+
+
+
+    @Before
+    public void setup() throws Exception {
+        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
+    }
+
     @Test
-    void showRegistratieFormulier() {
-        Assert.assertNotNull(medewerkerController);
+    public void beanTestmedewerkerController() {
+        //Arrange
+        //Activate
+        ServletContext servletContext = webApplicationContext.getServletContext();
+
+
+        Assert.assertNotNull(servletContext);
+        Assert.assertTrue(servletContext instanceof MockServletContext);
+        Assert.assertNotNull(webApplicationContext.getBean("medewerkerController"));
+    }
+
+    @Test
+    public void saveGebruikerTest() throws Exception {
+
+        //Arrange
+        BindingResult result = mock(BindingResult.class);
+        when(result.hasErrors()).thenReturn(false);
+        Medewerker medewerker1 = new Medewerker();
+
+        medewerker1.setGebruikersnaam("test1234");
+        medewerker1.setWachtwoord("test1234");
+        medewerker1.setWachtwoordBevestigen("test1234");
+
+        //Activate
+        medewerkerController.saveGebruiker(medewerker1, result);
+
+        //Assert
+        Assert.assertNotNull(medewerkerRepository.findByGebruikersnaam("test1234"));
     }
 
 
 
-    /*@Test
-    void saveGebruiker() {
-        Medewerker medewerker = new Medewerker();
-        medewerker.setGebruikersnaam("test");
-        medewerker.setWachtwoord("test");
-        medewerkerController.saveGebruiker(medewerker);
 
-        Optional<Medewerker> opgehaaldeMedewerker = medewerkerRepository.findByGebruikersnaam("test");
 
-        Assert.assertNotNull(opgehaaldeMedewerker);
-    }*/
-}
+    }
+
+

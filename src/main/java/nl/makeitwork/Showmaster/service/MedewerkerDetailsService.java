@@ -26,7 +26,7 @@ public class MedewerkerDetailsService implements UserDetailsService {
         Medewerker medewerker = medewerkerRepository.findByGebruikersnaam(gebruikersnaam);
         if (medewerker == null) throw new UsernameNotFoundException(gebruikersnaam);
 
-
+        //Medewerker als rol toegevoegd voor elke gebruiker.
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
         grantedAuthorities.add(new SimpleGrantedAuthority("medewerker"));
 

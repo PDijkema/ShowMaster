@@ -29,7 +29,6 @@ public class SecurityServiceImplementatie implements SecurityService {
         return null;
     }
 
-
     @Override
     public void autoLogin(String username, String password) {
         UserDetails userDetails = userDetailsService.loadUserByUsername(username);
@@ -40,7 +39,6 @@ public class SecurityServiceImplementatie implements SecurityService {
             SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
             logger.debug(String.format("Auto login %s successfully!", username));
         }
-
     }
 }
 

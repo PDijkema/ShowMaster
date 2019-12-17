@@ -26,6 +26,10 @@ public class Medewerker implements UserDetails {
 
     private Boolean planner;
 
+    @Transient
+    private String wachtwoordBevestigen;
+
+
     public Boolean getPlanner() {
         return planner;
     }
@@ -34,8 +38,6 @@ public class Medewerker implements UserDetails {
         this.planner = planner;
     }
 
-    @Transient
-    private String wachtwoordBevestigen;
 
     public String getWachtwoordBevestigen() {
         return wachtwoordBevestigen;

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 
 @Service
-public class MedewerkerServiceImplementatie implements MedewekerService {
+public class MedewerkerServiceImplementatie implements MedewerkerService {
     @Autowired
     private MedewerkerRepository medewerkerRepository;
 
@@ -24,6 +24,5 @@ public class MedewerkerServiceImplementatie implements MedewekerService {
     public Medewerker findByUsername(String gebruikersnaam) {
         return medewerkerRepository.findByGebruikersnaam(gebruikersnaam);
     }
-
 
 }

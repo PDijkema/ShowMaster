@@ -1,10 +1,7 @@
 package nl.makeitwork.Showmaster.validator;
 
 import nl.makeitwork.Showmaster.model.Medewerker;
-import nl.makeitwork.Showmaster.repository.MedewerkerRepository;
-import nl.makeitwork.Showmaster.service.MedewekerService;
-import nl.makeitwork.Showmaster.service.MedewerkerDetailsService;
-import nl.makeitwork.Showmaster.service.MedewerkerServiceImplementatie;
+import nl.makeitwork.Showmaster.service.MedewerkerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -15,7 +12,7 @@ import org.springframework.validation.Validator;
 public class MedewerkerValidator implements Validator {
 
         @Autowired
-        private MedewekerService medewekerService;
+        private MedewerkerService medewerkerService;
 
         @Override
         public boolean supports(Class<?> aClass) {
@@ -30,7 +27,7 @@ public class MedewerkerValidator implements Validator {
             if (medewerker.getGebruikersnaam().length() < 6 || medewerker.getGebruikersnaam().length() > 32) {
                 errors.rejectValue("gebruikersnaam", "Size.registratieFormulier.username");
             }
-            if (medewekerService.findByUsername(medewerker.getGebruikersnaam()) != null) {
+            if (medewerkerService.findByUsername(medewerker.getGebruikersnaam()) != null) {
                 errors.rejectValue("gebruikersnaam", "Duplicate.registratieFormulier.gebruikersnaam");
             }
 
