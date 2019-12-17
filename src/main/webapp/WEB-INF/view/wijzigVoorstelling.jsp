@@ -10,11 +10,12 @@
   <meta charset="utf-8">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-  <title>Wijzig voorstelling</title>
+  <title>Nieuwe/Wijzig voorstelling</title>
 </head>
     <body>
-        <h1>Wijzig voorstelling</h1>
+        <h1>Nieuwe/Wijzig voorstelling</h1>
         <form:form action="/voorstelling/toevoegen" modelAttribute="voorstelling" method="post">
+            <form:hidden path="voorstellingId"/>
             <table>
                 <tr>
                     <td>Naam voorstelling:</td>

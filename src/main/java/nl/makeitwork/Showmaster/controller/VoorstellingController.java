@@ -4,6 +4,7 @@ import nl.makeitwork.Showmaster.repository.VoorstellingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,7 +35,7 @@ public class VoorstellingController {
 
     @GetMapping("/voorstelling/toevoegen")
     protected String toevoegenVoorstellingen(Voorstelling voorstelling) {
-        return "nieuweVoorstelling";
+        return "wijzigVoorstelling";
     }
 
     @GetMapping("/voorstelling/wijzigen/{voorstellingId}")
@@ -44,16 +45,17 @@ public class VoorstellingController {
             return "redirect:/alleVoorstellingen";
         } else {
             model.addAttribute("voorstelling", voorstelling.get());
+            System.out.println(voorstelling);
             return "wijzigVoorstelling";
         }
     }
 
     @PostMapping("/voorstelling/toevoegen")
-    protected String saveOrUpdateVoorstelling(@ModelAttribute("voorstelling") Voorstelling voorstelling) {
-        if (!voorstelling.getNaam().isEmpty() && voorstelling.getDatum() != null) {
+    protected String saveOrUpdateVoorstelling(@ModelAttribute("voorstelling") Voorstelling voorstelling, BindingResult result) {
+        if (!result.hasErrors()) {
             voorstellingRepository.save(voorstelling);
         } else {
-            return "nieuweVoorstelling";
+            return "wijzigVoorstelling";
         }
         return "redirect:/voorstellingen";
     }

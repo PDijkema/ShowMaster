@@ -27,7 +27,7 @@ public class Voorstelling {
 
     @Override
     public String toString() {
-        return "naam " + naam + " datum " + datum ;
+        return "Id "+ voorstellingId + " naam " + naam + " datum " + datum ;
     }
 
     public Integer getVoorstellingId() {
