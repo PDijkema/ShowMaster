@@ -49,12 +49,16 @@
                     <input type="password" id="wachtwoord" placeholder="Wachtwoord" class="form-control">
                 </div>
             </div>
-            <div class="form-group">
-                <label for="wachtwoord" class="col-sm-3 control-label">Herhaal wachtwoord* </label>
-                <div class="col-sm-9">
-                    <input type="password" id="wachtwoord" placeholder="Wachtwoord" class="form-control">
-                </div>
-            </div>
+
+            <!-- deze is nu nog niet aan de orde, is voor later -->
+            <!-- <div class="form-group"> -->
+                <!-- <label for="wachtwoord" class="col-sm-3 control-label">Herhaal wachtwoord* </label> -->
+                <!-- <div class="col-sm-9"> -->
+                    <!-- <input type="password" id="wachtwoord" placeholder="Wachtwoord" class="form-control"> -->
+                <!-- </div> -->
+            <!-- </div> -->
+
+
             <div class="form-group">
                 <label for="voornaam" class="col-sm-3 control-label">Voornaam* </label>
                 <div class="col-sm-9">
@@ -78,6 +82,7 @@
                 <div class="col-sm-9">
                     <input type="email" id="emailadres" placeholder="Emailadres" class="form-control" name="emailadres">
                 </div>
+             </div>
                 <div class="form-group">
                     <label for="geboortedatum" class="col-sm-3 control-label">Geboortedatum </label>
                     <div class="col-sm-9">
@@ -87,25 +92,30 @@
                 <div class="form-group">
                     <label for="telefoonnummer" class="col-sm-3 control-label">Telefoonnummer* </label>
                     <div class="col-sm-9">
-                        <input type="phoneNumber" id="telefoonnummer" placeholder="telefoonnummer" class="form-control">
+                        <input type="phoneNumber" id="telefoonnummer" placeholder="Telefoonnummer" class="form-control">
                     </div>
                 </div>
+                <div></div>
+                <div></div>
+                <h2>Adresgegevens</h2>
                 <div class="form-group">
                     <label for="straatnaam" class="col-sm-3 control-label">Straatnaam* </label>
                     <div class="col-sm-9">
                         <input type="text" id="straatnaam" placeholder="Straatnaam" class="form-control">
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="toevoeging" class="col-sm-3 control-label">Toevoeging </label>
-                    <div class="col-sm-9">
-                        <input type="text" id="toevoeging" placeholder="Toevoeging" class="form-control">
-                    </div>
-                </div>
+
+                <!-- deze checken, zit nu pijltje omhoog/naar beneden in -->
                 <div class="form-group">
                     <label for="huisnummer" class="col-sm-3 control-label">Huisnummer* </label>
                     <div class="col-sm-9">
                         <input type="number" id="huisnummer" placeholder="Huisnummer" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="toevoeging" class="col-sm-3 control-label">Toevoeging </label>
+                    <div class="col-sm-9">
+                        <input type="text" id="toevoeging" placeholder="Toevoeging" class="form-control">
                     </div>
                 </div>
                 <div class="form-group">
@@ -126,7 +136,6 @@
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary btn-block">Opslaan</button>
-            </div>
         </form>
     </div>
     </form:form>
