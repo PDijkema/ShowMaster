@@ -29,6 +29,8 @@ public class WebSecurityConfiguratie extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/resources/**","/registreer").permitAll()
+
+                .antMatchers ( "/inlogkeuzeplanner"). hasRole ( "PLANNER")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -42,7 +44,7 @@ public class WebSecurityConfiguratie extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
-                .withUser("admin").password(bCryptPasswordEncoder().encode("admin")).roles("USER","ADMIN");
+                .withUser("admin").password(bCryptPasswordEncoder().encode("admin")).roles("USER","ADMIN","PLANNER");
         configureGlobal(auth);
     }
 
