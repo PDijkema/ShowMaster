@@ -11,9 +11,11 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.validation.BindingResult;
 
-import javax.naming.Binding;
 import java.time.LocalDateTime;
 import java.time.Month;
+
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 
 @RunWith(SpringRunner.class)
@@ -27,24 +29,23 @@ class VoorstellingControllerTest {
     @Autowired
     private VoorstellingRepository voorstellingRepository;
 
-/*
     @Test
     void saveorupdateVoorstelling() {
 
         //arrange
-        BindingResult result
+        BindingResult result = mock(BindingResult.class);
+        when(result.hasErrors()).thenReturn(false);
         Voorstelling voorstelling = new Voorstelling();
         LocalDateTime datum = LocalDateTime.of(2020, Month.OCTOBER, 10, 20, 30);
         voorstelling.setNaam("Lion King");
         voorstelling.setDatum(datum);
 
         //activate
-        voorstellingController.saveOrUpdateVoorstelling(voorstelling, BindingResult result);
+        voorstellingController.saveOrUpdateVoorstelling(voorstelling, result);
 
         //assert
         Assert.assertNotNull(voorstellingRepository.findById(voorstelling.getVoorstellingId()));
     }
-*/
 
     @Test
     void alleVoorstellingen() {
@@ -53,21 +54,23 @@ class VoorstellingControllerTest {
     }
 
 
-/*    @Test
+    @Test
     void verwijderVoorstelling() {
 
         //arrange
+        BindingResult result = mock(BindingResult.class);
+        when(result.hasErrors()).thenReturn(false);
         Voorstelling voorstelling = new Voorstelling();
         LocalDateTime datum = LocalDateTime.of(2020, Month.JANUARY, 18, 20, 30);
         voorstelling.setNaam("Soldaat van Oranje");
         voorstelling.setDatum(datum);
 
         //activate
-        voorstellingController.saveOrUpdateVoorstelling(voorstelling);
+        voorstellingController.saveOrUpdateVoorstelling(voorstelling, result);
         voorstellingController.verwijderVoorstelling(voorstelling.getVoorstellingId());
 
         //assert
         Assert.assertFalse(voorstellingRepository.existsById(voorstelling.getVoorstellingId()));
 
-    }*/
+    }
 }
