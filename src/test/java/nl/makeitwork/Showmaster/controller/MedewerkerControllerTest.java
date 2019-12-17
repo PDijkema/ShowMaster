@@ -3,13 +3,11 @@ package nl.makeitwork.Showmaster.controller;
 
 import nl.makeitwork.Showmaster.model.Medewerker;
 import nl.makeitwork.Showmaster.repository.MedewerkerRepository;
-
 import nl.makeitwork.Showmaster.service.MedewerkerService;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,15 +17,11 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.DataBinder;
 import org.springframework.web.context.WebApplicationContext;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-
-
-
 import javax.servlet.ServletContext;
-import java.util.Map;
+
 
 @RunWith(SpringRunner.class)
 @WebAppConfiguration
@@ -36,13 +30,13 @@ import java.util.Map;
 class MedewerkerControllerTest {
 
     @Autowired
-    MedewerkerService medewerkerService;
+    private MedewerkerService medewerkerService;
 
     @Autowired
-    MedewerkerController medewerkerController;
+    private MedewerkerController medewerkerController;
 
     @Autowired
-    MedewerkerRepository medewerkerRepository;
+    private MedewerkerRepository medewerkerRepository;
 
     @Autowired
     private MockMvc mockMvc;
