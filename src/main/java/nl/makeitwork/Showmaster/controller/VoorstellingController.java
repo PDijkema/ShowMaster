@@ -50,7 +50,6 @@ public class VoorstellingController {
             return "redirect:/alleVoorstellingen";
         } else {
             model.addAttribute("voorstelling", voorstelling.get());
-
             return "wijzigVoorstelling";
         }
     }

@@ -35,6 +35,7 @@
                     <c:forEach items="${alleTaken}" var="taak">
                         <tr>
                           <td><c:out value="${taak.taakNaam}"/></td>
+                          <td><c:out value="${taak.standaardBezetting}"/></td>
                         </tr>
                     </c:forEach>
                 </div>
