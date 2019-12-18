@@ -1,13 +1,15 @@
 package nl.makeitwork.Showmaster.model;
 
+
 import org.springframework.format.annotation.DateTimeFormat;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author Pieter Dijkema
@@ -15,6 +17,7 @@ import java.util.List;
  */
 
 @Entity
+@Table(name = "voorstelling")
 public class Voorstelling {
 
     @Id
@@ -25,6 +28,15 @@ public class Voorstelling {
     @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime datum;
+
+        // owning side
+        @ManyToMany(cascade = {CascadeType.ALL})
+        @JoinTable(
+            name = "voorstelling_heeft_taak",
+            joinColumns = { @JoinColumn(name = "voorstellingId") },
+            inverseJoinColumns = { @JoinColumn(name = "taakId") }
+        )
+        List<Taak> taken = new ArrayList<>();
 
     @Override
     public String toString() {
