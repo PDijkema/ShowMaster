@@ -28,7 +28,14 @@ public class MedewerkerDetailsService implements UserDetailsService {
 
         //Medewerker als rol toegevoegd voor elke gebruiker.
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
-        grantedAuthorities.add(new SimpleGrantedAuthority("medewerker"));
+
+        if (medewerker.getPlanner()){
+            grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_PLANNER"));
+        }
+
+        grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_MEDEWERKER"));
+
+
 
         return new org.springframework.security.core.userdetails.User(medewerker.getUsername(), medewerker.getPassword(), grantedAuthorities);
     }

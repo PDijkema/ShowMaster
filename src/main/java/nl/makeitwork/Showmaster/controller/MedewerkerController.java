@@ -66,7 +66,7 @@ public class MedewerkerController {
         }
         medewerkerService.save(registratieFormulier);
         securityService.autoLogin(registratieFormulier.getGebruikersnaam(),registratieFormulier.getWachtwoordBevestigen());
-        return "redirect:/welcome";
+        return "redirect:/";
     }
 
     @GetMapping("/login")
@@ -82,32 +82,35 @@ public class MedewerkerController {
         return "login";
     }
 
-    @GetMapping({"/", "/welcome"})
-    public String welcome(Model model) {
+    @GetMapping("/welkommedewerker")
+    public String welkomMedewerker(Model model) {
+        return "welkomMedewerker";
+    }
+
+    @GetMapping({"/","/planner/"})
+    public String isPlanner (){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
-        if(auth.getAuthorities().stream().anyMatch(r -> r.getAuthority().equals("ROLE_PLANNER"))) {
-            return "redirect:/inlogkeuzeplanner";
+        if(auth.getAuthorities().stream().noneMatch(r -> r.getAuthority().equals("ROLE_PLANNER"))) {
+            return "redirect:/welkommedewerker";
         }
-
-
-        return "welcome";
+        return "redirect:/planner/inlogkeuze";
     }
 
-    @GetMapping("/test")
-    public String test (){
-        return "alleVoorstellingen";
-    }
-
-    @GetMapping("inlogkeuzeplanner")
+    @GetMapping("/planner/inlogkeuze")
     public String inlogKeuzePlanner(Model model) {
-
-
         return "inlogKeuzePlanner";
     }
 
-
+    @GetMapping("/planner/welkom")
+    public String welkomPlanner(Model model) {
+        return "welkomPlanner";
     }
+
+
+
+
+}
 
 
 

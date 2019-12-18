@@ -30,7 +30,7 @@ public class WebSecurityConfiguratie extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/resources/**","/registreer").permitAll()
 
-                .antMatchers ( "/inlogkeuzeplanner"). hasRole ( "PLANNER")
+                .antMatchers ( "/planner/**"). hasRole ( "PLANNER")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
