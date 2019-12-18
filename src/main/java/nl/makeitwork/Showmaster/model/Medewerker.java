@@ -4,16 +4,23 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * @Author Gert Postma
  * 16-12: Karin Zoetendal: profielgegevens toegevoegd (NAW, email, telefoon, voorkeurstaak, vaste taak)
  */
 @Entity
-public class Medewerker {
+public class Medewerker implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -59,6 +66,10 @@ public class Medewerker {
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     private Taak vasteTaak;
 
+    @Transient
+    private String wachtwoordBevestigen;
+
+
     public Boolean getPlanner() {
         return planner;
     }
@@ -67,8 +78,6 @@ public class Medewerker {
         this.planner = planner;
     }
 
-    @Transient
-    private String wachtwoordBevestigen;
 
     public String getWachtwoordBevestigen() {
         return wachtwoordBevestigen;
@@ -205,5 +214,43 @@ public class Medewerker {
     public void setVasteTaak(Taak vasteTaak) {
         this.vasteTaak = vasteTaak;
     }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+            List<GrantedAuthority> authorities = new ArrayList<>();
+            authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+            return authorities;
+        }
+
+    @Override
+    public String getPassword() {
+        return this.wachtwoord;
+    }
+
+    @Override
+    public String getUsername() {
+        return this.gebruikersnaam;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
 }
 

@@ -16,6 +16,7 @@ public class Taak {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer taakId;
 
+
     private String taakNaam;
 
     private Integer standaardBezetting;
