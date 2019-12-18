@@ -37,7 +37,7 @@
                         <tr>
                           <td>
                             <label class="input-group"/>
-                            <label colspan="1" type="text" class="form-control" aria-label="Recipient's username with five button addons" aria-describedby="button-addon4"><c:out value="${taak.taakNaam}"/></label>
+                            <label colspan="1" type="text" class="form-control" aria-label="five button addons" aria-describedby="button-addon"><c:out value="${taak.taakNaam}"/></label>
                               <div>
                                   <select class="custom-select" id="inputGroupSelect03" aria-label="Example select with button addon">
                                       <option selected>Geen</option>

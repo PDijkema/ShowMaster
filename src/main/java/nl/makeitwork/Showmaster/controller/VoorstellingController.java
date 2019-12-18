@@ -69,4 +69,25 @@ public class VoorstellingController {
         voorstellingRepository.deleteById(voorstellingId);
         return "redirect:/voorstellingen";
     }
+
+    @GetMapping("/voorstellingen/setup")
+    protected String setupTakenInDatabase() {
+
+        Voorstelling voorstelling1 = new Voorstelling();
+        voorstelling1.setNaam("Lion King");
+        voorstelling1.setDatum(LocalDateTime.of(2020, Month.JANUARY, 18, 20, 30));
+        voorstellingRepository.save(voorstelling1);
+
+        Voorstelling voorstelling2 = new Voorstelling();
+        voorstelling2.setNaam("Soldaat van Oranje");
+        voorstelling2.setDatum(LocalDateTime.of(2020, Month.JANUARY, 16, 20, 00));
+        voorstellingRepository.save(voorstelling2);
+
+        Voorstelling voorstelling3 = new Voorstelling();
+        voorstelling3.setNaam("Assepoester");
+        voorstelling3.setDatum(LocalDateTime.of(2020, Month.FEBRUARY, 5, 16, 00));
+        voorstellingRepository.save(voorstelling3);
+
+        return "redirect:/voorstellingen";
+    }
 }
