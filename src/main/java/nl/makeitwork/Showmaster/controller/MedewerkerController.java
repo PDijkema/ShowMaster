@@ -11,8 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -88,13 +90,14 @@ public class MedewerkerController {
     }
 
     @GetMapping({"/","/planner/"})
-    public String isPlanner (){
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    public String isPlanner (@AuthenticationPrincipal Medewerker medewerker){
 
-        if(auth.getAuthorities().stream().noneMatch(r -> r.getAuthority().equals("ROLE_PLANNER"))) {
-            return "redirect:/welkommedewerker";
+        if(medewerker.getAuthorities().stream().anyMatch(r -> r.getAuthority().equals("ROLE_PLANNER"))) {
+            return "redirect:/planner/inlogkeuze";
         }
-        return "redirect:/planner/inlogkeuze";
+
+        return "redirect:/welkommedewerker";
+
     }
 
     @GetMapping("/planner/inlogkeuze")

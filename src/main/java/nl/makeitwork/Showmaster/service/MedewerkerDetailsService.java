@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.security.Principal;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -22,22 +23,13 @@ public class MedewerkerDetailsService implements UserDetailsService {
 
     @Override
     @Transactional(readOnly = true)
+
     public UserDetails loadUserByUsername(String gebruikersnaam) {
         Medewerker medewerker = medewerkerRepository.findByGebruikersnaam(gebruikersnaam);
         if (medewerker == null) throw new UsernameNotFoundException(gebruikersnaam);
 
-        //Medewerker als rol toegevoegd voor elke gebruiker.
-        Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
 
-        if (medewerker.getPlanner()){
-            grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_PLANNER"));
-        }
-
-        grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_MEDEWERKER"));
-
-
-
-        return new org.springframework.security.core.userdetails.User(medewerker.getUsername(), medewerker.getPassword(), grantedAuthorities);
+        return medewerker;
     }
 }
 
