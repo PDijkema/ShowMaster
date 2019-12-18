@@ -18,16 +18,17 @@ public class Medewerker implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer medewerkerId;
-
     @Column(unique = true)
     private String gebruikersnaam;
-
     private String wachtwoord;
-
     private Boolean planner;
 
     @Transient
     private String wachtwoordBevestigen;
+
+        @OneToOne(mappedBy = "medewerker", cascade = CascadeType.ALL,
+                    fetch = FetchType.LAZY, optional = false)
+        private VoorstellingsTaak voorstellingsTaak;
 
 
     public Boolean getPlanner() {

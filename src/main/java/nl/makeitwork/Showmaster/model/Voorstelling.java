@@ -7,9 +7,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+
 
 /**
  * @author Pieter Dijkema
@@ -29,14 +28,12 @@ public class Voorstelling {
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime datum;
 
-        // owning side
-        @ManyToMany(cascade = {CascadeType.ALL})
-        @JoinTable(
-            name = "voorstelling_heeft_taak",
-            joinColumns = { @JoinColumn(name = "voorstellingId") },
-            inverseJoinColumns = { @JoinColumn(name = "taakId") }
+        @OneToMany(
+            mappedBy = "voorstelling",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
         )
-        List<Taak> taken = new ArrayList<>();
+        private List<VoorstellingsTaak> voorstellingsTaak = new ArrayList<>();
 
     @Override
     public String toString() {
@@ -65,5 +62,13 @@ public class Voorstelling {
 
     public void setDatum(LocalDateTime datum) {
         this.datum = datum;
+    }
+
+    public List<VoorstellingsTaak> getVoorstellingsTaak() {
+        return voorstellingsTaak;
+    }
+
+    public void setVoorstellingsTaak(List<VoorstellingsTaak> voorstellingsTaak) {
+        this.voorstellingsTaak = voorstellingsTaak;
     }
 }

@@ -1,10 +1,11 @@
 package nl.makeitwork.Showmaster.model;
 
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.NaturalIdCache;
+
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * @author Karin Zoetendal
@@ -15,6 +16,10 @@ import java.util.Set;
 
 @Entity
 @Table(name = "taak")
+@NaturalIdCache
+@org.hibernate.annotations.Cache(
+    usage = CacheConcurrencyStrategy.READ_WRITE
+)
 public class Taak {
 
     @Id
@@ -23,9 +28,12 @@ public class Taak {
     private String taakNaam;
     private Integer standaardBezetting;
 
-        // inverse side
-        @ManyToMany(mappedBy = "taken")
-        private List<Voorstelling> voorstellingen = new ArrayList<>();
+        @OneToMany(
+            mappedBy = "taak",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+        )
+        private List<VoorstellingsTaak> voorstellingsTaak = new ArrayList<>();
 
     public Integer getTaakId() {
         return taakId;
@@ -49,5 +57,13 @@ public class Taak {
 
     public void setStandaardBezetting(Integer standaardBezetting) {
         this.standaardBezetting = standaardBezetting;
+    }
+
+    public List<VoorstellingsTaak> getVoorstellingsTaak() {
+        return voorstellingsTaak;
+    }
+
+    public void setVoorstellingsTaak(List<VoorstellingsTaak> voorstellingsTaak) {
+        this.voorstellingsTaak = voorstellingsTaak;
     }
 }
