@@ -5,6 +5,7 @@ import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
@@ -32,7 +33,7 @@ public class Medewerker {
     private String achternaam;
 
     @DateTimeFormat(pattern = "dd-MM-yyyy")
-    private LocalDateTime geboortedatum;
+    private LocalDate geboortedatum;
 
     private String straatnaam;
 
@@ -125,11 +126,11 @@ public class Medewerker {
         this.achternaam = achternaam;
     }
 
-    public LocalDateTime getGeboortedatum() {
+    public LocalDate getGeboortedatum() {
         return geboortedatum;
     }
 
-    public void setGeboortedatum(LocalDateTime geboortedatum) {
+    public void setGeboortedatum(LocalDate geboortedatum) {
         this.geboortedatum = geboortedatum;
     }
 

@@ -5,12 +5,14 @@ import nl.makeitwork.Showmaster.repository.MedewerkerRepository;
 import nl.makeitwork.Showmaster.repository.TaakRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 
 /**
@@ -38,6 +40,8 @@ public class MedewerkerController {
         return "redirect:/registreer";
     }
 
+
+
     // moet wellicht aangepast, moet medewerkerId meegeven
     @GetMapping("/profiel/wijzigen")
     protected String showProfielpagina(Model model) {
@@ -49,7 +53,7 @@ public class MedewerkerController {
 
     // Redirect moet nog worden aangepast, moet terug naar profielPagina (overzicht profielgegevens)
     @PostMapping("/profiel/wijzigen")
-    public String saveOrUpdateGebruiker (@ModelAttribute("profielWijzigen") Medewerker profielWijzigingen,
+    public String saveOrUpdateMedewerker(@ModelAttribute("profielWijzigen") Medewerker profielWijzigingen,
                                          BindingResult result) {
         if (result.hasErrors()) {
             return "profielWijzigen";
