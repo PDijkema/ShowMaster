@@ -2,7 +2,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:form="http://www.w3.org/1999/xhtml">
 <head>
   <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -31,20 +31,34 @@
                          </td>
                     </tr>
                 </div>
+                <tr><td><h2>Bezetting taken</h2></td></tr>
                 <div>
                     <c:forEach items="${alleTaken}" var="taak">
                         <tr>
-                          <td><c:out value="${taak.taakNaam}"/></td>
-                          <td><c:out value="${taak.standaardBezetting}"/></td>
+                          <td>
+                            <label class="input-group"/>
+                            <label colspan="1" type="text" class="form-control" aria-label="Recipient's username with five button addons" aria-describedby="button-addon4"><c:out value="${taak.taakNaam}"/></label>
+                              <div>
+                                  <select class="custom-select" id="inputGroupSelect03" aria-label="Example select with button addon">
+                                      <option selected>Geen</option>
+                                      <option value="1">1</option>
+                                      <option value="2">2</option>
+                                      <option value="3">3</option>
+                                  </select>
+                              </div>
+                          </td>
                         </tr>
                     </c:forEach>
                 </div>
                 <tr>
-                    <td colspan="2">
+                    <td colspan="1">
                         <input type="submit" class="btn btn-primary" value="Opslaan"/>
                     </td>
                 </tr>
             </table>
         </form:form>
+        <div colspan="1">
+            <a class="btn btn-primary" href="/voorstellingen">Overzicht Voorstellingen</a>
+        </div>
     </body>
 </html>
