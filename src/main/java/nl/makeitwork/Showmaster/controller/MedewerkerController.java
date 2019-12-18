@@ -10,6 +10,7 @@ import nl.makeitwork.Showmaster.validator.MedewerkerValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -82,8 +83,8 @@ public class MedewerkerController {
 
     // moet wellicht aangepast, moet medewerkerId meegeven
     @GetMapping("/profiel/wijzigen")
-    protected String showProfielpagina(Model model) {
-        model.addAttribute("medewerker", new Medewerker());
+    protected String showProfielpagina(Model model, @AuthenticationPrincipal UserDetails user) {
+        model.addAttribute("medewerker", medewerkerRepository.findByGebruikersnaam(user.getUsername()));
         model.addAttribute("takenLijst", taakRepository.findAll());
         return "profielWijzigen";
     }
@@ -91,12 +92,12 @@ public class MedewerkerController {
 
     // Redirect moet nog worden aangepast, moet terug naar profielPagina (overzicht profielgegevens)
     @PostMapping("/profiel/wijzigen")
-    public String saveOrUpdateMedewerker(@ModelAttribute("profielWijzigen") Medewerker profielWijzigingen,
+    public String saveOrUpdateMedewerker(@ModelAttribute("medewerker") Medewerker medewerker,
                                          BindingResult result) {
         if (result.hasErrors()) {
             return "profielWijzigen";
         } else {
-            medewerkerRepository.save(profielWijzigingen);
+            medewerkerRepository.save(medewerker);
             return "redirect:/takenlijst";
         }
     }

@@ -41,55 +41,55 @@
                 <div class="form-group">
                     <label for="gebruikersnaam" class="col-sm-3 control-label">Gebruikersnaam* </label>
                     <div class="col-sm-9">
-                        <input type="text" id="gebruikersnaam" placeholder="Gebruikersnaam" class="form-control">
+                        <form:input path="gebruikersnaam" placeholder="gebruikersnaam" class="form-control" />
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="wachtwoord" class="col-sm-3 control-label">Wachtwoord* </label>
                     <div class="col-sm-9">
-                        <input type="password" id="wachtwoord" placeholder="Wachtwoord" class="form-control">
+                        <form:input path="wachtwoord" placeholder="Wachtwoord" class="form-control" />
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="wachtwoordBevestigen" class="col-sm-3 control-label">Bevestig wachtwoord* </label>
                     <div class="col-sm-9">
-                        <input type="password" id="wachtwoordBevestigen" placeholder="Wachtwoord" class="form-control">
+                        <form:input path="wachtwoordBevestigen" placeholder="Wachtwoord" class="form-control" />
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="voornaam" class="col-sm-3 control-label">Voornaam* </label>
                     <div class="col-sm-9">
-                        <input type="text" id="voornaam" placeholder="Voornaam" class="form-control" autofocus>
+                        <form:input path="voornaam" placeholder="Voornaam" class="form-control" autofocus="true" />
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="tussenvoegsel" class="col-sm-3 control-label">tussenvoegsel</label>
+                    <label for="tussenvoegsel" class="col-sm-3 control-label">Tussenvoegsel</label>
                     <div class="col-sm-9">
-                        <input type="text" id="tussenvoegsel" placeholder="Tussenvoegsel" class="form-control" autofocus>
+                        <form:input path="tussenvoegsel" placeholder="Tussenvoegsel" class="form-control" autofocus="true" />
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="achternaam" class="col-sm-3 control-label">Achternaam* </label>
                     <div class="col-sm-9">
-                        <input type="text" id="achternaam" placeholder="Achternaam" class="form-control" autofocus>
+                        <form:input path="achternaam" placeholder="Achternaam" class="form-control" autofocus="true" />
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="emailadres" class="col-sm-3 control-label">Emailadres* </label>
                     <div class="col-sm-9">
-                        <input type="email" id="emailadres" placeholder="Emailadres" class="form-control" name="emailadres">
+                        <form:input path="emailadres" placeholder="Emailadres" class="form-control" name="emailadres" />
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="geboortedatum" class="col-sm-3 control-label">Geboortedatum </label>
                     <div class="col-sm-9">
-                        <input type="date" id="geboortedatum" class="form-control">
+                        <form:input path="geboortedatum" class="form-control" />
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="telefoonnummer" class="col-sm-3 control-label">Telefoonnummer* </label>
                     <div class="col-sm-9">
-                        <input type="phoneNumber" id="telefoonnummer" placeholder="Telefoonnummer" class="form-control">
+                        <form:input path="telefoonnummer" placeholder="Telefoonnummer" class="form-control" />
                     </div>
                 </div>
 
@@ -109,7 +109,7 @@
                 <div class="form-group">
                     <label for="straatnaam" class="col-sm-3 control-label">Straatnaam* </label>
                     <div class="col-sm-9">
-                        <input type="text" id="straatnaam" placeholder="Straatnaam" class="form-control">
+                        <form:input path="straatnaam" placeholder="Straatnaam" class="form-control" />
                     </div>
                 </div>
 
@@ -117,25 +117,25 @@
                 <div class="form-group">
                     <label for="huisnummer" class="col-sm-3 control-label">Huisnummer* </label>
                     <div class="col-sm-9">
-                        <input type="number" id="huisnummer" placeholder="Huisnummer" class="form-control">
+                        <form:input path="huisnummer" placeholder="Huisnummer" class="form-control" min="0" />
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="toevoeging" class="col-sm-3 control-label">Toevoeging </label>
                     <div class="col-sm-9">
-                        <input type="text" id="toevoeging" placeholder="Toevoeging" class="form-control">
+                        <form:input path="toevoeging" placeholder="Toevoeging" class="form-control" />
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="postcode" class="col-sm-3 control-label">Postcode* </label>
                     <div class="col-sm-9">
-                        <input type="text" id="postcode" placeholder="Postcode" class="form-control">
+                        <form:input path="postcode" placeholder="Postcode" class="form-control" />
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="woonplaats" class="col-sm-3 control-label">Woonplaats* </label>
                     <div class="col-sm-9">
-                        <input type="text" id="woonplaats" placeholder="Woonplaats" class="form-control">
+                        <form:input path="woonplaats" placeholder="Woonplaats" class="form-control" />
                     </div>
                 </div>
                 <div class="form-group">
