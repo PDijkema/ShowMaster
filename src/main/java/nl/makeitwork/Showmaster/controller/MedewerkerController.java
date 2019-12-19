@@ -62,19 +62,19 @@ public class MedewerkerController {
 
     @GetMapping("/registreer")
     protected String showRegistratieFormulier(Model model) {
-        model.addAttribute("registratieFormulier",new Medewerker());
+        model.addAttribute("registratieFormulier", new Medewerker());
         return "registratieFormulier";
     }
 
     @PostMapping("/registreer")
-    public String saveGebruiker (@ModelAttribute("registratieFormulier")Medewerker registratieFormulier, BindingResult bindingResult){
-        medewerkerValidator.validate(registratieFormulier,bindingResult);
+    public String saveGebruiker(@ModelAttribute("registratieFormulier") Medewerker registratieFormulier, BindingResult bindingResult) {
+        medewerkerValidator.validate(registratieFormulier, bindingResult);
 
-        if (bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
             return "registratieFormulier";
         }
         medewerkerService.save(registratieFormulier);
-        securityService.autoLogin(registratieFormulier.getGebruikersnaam(),registratieFormulier.getWachtwoordBevestigen());
+        securityService.autoLogin(registratieFormulier.getGebruikersnaam(), registratieFormulier.getWachtwoordBevestigen());
         registratieFormulier.setWachtwoordBevestigen("");
         return "redirect:/";
     }
@@ -97,10 +97,10 @@ public class MedewerkerController {
         return "welkomMedewerker";
     }
 
-    @GetMapping({"/","/planner/"})
-    public String isPlanner (@AuthenticationPrincipal Medewerker medewerker){
+    @GetMapping({"/", "/planner/"})
+    public String isPlanner(@AuthenticationPrincipal Medewerker medewerker) {
 
-        if(medewerker.getAuthorities().stream().anyMatch(r -> r.getAuthority().equals("ROLE_PLANNER"))) {
+        if (medewerker.getAuthorities().stream().anyMatch(r -> r.getAuthority().equals("ROLE_PLANNER"))) {
             return "redirect:/planner/inlogkeuze";
         }
 
@@ -113,8 +113,14 @@ public class MedewerkerController {
         return "inlogKeuzePlanner";
     }
 
+    @GetMapping("/profielpagina")
+    protected String showProfielPagina(Model model, @AuthenticationPrincipal Medewerker ingelogdeMedewerker) {
+        model.addAttribute("medewerker", ingelogdeMedewerker);
+        return "profielPagina";
+    }
+
     @GetMapping("/profiel/wijzigen")
-    protected String showProfielpagina(Model model, @AuthenticationPrincipal Medewerker ingelogdeMedewerker) {
+    protected String showProfielWijzigen(Model model, @AuthenticationPrincipal Medewerker ingelogdeMedewerker) {
         model.addAttribute("medewerker", ingelogdeMedewerker);
         model.addAttribute("takenLijst", taakRepository.findAll());
         return "profielWijzigen";
@@ -123,13 +129,13 @@ public class MedewerkerController {
 
     // Redirect moet nog worden aangepast, moet terug naar profielPagina (overzicht profielgegevens)
     @PostMapping("/profiel/wijzigen")
-    public String updateMedewerker(@ModelAttribute("medewerker") Medewerker medewerker,
+    public String updateMedewerker(@ModelAttribute("medewerker") Medewerker ingelogdeMedewerker,
                                    BindingResult result) {
         if (result.hasErrors()) {
             return "profielWijzigen";
         } else {
-            medewerkerRepository.save(medewerker);
-            return "redirect://welkommedewerker";
+            medewerkerRepository.save(ingelogdeMedewerker);
+            return "redirect:/medewerker/welkom";
         }
     }
 
@@ -137,8 +143,6 @@ public class MedewerkerController {
     public String welkomPlanner(Model model) {
         return "welkomPlanner";
     }
-
-
 
 
 }

@@ -1,0 +1,57 @@
+
+
+<div class="form-group" xmlns:form="http://www.w3.org/1999/xhtml">
+    <label class="col-sm-3 control-label">Voorkeurstaak </label>  <!-- for="voorkeurstaakId"  dit werkt niet-->
+    <div class="col-sm-9">
+        <form:select path="voorkeurstaak">
+            <form:option value="0" label="Select" />
+            <form:options items="${takenLijst}" itemValue="taakId" itemLabel="taakNaam" />
+        </form:select>
+    </div>
+</div>
+
+<div></div>
+<div></div>
+<h2>Adresgegevens</h2>
+<div class="form-group">
+    <label for="straatnaam" class="col-sm-3 control-label">Straatnaam* </label>
+    <div class="col-sm-9">
+        <form:input path="straatnaam" placeholder="Straatnaam" class="form-control" />
+    </div>
+</div>
+
+<!-- deze checken, zit nu pijltje omhoog/naar beneden in -->
+<div class="form-group">
+    <label for="huisnummer" class="col-sm-3 control-label">Huisnummer* </label>
+    <div class="col-sm-9">
+        <form:input path="huisnummer" placeholder="Huisnummer" class="form-control" min="0" />
+    </div>
+</div>
+<div class="form-group">
+    <label for="toevoeging" class="col-sm-3 control-label">Toevoeging </label>
+    <div class="col-sm-9">
+        <form:input path="toevoeging" placeholder="Toevoeging" class="form-control" />
+    </div>
+</div>
+<div class="form-group">
+    <label for="postcode" class="col-sm-3 control-label">Postcode* </label>
+    <div class="col-sm-9">
+        <form:input path="postcode" placeholder="Postcode" class="form-control" />
+    </div>
+</div>
+<div class="form-group">
+    <label for="woonplaats" class="col-sm-3 control-label">Woonplaats* </label>
+    <div class="col-sm-9">
+        <form:input path="woonplaats" placeholder="Woonplaats" class="form-control" />
+    </div>
+</div>
+<div class="form-group">
+    <div class="col-sm-9 col-sm-offset-3">
+        <span class="help-block">*Verplichte velden</span>
+    </div>
+</div>
+<button type="submit" class="btn btn-primary btn-block">Opslaan</button>
+</form>
+</div>
+</form:form>
+<hr>

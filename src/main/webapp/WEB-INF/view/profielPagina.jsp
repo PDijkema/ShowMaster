@@ -5,7 +5,7 @@
 <html lang="en">
   <head>
       <meta charset="utf-8">
-      <title>Profiel wijzigen</title>
+      <title>Profielpagina</title>
 
      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -15,8 +15,8 @@
 
      <div class="container">
 
-            <form:form method="POST" modelAttribute="medewerker" class="form-signin">
-                <h1>Profiel wijzigen</h1>
+            <form:form modelAttribute="medewerker" class="form-signin">
+                <h1>Profielpagina</h1>
                 <h2 class="form-signin-heading">Persoonlijke gegevens</h2>
 
                 <form:hidden path="medewerkerId" />
@@ -132,7 +132,7 @@
 
                 <p>*Verplichte velden</p>
 
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Opslaan</button>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Gegevens wijzigen</button>
 
             </form:form>
         </div>
