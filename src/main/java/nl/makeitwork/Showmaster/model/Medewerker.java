@@ -23,8 +23,6 @@ public class Medewerker implements UserDetails {
     private String wachtwoord;
     private Boolean planner;
 
-
-
     @Transient
     private String wachtwoordBevestigen;
 

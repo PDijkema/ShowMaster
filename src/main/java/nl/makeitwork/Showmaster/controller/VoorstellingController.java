@@ -36,6 +36,7 @@ public class VoorstellingController {
         return "alleVoorstellingen";
     }
 
+
     @GetMapping("/voorstelling/toevoegen")
     protected String toevoegenVoorstellingen(Voorstelling voorstelling, Model model) {
         model.addAttribute("alleTaken", taakRepository.findAll());

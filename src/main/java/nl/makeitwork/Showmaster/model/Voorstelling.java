@@ -71,4 +71,5 @@ public class Voorstelling {
     public void setVoorstellingsTaak(List<VoorstellingsTaak> voorstellingsTaak) {
         this.voorstellingsTaak = voorstellingsTaak;
     }
+
 }

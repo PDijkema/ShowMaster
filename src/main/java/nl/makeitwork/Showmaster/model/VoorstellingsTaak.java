@@ -43,4 +43,21 @@ public class VoorstellingsTaak {
     public void setTaak(Taak taak) {
         this.taak = taak;
     }
+
+    public Integer getVoorstellingsTaakId() {
+        return voorstellingsTaakId;
+    }
+
+    public void setVoorstellingsTaakId(Integer voorstellingsTaakId) {
+        this.voorstellingsTaakId = voorstellingsTaakId;
+    }
+
+
+    public Medewerker getMedewerker() {
+        return medewerker;
+    }
+
+    public void setMedewerker(Medewerker medewerker) {
+        this.medewerker = medewerker;
+    }
 }

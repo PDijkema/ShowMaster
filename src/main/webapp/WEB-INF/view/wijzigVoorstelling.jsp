@@ -31,25 +31,6 @@
                          </td>
                     </tr>
                 </div>
-                <tr><td><h2>Bezetting taken</h2></td></tr>
-                <div>
-                    <c:forEach items="${alleTaken}" var="taak">
-                        <tr>
-                          <td>
-                            <label class="input-group"/>
-                            <label colspan="1" type="text" class="form-control" aria-label="five button addons" aria-describedby="button-addon"><c:out value="${taak.taakNaam}"/></label>
-                              <div>
-                                  <select class="custom-select" id="inputGroupSelect03" aria-label="Example select with button addon">
-                                      <option selected>Geen</option>
-                                      <option value="1">1</option>
-                                      <option value="2">2</option>
-                                      <option value="3">3</option>
-                                  </select>
-                              </div>
-                          </td>
-                        </tr>
-                    </c:forEach>
-                </div>
                 <tr>
                     <td colspan="1">
                         <input type="submit" class="btn btn-primary" value="Opslaan"/>
@@ -57,8 +38,7 @@
                 </tr>
             </table>
         </form:form>
-        <div colspan="1">
-            <a class="btn btn-primary" href="/voorstellingen">Overzicht Voorstellingen</a>
-        </div>
+                <a class="btn btn-primary" href="/toevoegenTaken">Taken Toevoegen</a>
+                <a class="btn btn-primary" href="/voorstellingen">Overzicht Voorstellingen</a>
     </body>
 </html>
