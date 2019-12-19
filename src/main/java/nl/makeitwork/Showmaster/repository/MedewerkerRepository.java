@@ -13,5 +13,6 @@ import java.util.Optional;
 
 public interface MedewerkerRepository extends JpaRepository<Medewerker, Integer> {
     Medewerker findByGebruikersnaam(String gebruikersnaam);
+
 }
 
