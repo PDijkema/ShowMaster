@@ -3,6 +3,10 @@ package nl.makeitwork.Showmaster.model;
 
 import javax.persistence.*;
 
+/**
+ * @author Pieter Dijkema
+ * in voorstellingsTaken komen de andere entiteiten samen
+ */
 
 @Entity(name = "voorstellingsTaak")
 @Table(name = "voorstelling_heeft_taak")
