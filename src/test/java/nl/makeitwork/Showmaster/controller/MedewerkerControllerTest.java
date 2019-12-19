@@ -92,9 +92,24 @@ class MedewerkerControllerTest {
     @Test
     void testUpdateMedewerker() throws Exception {
 
+        // Arrange
         Medewerker testmedewerker1 = new Medewerker();
         setGebruikersgegevensTestMedewerker1(testmedewerker1);
         medewerkerRepository.save(testmedewerker1);
+
+        BindingResult result = mock(BindingResult.class);
+        when(result.hasErrors()).thenReturn(false);
+        String verwachteAchternaam = "Vries";
+
+        vulProfielgegevens(testmedewerker1);
+
+        // Activate
+        medewerkerController.updateMedewerker(testmedewerker1, result);
+
+        // Assert
+        Assert.assertEquals(testmedewerker1.getAchternaam(), verwachteAchternaam);
+    }
+
 
     @Test
     public void verwijderGebruikerTest() throws Exception {
@@ -103,9 +118,6 @@ class MedewerkerControllerTest {
         when(bindingResult.hasErrors()).thenReturn(false);
         Medewerker medewerker1 = new Medewerker();
 
-        String verwachteAchternaam = "Vries";
-
-        vulProfielgegevens(testmedewerker1);
         medewerker1.setGebruikersnaam("test12345");
         medewerker1.setWachtwoord("test12345");
         medewerker1.setWachtwoordBevestigen("test12345");
@@ -117,13 +129,10 @@ class MedewerkerControllerTest {
         medewerker1 = medewerkerRepository.findByGebruikersnaam("test12345");
 
         medewerkerController.verwijderGebruiker(medewerker1.getMedewerkerId());
-        medewerkerController.updateMedewerker(testmedewerker1, result);
 
         //Assert
         Assert.assertNull(medewerkerRepository.findByGebruikersnaam("test12345"));
 
-    }
-        Assert.assertEquals(testmedewerker1.getAchternaam(), verwachteAchternaam);
     }
 
     public void setGebruikersgegevensTestMedewerker1(Medewerker testMedewerker) {
@@ -145,8 +154,7 @@ class MedewerkerControllerTest {
         opgehaaldeMedewerker.setWoonplaats("Putten");
         opgehaaldeMedewerker.setTelefoonnummer("06-84431841");
     }
-
-
 }
+
 
 
