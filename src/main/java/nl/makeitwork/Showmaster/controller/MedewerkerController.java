@@ -75,6 +75,7 @@ public class MedewerkerController {
         }
         medewerkerService.save(registratieFormulier);
         securityService.autoLogin(registratieFormulier.getGebruikersnaam(),registratieFormulier.getWachtwoordBevestigen());
+        registratieFormulier.setWachtwoordBevestigen("");
         return "redirect:/";
     }
 
@@ -91,7 +92,7 @@ public class MedewerkerController {
         return "login";
     }
 
-    @GetMapping("/welkommedewerker")
+    @GetMapping("/medewerker/welkom")
     public String welkomMedewerker(Model model) {
         return "welkomMedewerker";
     }
@@ -113,8 +114,8 @@ public class MedewerkerController {
     }
 
     @GetMapping("/profiel/wijzigen")
-    protected String showProfielpagina(Model model, @AuthenticationPrincipal UserDetails user) {
-        model.addAttribute("medewerker", medewerkerRepository.findByGebruikersnaam(user.getUsername()));
+    protected String showProfielpagina(Model model, @AuthenticationPrincipal Medewerker ingelogdeMedewerker) {
+        model.addAttribute("medewerker", ingelogdeMedewerker);
         model.addAttribute("takenLijst", taakRepository.findAll());
         return "profielWijzigen";
     }
@@ -122,12 +123,11 @@ public class MedewerkerController {
 
     // Redirect moet nog worden aangepast, moet terug naar profielPagina (overzicht profielgegevens)
     @PostMapping("/profiel/wijzigen")
-    public String saveOrUpdateMedewerker(@ModelAttribute("medewerker") Medewerker medewerker,
-                                         BindingResult result) {
+    public String saveOrUpdateMedewerker(@ModelAttribute("medewerker") Medewerker ingelogdeMedewerker, BindingResult result) {
         if (result.hasErrors()) {
             return "profielWijzigen";
         } else {
-            medewerkerRepository.save(medewerker);
+            medewerkerRepository.save(ingelogdeMedewerker);
             return "redirect:/takenlijst";
         }
     }

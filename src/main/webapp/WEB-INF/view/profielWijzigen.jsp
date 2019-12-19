@@ -47,7 +47,7 @@
                 <div class="form-group">
                     <label for="wachtwoord" class="col-sm-3 control-label">Wachtwoord* </label>
                     <div class="col-sm-9">
-                        <form:input path="wachtwoord" placeholder="Wachtwoord" class="form-control" />
+                        <form:input path="wachtwoord" type="password"  placeholder="Wachtwoord" class="form-control" />
                     </div>
                 </div>
                 <div class="form-group">

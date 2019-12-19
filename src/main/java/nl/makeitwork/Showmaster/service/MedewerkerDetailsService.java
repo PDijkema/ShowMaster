@@ -23,11 +23,9 @@ public class MedewerkerDetailsService implements UserDetailsService {
 
     @Override
     @Transactional(readOnly = true)
-
     public UserDetails loadUserByUsername(String gebruikersnaam) {
         Medewerker medewerker = medewerkerRepository.findByGebruikersnaam(gebruikersnaam);
         if (medewerker == null) throw new UsernameNotFoundException(gebruikersnaam);
-
 
         return medewerker;
     }
