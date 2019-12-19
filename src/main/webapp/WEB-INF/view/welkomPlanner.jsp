@@ -18,6 +18,7 @@
         </form>
 
         <a href="/taak/aanmaken">  <button type="button" class="btn btn-primary btn-lg">Taak aanmaken</button> </a>
+        <a href="/planner/gebruiker/overzicht">  <button type="button" class="btn btn-primary btn-lg">Gebruiker overzicht</button> </a>
         <a href="/voorstellingen">  <button type="button" class="btn btn-primary btn-lg">Voorstellingen</button> </a>
         <a onclick="document.forms['logoutForm'].submit()"> <button type="button" class="btn btn-primary btn-lg">Log out</button> </a>
 
