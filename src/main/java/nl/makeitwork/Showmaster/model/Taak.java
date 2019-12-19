@@ -2,8 +2,8 @@ package nl.makeitwork.Showmaster.model;
 
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.NaturalIdCache;
-
 import javax.persistence.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +25,10 @@ public class Taak {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer taakId;
+
+
     private String taakNaam;
+
     private Integer standaardBezetting;
 
         @OneToMany(

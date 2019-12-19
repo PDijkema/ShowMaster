@@ -12,11 +12,15 @@
 <body>
 <div class="container">
     <c:if test="${pageContext.request.userPrincipal.name != null}">
+
         <form id="logoutForm" method="POST" action="${contextPath}/logout">
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         </form>
 
-        <h2>Welkom Planner ${pageContext.request.userPrincipal.name} | <a onclick="document.forms['logoutForm'].submit()">Logout</a></h2>
+        <a href="/taak/aanmaken">  <button type="button" class="btn btn-primary btn-lg">Taak aanmaken</button> </a>
+        <a href="/voorstellingen">  <button type="button" class="btn btn-primary btn-lg">Voorstellingen</button> </a>
+        <a onclick="document.forms['logoutForm'].submit()"> <button type="button" class="btn btn-primary btn-lg">Log out</button> </a>
+
     </c:if>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>

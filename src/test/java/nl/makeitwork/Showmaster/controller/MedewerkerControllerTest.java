@@ -22,6 +22,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import javax.servlet.ServletContext;
 
+import java.time.LocalDate;
 
 @RunWith(SpringRunner.class)
 @WebAppConfiguration
@@ -81,6 +82,33 @@ class MedewerkerControllerTest {
         //Assert
         Assert.assertNotNull(medewerkerRepository.findByGebruikersnaam("test1234"));
     }
+
+    // deze test moet nog afgemaakt worden
+    /*@Test
+    void saveOrUpdateMedewerker() throws Exception {
+
+        //Arrange
+        BindingResult result = mock(BindingResult.class);
+        when(result.hasErrors()).thenReturn(false);
+
+        Medewerker medewerker = new Medewerker();
+        medewerker.setVoornaam("Piet");
+        medewerker.setTussenvoegsel("de");
+        medewerker.setAchternaam("Vries");
+        medewerker.setEmailadres("pdevries@blabla.com");
+        medewerker.setGeboortedatum(LocalDate.parse("1956-8-1"));
+        medewerker.setStraatnaam("Rondweg");
+        medewerker.setHuisnummer(2);
+        medewerker.setPostcode("8607HH");
+        medewerker.setWoonplaats("Putten");
+        medewerker.setTelefoonnummer("06-84431841");
+
+        //Activate
+        medewerkerController.saveOrUpdateMedewerker(medewerker, result);
+
+        //Assert
+        Medewerker opgehaaldeMedewerker = medewerkerRepository.findByGebruikersnaam("test");
+    }*/
 
 
 

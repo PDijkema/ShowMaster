@@ -2,12 +2,15 @@ package nl.makeitwork.Showmaster.controller;
 
 import nl.makeitwork.Showmaster.model.Medewerker;
 import nl.makeitwork.Showmaster.repository.MedewerkerRepository;
+import nl.makeitwork.Showmaster.repository.TaakRepository;
 import nl.makeitwork.Showmaster.service.MedewerkerService;
 import nl.makeitwork.Showmaster.service.MedewerkerServiceImplementatie;
 import nl.makeitwork.Showmaster.service.SecurityService;
 import nl.makeitwork.Showmaster.service.SecurityServiceImplementatie;
 import nl.makeitwork.Showmaster.validator.MedewerkerValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -30,6 +33,7 @@ import java.util.ArrayList;
 
 /**
  * @Author Gert Postma
+ * 17-12-19 - Karin Zoetendal: profiel/wijzigen get en postmapping toegevoegd, moet nog aangepost worden
  */
 @Controller
 public class MedewerkerController {
@@ -53,6 +57,9 @@ public class MedewerkerController {
     @Autowired
     private MedewerkerRepository medewerkerRepository;
 
+    @Autowired
+    TaakRepository taakRepository;
+
     @GetMapping("/registreer")
     protected String showRegistratieFormulier(Model model) {
         model.addAttribute("registratieFormulier",new Medewerker());
@@ -68,6 +75,7 @@ public class MedewerkerController {
         }
         medewerkerService.save(registratieFormulier);
         securityService.autoLogin(registratieFormulier.getGebruikersnaam(),registratieFormulier.getWachtwoordBevestigen());
+        registratieFormulier.setWachtwoordBevestigen("");
         return "redirect:/";
     }
 
@@ -84,7 +92,7 @@ public class MedewerkerController {
         return "login";
     }
 
-    @GetMapping("/welkommedewerker")
+    @GetMapping("/medewerker/welkom")
     public String welkomMedewerker(Model model) {
         return "welkomMedewerker";
     }
@@ -103,6 +111,25 @@ public class MedewerkerController {
     @GetMapping("/planner/inlogkeuze")
     public String inlogKeuzePlanner(Model model) {
         return "inlogKeuzePlanner";
+    }
+
+    @GetMapping("/profiel/wijzigen")
+    protected String showProfielpagina(Model model, @AuthenticationPrincipal Medewerker ingelogdeMedewerker) {
+        model.addAttribute("medewerker", ingelogdeMedewerker);
+        model.addAttribute("takenLijst", taakRepository.findAll());
+        return "profielWijzigen";
+    }
+
+
+    // Redirect moet nog worden aangepast, moet terug naar profielPagina (overzicht profielgegevens)
+    @PostMapping("/profiel/wijzigen")
+    public String saveOrUpdateMedewerker(@ModelAttribute("medewerker") Medewerker ingelogdeMedewerker, BindingResult result) {
+        if (result.hasErrors()) {
+            return "profielWijzigen";
+        } else {
+            medewerkerRepository.save(ingelogdeMedewerker);
+            return "redirect:/takenlijst";
+        }
     }
 
     @GetMapping("/planner/welkom")
