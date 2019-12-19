@@ -10,7 +10,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -39,7 +38,7 @@ public class Medewerker implements UserDetails {
 
     private String achternaam;
 
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate geboortedatum;
 
     private String straatnaam;
@@ -65,7 +64,6 @@ public class Medewerker implements UserDetails {
     @JoinColumn(name = "vasteTaakId", referencedColumnName = "taakId")
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     private Taak vasteTaak;
-
 
 
     @Transient
@@ -219,14 +217,14 @@ public class Medewerker implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-            List<GrantedAuthority> authorities = new ArrayList<>();
+        List<GrantedAuthority> authorities = new ArrayList<>();
 
-            if (this.planner){
-                authorities.add(new SimpleGrantedAuthority("ROLE_PLANNER"));
-            }
-            authorities.add(new SimpleGrantedAuthority("ROLE_MEDEWERKER"));
-            return authorities;
+        if (this.planner) {
+            authorities.add(new SimpleGrantedAuthority("ROLE_PLANNER"));
         }
+        authorities.add(new SimpleGrantedAuthority("ROLE_MEDEWERKER"));
+        return authorities;
+    }
 
 
     @Override
