@@ -5,8 +5,17 @@ import nl.makeitwork.Showmaster.repository.MedewerkerRepository;
 import nl.makeitwork.Showmaster.service.MedewerkerService;
 import nl.makeitwork.Showmaster.service.MedewerkerServiceImplementatie;
 import nl.makeitwork.Showmaster.service.SecurityService;
+import nl.makeitwork.Showmaster.service.SecurityServiceImplementatie;
 import nl.makeitwork.Showmaster.validator.MedewerkerValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,12 +23,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.nio.file.attribute.UserPrincipal;
+import java.security.Principal;
+import java.util.ArrayList;
+
 
 /**
  * @Author Gert Postma
  */
 @Controller
 public class MedewerkerController {
+
+
+    @Autowired
+    SecurityServiceImplementatie securityServiceImplementatie;
 
     @Autowired
     private MedewerkerService medewerkerService;
@@ -46,13 +63,12 @@ public class MedewerkerController {
     public String saveGebruiker (@ModelAttribute("registratieFormulier")Medewerker registratieFormulier, BindingResult bindingResult){
         medewerkerValidator.validate(registratieFormulier,bindingResult);
 
-
         if (bindingResult.hasErrors()){
             return "registratieFormulier";
         }
         medewerkerService.save(registratieFormulier);
         securityService.autoLogin(registratieFormulier.getGebruikersnaam(),registratieFormulier.getWachtwoordBevestigen());
-        return "redirect:/welcome";
+        return "redirect:/";
     }
 
     @GetMapping("/login")
@@ -64,15 +80,42 @@ public class MedewerkerController {
         if (logout != null)
             model.addAttribute("message", "You have been logged out successfully.");
 
+
         return "login";
     }
 
-    @GetMapping({"/", "/welcome"})
-    public String welcome(Model model) {
-        return "welcome";
+    @GetMapping("/welkommedewerker")
+    public String welkomMedewerker(Model model) {
+        return "welkomMedewerker";
     }
 
+    @GetMapping({"/","/planner/"})
+    public String isPlanner (@AuthenticationPrincipal Medewerker medewerker){
+
+        if(medewerker.getAuthorities().stream().anyMatch(r -> r.getAuthority().equals("ROLE_PLANNER"))) {
+            return "redirect:/planner/inlogkeuze";
+        }
+
+        return "redirect:/welkommedewerker";
+
     }
+
+    @GetMapping("/planner/inlogkeuze")
+    public String inlogKeuzePlanner(Model model) {
+        return "inlogKeuzePlanner";
+    }
+
+    @GetMapping("/planner/welkom")
+    public String welkomPlanner(Model model) {
+        return "welkomPlanner";
+    }
+
+
+
+
+}
+
+
 
 
 
