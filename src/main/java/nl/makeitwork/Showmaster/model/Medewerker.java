@@ -66,6 +66,8 @@ public class Medewerker implements UserDetails {
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     private Taak vasteTaak;
 
+
+
     @Transient
     private String wachtwoordBevestigen;
 
@@ -218,9 +220,14 @@ public class Medewerker implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
             List<GrantedAuthority> authorities = new ArrayList<>();
-            authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+
+            if (this.planner){
+                authorities.add(new SimpleGrantedAuthority("ROLE_PLANNER"));
+            }
+            authorities.add(new SimpleGrantedAuthority("ROLE_MEDEWERKER"));
             return authorities;
         }
+
 
     @Override
     public String getPassword() {
