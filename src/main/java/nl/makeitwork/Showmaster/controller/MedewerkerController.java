@@ -79,7 +79,6 @@ public class MedewerkerController {
         return "welcome";
     }
 
-    // moet wellicht aangepast, moet medewerkerId meegeven
     @GetMapping("/profiel/wijzigen")
     protected String showProfielpagina(Model model, @AuthenticationPrincipal UserDetails user) {
         model.addAttribute("medewerker", medewerkerRepository.findByGebruikersnaam(user.getUsername()));
