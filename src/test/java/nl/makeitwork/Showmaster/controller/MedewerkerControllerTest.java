@@ -84,7 +84,7 @@ class MedewerkerControllerTest {
     }
 
     // deze test moet nog afgemaakt worden
-    @Test
+    /*@Test
     void saveOrUpdateMedewerker() throws Exception {
 
         //Arrange
@@ -108,8 +108,7 @@ class MedewerkerControllerTest {
 
         //Assert
         Medewerker opgehaaldeMedewerker = medewerkerRepository.findByGebruikersnaam("test");
-
-    }
+    }*/
 
 
 
