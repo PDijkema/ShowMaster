@@ -120,6 +120,12 @@ public class MedewerkerController {
         return "profielPagina";
     }
 
+    @PostMapping("/profielpagina")
+    protected String goToProfielWijzigen(Model model, @AuthenticationPrincipal Medewerker ingelogdeMedewerker) {
+        return "redirect:/profiel/wijzigen";
+    }
+
+
     @GetMapping("/profiel/wijzigen")
     protected String showProfielWijzigen(Model model, @AuthenticationPrincipal Medewerker ingelogdeMedewerker) {
         model.addAttribute("medewerker", ingelogdeMedewerker);
@@ -127,8 +133,7 @@ public class MedewerkerController {
         return "profielWijzigen";
     }
 
-
-    // Redirect moet nog worden aangepast, moet terug naar profielPagina (overzicht profielgegevens)
+    // Gaat nog niet goed, profielpagina laadt daarna geupdate gegevens niet, en ww wordt overschreven met NULL
     @PostMapping("/profiel/wijzigen")
     public String updateMedewerker(@ModelAttribute("medewerker") Medewerker ingelogdeMedewerker,
                                    BindingResult result) {
@@ -136,7 +141,7 @@ public class MedewerkerController {
             return "profielWijzigen";
         } else {
             medewerkerRepository.save(ingelogdeMedewerker);
-            return "redirect:/medewerker/welkom";
+            return "redirect:/profielpagina";
         }
     }
 
