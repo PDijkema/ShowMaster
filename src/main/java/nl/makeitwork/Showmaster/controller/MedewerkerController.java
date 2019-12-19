@@ -122,13 +122,13 @@ public class MedewerkerController {
 
     // Redirect moet nog worden aangepast, moet terug naar profielPagina (overzicht profielgegevens)
     @PostMapping("/profiel/wijzigen")
-    public String saveOrUpdateMedewerker(@ModelAttribute("medewerker") Medewerker medewerker,
-                                         BindingResult result) {
+    public String updateMedewerker(@ModelAttribute("medewerker") Medewerker medewerker,
+                                   BindingResult result) {
         if (result.hasErrors()) {
             return "profielWijzigen";
         } else {
             medewerkerRepository.save(medewerker);
-            return "redirect:/takenlijst";
+            return "redirect://welkommedewerker";
         }
     }
 

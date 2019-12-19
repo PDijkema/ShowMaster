@@ -12,22 +12,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mock.web.MockServletContext;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.context.WebApplicationContext;
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+
 import javax.servlet.ServletContext;
 
-import java.time.LocalDate;
 
 @RunWith(SpringRunner.class)
 @WebAppConfiguration
 @SpringBootTest
 @AutoConfigureMockMvc
+@TestPropertySource(locations = "classpath:test.properties")
 class MedewerkerControllerTest {
 
     @Autowired
@@ -44,7 +47,6 @@ class MedewerkerControllerTest {
 
     @Autowired
     private WebApplicationContext webApplicationContext;
-
 
 
     @Before
@@ -75,6 +77,7 @@ class MedewerkerControllerTest {
         medewerker1.setGebruikersnaam("test1234");
         medewerker1.setWachtwoord("test1234");
         medewerker1.setWachtwoordBevestigen("test1234");
+        medewerker1.setPlanner(false);
 
         //Activate
         medewerkerController.saveGebruiker(medewerker1, bindingResult);
@@ -83,37 +86,49 @@ class MedewerkerControllerTest {
         Assert.assertNotNull(medewerkerRepository.findByGebruikersnaam("test1234"));
     }
 
-    // deze test moet nog afgemaakt worden
-    /*@Test
-    void saveOrUpdateMedewerker() throws Exception {
+    @Test
+    void testUpdateMedewerker() throws Exception {
+
+        Medewerker testmedewerker1 = new Medewerker();
+        setGebruikersgegevensTestMedewerker1(testmedewerker1);
+        medewerkerRepository.save(testmedewerker1);
 
         //Arrange
         BindingResult result = mock(BindingResult.class);
         when(result.hasErrors()).thenReturn(false);
 
-        Medewerker medewerker = new Medewerker();
-        medewerker.setVoornaam("Piet");
-        medewerker.setTussenvoegsel("de");
-        medewerker.setAchternaam("Vries");
-        medewerker.setEmailadres("pdevries@blabla.com");
-        medewerker.setGeboortedatum(LocalDate.parse("1956-8-1"));
-        medewerker.setStraatnaam("Rondweg");
-        medewerker.setHuisnummer(2);
-        medewerker.setPostcode("8607HH");
-        medewerker.setWoonplaats("Putten");
-        medewerker.setTelefoonnummer("06-84431841");
+        String verwachteAchternaam = "Vries";
+
+        vulProfielgegevens(testmedewerker1);
 
         //Activate
-        medewerkerController.saveOrUpdateMedewerker(medewerker, result);
+        medewerkerController.updateMedewerker(testmedewerker1, result);
 
         //Assert
-        Medewerker opgehaaldeMedewerker = medewerkerRepository.findByGebruikersnaam("test");
-    }*/
-
-
-
-
-
+        Assert.assertEquals(testmedewerker1.getAchternaam(), verwachteAchternaam);
     }
+
+    public void setGebruikersgegevensTestMedewerker1(Medewerker testMedewerker) {
+        testMedewerker.setGebruikersnaam("test4567");
+        testMedewerker.setWachtwoord("test4567");
+        testMedewerker.setWachtwoordBevestigen("test4567");
+        testMedewerker.setPlanner(false);
+    }
+
+    public void vulProfielgegevens(Medewerker opgehaaldeMedewerker) {
+        opgehaaldeMedewerker.setVoornaam("Piet");
+        opgehaaldeMedewerker.setTussenvoegsel("de");
+        opgehaaldeMedewerker.setAchternaam("Vries");
+        opgehaaldeMedewerker.setEmailadres("pdevries@blabla.com");
+        //updateMedewerker.setGeboortedatum(LocalDate.parse("1956-8-1"));
+        opgehaaldeMedewerker.setStraatnaam("Rondweg");
+        opgehaaldeMedewerker.setHuisnummer(2);
+        opgehaaldeMedewerker.setPostcode("8607HH");
+        opgehaaldeMedewerker.setWoonplaats("Putten");
+        opgehaaldeMedewerker.setTelefoonnummer("06-84431841");
+    }
+
+
+}
 
 

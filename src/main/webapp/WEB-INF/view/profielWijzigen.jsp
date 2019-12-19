@@ -44,18 +44,7 @@
                         <form:input path="gebruikersnaam" placeholder="gebruikersnaam" class="form-control" />
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="wachtwoord" class="col-sm-3 control-label">Wachtwoord* </label>
-                    <div class="col-sm-9">
-                        <form:input path="wachtwoord" placeholder="Wachtwoord" class="form-control" />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="wachtwoordBevestigen" class="col-sm-3 control-label">Bevestig wachtwoord* </label>
-                    <div class="col-sm-9">
-                        <form:input path="wachtwoordBevestigen" placeholder="Wachtwoord" class="form-control" />
-                    </div>
-                </div>
+
                 <div class="form-group">
                     <label for="voornaam" class="col-sm-3 control-label">Voornaam* </label>
                     <div class="col-sm-9">
