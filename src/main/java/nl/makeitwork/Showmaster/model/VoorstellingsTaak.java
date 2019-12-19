@@ -1,6 +1,9 @@
 package nl.makeitwork.Showmaster.model;
 
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 
 /**
@@ -16,17 +19,24 @@ public class VoorstellingsTaak {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer voorstellingsTaakId;
 
-        @ManyToOne(fetch = FetchType.LAZY, optional = false)
-        @MapsId("voorstellingId")
+        @ManyToOne
+        @JoinColumn(name = "voorstellingId", referencedColumnName = "voorstellingId")
+        @OnDelete(action = OnDeleteAction.CASCADE)
         private Voorstelling voorstelling;
 
-        @ManyToOne(fetch = FetchType.LAZY, optional = false)
-        @MapsId("taakId")
+        @ManyToOne
+        @JoinColumn(name = "taakId", referencedColumnName = "taakId")
+        @OnDelete(action = OnDeleteAction.CASCADE)
         private Taak taak;
 
         @OneToOne(fetch = FetchType.LAZY)
-        @JoinColumn(name = "medewerkersId")
+        @JoinColumn(name = "medewerkerId", referencedColumnName = "medewerkerId")
+        @OnDelete(action = OnDeleteAction.CASCADE)
         private Medewerker medewerker;
+
+    public VoorstellingsTaak() {
+    }
+
 
     public Voorstelling getVoorstelling() {
         return voorstelling;

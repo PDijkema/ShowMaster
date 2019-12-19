@@ -53,7 +53,7 @@ public class Medewerker implements UserDetails {
 
     private String telefoonnummer;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+/*    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "voorkeurstaakId", referencedColumnName = "taakId")
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     private Taak voorkeurstaak;
@@ -61,7 +61,7 @@ public class Medewerker implements UserDetails {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "vasteTaakId", referencedColumnName = "taakId")
     @OnDelete(action = OnDeleteAction.NO_ACTION)
-    private Taak vasteTaak;
+    private Taak vasteTaak;*/
 
 
     @Transient
@@ -201,7 +201,7 @@ public class Medewerker implements UserDetails {
         this.telefoonnummer = telefoonnummer;
     }
 
-    public Taak getVoorkeurstaak() {
+/*    public Taak getVoorkeurstaak() {
         return voorkeurstaak;
     }
 
@@ -215,7 +215,7 @@ public class Medewerker implements UserDetails {
 
     public void setVasteTaak(Taak vasteTaak) {
         this.vasteTaak = vasteTaak;
-    }
+    }*/
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

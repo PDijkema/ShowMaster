@@ -16,27 +16,30 @@ import java.util.List;
 
 @Entity
 @Table(name = "taak")
-@NaturalIdCache
-@org.hibernate.annotations.Cache(
-    usage = CacheConcurrencyStrategy.READ_WRITE
-)
 public class Taak {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer taakId;
-
-
     private String taakNaam;
-
     private Integer standaardBezetting;
 
-        @OneToMany(
+      /*  @OneToMany(
             mappedBy = "taak",
             cascade = CascadeType.ALL,
             orphanRemoval = true
-        )
-        private List<VoorstellingsTaak> voorstellingsTaak = new ArrayList<>();
+        )*/
+        //private List<VoorstellingsTaak> voorstellingsTaak = new ArrayList<>();
+
+    @Override
+    public String toString() {
+        return "Taak{" +
+            "taakId=" + taakId +
+            ", taakNaam='" + taakNaam + '\'' +
+            ", standaardBezetting=" + standaardBezetting +
+            ", voorstellingsTaak=" +
+            '}';
+    }
 
     public Integer getTaakId() {
         return taakId;
@@ -62,11 +65,11 @@ public class Taak {
         this.standaardBezetting = standaardBezetting;
     }
 
-    public List<VoorstellingsTaak> getVoorstellingsTaak() {
+/*    public List<VoorstellingsTaak> getVoorstellingsTaak() {
         return voorstellingsTaak;
     }
 
     public void setVoorstellingsTaak(List<VoorstellingsTaak> voorstellingsTaak) {
         this.voorstellingsTaak = voorstellingsTaak;
-    }
+    }*/
 }

@@ -28,12 +28,12 @@ public class Voorstelling {
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime datum;
 
-        @OneToMany(
+/*        @OneToMany(
             mappedBy = "voorstelling",
             cascade = CascadeType.ALL,
             orphanRemoval = true
         )
-        private List<VoorstellingsTaak> voorstellingsTaak = new ArrayList<>();
+        private List<VoorstellingsTaak> voorstellingsTaak = new ArrayList<>();*/
 
     @Override
     public String toString() {
@@ -64,12 +64,12 @@ public class Voorstelling {
         this.datum = datum;
     }
 
-    public List<VoorstellingsTaak> getVoorstellingsTaak() {
+/*    public List<VoorstellingsTaak> getVoorstellingsTaak() {
         return voorstellingsTaak;
     }
 
     public void setVoorstellingsTaak(List<VoorstellingsTaak> voorstellingsTaak) {
         this.voorstellingsTaak = voorstellingsTaak;
-    }
+    }*/
 
 }

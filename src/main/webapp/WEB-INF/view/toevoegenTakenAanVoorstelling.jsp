@@ -2,7 +2,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <!doctype html>
-<html lang="en" xmlns:form="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:form="http://www.w3.org/1999/xhtml" xmlns:c="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -13,7 +13,7 @@
             Beheer voorstelling
         </h1>
 
-        <form action="/taken/toevoegen" method="post">
+        <form:form action="/taken/toevoegen" method="post">
             <table>
                 <tr>
                     <th>Taaknaam</th>
@@ -25,12 +25,12 @@
                                 <td>
                                     <div class="input-group-prepend">
                                         <p><c:out value="${taak.taakNaam}"/></p>
-                                        <input type="hidden" value="${taak.taakId}"/>
+                                        <p><input type="hidden"  c:out value="${taak.taakId}"/></p>
 
                                     </div>
                                 </td>
                                 <td>
-                                    <select name="aantal" class="custom-select" id="inputGroupSelect03" aria-label="button addon">
+                                    <select name="${taak.taakNaam}" class="custom-select" id="inputGroupSelect03" aria-label="button addon">
                                         <option selected>Geen</option>
                                         <option value="1">1</option>
                                         <option value="2">2</option>
@@ -41,10 +41,11 @@
                         </tr>
                     </c:forEach>
                 <td>
+                    <input type="hidden" name="voorstellingId" value="${taak.taakId}"/></p>
                     <input type="submit" class="btn btn-primary" value="Opslaan">
                 </td>
             </table>
-        </form>
+        </form:form>
         <a class="btn btn-primary" href="/voorstellingen">Overzicht Voorstellingen</a>
     </body>
 
