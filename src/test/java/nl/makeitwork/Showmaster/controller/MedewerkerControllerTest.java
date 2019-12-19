@@ -20,11 +20,14 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.context.WebApplicationContext;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
 import javax.servlet.ServletContext;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import static org.mockito.Mockito.*;
 
 @RunWith(SpringRunner.class)
 @WebAppConfiguration
@@ -93,18 +96,33 @@ class MedewerkerControllerTest {
         setGebruikersgegevensTestMedewerker1(testmedewerker1);
         medewerkerRepository.save(testmedewerker1);
 
+    @Test
+    public void verwijderGebruikerTest() throws Exception {
         //Arrange
-        BindingResult result = mock(BindingResult.class);
-        when(result.hasErrors()).thenReturn(false);
+        BindingResult bindingResult = mock(BindingResult.class);
+        when(bindingResult.hasErrors()).thenReturn(false);
+        Medewerker medewerker1 = new Medewerker();
 
         String verwachteAchternaam = "Vries";
 
         vulProfielgegevens(testmedewerker1);
+        medewerker1.setGebruikersnaam("test12345");
+        medewerker1.setWachtwoord("test12345");
+        medewerker1.setWachtwoordBevestigen("test12345");
+        medewerker1.setPlanner(false);
 
         //Activate
+        medewerkerController.saveGebruiker(medewerker1, bindingResult);
+
+        medewerker1 = medewerkerRepository.findByGebruikersnaam("test12345");
+
+        medewerkerController.verwijderGebruiker(medewerker1.getMedewerkerId());
         medewerkerController.updateMedewerker(testmedewerker1, result);
 
         //Assert
+        Assert.assertNull(medewerkerRepository.findByGebruikersnaam("test12345"));
+
+    }
         Assert.assertEquals(testmedewerker1.getAchternaam(), verwachteAchternaam);
     }
 
