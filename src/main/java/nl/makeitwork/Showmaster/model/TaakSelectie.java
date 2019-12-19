@@ -3,6 +3,7 @@ package nl.makeitwork.Showmaster.model;
 
 public class TaakSelectie {
     private Integer taakId;
+    
     private Integer aantal;
 
     public Integer getTaakId() {
