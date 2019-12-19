@@ -17,7 +17,7 @@
 
     <div class="container">
         <h2 class="form-heading">Maak uw keuze</h2>
-        <a href="/welkommedewerker"> <button type="button" class="btn btn-primary btn-lg">Medewerker</button></a>
+        <a href="/medewerker/welkom"> <button type="button" class="btn btn-primary btn-lg">Medewerker</button></a>
 
         <a href="/planner/welkom"> <button type="button" class="btn btn-primary btn-lg">Planner</button></a>
 
