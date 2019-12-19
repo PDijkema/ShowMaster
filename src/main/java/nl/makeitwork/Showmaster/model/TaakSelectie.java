@@ -1,5 +1,9 @@
 package nl.makeitwork.Showmaster.model;
 
+/**
+ * @author Pieter Dijkema
+ * tijdelijk klasse om taken bij voorstellingen op te kunnen slaan. Later vervangen door een meer flexibele vorm
+ */
 
 public class TaakSelectie {
    private Integer bar;

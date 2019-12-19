@@ -1,6 +1,5 @@
 package nl.makeitwork.Showmaster.controller;
 
-import nl.makeitwork.Showmaster.model.Taak;
 import nl.makeitwork.Showmaster.model.TaakSelectie;
 import nl.makeitwork.Showmaster.model.Voorstelling;
 import nl.makeitwork.Showmaster.model.VoorstellingsTaak;
@@ -13,9 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-
 import javax.servlet.http.HttpServletRequest;
-import java.util.Optional;
+
 
 
 /**
@@ -43,21 +41,6 @@ public class VoorstellingsTaakController {
     protected String saveOrUpdateTakenBijVoorstelling(TaakSelectie taakSelectie, BindingResult result, HttpServletRequest request) {
         Integer voorstellingId = (Integer)(request.getSession().getAttribute("voorstellingId"));
         Voorstelling voorstelling = voorstellingRepository.findById(voorstellingId).get();
-        Taak taakBar = taakRepository.findByTaakNaam("Bar");
-        Taak taakKaartverkoop = taakRepository.findByTaakNaam("Kaartverkoop");
-        Taak taakGarderobe = taakRepository.findByTaakNaam("Garderobe");
-        System.out.println(taakBar);
-
-
-/*        System.out.println(taakSelectie);
-        System.out.println("Id voorstelling is " + request.getSession().getAttribute("voorstellingId"));
-        System.out.println("Id voorstelling is " + request.getSession().getAttribute("naam"));
-        System.out.println("parsedId " + voorstellingId);
-        System.out.println(voorstellingRepository.findById(voorstellingId));
-        System.out.println(taakBar);
-        System.out.println(taakKaartverkoop);
-        System.out.println(taakGarderobe);*/
-
 
         if (!result.hasErrors()) {
             int bar = taakSelectie.getBar();
@@ -66,28 +49,28 @@ public class VoorstellingsTaakController {
 
             for (int i = 0; i < bar; i++) {
                 VoorstellingsTaak taak = new VoorstellingsTaak();
-                taak.setTaak(taakBar);
+                taak.setTaak(taakRepository.findByTaakNaam("Bar"));
                 taak.setVoorstelling(voorstelling);
                 voorstellingsTaakRepository.save(taak);
             }
 
             for (int i = 0; i < kaartVerkoop; i++) {
                 VoorstellingsTaak taak = new VoorstellingsTaak();
-                taak.setTaak(taakKaartverkoop);
+                taak.setTaak(taakRepository.findByTaakNaam("Kaartverkoop"));
                 taak.setVoorstelling(voorstelling);
                 voorstellingsTaakRepository.save(taak);
             }
 
             for (int i = 0; i < garderobe; i++) {
                 VoorstellingsTaak taak = new VoorstellingsTaak();
-                taak.setTaak(taakGarderobe);
+                taak.setTaak(taakRepository.findByTaakNaam("Garderobe"));
                 taak.setVoorstelling(voorstelling);
                 voorstellingsTaakRepository.save(taak);
             }
-
-
+        } else {
 
         }
+
         return "redirect:/voorstellingen";
     }
 }

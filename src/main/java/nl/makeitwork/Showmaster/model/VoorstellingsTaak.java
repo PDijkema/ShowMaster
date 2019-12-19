@@ -37,7 +37,6 @@ public class VoorstellingsTaak {
     public VoorstellingsTaak() {
     }
 
-
     public Voorstelling getVoorstelling() {
         return voorstelling;
     }
