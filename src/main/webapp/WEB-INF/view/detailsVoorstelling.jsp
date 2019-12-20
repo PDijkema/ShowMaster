@@ -35,48 +35,19 @@
             </tr>
         </thead>
         <tbody>
+            <c:forEach items="${takenBijVoorstelling}" var="takenBijVoorstelling">
+                <tr>
+                    <td><c:out value="${takenBijVoorstelling.getTaak().getTaakNaam()}"/></td>
+                
+
+                    <td><c:out value="${takenBijVoorstelling.getMedewerker().getGebruikersnaam()}"/></td>
 
 
+
+                </tr>
+            </c:forEach>
         </tbody>
     </table>
-
-
-
-
-
-        <h1>Taken</h1>
-        <form:form >
-            <table>
-                <tr>
-                    <th>Taaknaam</th>
-                    <th>Medewerker</th>
-                </tr>
-                <c:forEach items="${alleTaken}" var="taak">
-                    <tr>
-                        <div class="input-group mb-3">
-                            <td>
-                                <div class="input-group-prepend">
-                                    <p><c:out value="${taak.taakNaam}"/></p>
-                                    <p><input type="hidden"  c:out value="${taak.taakId}"/></p>
-
-                                </div>
-                            </td>
-                            <td>
-                                <select name="${taak.taakNaam}" class="custom-select" id="inputGroupSelect03" aria-label="button addon">
-                                    <option selected>Geen</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                </select>
-                            </td>
-                        </div>
-                    </tr>
-                </c:forEach>
-                <td>
-                    <input type="hidden" name="voorstellingId" value="${taak.taakId}"/></p>
-                </td>
-            </table>
-        </form:form>
 
         <a class="btn btn-primary" href="/voorstellingen">Overzicht Voorstellingen</a>
     </body>

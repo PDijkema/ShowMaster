@@ -64,20 +64,13 @@ public class VoorstellingController {
     @GetMapping("/voorstelling/details/{voorstellingId}")
     protected String detailsVoorstelling(@PathVariable Integer voorstellingId, Model model, HttpServletRequest request) {
         Optional<Voorstelling> voorstelling = voorstellingRepository.findById(voorstellingId);
-        System.out.println("id " + voorstellingId);
+        List<VoorstellingsTaak> voorstellingsTaken = voorstellingsTaakRepository.findVoorstellingstaakByVoorstellingId(voorstellingId);
 
-        List<VoorstellingsTaak> voorstellinsTaken = voorstellingsTaakRepository.findVoorstellingstaakByVoorstellingId(voorstellingId);
-        for (VoorstellingsTaak v: voorstellinsTaken) {
-            System.out.println(v);
-
-        }
-
-
-        //model.addAttribute("alleTaken", taakRepository.findAll());
         if (!voorstelling.isPresent()) {
             return "redirect:/alleVoorstellingen";
         } else {
             request.getSession().setAttribute("voorstellingId", voorstellingId);
+            model.addAttribute("takenBijVoorstelling", voorstellingsTaken);
             model.addAttribute("voorstelling", voorstelling.get());
             return "detailsVoorstelling";
         }
