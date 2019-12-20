@@ -1,11 +1,6 @@
 package nl.makeitwork.Showmaster.model;
-
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.NaturalIdCache;
 import javax.persistence.*;
 
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author Karin Zoetendal

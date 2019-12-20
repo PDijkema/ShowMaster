@@ -1,6 +1,5 @@
 package nl.makeitwork.Showmaster.model;
 
-
 import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
