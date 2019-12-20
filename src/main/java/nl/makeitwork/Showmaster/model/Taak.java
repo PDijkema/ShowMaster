@@ -21,10 +21,6 @@ public class Taak {
 
     @Override
     public String toString() {
-        return taakNaam;
-    }
-    @Override
-    public String toString() {
         return "Taak{" +
             "taakId=" + taakId +
             ", taakNaam='" + taakNaam + '\'' +

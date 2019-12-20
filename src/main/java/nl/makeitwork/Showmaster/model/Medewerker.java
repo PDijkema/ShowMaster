@@ -28,6 +28,9 @@ public class Medewerker implements UserDetails {
 
     private String wachtwoord;
 
+    @Transient
+    private String wachtwoordBevestigen;
+
     private Boolean planner;
 
     private String voornaam;
@@ -63,15 +66,6 @@ public class Medewerker implements UserDetails {
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     private Taak vasteTaak;
 
-
-    @Transient
-    private String wachtwoordBevestigen;
-
-        @OneToOne(mappedBy = "medewerker", cascade = CascadeType.ALL,
-                    fetch = FetchType.LAZY, optional = false)
-        private VoorstellingsTaak voorstellingsTaak;
-
-
     public Boolean getPlanner() {
         return planner;
     }
@@ -79,7 +73,6 @@ public class Medewerker implements UserDetails {
     public void setPlanner(Boolean planner) {
         this.planner = planner;
     }
-
 
     public String getWachtwoordBevestigen() {
         return wachtwoordBevestigen;
@@ -201,7 +194,7 @@ public class Medewerker implements UserDetails {
         this.telefoonnummer = telefoonnummer;
     }
 
-/*    public Taak getVoorkeurstaak() {
+    public Taak getVoorkeurstaak() {
         return voorkeurstaak;
     }
 
@@ -215,18 +208,18 @@ public class Medewerker implements UserDetails {
 
     public void setVasteTaak(Taak vasteTaak) {
         this.vasteTaak = vasteTaak;
-    }*/
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-            List<GrantedAuthority> authorities = new ArrayList<>();
+        List<GrantedAuthority> authorities = new ArrayList<>();
 
-            if (this.planner){
-                authorities.add(new SimpleGrantedAuthority("ROLE_PLANNER"));
-            }
-            authorities.add(new SimpleGrantedAuthority("ROLE_MEDEWERKER"));
-            return authorities;
+        if (this.planner) {
+            authorities.add(new SimpleGrantedAuthority("ROLE_PLANNER"));
         }
+        authorities.add(new SimpleGrantedAuthority("ROLE_MEDEWERKER"));
+        return authorities;
+    }
 
 
     @Override

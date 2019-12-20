@@ -48,7 +48,7 @@
                         <th>Achternaam</th>
                     </tr>
                     <tr>
-                        <td>${medewerker.achternaam}</td>
+                        <td>${medewerker.achternaam} &nbsp;</td>
                     </tr>
                     <tr></tr>
                     <tr>
@@ -76,7 +76,7 @@
                         <th>Voorkeurstaak</th>
                     </tr>
                     <tr>
-                        <td>${medewerker.voorkeurstaak} &nbsp;</td>
+                        <td>${medewerker.voorkeurstaak.taakNaam} &nbsp;</td>
                     </tr>
                     <tr></tr>
                     <tr></tr>

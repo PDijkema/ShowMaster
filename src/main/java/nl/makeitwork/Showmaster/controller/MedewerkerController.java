@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 /**
  * @Author Gert Postma
- * 17-12-19 - Karin Zoetendal: profiel/wijzigen get en postmapping toegevoegd, moet nog aangepost worden
+ * 20-12-19 - Karin Zoetendal: profiel/wijzigen en profielpagina worden nu correct weergegeven
  */
 @Controller
 public class MedewerkerController {
@@ -148,8 +148,6 @@ public class MedewerkerController {
         medewerkerRepository.deleteById(medewerkerId);
         return "redirect:/planner/gebruiker/overzicht";
     }
-
-
 
 }
 
