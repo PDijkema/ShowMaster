@@ -17,7 +17,7 @@
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         </form>
         <jsp:include page="persoonlijkeTakenPerShow.jsp" />
-        <a href="/profiel/wijzigen">  <button type="button" class="btn btn-primary btn-lg">Profiel wijzigen</button> </a>
+        <a href="/profielpagina">  <button type="button" class="btn btn-primary btn-lg">Profielpagina</button> </a>
         <a onclick="document.forms['logoutForm'].submit()"> <button type="button" class="btn btn-primary btn-lg">Log out</button> </a>
 
     </c:if>
