@@ -21,7 +21,10 @@ public class Taak {
 
     private Integer standaardBezetting;
 
-    public Taak() {}
+    @Override
+    public String toString() {
+        return taakNaam;
+    }
 
     public Integer getTaakId() {
         return taakId;

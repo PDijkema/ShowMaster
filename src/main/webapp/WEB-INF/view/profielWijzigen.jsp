@@ -20,6 +20,8 @@
                 <h2 class="form-signin-heading">Persoonlijke gegevens</h2>
 
                 <form:hidden path="medewerkerId" />
+                <form:hidden path="wachtwoord" />
+                <form:hidden path="planner" />
 
                 <spring:bind path="gebruikersnaam">
                     <div class="form-group ${status.error ? 'has-error' : ''}">

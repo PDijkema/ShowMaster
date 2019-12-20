@@ -11,121 +11,121 @@
 
 </head>
 
-<body>
+    <body>
 
-<div class="container">
+        <div class="container">
 
-    <form:form modelAttribute="medewerker" class="form-signin">
-        <h1>Profielpagina</h1>
-        <h2 class="form-signin-heading">Persoonlijke gegevens</h2>
+            <form:form modelAttribute="medewerker" class="form-signin">
+                <h1>Profielpagina</h1>
+                <h2 class="form-signin-heading">Persoonlijke gegevens</h2>
 
-        <form:hidden path="medewerkerId" />
+                <form:hidden path="medewerkerId" />
+                <form:hidden path="planner" />
 
+                <table>
+                    <tr>
+                        <th>Gebruikersnaam</th>
+                    </tr>
+                    <tr>
+                        <td>${medewerker.gebruikersnaam}</td>
+                    </tr>
+                    <tr></tr>
+                    <tr>
+                        <th>Voornaam</th>
+                    </tr>
+                    <tr>
+                        <td>${medewerker.voornaam} &nbsp;</td>
+                    </tr>
+                    <tr></tr>
+                    <tr>
+                        <th>Tussenvoegsel</th>
+                    </tr>
+                    <tr>
+                        <td>${medewerker.tussenvoegsel} &nbsp;</td>
+                    </tr>
+                    <tr></tr>
+                    <tr>
+                        <th>Achternaam</th>
+                    </tr>
+                    <tr>
+                        <td>${medewerker.achternaam}</td>
+                    </tr>
+                    <tr></tr>
+                    <tr>
+                        <th>Emailadres</th>
+                    </tr>
+                    <tr>
+                        <td>${medewerker.emailadres} &nbsp;</td>
+                    </tr>
+                    <tr></tr>
+                    <tr>
+                        <th>Geboortedatum</th>
+                    </tr>
+                    <tr>
+                        <td>${medewerker.geboortedatum} &nbsp;</td>
+                    </tr>
+                    <tr></tr>
+                    <tr>
+                        <th>Telefoonnummer</th>
+                    </tr>
+                    <tr>
+                        <td>${medewerker.telefoonnummer} &nbsp;</td>
+                    </tr>
+                    <tr></tr>
+                    <tr>
+                        <th>Voorkeurstaak</th>
+                    </tr>
+                    <tr>
+                        <td>${medewerker.voorkeurstaak} &nbsp;</td>
+                    </tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                    </table>
 
-        <table>
-            <tr>
-                <th>Gebruikersnaam</th>
-            </tr>
-            <tr>
-                <td>${medewerker.gebruikersnaam}</td>
-            </tr>
-            <tr></tr>
-            <tr>
-                <th>Voornaam</th>
-            </tr>
-            <tr>
-                <td>${medewerker.voornaam}</td>
-            </tr>
-            <tr></tr>
-            <tr>
-                <th>Tussenvoegsel</th>
-            </tr>
-            <tr>
-                <td>${medewerker.tussenvoegsel}</td>
-            </tr>
-            <tr></tr>
-            <tr>
-                <th>Achternaam</th>
-            </tr>
-            <tr>
-                <td>${medewerker.achternaam}</td>
-            </tr>
-            <tr></tr>
-            <tr>
-                <th>Emailadres</th>
-            </tr>
-            <tr>
-                <td>${medewerker.emailadres}</td>
-            </tr>
-            <tr></tr>
-            <tr>
-                <th>Geboortedatum</th>
-            </tr>
-            <tr>
-                <td>${medewerker.geboortedatum}</td>
-            </tr>
-            <tr></tr>
-            <tr>
-                <th>Telefoonnummer</th>
-            </tr>
-            <tr>
-                <td>${medewerker.telefoonnummer}</td>
-            </tr>
-            <tr></tr>
-            <tr>
-                <th>Voorkeurstaak</th>
-            </tr>
-            <tr>
-                <td>${medewerker.voorkeurstaak}</td>
-            </tr>
-            <tr></tr>
+                    <h2>Adresgegevens</h2>
+                    <table>
+                    <tr>
+                        <th>Straatnaam</th>
+                    </tr>
+                    <tr>
+                        <td>${medewerker.straatnaam} &nbsp;</td>
+                    </tr>
+                    <tr></tr>
+                    <tr>
+                        <th>Huisnummer</th>
+                    </tr>
+                    <tr>
+                        <td>${medewerker.huisnummer} &nbsp;</td>
+                    </tr>
+                    <tr></tr>
+                    <tr>
+                        <th>Toevoeging</th>
+                    </tr>
+                    <tr>
+                        <td>${medewerker.toevoeging} &nbsp;</td>
+                    </tr>
+                    <tr></tr>
+                    <tr>
+                        <th>Postcode</th>
+                    </tr>
+                    <tr>
+                        <td>${medewerker.postcode} &nbsp;</td>
+                    </tr>
+                    <tr></tr>
+                    <tr>
+                        <th>Woonplaats</th>
+                    </tr>
+                    <tr>
+                        <td>${medewerker.woonplaats} &nbsp;</td>
+                    </tr>
+                    <tr></tr>
+                </table>
 
-            <tr></tr>
-            <tr></tr>
-            </table>
-            <h2>Adresgegevens</h2>
-            <table>
-            <tr>
-                <th>Straatnaam</th>
-            </tr>
-            <tr>
-                <td>${medewerker.straatnaam}</td>
-            </tr>
-            <tr></tr>
-            <tr>
-                <th>Huisnummer</th>
-            </tr>
-            <tr>
-                <td>${medewerker.huisnummer}</td>
-            </tr>
-            <tr></tr>
-            <tr>
-                <th>Toevoeging</th>
-            </tr>
-            <tr>
-                <td>${medewerker.toevoeging}</td>
-            </tr>
-            <tr></tr>
-            <tr>
-                <th>Postcode</th>
-            </tr>
-            <tr>
-                <td>${medewerker.postcode}</td>
-            </tr>
-            <tr></tr>
-            <tr>
-                <th>Woonplaats</th>
-            </tr>
-            <tr>
-                <td>${medewerker.woonplaats}</td>
-            </tr>
-            <tr></tr>
-        </table>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Gegevens wijzigen</button>
 
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Gegevens wijzigen</button>
+            </form:form>
+            </div>
 
-    </form:form>
-    </div>
-
-    </body>
+        </body>
 </html>

@@ -116,7 +116,7 @@ public class MedewerkerController {
 
     @GetMapping("/profielpagina")
     protected String showProfielPagina(Model model, @AuthenticationPrincipal Medewerker ingelogdeMedewerker) {
-        model.addAttribute("medewerker", ingelogdeMedewerker);
+        model.addAttribute("medewerker", medewerkerRepository.findByGebruikersnaam(ingelogdeMedewerker.getGebruikersnaam()));
         return "profielPagina";
     }
 
@@ -125,7 +125,6 @@ public class MedewerkerController {
         return "redirect:/profiel/wijzigen";
     }
 
-
     @GetMapping("/profiel/wijzigen")
     protected String showProfielWijzigen(Model model, @AuthenticationPrincipal Medewerker ingelogdeMedewerker) {
         model.addAttribute("medewerker", ingelogdeMedewerker);
@@ -133,7 +132,6 @@ public class MedewerkerController {
         return "profielWijzigen";
     }
 
-    // Gaat nog niet goed, profielpagina laadt daarna geupdate gegevens niet, en ww wordt overschreven met NULL
     @PostMapping("/profiel/wijzigen")
     public String updateMedewerker(@ModelAttribute("medewerker") Medewerker ingelogdeMedewerker,
                                    BindingResult result) {
