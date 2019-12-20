@@ -4,7 +4,7 @@
 
 
 <!DOCTYPE html>
-<table lang="en">
+<table lang="en" xmlns:c="http://www.w3.org/1999/XSL/Transform">
 <head>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -38,17 +38,20 @@
             <c:forEach items="${takenBijVoorstelling}" var="takenBijVoorstelling">
                 <tr>
                     <td><c:out value="${takenBijVoorstelling.getTaak().getTaakNaam()}"/></td>
-                
-
-                    <td><c:out value="${takenBijVoorstelling.getMedewerker().getGebruikersnaam()}"/></td>
-
-
-
+                    <td>
+                        <c:choose>
+                            <c:when test="${empty takenBijVoorstelling.getMedewerker().getGebruikersnaam()}">
+                                Openstaand
+                            </c:when>
+                            <c:otherwise>
+                                <c:out value="${takenBijVoorstelling.getMedewerker().getGebruikersnaam()}"/>
+                            </c:otherwise>
+                        </c:choose>
+                    </td>
                 </tr>
             </c:forEach>
         </tbody>
     </table>
-
         <a class="btn btn-primary" href="/voorstellingen">Overzicht Voorstellingen</a>
     </body>
 </html>
