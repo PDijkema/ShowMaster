@@ -14,6 +14,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -57,6 +59,18 @@ public class VoorstellingsTaakController {
         return "redirect:/voorstellingen";
     }
 
+    @GetMapping("/taken/weergeven/opentaken")
+    public String nietIngevuldeTakenOphalen (Model model){
+        List<VoorstellingsTaak> voorstellingsTaken = voorstellingsTaakRepository.findAll();
+        voorstellingsTaken.removeIf(r -> r.getMedewerker() != null);
+
+
+
+
+
+    return "redirect:/";
+    }
+
     protected void takenOpslaanBijVoorstelling(int taakAantal, Voorstelling voorstelling, Taak taak) {
 
         for (int i = 0; i < taakAantal; i++) {
@@ -65,5 +79,7 @@ public class VoorstellingsTaakController {
             voorstellingsTaak.setVoorstelling(voorstelling);
             voorstellingsTaakRepository.save(voorstellingsTaak);
         }
+
+
     }
 }
