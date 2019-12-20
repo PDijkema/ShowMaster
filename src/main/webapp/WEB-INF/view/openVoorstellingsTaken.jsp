@@ -11,26 +11,30 @@
 
 <body>
 <h1>Overzicht open taken</h1>
-<table class="table table-hover">
+
+<table  class="table table-hover"  >
+
     <thead>
     <tr>
         <th scope ="col">Voorstelling naam</th>
         <th scope ="col">Datum en tijd</th>
-        <th scope ="col">Taak</th>
         <th scope ="col">Inschrijven</th>
 
 
     </tr>
     </thead>
     <tbody>
-    <c:forEach items="${toeTeWijzenTaken}" var="toeTeWijzenTaak">
+    <c:forEach items="${voorstellingLijst}" var="voorstellingen">
+        <form:form method="POST" object="${voorstellingen}" action="${contextPath}/taken/weergeven/opentaken" class="form-signin">
         <tr>
-            <td><c:out value="${toeTeWijzenTaak.getVoorstelling().getNaam()}"/></td>
-            <td><c:out value="${toeTeWijzenTaak.getVoorstelling().getDatum()}"/></td>
-            <td><c:out value="${toeTeWijzenTaak.getTaak().getTaakNaam()}"/></td>
-            <td><a href="/taken/weergeven/opentaken">Inschrijven</a></td>
+            <td><c:out value="${voorstellingen.getNaam()}"/></td>
+            <td><c:out value="${voorstellingen.getDatum()}"/></td>
+            <td><button class="btn btn-lg btn-primary btn-block" type="submit">Inschrijven</button></td>
+
         </tr>
+        </form:form>
     </c:forEach>
     </tbody>
 </table>
+
 </body>

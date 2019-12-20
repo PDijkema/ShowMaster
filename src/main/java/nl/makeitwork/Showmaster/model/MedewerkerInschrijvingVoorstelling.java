@@ -7,7 +7,7 @@ import javax.persistence.*;
 
 @Entity(name = "medewerkerInschrijvingTaak")
 @Table(name = "medewerker_inschrijving_taak")
-public class MedewerkerInschrijvingTaak {
+public class MedewerkerInschrijvingVoorstelling {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -19,9 +19,9 @@ public class MedewerkerInschrijvingTaak {
     private Medewerker medewerker;
 
     @ManyToOne
-    @JoinColumn(name = "voorstellingsTaakId", referencedColumnName = "voorstellingsTaakId")
+    @JoinColumn(name = "voorstellingId", referencedColumnName = "voorstellingId")
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private VoorstellingsTaak voorstellingsTaak;
+    private Voorstelling voorstelling;
 
     public Integer getMedewerkerInschrijvingTaakId() {
         return medewerkerInschrijvingTaakId;
@@ -39,12 +39,11 @@ public class MedewerkerInschrijvingTaak {
         this.medewerker = medewerker;
     }
 
-
-    public VoorstellingsTaak getVoorstellingsTaak() {
-        return voorstellingsTaak;
+    public Voorstelling getVoorstelling() {
+        return voorstelling;
     }
 
-    public void setVoorstellingsTaak(VoorstellingsTaak voorstellingsTaak) {
-        this.voorstellingsTaak = voorstellingsTaak;
+    public void setVoorstelling(Voorstelling voorstelling) {
+        this.voorstelling = voorstelling;
     }
 }
