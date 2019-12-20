@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 
@@ -84,14 +85,14 @@ public class MedewerkerController {
         return "welkomMedewerker";
     }
 
-    @GetMapping({"/","/planner/"})
+    @GetMapping({"/","/planner"})
     public String isPlanner (@AuthenticationPrincipal Medewerker medewerker){
 
         if(medewerker.getAuthorities().stream().anyMatch(r -> r.getAuthority().equals("ROLE_PLANNER"))) {
             return "redirect:/planner/inlogkeuze";
         }
 
-        return "redirect:/welkommedewerker";
+        return "redirect:/medewerker/welkom";
 
     }
 
@@ -123,6 +124,21 @@ public class MedewerkerController {
     public String welkomPlanner(Model model) {
         return "welkomPlanner";
     }
+
+    @GetMapping("/planner/gebruiker/overzicht")
+    public String gebruikerOverzicht (Model model) {
+        System.out.println(medewerkerRepository.findAll());
+        model.addAttribute("alleGebruikers",medewerkerRepository.findAll());
+
+        return "gebruikerOverzicht";
+    }
+
+    @GetMapping("/planner/gebruiker/verwijderen/{medewerkerId}")
+    public String verwijderGebruiker(@PathVariable Integer medewerkerId) {
+        medewerkerRepository.deleteById(medewerkerId);
+        return "redirect:/planner/gebruiker/overzicht";
+    }
+
 
 
 
