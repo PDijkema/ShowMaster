@@ -19,13 +19,21 @@
                     </tr>
                 </thead>
                 <tbody>
+
+                    <!-- dit moet het worden, alle voorstellingen waarvoor de ingelogde medewerker is ingepland -->
+                    <!-- <c:forEach items="${alleVoorstellingsTaken}" var="voorstellingstaak"/> -->
+                    <!-- <c:if test="${voorstellingstaak.medewerkerId == medewerker.medewerkerId}">  -->
+
+                   <!--  <tr> -->
+                        <!-- <td><c:out value="${voorstellingstaak.voorstellingId.naam}"/></td> -->
+                        <!-- <td><c:out value="${voorstellingstaak.voorstellingId.datum}"/></td> -->
+                        <!-- <td><c:out value="${voorstellingstaak.taakId.taakNaam}"/></td> </c:if> -->
+
+
                     <c:forEach items="${alleVoorstellingen}" var="voorstelling">
                     <tr>
                         <td><c:out value="${voorstelling.naam}"/></td>
                         <td><c:out value="${voorstelling.datum}"/></td>
-
-                  <!-- deze moet nog worden aangepast -->
-                  <!--      <td>c:out value="${voorstellingstaak.taakId.taakNaam}" </td> -->
 
                     </tr>
                     </c:forEach>
