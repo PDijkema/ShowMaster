@@ -65,7 +65,6 @@ public class VoorstellingController {
     protected String detailsVoorstelling(@PathVariable Integer voorstellingId, Model model, HttpServletRequest request) {
         Optional<Voorstelling> voorstelling = voorstellingRepository.findById(voorstellingId);
         List<VoorstellingsTaak> voorstellingsTaken = voorstellingsTaakRepository.findVoorstellingstaakByVoorstellingId(voorstellingId);
-
         if (!voorstelling.isPresent()) {
             return "redirect:/alleVoorstellingen";
         } else {
