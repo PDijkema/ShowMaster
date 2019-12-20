@@ -52,7 +52,6 @@ class MedewerkerControllerTest {
     private WebApplicationContext webApplicationContext;
 
 
-
     @Before
     public void setup() throws Exception {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
@@ -91,6 +90,28 @@ class MedewerkerControllerTest {
     }
 
     @Test
+    void testUpdateMedewerker() throws Exception {
+
+        // Arrange
+        Medewerker testmedewerker1 = new Medewerker();
+        setGebruikersgegevensTestMedewerker1(testmedewerker1);
+        medewerkerRepository.save(testmedewerker1);
+
+        BindingResult result = mock(BindingResult.class);
+        when(result.hasErrors()).thenReturn(false);
+        String verwachteAchternaam = "Vries";
+
+        vulProfielgegevens(testmedewerker1);
+
+        // Activate
+        medewerkerController.updateMedewerker(testmedewerker1, result);
+
+        // Assert
+        Assert.assertEquals(testmedewerker1.getAchternaam(), verwachteAchternaam);
+    }
+
+
+    @Test
     public void verwijderGebruikerTest() throws Exception {
         //Arrange
         BindingResult bindingResult = mock(BindingResult.class);
@@ -114,10 +135,26 @@ class MedewerkerControllerTest {
 
     }
 
-
-
-
-
+    public void setGebruikersgegevensTestMedewerker1(Medewerker testMedewerker) {
+        testMedewerker.setGebruikersnaam("test4567");
+        testMedewerker.setWachtwoord("test4567");
+        testMedewerker.setWachtwoordBevestigen("test4567");
+        testMedewerker.setPlanner(false);
     }
+
+    public void vulProfielgegevens(Medewerker opgehaaldeMedewerker) {
+        opgehaaldeMedewerker.setVoornaam("Piet");
+        opgehaaldeMedewerker.setTussenvoegsel("de");
+        opgehaaldeMedewerker.setAchternaam("Vries");
+        opgehaaldeMedewerker.setEmailadres("pdevries@blabla.com");
+        //updateMedewerker.setGeboortedatum(LocalDate.parse("1956-8-1"));
+        opgehaaldeMedewerker.setStraatnaam("Rondweg");
+        opgehaaldeMedewerker.setHuisnummer(2);
+        opgehaaldeMedewerker.setPostcode("8607HH");
+        opgehaaldeMedewerker.setWoonplaats("Putten");
+        opgehaaldeMedewerker.setTelefoonnummer("06-84431841");
+    }
+}
+
 
 
