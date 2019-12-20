@@ -11,4 +11,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TaakRepository extends JpaRepository<Taak, Integer> {
+    Taak findByTaakNaam(String taakNaam);
 }

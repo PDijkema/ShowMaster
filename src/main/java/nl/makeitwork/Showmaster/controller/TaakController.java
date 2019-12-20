@@ -57,12 +57,12 @@ public class TaakController {
         taakRepository.save(taak2);
 
         Taak taak3 = new Taak();
-        taak3.setTaakNaam("Kaartcontrole");
+        taak3.setTaakNaam("Garderobe");
         taak3.setStandaardBezetting(1);
         taakRepository.save(taak3);
 
-        Taak taak4 = new Taak();
-        taak4.setTaakNaam("Garderobe");
+/*        Taak taak4 = new Taak();
+        taak4.setTaakNaam("Kaarverkoop");
         taak4.setStandaardBezetting(2);
         taakRepository.save(taak4);
 
@@ -84,7 +84,7 @@ public class TaakController {
         Taak taak8 = new Taak();
         taak8.setTaakNaam("Steward");
         taak8.setStandaardBezetting(1);
-        taakRepository.save(taak8);
+        taakRepository.save(taak8);*/
 
         return "redirect:/takenlijst";
     }
