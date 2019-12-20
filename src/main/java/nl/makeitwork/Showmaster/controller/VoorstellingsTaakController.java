@@ -62,13 +62,13 @@ public class VoorstellingsTaakController {
     @GetMapping("/taken/weergeven/opentaken")
     public String nietIngevuldeTakenOphalen (Model model){
         List<VoorstellingsTaak> voorstellingsTaken = voorstellingsTaakRepository.findAll();
+
         voorstellingsTaken.removeIf(r -> r.getMedewerker() != null);
 
+        model.addAttribute("toeTeWijzenTaken", voorstellingsTaken);
 
 
-
-
-    return "redirect:/";
+    return "openVoorstellingsTaken";
     }
 
     protected void takenOpslaanBijVoorstelling(int taakAantal, Voorstelling voorstelling, Taak taak) {
