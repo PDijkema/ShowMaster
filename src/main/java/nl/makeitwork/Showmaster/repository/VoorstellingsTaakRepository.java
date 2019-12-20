@@ -4,6 +4,7 @@ import nl.makeitwork.Showmaster.model.VoorstellingsTaak;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+
 /**
  * @author Pieter Dijkema
  * repo voor voorstellingenTaken
@@ -11,4 +12,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface VoorstellingsTaakRepository extends JpaRepository<VoorstellingsTaak, Integer> {
+
 }

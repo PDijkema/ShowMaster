@@ -2,12 +2,9 @@ package nl.makeitwork.Showmaster.model;
 
 
 import org.springframework.format.annotation.DateTimeFormat;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 
 /**
@@ -28,12 +25,6 @@ public class Voorstelling {
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime datum;
 
-/*        @OneToMany(
-            mappedBy = "voorstelling",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-        )
-        private List<VoorstellingsTaak> voorstellingsTaak = new ArrayList<>();*/
 
     @Override
     public String toString() {
@@ -63,13 +54,5 @@ public class Voorstelling {
     public void setDatum(LocalDateTime datum) {
         this.datum = datum;
     }
-
-/*    public List<VoorstellingsTaak> getVoorstellingsTaak() {
-        return voorstellingsTaak;
-    }
-
-    public void setVoorstellingsTaak(List<VoorstellingsTaak> voorstellingsTaak) {
-        this.voorstellingsTaak = voorstellingsTaak;
-    }*/
 
 }

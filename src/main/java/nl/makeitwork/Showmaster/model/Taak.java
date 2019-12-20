@@ -24,13 +24,6 @@ public class Taak {
     private String taakNaam;
     private Integer standaardBezetting;
 
-      /*  @OneToMany(
-            mappedBy = "taak",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-        )*/
-        //private List<VoorstellingsTaak> voorstellingsTaak = new ArrayList<>();
-
     @Override
     public String toString() {
         return "Taak{" +
@@ -65,11 +58,4 @@ public class Taak {
         this.standaardBezetting = standaardBezetting;
     }
 
-/*    public List<VoorstellingsTaak> getVoorstellingsTaak() {
-        return voorstellingsTaak;
-    }
-
-    public void setVoorstellingsTaak(List<VoorstellingsTaak> voorstellingsTaak) {
-        this.voorstellingsTaak = voorstellingsTaak;
-    }*/
 }
