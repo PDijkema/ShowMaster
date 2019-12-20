@@ -34,15 +34,6 @@ public class VoorstellingsTaak {
         @OnDelete(action = OnDeleteAction.CASCADE)
         private Medewerker medewerker;
 
-    @Override
-    public String toString() {
-        return "VoorstellingsTaak{" +
-            "voorstellingsTaakId=" + voorstellingsTaakId +
-            ", voorstelling=" + voorstelling +
-            ", taak=" + taak +
-            ", medewerker=" + medewerker +
-            '}';
-    }
 
     public Voorstelling getVoorstelling() {
         return voorstelling;
@@ -77,13 +68,4 @@ public class VoorstellingsTaak {
         this.medewerker = medewerker;
     }
 
-    @Override
-    public String toString() {
-        return "VoorstellingsTaak{" +
-                "voorstellingsTaakId=" + voorstellingsTaakId +
-                ", voorstelling=" + voorstelling +
-                ", taak=" + taak +
-                ", medewerker=" + medewerker +
-                '}';
-    }
 }

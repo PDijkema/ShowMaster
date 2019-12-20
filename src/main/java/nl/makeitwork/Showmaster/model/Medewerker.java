@@ -67,6 +67,7 @@ public class Medewerker implements UserDetails {
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     private Taak vasteTaak;
 
+
     public Boolean getPlanner() {
         return planner;
     }

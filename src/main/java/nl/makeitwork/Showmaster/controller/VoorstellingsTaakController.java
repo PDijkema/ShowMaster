@@ -67,7 +67,6 @@ public class VoorstellingsTaakController {
 
         model.addAttribute("toeTeWijzenTaken", voorstellingsTaken);
 
-
     return "openVoorstellingsTaken";
     }
 
