@@ -3,6 +3,7 @@ package nl.makeitwork.Showmaster.controller;
 import nl.makeitwork.Showmaster.model.Medewerker;
 import nl.makeitwork.Showmaster.repository.MedewerkerRepository;
 import nl.makeitwork.Showmaster.repository.TaakRepository;
+import nl.makeitwork.Showmaster.repository.VoorstellingRepository;
 import nl.makeitwork.Showmaster.service.MedewerkerService;
 import nl.makeitwork.Showmaster.service.MedewerkerServiceImplementatie;
 import nl.makeitwork.Showmaster.service.SecurityService;
@@ -48,6 +49,9 @@ public class MedewerkerController {
     @Autowired
     TaakRepository taakRepository;
 
+    @Autowired
+    VoorstellingRepository voorstellingRepository;
+
     @GetMapping("/registreer")
     protected String showRegistratieFormulier(Model model) {
         model.addAttribute("registratieFormulier", new Medewerker());
@@ -81,7 +85,9 @@ public class MedewerkerController {
     }
 
     @GetMapping("/medewerker/welkom")
-    public String welkomMedewerker(Model model) {
+    public String welkomMedewerker(Model model, @AuthenticationPrincipal Medewerker ingelogdeMedewerker) {
+        model.addAttribute("medewerker", medewerkerRepository.findByGebruikersnaam(ingelogdeMedewerker.getGebruikersnaam()));
+        model.addAttribute("alleVoorstellingen", voorstellingRepository.findAll());
         return "welkomMedewerker";
     }
 
