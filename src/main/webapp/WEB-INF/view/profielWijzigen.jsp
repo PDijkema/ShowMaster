@@ -1,152 +1,143 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
-<!-- https://bootsnipp.com/snippets/z8b1X -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="utf-8">
+      <title>Profiel wijzigen</title>
 
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-<!doctype html>
-<html lang="en" xmlns:form="http://www.w3.org/1999/xhtml">
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
-    <title>Profielpagina</title>
-</head>
+  </head>
 
     <body>
-    <h1>Profielpagina</h1>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-            crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-            crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-            crossorigin="anonymous"></script>
+     <div class="container">
 
-    <form:form action="/profielWijzigen" modelAttribute="medewerker">
+            <form:form method="POST" modelAttribute="medewerker" class="form-signin">
+                <h1>Profiel wijzigen</h1>
+                <h2 class="form-signin-heading">Persoonlijke gegevens</h2>
 
-        <div class="container">
-            <form class="form-horizontal" role="form">
-                <h2>Persoonlijke gegevens</h2>
-                <div class="form-group">
-                    <label for="gebruikersnaam" class="col-sm-3 control-label">Gebruikersnaam* </label>
-                    <div class="col-sm-9">
-                        <form:input path="gebruikersnaam" placeholder="gebruikersnaam" class="form-control" />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="wachtwoord" class="col-sm-3 control-label">Wachtwoord* </label>
-                    <div class="col-sm-9">
-                        <form:input path="wachtwoord" type="password"  placeholder="Wachtwoord" class="form-control" />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="wachtwoordBevestigen" class="col-sm-3 control-label">Bevestig wachtwoord* </label>
-                    <div class="col-sm-9">
-                        <form:input path="wachtwoordBevestigen" placeholder="Wachtwoord" class="form-control" />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="voornaam" class="col-sm-3 control-label">Voornaam* </label>
-                    <div class="col-sm-9">
-                        <form:input path="voornaam" placeholder="Voornaam" class="form-control" autofocus="true" />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="tussenvoegsel" class="col-sm-3 control-label">Tussenvoegsel</label>
-                    <div class="col-sm-9">
-                        <form:input path="tussenvoegsel" placeholder="Tussenvoegsel" class="form-control" autofocus="true" />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="achternaam" class="col-sm-3 control-label">Achternaam* </label>
-                    <div class="col-sm-9">
-                        <form:input path="achternaam" placeholder="Achternaam" class="form-control" autofocus="true" />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="emailadres" class="col-sm-3 control-label">Emailadres* </label>
-                    <div class="col-sm-9">
-                        <form:input path="emailadres" placeholder="Emailadres" class="form-control" name="emailadres" />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="geboortedatum" class="col-sm-3 control-label">Geboortedatum </label>
-                    <div class="col-sm-9">
-                        <form:input path="geboortedatum" class="form-control" />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="telefoonnummer" class="col-sm-3 control-label">Telefoonnummer* </label>
-                    <div class="col-sm-9">
-                        <form:input path="telefoonnummer" placeholder="Telefoonnummer" class="form-control" />
-                    </div>
-                </div>
+                <form:hidden path="medewerkerId" />
+                <form:hidden path="wachtwoord" />
+                <form:hidden path="planner" />
 
-                <div class="form-group" xmlns:form="http://www.w3.org/1999/xhtml">
-                    <label class="col-sm-3 control-label">Voorkeurstaak </label>  <!-- for="voorkeurstaakId"  dit werkt niet-->
-                    <div class="col-sm-9">
+                <spring:bind path="gebruikersnaam">
+                    <div class="form-group ${status.error ? 'has-error' : ''}">
+                        <label for="gebruikersnaam" class="col-sm-3 control-label">Gebruikersnaam* </label>
+                        <form:input type="text" path="gebruikersnaam" class="form-control" placeholder="Gebruikersnaam"
+                                    autofocus="true"></form:input>
+                        <form:errors path="gebruikersnaam"></form:errors>
+                    </div>
+                </spring:bind>
+
+                <spring:bind path="voornaam">
+                    <div>
+                        <label for="voornaam" class="col-sm-3 control-label">Voornaam* </label>
+                        <form:input type="text" path="voornaam" class="form-control" placeholder="Voornaam"></form:input>
+                    </div>
+                </spring:bind>
+
+                <spring:bind path="tussenvoegsel">
+                                <div>
+                                    <label for="tussenvoegsel" class="col-sm-3 control-label">Tussenvoegsel</label>
+                                    <form:input type="text" path="tussenvoegsel" class="form-control"
+                                                placeholder="Tussenvoegsel"></form:input>
+                                </div>
+                </spring:bind>
+
+                <spring:bind path="achternaam">
+                    <div>
+                        <label for="achternaam" class="col-sm-3 control-label">Achternaam</label>
+                        <form:input type="text" path="achternaam" class="form-control"
+                                    placeholder="Achternaam"></form:input>
+                    </div>
+                </spring:bind>
+
+                <spring:bind path="emailadres">
+                    <div>
+                        <label for="emailadres" class="col-sm-3 control-label">Emailadres</label>
+                        <form:input type="email" path="emailadres" class="form-control"
+                                    placeholder="Emailadres"></form:input>
+                    </div>
+                </spring:bind>
+
+                <spring:bind path="geboortedatum">
+                    <div>
+                        <label for="geboortedatum" class="col-sm-3 control-label">Geboortedatum</label>
+                        <form:input type="date" path="geboortedatum" class="form-control"
+                                    placeholder="yyy-mm-dd"></form:input>
+                    </div>
+                </spring:bind>
+
+                <spring:bind path="telefoonnummer">
+                    <div>
+                        <label for="telefoonnumer" class="col-sm-3 control-label">Telefoonnummer</label>
+                        <form:input type="text" path="telefoonnummer" class="form-control"
+                                    placeholder="Telefoonnummer"></form:input>
+                    </div>
+                </spring:bind>
+
+                <spring:bind path="voorkeurstaak">
+                    <div>
+                        <label for="voorkeurstaak" class="col-sm-3 control-label">Voorkeurstaak</label>
                         <form:select path="voorkeurstaak">
-                            <form:option value="0" label="Select" />
-                            <form:options items="${takenLijst}" itemValue="taakId" itemLabel="taakNaam" />
-                        </form:select>
+                                    <form:option value="0" label="Select" />
+                                    <form:options items="${takenLijst}" itemValue="taakId" itemLabel="taakNaam" />
+                                </form:select>
                     </div>
-                </div>
+                </spring:bind>
 
-                <div></div>
-                <div></div>
+                <hr>
+                <hr>
                 <h2>Adresgegevens</h2>
-                <div class="form-group">
-                    <label for="straatnaam" class="col-sm-3 control-label">Straatnaam* </label>
-                    <div class="col-sm-9">
-                        <form:input path="straatnaam" placeholder="Straatnaam" class="form-control" />
+                <spring:bind path="straatnaam">
+                    <div>
+                        <label for="straatnaam" class="col-sm-3 control-label">Straatnaam</label>
+                        <form:input type="text" path="straatnaam" class="form-control"
+                                    placeholder="Straatnaam"></form:input>
                     </div>
-                </div>
+                </spring:bind>
 
-                <!-- deze checken, zit nu pijltje omhoog/naar beneden in -->
-                <div class="form-group">
-                    <label for="huisnummer" class="col-sm-3 control-label">Huisnummer* </label>
-                    <div class="col-sm-9">
-                        <form:input path="huisnummer" placeholder="Huisnummer" class="form-control" min="0" />
+                <spring:bind path="huisnummer">
+                    <div>
+                        <label for="huisnummer" class="col-sm-3 control-label">Huisnummer</label>
+                        <form:input type="number" path="huisnummer" class="form-control"
+                                    placeholder="Huisnummer" min="0"></form:input>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="toevoeging" class="col-sm-3 control-label">Toevoeging </label>
-                    <div class="col-sm-9">
-                        <form:input path="toevoeging" placeholder="Toevoeging" class="form-control" />
+                </spring:bind>
+
+                <spring:bind path="toevoeging">
+                    <div>
+                        <label for="toevoeging" class="col-sm-3 control-label">Toevoeging</label>
+                        <form:input type="text" path="toevoeging" class="form-control"
+                                    placeholder="Toevoeging"></form:input>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="postcode" class="col-sm-3 control-label">Postcode* </label>
-                    <div class="col-sm-9">
-                        <form:input path="postcode" placeholder="Postcode" class="form-control" />
+                </spring:bind>
+
+                <spring:bind path="postcode">
+                    <div>
+                        <label for="postcode" class="col-sm-3 control-label">Postcode</label>
+                        <form:input type="text" path="postcode" class="form-control"
+                                    placeholder="Postcode"></form:input>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="woonplaats" class="col-sm-3 control-label">Woonplaats* </label>
-                    <div class="col-sm-9">
-                        <form:input path="woonplaats" placeholder="Woonplaats" class="form-control" />
+                </spring:bind>
+
+                <spring:bind path="woonplaats">
+                    <div>
+                        <label for="woonplaats" class="col-sm-3 control-label">Woonplaats</label>
+                        <form:input type="text" path="woonplaats" class="form-control"
+                                    placeholder="Woonplaats"></form:input>
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-9 col-sm-offset-3">
-                        <span class="help-block">*Verplichte velden</span>
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-primary btn-block">Opslaan</button>
-            </form>
+                </spring:bind>
+
+                <p>*Verplichte velden</p>
+
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Opslaan</button>
+
+            </form:form>
         </div>
-    </form:form>
-    <hr>
+
     </body>
 </html>

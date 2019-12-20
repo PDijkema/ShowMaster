@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 /**
  * @Author Gert Postma
- * 17-12-19 - Karin Zoetendal: profiel/wijzigen get en postmapping toegevoegd, moet nog aangepost worden
+ * 20-12-19 - Karin Zoetendal: profiel/wijzigen en profielpagina worden nu correct weergegeven
  */
 @Controller
 public class MedewerkerController {
@@ -50,19 +50,19 @@ public class MedewerkerController {
 
     @GetMapping("/registreer")
     protected String showRegistratieFormulier(Model model) {
-        model.addAttribute("registratieFormulier",new Medewerker());
+        model.addAttribute("registratieFormulier", new Medewerker());
         return "registratieFormulier";
     }
 
     @PostMapping("/registreer")
-    public String saveGebruiker (@ModelAttribute("registratieFormulier")Medewerker registratieFormulier, BindingResult bindingResult){
-        medewerkerValidator.validate(registratieFormulier,bindingResult);
+    public String saveGebruiker(@ModelAttribute("registratieFormulier") Medewerker registratieFormulier, BindingResult bindingResult) {
+        medewerkerValidator.validate(registratieFormulier, bindingResult);
 
-        if (bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
             return "registratieFormulier";
         }
         medewerkerService.save(registratieFormulier);
-        securityService.autoLogin(registratieFormulier.getGebruikersnaam(),registratieFormulier.getWachtwoordBevestigen());
+        securityService.autoLogin(registratieFormulier.getGebruikersnaam(), registratieFormulier.getWachtwoordBevestigen());
         registratieFormulier.setWachtwoordBevestigen("");
         return "redirect:/";
     }
@@ -88,7 +88,7 @@ public class MedewerkerController {
     @GetMapping({"/","/planner"})
     public String isPlanner (@AuthenticationPrincipal Medewerker medewerker){
 
-        if(medewerker.getAuthorities().stream().anyMatch(r -> r.getAuthority().equals("ROLE_PLANNER"))) {
+        if (medewerker.getAuthorities().stream().anyMatch(r -> r.getAuthority().equals("ROLE_PLANNER"))) {
             return "redirect:/planner/inlogkeuze";
         }
 
@@ -101,22 +101,32 @@ public class MedewerkerController {
         return "inlogKeuzePlanner";
     }
 
+    @GetMapping("/profielpagina")
+    protected String showProfielPagina(Model model, @AuthenticationPrincipal Medewerker ingelogdeMedewerker) {
+        model.addAttribute("medewerker", medewerkerRepository.findByGebruikersnaam(ingelogdeMedewerker.getGebruikersnaam()));
+        return "profielPagina";
+    }
+
+    @PostMapping("/profielpagina")
+    protected String goToProfielWijzigen(Model model, @AuthenticationPrincipal Medewerker ingelogdeMedewerker) {
+        return "redirect:/profiel/wijzigen";
+    }
+
     @GetMapping("/profiel/wijzigen")
-    protected String showProfielpagina(Model model, @AuthenticationPrincipal Medewerker ingelogdeMedewerker) {
+    protected String showProfielWijzigen(Model model, @AuthenticationPrincipal Medewerker ingelogdeMedewerker) {
         model.addAttribute("medewerker", ingelogdeMedewerker);
         model.addAttribute("takenLijst", taakRepository.findAll());
         return "profielWijzigen";
     }
 
-
-    // Redirect moet nog worden aangepast, moet terug naar profielPagina (overzicht profielgegevens)
     @PostMapping("/profiel/wijzigen")
-    public String saveOrUpdateMedewerker(@ModelAttribute("medewerker") Medewerker ingelogdeMedewerker, BindingResult result) {
+    public String updateMedewerker(@ModelAttribute("medewerker") Medewerker ingelogdeMedewerker,
+                                   BindingResult result) {
         if (result.hasErrors()) {
             return "profielWijzigen";
         } else {
             medewerkerRepository.save(ingelogdeMedewerker);
-            return "redirect:/takenlijst";
+            return "redirect:/profielpagina";
         }
     }
 
@@ -138,10 +148,6 @@ public class MedewerkerController {
         medewerkerRepository.deleteById(medewerkerId);
         return "redirect:/planner/gebruiker/overzicht";
     }
-
-
-
-
 
 }
 
