@@ -1,7 +1,9 @@
 package nl.makeitwork.Showmaster.controller;
 import nl.makeitwork.Showmaster.model.Voorstelling;
+import nl.makeitwork.Showmaster.model.VoorstellingsTaak;
 import nl.makeitwork.Showmaster.repository.TaakRepository;
 import nl.makeitwork.Showmaster.repository.VoorstellingRepository;
+import nl.makeitwork.Showmaster.repository.VoorstellingsTaakRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,6 +31,8 @@ public class VoorstellingController {
     private VoorstellingRepository voorstellingRepository;
     @Autowired
     private TaakRepository taakRepository;
+    @Autowired
+    private VoorstellingsTaakRepository voorstellingsTaakRepository;
 
 
     @GetMapping("/voorstellingen")
@@ -54,6 +58,28 @@ public class VoorstellingController {
             request.getSession().setAttribute("voorstellingId", voorstellingId);
             model.addAttribute("voorstelling", voorstelling.get());
             return "wijzigVoorstelling";
+        }
+    }
+
+    @GetMapping("/voorstelling/details/{voorstellingId}")
+    protected String detailsVoorstelling(@PathVariable Integer voorstellingId, Model model, HttpServletRequest request) {
+        Optional<Voorstelling> voorstelling = voorstellingRepository.findById(voorstellingId);
+        System.out.println("id " + voorstellingId);
+
+        List<VoorstellingsTaak> voorstellinsTaken = voorstellingsTaakRepository.findVoorstellingstaakByVoorstellingId(voorstellingId);
+        for (VoorstellingsTaak v: voorstellinsTaken) {
+            System.out.println(v);
+
+        }
+
+
+        //model.addAttribute("alleTaken", taakRepository.findAll());
+        if (!voorstelling.isPresent()) {
+            return "redirect:/alleVoorstellingen";
+        } else {
+            request.getSession().setAttribute("voorstellingId", voorstellingId);
+            model.addAttribute("voorstelling", voorstelling.get());
+            return "detailsVoorstelling";
         }
     }
 
