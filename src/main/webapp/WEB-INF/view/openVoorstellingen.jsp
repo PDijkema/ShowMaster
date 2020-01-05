@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 <body>
-<h1>Overzicht open taken</h1>
+<h1>Overzicht open voorstellingen</h1>
 
 <table  class="table table-hover"  >
 
@@ -19,21 +19,24 @@
         <th scope ="col">Voorstelling naam</th>
         <th scope ="col">Datum en tijd</th>
         <th scope ="col">Inschrijven</th>
+        <th scope ="col">Test</th>
 
 
     </tr>
     </thead>
     <tbody>
+
     <c:forEach items="${voorstellingLijst}" var="voorstellingen">
-        <form:form method="POST" object="${voorstellingen}" action="${contextPath}/taken/weergeven/opentaken" class="form-signin">
         <tr>
             <td><c:out value="${voorstellingen.getNaam()}"/></td>
             <td><c:out value="${voorstellingen.getDatum()}"/></td>
-            <td><button class="btn btn-lg btn-primary btn-block" type="submit">Inschrijven</button></td>
+            <td><c:out value="${voorstellingen.getVoorstellingId()}"/></td>
+            <td><a href="/voorstelling/weergeven/openvoorstelling/inschrijven/<c:out value="${voorstellingen.voorstellingId}"/>" >Inschrijven </a></td>
 
         </tr>
-        </form:form>
     </c:forEach>
+
+
     </tbody>
 </table>
 

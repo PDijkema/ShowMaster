@@ -5,8 +5,8 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 
-@Entity(name = "medewerkerInschrijvingTaak")
-@Table(name = "medewerker_inschrijving_taak")
+@Entity(name = "medewerkerInschrijvingVoorstelling")
+@Table(name = "medewerker_inschrijving_voorstelling")
 public class MedewerkerInschrijvingVoorstelling {
 
     @Id

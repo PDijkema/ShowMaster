@@ -12,4 +12,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface VoorstellingRepository extends JpaRepository<Voorstelling, Integer> {
+    Voorstelling findByVoorstellingId(Integer voorstellingId);
+
 }

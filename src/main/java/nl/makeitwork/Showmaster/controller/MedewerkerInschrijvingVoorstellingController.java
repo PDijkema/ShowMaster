@@ -1,6 +1,8 @@
 package nl.makeitwork.Showmaster.controller;
 
 
+import nl.makeitwork.Showmaster.model.Medewerker;
+import nl.makeitwork.Showmaster.model.MedewerkerInschrijvingVoorstelling;
 import nl.makeitwork.Showmaster.model.Voorstelling;
 import nl.makeitwork.Showmaster.model.VoorstellingsTaak;
 import nl.makeitwork.Showmaster.repository.MedewerkerInschrijvingVoorstellingRepository;
@@ -8,14 +10,14 @@ import nl.makeitwork.Showmaster.repository.TaakRepository;
 import nl.makeitwork.Showmaster.repository.VoorstellingRepository;
 import nl.makeitwork.Showmaster.repository.VoorstellingsTaakRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class MedewerkerInschrijvingVoorstellingController {
@@ -29,7 +31,7 @@ public class MedewerkerInschrijvingVoorstellingController {
     @Autowired
     private MedewerkerInschrijvingVoorstellingRepository medewerkerInschrijvingVoorstellingRepository;
 
-    @GetMapping("/taken/weergeven/opentaken")
+    @GetMapping("/voorstelling/weergeven/openvoorstelling")
     public String nietIngevuldeTakenOphalen (Model model){
         List<VoorstellingsTaak> voorstellingsTaken = voorstellingsTaakRepository.findAll();
         List<Voorstelling> voorstellingen = voorstellingRepository.findAll();
@@ -41,18 +43,33 @@ public class MedewerkerInschrijvingVoorstellingController {
 
         model.addAttribute("voorstellingLijst", voorstellingen);
 
-        return "openVoorstellingsTaken";
+        return "openVoorstellingen";
     }
 
-    @PostMapping("/taken/weergeven/opentaken")
-    public String saveGebruiker(@ModelAttribute(value = "voorstelling") Voorstelling voorstelling, Model model, BindingResult bindingResult) {
+    @GetMapping("/voorstelling/weergeven/openvoorstelling/inschrijven/{voorstellingId}")
+    public String inschrijvenVoorstelling(@PathVariable Integer voorstellingId, @AuthenticationPrincipal Medewerker ingelogdeMedewerker) {
+
+       Voorstelling voorstelling = voorstellingRepository.findByVoorstellingId(voorstellingId);
+
+       MedewerkerInschrijvingVoorstelling medewerkerInschrijvingVoorstelling = new MedewerkerInschrijvingVoorstelling();
+       medewerkerInschrijvingVoorstelling.setMedewerker(ingelogdeMedewerker);
+       medewerkerInschrijvingVoorstelling.setVoorstelling(voorstelling);
+       medewerkerInschrijvingVoorstellingRepository.save(medewerkerInschrijvingVoorstelling);
+
+        return "redirect:/voorstelling/weergeven/openvoorstelling";
+    }
+
+    @PostMapping("/voorstelling/weergeven/openvoorstelling")
+    public String saveGebruiker(@ModelAttribute(value = "voorstellingen") Voorstelling voorstelling, Model model, BindingResult bindingResult) {
 
 
-        System.out.println(voorstelling.getNaam());
+
+
+        System.out.println(voorstelling.getVoorstellingId());
 
 
 
-        return "redirect:/taken/weergeven/opentaken";
+        return "redirect:/voorstelling/weergeven/openvoorstelling";
     }
 
 
