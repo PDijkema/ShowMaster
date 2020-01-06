@@ -114,7 +114,7 @@ public class MedewerkerController {
 
     @GetMapping("/profiel/wijzigen")
     protected String showProfielWijzigen(Model model, @AuthenticationPrincipal Medewerker ingelogdeMedewerker) {
-        model.addAttribute("medewerker", ingelogdeMedewerker);
+        model.addAttribute("medewerker", medewerkerRepository.findByGebruikersnaam(ingelogdeMedewerker.getGebruikersnaam()));
         model.addAttribute("takenLijst", taakRepository.findAll());
         return "profielWijzigen";
     }
@@ -122,6 +122,7 @@ public class MedewerkerController {
     @PostMapping("/profiel/wijzigen")
     public String updateMedewerker(@ModelAttribute("medewerker") Medewerker ingelogdeMedewerker,
                                    BindingResult result) {
+
         if (result.hasErrors()) {
             return "profielWijzigen";
         } else {

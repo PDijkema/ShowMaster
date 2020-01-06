@@ -62,16 +62,12 @@ public class TaakController {
         taak3.setStandaardBezetting(1);
         taakRepository.save(taak3);
 
-/*        Taak taak4 = new Taak();
-        taak4.setTaakNaam("Kaarverkoop");
-        taak4.setStandaardBezetting(2);
-        taakRepository.save(taak4);
-
         Taak taak5 = new Taak();
         taak5.setTaakNaam("Foto");
         taak5.setStandaardBezetting(1);
         taakRepository.save(taak5);
 
+/*
         Taak taak6 = new Taak();
         taak6.setTaakNaam("Backstage");
         taak6.setStandaardBezetting(1);
