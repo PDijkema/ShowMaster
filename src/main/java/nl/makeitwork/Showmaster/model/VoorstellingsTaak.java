@@ -67,7 +67,6 @@ public class VoorstellingsTaak {
         this.voorstellingsTaakId = voorstellingsTaakId;
     }
 
-
     public Medewerker getMedewerker() {
         return medewerker;
     }

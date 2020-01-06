@@ -48,6 +48,27 @@ public class VoorstellingController {
         return "wijzigVoorstelling";
     }
 
+
+
+
+    @GetMapping("/voorstelling/taakbeheer/{voorstellingId}")
+    protected String taakBeheer(@PathVariable Integer voorstellingId, Model model, HttpServletRequest request) {
+        Optional<Voorstelling> voorstelling = voorstellingRepository.findById(voorstellingId);
+        model.addAttribute("alleTaken", taakRepository.findAll());
+        if (!voorstelling.isPresent()) {
+            return "redirect:/alleVoorstellingen";
+        } else {
+            request.getSession().setAttribute("voorstellingId", voorstellingId);
+            model.addAttribute("voorstelling", voorstelling.get());
+            return "taakBeheer";
+        }
+    }
+
+
+
+
+
+
     @GetMapping("/voorstelling/wijzigen/{voorstellingId}")
     protected String wijzigenVoorstellingen(@PathVariable Integer voorstellingId, Model model, HttpServletRequest request) {
         Optional<Voorstelling> voorstelling = voorstellingRepository.findById(voorstellingId);
