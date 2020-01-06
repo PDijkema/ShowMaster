@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 /**
@@ -31,7 +32,7 @@ public class TaakController {
         if (taak.getTaakNaam() != null && !taak.getTaakNaam().isEmpty() &&
                 taak.getStandaardBezetting() != null) {
             taakRepository.save(taak);
-            return "redirect:/takenLijst";
+            return "redirect:/takenlijst";
         } else {
             return "taakAanmaken";
         }
@@ -61,16 +62,12 @@ public class TaakController {
         taak3.setStandaardBezetting(1);
         taakRepository.save(taak3);
 
-/*        Taak taak4 = new Taak();
-        taak4.setTaakNaam("Kaarverkoop");
-        taak4.setStandaardBezetting(2);
-        taakRepository.save(taak4);
-
         Taak taak5 = new Taak();
         taak5.setTaakNaam("Foto");
         taak5.setStandaardBezetting(1);
         taakRepository.save(taak5);
 
+/*
         Taak taak6 = new Taak();
         taak6.setTaakNaam("Backstage");
         taak6.setStandaardBezetting(1);
@@ -86,6 +83,12 @@ public class TaakController {
         taak8.setStandaardBezetting(1);
         taakRepository.save(taak8);*/
 
+        return "redirect:/takenlijst";
+    }
+
+    @GetMapping("/taak/verwijderen/{taakId}")
+    public String verwijderStandaardTaak(@PathVariable Integer taakId) {
+        taakRepository.deleteById(taakId);
         return "redirect:/takenlijst";
     }
 

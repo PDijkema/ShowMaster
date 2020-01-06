@@ -122,7 +122,8 @@
                     <tr></tr>
                 </table>
 
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Gegevens wijzigen</button>
+                <button class="btn btn-primary" type="submit">Gegevens wijzigen</button>
+                <a href="/medewerker/welkom">  <button type="button" class="btn btn-primary">Terug naar welkom</button> </a>
 
             </form:form>
             </div>

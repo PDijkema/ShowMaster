@@ -4,6 +4,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
+import java.util.Set;
 
 /**
  * @author Pieter Dijkema
@@ -33,15 +34,6 @@ public class VoorstellingsTaak {
         @OnDelete(action = OnDeleteAction.CASCADE)
         private Medewerker medewerker;
 
-    @Override
-    public String toString() {
-        return "VoorstellingsTaak{" +
-            "voorstellingsTaakId=" + voorstellingsTaakId +
-            ", voorstelling=" + voorstelling +
-            ", taak=" + taak +
-            ", medewerker=" + medewerker +
-            '}';
-    }
 
     public Voorstelling getVoorstelling() {
         return voorstelling;
@@ -67,7 +59,6 @@ public class VoorstellingsTaak {
         this.voorstellingsTaakId = voorstellingsTaakId;
     }
 
-
     public Medewerker getMedewerker() {
         return medewerker;
     }
@@ -75,4 +66,5 @@ public class VoorstellingsTaak {
     public void setMedewerker(Medewerker medewerker) {
         this.medewerker = medewerker;
     }
+
 }

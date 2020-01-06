@@ -38,7 +38,6 @@
                 </tr>
             </table>
         </form:form>
-                <a class="btn btn-primary" href="/toevoegenTaken">Taken Toevoegen</a>
                 <a class="btn btn-primary" href="/voorstellingen">Overzicht Voorstellingen</a>
     </body>
 </html>
