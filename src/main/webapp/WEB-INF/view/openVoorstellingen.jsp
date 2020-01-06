@@ -38,5 +38,6 @@
 
     </tbody>
 </table>
+<a href="/medewerker/welkom">  <button type="button" class="btn btn-primary">Terug naar welkom</button> </a>
 
 </body>

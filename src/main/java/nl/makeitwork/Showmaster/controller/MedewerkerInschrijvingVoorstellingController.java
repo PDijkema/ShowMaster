@@ -50,9 +50,6 @@ public class MedewerkerInschrijvingVoorstellingController {
         List<MedewerkerInschrijvingVoorstelling> medewerkerInschrijvingVoorstellingList = medewerkerInschrijvingVoorstellingRepository.findAll();
 
         if (!medewerkerInschrijvingVoorstellingList.isEmpty()) {
-            System.out.println(ingelogdeMedewerker.getMedewerkerId());
-            System.out.println(voorstellingId);
-
             if (medewerkerInschrijvingVoorstellingList.stream().anyMatch(r ->
                     r.getVoorstelling().getVoorstellingId().equals(voorstellingId) &&
                             r.getMedewerker().getMedewerkerId().equals(ingelogdeMedewerker.getMedewerkerId()))) {
