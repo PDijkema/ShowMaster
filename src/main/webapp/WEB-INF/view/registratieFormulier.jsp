@@ -54,7 +54,7 @@
             </spring:bind>
 
 
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Verstuur</button>
+            <button class="btn btn-primary" type="submit">Verstuur</button>
 
 
         </form:form>

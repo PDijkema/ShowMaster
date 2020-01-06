@@ -30,5 +30,6 @@
                 </tbody>
             </table>
         <a class="btn btn-primary" href="/voorstelling/toevoegen">Voeg voorstelling toe</a>
+        <a href="/planner/welkom">  <button type="button" class="btn btn-primary">Terug naar welkom</button> </a>
     </body>
 </html>

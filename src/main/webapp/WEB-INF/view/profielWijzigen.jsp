@@ -134,7 +134,7 @@
 
                 <p>*Verplichte velden</p>
 
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Opslaan</button>
+                <button class="btn btn-primary" type="submit">Opslaan</button>
 
             </form:form>
         </div>
