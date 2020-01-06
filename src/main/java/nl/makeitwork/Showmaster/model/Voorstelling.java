@@ -1,12 +1,10 @@
 package nl.makeitwork.Showmaster.model;
 
 import org.springframework.format.annotation.DateTimeFormat;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+
 
 /**
  * @author Pieter Dijkema
@@ -14,6 +12,7 @@ import java.time.LocalDateTime;
  */
 
 @Entity
+@Table(name = "voorstelling")
 public class Voorstelling {
 
     @Id
@@ -24,6 +23,7 @@ public class Voorstelling {
     @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime datum;
+
 
     @Override
     public String toString() {
@@ -53,4 +53,5 @@ public class Voorstelling {
     public void setDatum(LocalDateTime datum) {
         this.datum = datum;
     }
+
 }

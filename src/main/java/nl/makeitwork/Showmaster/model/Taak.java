@@ -1,9 +1,6 @@
 package nl.makeitwork.Showmaster.model;
+import javax.persistence.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
 /**
  * @author Karin Zoetendal
@@ -13,18 +10,24 @@ import javax.persistence.Id;
  */
 
 @Entity
+@Table(name = "taak")
 public class Taak {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer taakId;
-
-
     private String taakNaam;
-
     private Integer standaardBezetting;
 
-    public Taak() {}
+    @Override
+    public String toString() {
+        return "Taak{" +
+            "taakId=" + taakId +
+            ", taakNaam='" + taakNaam + '\'' +
+            ", standaardBezetting=" + standaardBezetting +
+            ", voorstellingsTaak=" +
+            '}';
+    }
 
     public Integer getTaakId() {
         return taakId;
@@ -49,4 +52,5 @@ public class Taak {
     public void setStandaardBezetting(Integer standaardBezetting) {
         this.standaardBezetting = standaardBezetting;
     }
+
 }

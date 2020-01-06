@@ -1,6 +1,9 @@
 package nl.makeitwork.Showmaster.controller;
 import nl.makeitwork.Showmaster.model.Voorstelling;
+import nl.makeitwork.Showmaster.model.VoorstellingsTaak;
+import nl.makeitwork.Showmaster.repository.TaakRepository;
 import nl.makeitwork.Showmaster.repository.VoorstellingRepository;
+import nl.makeitwork.Showmaster.repository.VoorstellingsTaakRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.List;
@@ -25,6 +29,10 @@ public class VoorstellingController {
 
     @Autowired
     private VoorstellingRepository voorstellingRepository;
+    @Autowired
+    private TaakRepository taakRepository;
+    @Autowired
+    private VoorstellingsTaakRepository voorstellingsTaakRepository;
 
 
     @GetMapping("/voorstellingen")
@@ -33,20 +41,37 @@ public class VoorstellingController {
         return "alleVoorstellingen";
     }
 
+
     @GetMapping("/voorstelling/toevoegen")
-    protected String toevoegenVoorstellingen(Voorstelling voorstelling) {
+    protected String toevoegenVoorstellingen(Voorstelling voorstelling, Model model) {
+        model.addAttribute("alleTaken", taakRepository.findAll());
         return "wijzigVoorstelling";
     }
 
     @GetMapping("/voorstelling/wijzigen/{voorstellingId}")
-    protected String wijzigenVoorstellingen(@PathVariable Integer voorstellingId, Model model) {
+    protected String wijzigenVoorstellingen(@PathVariable Integer voorstellingId, Model model, HttpServletRequest request) {
         Optional<Voorstelling> voorstelling = voorstellingRepository.findById(voorstellingId);
+        model.addAttribute("alleTaken", taakRepository.findAll());
         if (!voorstelling.isPresent()) {
             return "redirect:/alleVoorstellingen";
         } else {
+            request.getSession().setAttribute("voorstellingId", voorstellingId);
             model.addAttribute("voorstelling", voorstelling.get());
-            System.out.println(voorstelling);
             return "wijzigVoorstelling";
+        }
+    }
+
+    @GetMapping("/voorstelling/details/{voorstellingId}")
+    protected String detailsVoorstelling(@PathVariable Integer voorstellingId, Model model, HttpServletRequest request) {
+        Optional<Voorstelling> voorstelling = voorstellingRepository.findById(voorstellingId);
+        List<VoorstellingsTaak> voorstellingsTaken = voorstellingsTaakRepository.findVoorstellingstaakByVoorstellingId(voorstellingId);
+        if (!voorstelling.isPresent()) {
+            return "redirect:/alleVoorstellingen";
+        } else {
+            request.getSession().setAttribute("voorstellingId", voorstellingId);
+            model.addAttribute("takenBijVoorstelling", voorstellingsTaken);
+            model.addAttribute("voorstelling", voorstelling.get());
+            return "detailsVoorstelling";
         }
     }
 
@@ -63,6 +88,27 @@ public class VoorstellingController {
     @GetMapping("/voorstelling/verwijderen/{voorstellingId}")
     protected String verwijderVoorstelling(@PathVariable Integer voorstellingId) {
         voorstellingRepository.deleteById(voorstellingId);
+        return "redirect:/voorstellingen";
+    }
+
+    @GetMapping("/voorstellingen/setup")
+    protected String setupTakenInDatabase() {
+
+        Voorstelling voorstelling1 = new Voorstelling();
+        voorstelling1.setNaam("Lion King");
+        voorstelling1.setDatum(LocalDateTime.of(2020, Month.JANUARY, 18, 20, 30));
+        voorstellingRepository.save(voorstelling1);
+
+        Voorstelling voorstelling2 = new Voorstelling();
+        voorstelling2.setNaam("Soldaat van Oranje");
+        voorstelling2.setDatum(LocalDateTime.of(2020, Month.JANUARY, 16, 20, 00));
+        voorstellingRepository.save(voorstelling2);
+
+        Voorstelling voorstelling3 = new Voorstelling();
+        voorstelling3.setNaam("Assepoester");
+        voorstelling3.setDatum(LocalDateTime.of(2020, Month.FEBRUARY, 5, 16, 00));
+        voorstellingRepository.save(voorstelling3);
+
         return "redirect:/voorstellingen";
     }
 }
