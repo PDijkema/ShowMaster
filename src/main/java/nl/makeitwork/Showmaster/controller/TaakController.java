@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 /**
@@ -31,7 +32,7 @@ public class TaakController {
         if (taak.getTaakNaam() != null && !taak.getTaakNaam().isEmpty() &&
                 taak.getStandaardBezetting() != null) {
             taakRepository.save(taak);
-            return "redirect:/takenLijst";
+            return "redirect:/takenlijst";
         } else {
             return "taakAanmaken";
         }
@@ -82,6 +83,12 @@ public class TaakController {
         taak8.setStandaardBezetting(1);
         taakRepository.save(taak8);*/
 
+        return "redirect:/takenlijst";
+    }
+
+    @GetMapping("/taak/verwijderen/{taakId}")
+    public String verwijderStandaardTaak(@PathVariable Integer taakId) {
+        taakRepository.deleteById(taakId);
         return "redirect:/takenlijst";
     }
 
