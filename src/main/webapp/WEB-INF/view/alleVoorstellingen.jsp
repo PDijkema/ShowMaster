@@ -14,7 +14,7 @@
                     <tr>
                         <th scope ="col">Naam</th>
                         <th scope ="col">Datum en tijd</td>
-                        <th scope ="col">Details</td>
+                        <th scope ="col">Taakbeheer</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -22,9 +22,9 @@
                     <tr>
                         <td><c:out value="${voorstelling.naam}"/></td>
                         <td><c:out value="${voorstelling.datum}"/></td>
-                        <td><a href="/voorstelling/details/<c:out value="${voorstelling.voorstellingId}" />">Details Taken</a></td>
-                        <td><a href="/voorstelling/verwijderen/<c:out value="${voorstelling.voorstellingId}" />">Verwijderen</a></td>
+                        <td><a href="/voorstelling/details/<c:out value="${voorstelling.voorstellingId}" />">Taakbeheer</a></td>
                         <td><a href="/voorstelling/wijzigen/<c:out value="${voorstelling.voorstellingId}" />">Wijzigen</a></td>
+                        <td><a href="/voorstelling/verwijderen/<c:out value="${voorstelling.voorstellingId}" />">Verwijderen</a></td>
                     </tr>
                     </c:forEach>
                 </tbody>
