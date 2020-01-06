@@ -30,10 +30,10 @@ public class MedewerkerInschrijvingVoorstellingController {
     private MedewerkerInschrijvingVoorstellingRepository medewerkerInschrijvingVoorstellingRepository;
 
     @GetMapping("/voorstelling/weergeven/openvoorstelling")
-    public String nietIngevuldeTakenOphalen (Model model){
+    public String nietIngevuldeTakenOphalen(Model model) {
+
         List<VoorstellingsTaak> voorstellingsTaken = voorstellingsTaakRepository.findAll();
         List<Voorstelling> voorstellingen = voorstellingRepository.findAll();
-
 
         voorstellingsTaken.removeIf(r -> r.getMedewerker() != null);
 
@@ -45,15 +45,27 @@ public class MedewerkerInschrijvingVoorstellingController {
     @GetMapping("/voorstelling/weergeven/openvoorstelling/inschrijven/{voorstellingId}")
     public String inschrijvenVoorstelling(@PathVariable Integer voorstellingId, @AuthenticationPrincipal Medewerker ingelogdeMedewerker) {
 
-       Voorstelling voorstelling = voorstellingRepository.findByVoorstellingId(voorstellingId);
 
-       MedewerkerInschrijvingVoorstelling medewerkerInschrijvingVoorstelling = new MedewerkerInschrijvingVoorstelling();
-       medewerkerInschrijvingVoorstelling.setMedewerker(ingelogdeMedewerker);
-       medewerkerInschrijvingVoorstelling.setVoorstelling(voorstelling);
 
-       medewerkerInschrijvingVoorstellingRepository.save(medewerkerInschrijvingVoorstelling);
+        List<MedewerkerInschrijvingVoorstelling> medewerkerInschrijvingVoorstellingList = medewerkerInschrijvingVoorstellingRepository.findAll();
 
+        if (!medewerkerInschrijvingVoorstellingList.isEmpty()) {
+            if (medewerkerInschrijvingVoorstellingList.stream().anyMatch(r ->
+                    r.getVoorstelling().getVoorstellingId().equals(voorstellingId) &&
+                            r.getMedewerker().getMedewerkerId().equals(ingelogdeMedewerker.getMedewerkerId()))) {
+                return "redirect:/voorstelling/weergeven/openvoorstelling";
+            }
+        }
+
+        Voorstelling voorstelling = voorstellingRepository.findByVoorstellingId(voorstellingId);
+        MedewerkerInschrijvingVoorstelling medewerkerInschrijvingVoorstelling = new MedewerkerInschrijvingVoorstelling();
+        medewerkerInschrijvingVoorstelling.setMedewerker(ingelogdeMedewerker);
+        medewerkerInschrijvingVoorstelling.setVoorstelling(voorstelling);
+
+        medewerkerInschrijvingVoorstellingRepository.save(medewerkerInschrijvingVoorstelling);
         return "redirect:/voorstelling/weergeven/openvoorstelling";
     }
-
 }
+
+
+
