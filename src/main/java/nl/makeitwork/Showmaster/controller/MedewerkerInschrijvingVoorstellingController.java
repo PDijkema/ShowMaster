@@ -14,6 +14,8 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.LinkedList;
 import java.util.List;
 
 
@@ -30,13 +32,26 @@ public class MedewerkerInschrijvingVoorstellingController {
     private MedewerkerInschrijvingVoorstellingRepository medewerkerInschrijvingVoorstellingRepository;
 
     @GetMapping("/voorstelling/weergeven/openvoorstelling")
-    public String nietIngevuldeTakenOphalen(Model model) {
+    public String openVoorstellingenOphalen(Model model, @AuthenticationPrincipal Medewerker ingelogdeMedewerker) {
 
-        List<VoorstellingsTaak> voorstellingsTaken = voorstellingsTaakRepository.findAll();
         List<Voorstelling> voorstellingen = voorstellingRepository.findAll();
 
-        voorstellingsTaken.removeIf(r -> r.getMedewerker() != null);
+        List<MedewerkerInschrijvingVoorstelling> medewerkerInschrijvingVoorstellingList = medewerkerInschrijvingVoorstellingRepository.findInschrijvingByMedewerkerId(ingelogdeMedewerker.getMedewerkerId());
 
+        medewerkerInschrijvingVoorstellingList.forEach(r->voorstellingen.remove(r.getVoorstelling()));
+
+        medewerkerInschrijvingVoorstellingList.forEach(r->r.getVoorstelling().getNaam());
+
+
+
+        /*for (MedewerkerInschrijvingVoorstelling medewerkerInschrijvingVoorsteelling:medewerkerInschrijvingVoorstellingList) {
+            voorstellingen.remove(medewerkerInschrijvingVoorsteelling.getVoorstelling());
+        }
+*/
+
+
+
+        model.addAttribute("inschrijvingen",medewerkerInschrijvingVoorstellingList);
         model.addAttribute("voorstellingLijst", voorstellingen);
 
         return "openVoorstellingen";

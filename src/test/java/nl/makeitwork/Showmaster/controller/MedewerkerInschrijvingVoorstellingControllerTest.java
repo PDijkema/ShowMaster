@@ -12,26 +12,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mock.web.MockServletContext;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.context.WebApplicationContext;
 
 import javax.servlet.ServletContext;
 
 import java.time.LocalDateTime;
 import java.time.Month;
-import java.util.LinkedList;
-import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 @RunWith(SpringRunner.class)
 @WebAppConfiguration
@@ -83,13 +77,14 @@ class MedewerkerInschrijvingVoorstellingControllerTest {
     }
 
     @Test
-    void nietIngevuldeTakenOphalen() {
+    void openVoorstellingenOphalen() {
 
         //Arrange
         Model model = mock(Model.class);
+        Medewerker medewerker = new Medewerker();
 
         //Assert
-        Assert.assertEquals(medewerkerInschrijvingVoorstellingController.nietIngevuldeTakenOphalen(model),"openVoorstellingen");
+        Assert.assertEquals(medewerkerInschrijvingVoorstellingController.openVoorstellingenOphalen(model,medewerker),"openVoorstellingen");
 
 
     }

@@ -21,7 +21,6 @@
         <th scope ="col">Inschrijven</th>
 
 
-
     </tr>
     </thead>
     <tbody>
@@ -32,12 +31,39 @@
             <td><c:out value="${voorstelling.getDatum()}"/></td>
             <td><a class="btn btn-primary" href="/voorstelling/weergeven/openvoorstelling/inschrijven/<c:out value="${voorstelling.voorstellingId}"/>" role="button">Inschrijven</a></td>
 
+
         </tr>
     </c:forEach>
 
+    </tbody>
+</table>
+
+<h1>Overzicht ingeschreven voorstellingen</h1>
+<table  class="table table-hover"  >
+
+    <thead>
+    <tr>
+        <th scope ="col">Voorstelling naam</th>
+        <th scope ="col">Datum en tijd</th>
+
+
+
+    </tr>
+    </thead>
+    <tbody>
+
+    <c:forEach items="${inschrijvingen}" var="inschrijving">
+        <tr>
+            <td><c:out value="${inschrijving.getVoorstelling().getNaam()}"/></td>
+            <td><c:out value="${inschrijving.getVoorstelling().getDatum()}"/></td>
+
+
+        </tr>
+    </c:forEach>
 
     </tbody>
 </table>
+
 <a href="/medewerker/welkom">  <button type="button" class="btn btn-primary">Terug naar welkom</button> </a>
 
 </body>
