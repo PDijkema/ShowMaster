@@ -13,11 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-import java.util.Optional;
+
 
 @Controller
 public class MedewerkerInschrijvingVoorstellingController {
@@ -39,8 +37,6 @@ public class MedewerkerInschrijvingVoorstellingController {
 
         voorstellingsTaken.removeIf(r -> r.getMedewerker() != null);
 
-
-
         model.addAttribute("voorstellingLijst", voorstellingen);
 
         return "openVoorstellingen";
@@ -54,23 +50,10 @@ public class MedewerkerInschrijvingVoorstellingController {
        MedewerkerInschrijvingVoorstelling medewerkerInschrijvingVoorstelling = new MedewerkerInschrijvingVoorstelling();
        medewerkerInschrijvingVoorstelling.setMedewerker(ingelogdeMedewerker);
        medewerkerInschrijvingVoorstelling.setVoorstelling(voorstelling);
+
        medewerkerInschrijvingVoorstellingRepository.save(medewerkerInschrijvingVoorstelling);
 
         return "redirect:/voorstelling/weergeven/openvoorstelling";
     }
-
-    @PostMapping("/voorstelling/weergeven/openvoorstelling")
-    public String saveGebruiker(@ModelAttribute(value = "voorstellingen") Voorstelling voorstelling, Model model, BindingResult bindingResult) {
-
-
-
-
-        System.out.println(voorstelling.getVoorstellingId());
-
-
-
-        return "redirect:/voorstelling/weergeven/openvoorstelling";
-    }
-
 
 }

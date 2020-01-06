@@ -19,19 +19,18 @@
         <th scope ="col">Voorstelling naam</th>
         <th scope ="col">Datum en tijd</th>
         <th scope ="col">Inschrijven</th>
-        <th scope ="col">Test</th>
+
 
 
     </tr>
     </thead>
     <tbody>
 
-    <c:forEach items="${voorstellingLijst}" var="voorstellingen">
+    <c:forEach items="${voorstellingLijst}" var="voorstelling">
         <tr>
-            <td><c:out value="${voorstellingen.getNaam()}"/></td>
-            <td><c:out value="${voorstellingen.getDatum()}"/></td>
-            <td><c:out value="${voorstellingen.getVoorstellingId()}"/></td>
-            <td><a href="/voorstelling/weergeven/openvoorstelling/inschrijven/<c:out value="${voorstellingen.voorstellingId}"/>" >Inschrijven </a></td>
+            <td><c:out value="${voorstelling.getNaam()}"/></td>
+            <td><c:out value="${voorstelling.getDatum()}"/></td>
+            <td><a class="btn btn-primary" href="/voorstelling/weergeven/openvoorstelling/inschrijven/<c:out value="${voorstelling.voorstellingId}"/>" role="button">Inschrijven</a></td>
 
         </tr>
     </c:forEach>
