@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mock.web.MockServletContext;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -101,25 +102,30 @@ class MedewerkerInschrijvingVoorstellingControllerTest {
         voorstelling1.setDatum(LocalDateTime.of(2020, Month.JANUARY, 18, 20, 30));
         voorstellingRepository.save(voorstelling1);
 
+        Voorstelling voorstelling2 = new Voorstelling();
+        voorstelling1.setNaam("Lion King2");
+        voorstelling1.setDatum(LocalDateTime.of(2020, Month.JANUARY, 18, 20, 30));
+        voorstellingRepository.save(voorstelling1);
+
         Medewerker medewerker = new Medewerker();
         medewerker.setGebruikersnaam("Pieter");
         medewerkerRepository.save(medewerker);
+
+
 
         MedewerkerInschrijvingVoorstelling medewerkerInschrijvingVoorstelling = new MedewerkerInschrijvingVoorstelling();
         medewerkerInschrijvingVoorstelling.setMedewerker(medewerker);
         medewerkerInschrijvingVoorstelling.setVoorstelling(voorstelling1);
 
-        List<MedewerkerInschrijvingVoorstelling> medewerkerInschrijvingVoorstellingList = new LinkedList<>();
-        medewerkerInschrijvingVoorstellingList.add(medewerkerInschrijvingVoorstelling);
 
         //Activate
         //Er wordt met dezelfde voorstellingId en medewerker een inschrijving gedaan, dit zou maar 1x mogen gebeuren.
-        medewerkerInschrijvingVoorstellingController.inschrijvenVoorstelling(1,medewerker);
-        medewerkerInschrijvingVoorstellingController.inschrijvenVoorstelling(1,medewerker);
+        medewerkerInschrijvingVoorstellingController.inschrijvenVoorstelling(voorstelling1.getVoorstellingId(),medewerker);
+        medewerkerInschrijvingVoorstellingController.inschrijvenVoorstelling(voorstelling1.getVoorstellingId(),medewerker);
 
 
         //Assert
-        Assert.assertEquals(medewerkerInschrijvingVoorstellingController.inschrijvenVoorstelling(2,medewerker),
+        Assert.assertEquals(medewerkerInschrijvingVoorstellingController.inschrijvenVoorstelling(voorstelling2.getVoorstellingId(),medewerker),
                "redirect:/voorstelling/weergeven/openvoorstelling");
 
 
