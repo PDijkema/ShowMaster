@@ -122,6 +122,7 @@ public class MedewerkerController {
     @PostMapping("/profiel/wijzigen")
     public String updateMedewerker(@ModelAttribute("medewerker") Medewerker ingelogdeMedewerker,
                                    BindingResult result) {
+
         if (result.hasErrors()) {
             return "profielWijzigen";
         } else {

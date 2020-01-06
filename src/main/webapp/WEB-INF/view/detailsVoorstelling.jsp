@@ -4,7 +4,7 @@
 
 
 <!DOCTYPE html>
-<table lang="en" xmlns:c="http://www.w3.org/1999/XSL/Transform">
+<table lang="en">
 <head>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -52,6 +52,7 @@
             </c:forEach>
         </tbody>
     </table>
+        <a class="btn btn-primary" href="/toevoegenTaken">Taken Toevoegen</a>
         <a class="btn btn-primary" href="/voorstellingen">Overzicht Voorstellingen</a>
     </body>
 </html>
