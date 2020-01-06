@@ -71,10 +71,10 @@ public class MedewerkerController {
     public String login(Model model, String error, String logout) {
 
         if (error != null)
-            model.addAttribute("error", "Your username and password is invalid.");
+            model.addAttribute("error", "Uw gebruikersnaam en/of wachtwoord is ongeldig");
 
         if (logout != null)
-            model.addAttribute("message", "You have been logged out successfully.");
+            model.addAttribute("message", "U bent succesvol uiteglogd");
 
 
         return "login";
@@ -138,7 +138,6 @@ public class MedewerkerController {
 
     @GetMapping("/planner/gebruiker/overzicht")
     public String gebruikerOverzicht (Model model) {
-        System.out.println(medewerkerRepository.findAll());
         model.addAttribute("alleGebruikers",medewerkerRepository.findAll());
 
         return "gebruikerOverzicht";
