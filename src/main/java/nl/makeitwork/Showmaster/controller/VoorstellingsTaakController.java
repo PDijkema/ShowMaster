@@ -44,19 +44,14 @@ public class VoorstellingsTaakController {
 
 
     @GetMapping("/voorstellingsTaak/verwijderen/{voorstellingId}/{voorstellingsTaakId}")
-    protected String verwijderenTaakBijVoorstelling(@PathVariable("voorstellingsTaakId") Integer voorstellingsTaakId,
-                                                    @PathVariable("voorstellingId") Integer voorstellingId, Model model) {
+    protected String verwijderenTaakBijVoorstelling(@PathVariable("voorstellingsTaakId") Integer voorstellingsTaakId) {
 
-        System.out.println("taakprint " + voorstellingRepository.findById(voorstellingsTaakId));
-        System.out.println("voorstellingsId: " + voorstellingId);
+        Optional<VoorstellingsTaak> voorstellingsTaak = voorstellingsTaakRepository.findById(voorstellingsTaakId);
+        Integer voorstellingId = voorstellingsTaak.get().getVoorstelling().getVoorstellingId();
 
         voorstellingsTaakRepository.deleteById(voorstellingsTaakId);
 
-        System.out.println("verwijderd!");
-
-
         return "redirect:/voorstelling/details/" + voorstellingId;
-
     }
 
 
