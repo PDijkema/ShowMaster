@@ -18,7 +18,7 @@ import java.util.Set;
  * @Author Gert Postma
  */
 @Entity
-public class Medewerker implements UserDetails {
+public class Medewerker {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -212,47 +212,6 @@ public class Medewerker implements UserDetails {
         this.vasteTaak = vasteTaak;
     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<GrantedAuthority> authorities = new ArrayList<>();
-
-        if (this.planner) {
-            authorities.add(new SimpleGrantedAuthority("ROLE_PLANNER"));
-        }
-        authorities.add(new SimpleGrantedAuthority("ROLE_MEDEWERKER"));
-        return authorities;
-    }
-
-
-    @Override
-    public String getPassword() {
-        return this.wachtwoord;
-    }
-
-    @Override
-    public String getUsername() {
-        return this.gebruikersnaam;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
 
 }
 

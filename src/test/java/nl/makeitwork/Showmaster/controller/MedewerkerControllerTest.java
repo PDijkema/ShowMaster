@@ -32,7 +32,7 @@ import static org.mockito.Mockito.*;
 @TestPropertySource(locations = "classpath:test.properties")
 class MedewerkerControllerTest {
 
-    @Autowired
+   /* @Autowired
     private MedewerkerService medewerkerService;
 
     @Autowired
@@ -149,7 +149,7 @@ class MedewerkerControllerTest {
         opgehaaldeMedewerker.setPostcode("8607HH");
         opgehaaldeMedewerker.setWoonplaats("Putten");
         opgehaaldeMedewerker.setTelefoonnummer("06-84431841");
-    }
+    }*/
 }
 
 

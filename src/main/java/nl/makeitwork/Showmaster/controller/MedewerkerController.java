@@ -1,6 +1,7 @@
 package nl.makeitwork.Showmaster.controller;
 
 import nl.makeitwork.Showmaster.model.Medewerker;
+import nl.makeitwork.Showmaster.model.User;
 import nl.makeitwork.Showmaster.repository.MedewerkerRepository;
 import nl.makeitwork.Showmaster.repository.TaakRepository;
 import nl.makeitwork.Showmaster.service.MedewerkerService;
@@ -55,14 +56,14 @@ public class MedewerkerController {
     }
 
     @PostMapping("/registreer")
-    public String saveGebruiker(@ModelAttribute("registratieFormulier") Medewerker registratieFormulier, BindingResult bindingResult) {
-        medewerkerValidator.validate(registratieFormulier, bindingResult);
+    public String saveGebruiker(@ModelAttribute("registratieFormulier") User registratieFormulier, BindingResult bindingResult) {
+        //medewerkerValidator.validate(registratieFormulier, bindingResult);
 
         if (bindingResult.hasErrors()) {
             return "registratieFormulier";
         }
         medewerkerService.save(registratieFormulier);
-        securityService.autoLogin(registratieFormulier.getGebruikersnaam(), registratieFormulier.getWachtwoordBevestigen());
+        securityService.autoLogin(registratieFormulier.getUsername(), registratieFormulier.getWachtwoordBevestigen());
         registratieFormulier.setWachtwoordBevestigen("");
         return "redirect:/";
     }
@@ -86,7 +87,7 @@ public class MedewerkerController {
     }
 
     @GetMapping({"/","/planner"})
-    public String isPlanner (@AuthenticationPrincipal Medewerker medewerker){
+    public String isPlanner (@AuthenticationPrincipal User medewerker){
 
         if (medewerker.getAuthorities().stream().anyMatch(r -> r.getAuthority().equals("ROLE_PLANNER"))) {
             return "redirect:/planner/inlogkeuze";

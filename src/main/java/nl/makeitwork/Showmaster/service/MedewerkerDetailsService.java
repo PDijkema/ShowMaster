@@ -1,7 +1,9 @@
 package nl.makeitwork.Showmaster.service;
 
 import nl.makeitwork.Showmaster.model.Medewerker;
+import nl.makeitwork.Showmaster.model.User;
 import nl.makeitwork.Showmaster.repository.MedewerkerRepository;
+import nl.makeitwork.Showmaster.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -19,15 +21,15 @@ import java.util.Set;
 public class MedewerkerDetailsService implements UserDetailsService {
 
     @Autowired
-    private MedewerkerRepository medewerkerRepository;
+    private UserRepository userRepository;
 
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String gebruikersnaam) {
-        Medewerker medewerker = medewerkerRepository.findByGebruikersnaam(gebruikersnaam);
-        if (medewerker == null) throw new UsernameNotFoundException(gebruikersnaam);
+        User user = userRepository.findByGebruikersnaam(gebruikersnaam);
+        if (user == null) throw new UsernameNotFoundException(gebruikersnaam);
 
-        return medewerker;
+        return user;
     }
 }
 

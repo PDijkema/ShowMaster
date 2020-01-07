@@ -1,9 +1,10 @@
 package nl.makeitwork.Showmaster.service;
 
-import nl.makeitwork.Showmaster.model.Medewerker;
+
+import nl.makeitwork.Showmaster.model.User;
 
 public interface MedewerkerService {
-    void save(Medewerker medewerker);
+    void save(User user);
 
-    Medewerker findByUsername(String username);
+    User findByUsername(String username);
 }
