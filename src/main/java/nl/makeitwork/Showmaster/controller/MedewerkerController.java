@@ -74,7 +74,7 @@ public class MedewerkerController {
             model.addAttribute("error", "Uw gebruikersnaam en/of wachtwoord is ongeldig");
 
         if (logout != null)
-            model.addAttribute("message", "U bent succesvol uiteglogd");
+            model.addAttribute("message", "U bent succesvol uitgelogd");
 
 
         return "login";
