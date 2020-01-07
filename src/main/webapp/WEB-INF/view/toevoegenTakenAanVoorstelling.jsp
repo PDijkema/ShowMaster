@@ -25,8 +25,7 @@
                                 <td>
                                     <div class="input-group-prepend">
                                         <p><c:out value="${taak.taakNaam}"/></p>
-                                        <p><input type="hidden"  c:out value="${taak.taakId}"/></p>
-
+                                        <p><c:out value="${taak.taakId}"/></p>
                                     </div>
                                 </td>
                                 <td>

@@ -12,8 +12,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+import java.util.Optional;
 
 
 /**
@@ -37,7 +42,49 @@ public class VoorstellingsTaakController {
         return "toevoegenTakenAanVoorstelling";
     }
 
-    @PostMapping("/taken/toevoegen")
+
+    @GetMapping("/voorstellingsTaak/verwijderen/{voorstellingId}/{voorstellingsTaakId}")
+    protected String verwijderenTaakBijVoorstelling(@PathVariable("voorstellingsTaakId") Integer voorstellingsTaakId,
+                                                    @PathVariable("voorstellingId") Integer voorstellingId, Model model) {
+
+        System.out.println("taakprint " + voorstellingRepository.findById(voorstellingsTaakId));
+        System.out.println("voorstellingsId: " + voorstellingId);
+
+        voorstellingsTaakRepository.deleteById(voorstellingsTaakId);
+
+        System.out.println("verwijderd!");
+
+
+        return "redirect:/voorstelling/details/" + voorstellingId;
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*    @PostMapping("/taken/toevoegen")
     protected String saveOrUpdateTakenBijVoorstelling(TaakSelectie taakSelectie, BindingResult result, HttpServletRequest request) {
         Integer voorstellingId = (Integer)(request.getSession().getAttribute("voorstellingId"));
         Voorstelling voorstelling = voorstellingRepository.findById(voorstellingId).get();
@@ -65,5 +112,5 @@ public class VoorstellingsTaakController {
             voorstellingsTaak.setVoorstelling(voorstelling);
             voorstellingsTaakRepository.save(voorstellingsTaak);
         }
-    }
+    }*/
 }

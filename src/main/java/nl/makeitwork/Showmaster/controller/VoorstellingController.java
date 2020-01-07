@@ -1,4 +1,5 @@
 package nl.makeitwork.Showmaster.controller;
+import nl.makeitwork.Showmaster.model.Taak;
 import nl.makeitwork.Showmaster.model.Voorstelling;
 import nl.makeitwork.Showmaster.model.VoorstellingsTaak;
 import nl.makeitwork.Showmaster.repository.TaakRepository;
@@ -62,8 +63,11 @@ public class VoorstellingController {
 
     @GetMapping("/voorstelling/details/{voorstellingId}")
     protected String detailsVoorstelling(@PathVariable Integer voorstellingId, Model model, HttpServletRequest request) {
+
+        model.addAttribute("alleTaken", taakRepository.findAll());
         Optional<Voorstelling> voorstelling = voorstellingRepository.findById(voorstellingId);
         List<VoorstellingsTaak> voorstellingsTaken = voorstellingsTaakRepository.findVoorstellingstaakByVoorstellingId(voorstellingId);
+
         if (!voorstelling.isPresent()) {
             return "redirect:/alleVoorstellingen";
         } else {
@@ -76,12 +80,27 @@ public class VoorstellingController {
 
     @PostMapping("/voorstelling/toevoegen")
     protected String saveOrUpdateVoorstelling(@ModelAttribute("voorstelling") Voorstelling voorstelling, BindingResult result) {
+
         if (!result.hasErrors()) {
             voorstellingRepository.save(voorstelling);
+            for (Taak taak : taakRepository.findAll()) {
+                standaardTakenOpslaanBijVoorstelling(taak.getStandaardBezetting(), voorstelling, taak);
+            }
+
         } else {
             return "wijzigVoorstelling";
         }
         return "redirect:/voorstellingen";
+    }
+
+    protected void standaardTakenOpslaanBijVoorstelling(int taakAantal, Voorstelling voorstelling, Taak taak) {
+
+        for (int i = 0; i < taakAantal; i++) {
+            VoorstellingsTaak voorstellingsTaak = new VoorstellingsTaak();
+            voorstellingsTaak.setTaak(taak);
+            voorstellingsTaak.setVoorstelling(voorstelling);
+            voorstellingsTaakRepository.save(voorstellingsTaak);
+        }
     }
 
     @GetMapping("/voorstelling/verwijderen/{voorstellingId}")

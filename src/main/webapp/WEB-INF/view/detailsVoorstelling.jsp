@@ -25,13 +25,35 @@
             <td scope="col">${voorstelling.datum}</td>
         </tr>
     </table>
-
+    <table>
+        <thead>
+        <tr>
+            <th scope="col">Taak</th>
+            <th scope="col">TaakId</th>
+            <th scope="col">Toevoegen</th>
+        </tr>
+        </thead>
+        <tbody>
+            <c:forEach items="${alleTaken}" var="taak">
+                <tr>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <td><c:out value="${taak.taakNaam}"/></td>
+                            <td><c:out value="${taak.taakId}"/></td>
+                            <td><a href="/taak/toevoegen/<c:out value="${taak.taakId}" />">Add</a></td>
+                        </div>
+                    </div>
+                </tr>
+            </c:forEach>
+        </tbody>
+    </table>
     <h1>Taken</h1>
     <table class="table table-hover">
         <thead>
             <tr>
                 <th scope="col">Taak</th>
                 <th scope="col">Medewerker</th>
+                <th scope="col">Verwijderen</th>
             </tr>
         </thead>
         <tbody>
@@ -48,11 +70,11 @@
                             </c:otherwise>
                         </c:choose>
                     </td>
+                    <td><a href="/voorstellingsTaak/verwijderen/{voorstellingId}/<c:out value="${takenBijVoorstelling.voorstellingsTaakId}" />">Delete</a></td>
                 </tr>
             </c:forEach>
         </tbody>
     </table>
-        <a class="btn btn-primary" href="/toevoegenTaken">Taken Toevoegen</a>
         <a class="btn btn-primary" href="/voorstellingen">Overzicht Voorstellingen</a>
     </body>
 </html>
