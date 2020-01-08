@@ -4,7 +4,7 @@
 
 
 <!DOCTYPE html>
-<table lang="en" xmlns:c="http://www.w3.org/1999/XSL/Transform">
+<table lang="en">
 <head>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -14,44 +14,47 @@
     <meta charset="UTF-8">
     <title>Details Voorstelling</title>
 </head>
-    <table>
-        <h1>Details voorstelling</h1>
-        <tr>
-            <td scope="col">Naam voorstelling:</td>
-            <td scope="col">${voorstelling.naam}</td>
-        </tr>
-        <tr>
-            <td scope="col">Datum en tijdstip:</td>
-            <td scope="col">${voorstelling.datum}</td>
-        </tr>
-    </table>
-
-    <h1>Taken</h1>
-    <table class="table table-hover">
-        <thead>
+    <body>
+    <jsp:include page="navbar.jsp" />
+        <table>
+            <h1>Details voorstelling</h1>
             <tr>
-                <th scope="col">Taak</th>
-                <th scope="col">Medewerker</th>
+                <td scope="col">Naam voorstelling:</td>
+                <td scope="col">${voorstelling.naam}</td>
             </tr>
-        </thead>
-        <tbody>
-            <c:forEach items="${takenBijVoorstelling}" var="takenBijVoorstelling">
+            <tr>
+                <td scope="col">Datum en tijdstip:</td>
+                <td scope="col">${voorstelling.datum}</td>
+            </tr>
+        </table>
+
+        <h1>Taken</h1>
+        <table class="table table-hover">
+            <thead>
                 <tr>
-                    <td><c:out value="${takenBijVoorstelling.getTaak().getTaakNaam()}"/></td>
-                    <td>
-                        <c:choose>
-                            <c:when test="${empty takenBijVoorstelling.getMedewerker().getGebruikersnaam()}">
-                                Openstaand
-                            </c:when>
-                            <c:otherwise>
-                                <c:out value="${takenBijVoorstelling.getMedewerker().getGebruikersnaam()}"/>
-                            </c:otherwise>
-                        </c:choose>
-                    </td>
+                    <th scope="col">Taak</th>
+                    <th scope="col">Medewerker</th>
                 </tr>
-            </c:forEach>
-        </tbody>
-    </table>
-        <a class="btn btn-primary" href="/voorstellingen">Overzicht Voorstellingen</a>
+            </thead>
+            <tbody>
+                <c:forEach items="${takenBijVoorstelling}" var="takenBijVoorstelling">
+                    <tr>
+                        <td><c:out value="${takenBijVoorstelling.getTaak().getTaakNaam()}"/></td>
+                        <td>
+                            <c:choose>
+                                <c:when test="${empty takenBijVoorstelling.getMedewerker().getGebruikersnaam()}">
+                                    Openstaand
+                                </c:when>
+                                <c:otherwise>
+                                    <c:out value="${takenBijVoorstelling.getMedewerker().getGebruikersnaam()}"/>
+                                </c:otherwise>
+                            </c:choose>
+                        </td>
+                    </tr>
+                </c:forEach>
+            </tbody>
+        </table>
+            <a class="btn btn-primary" href="/toevoegenTaken">Taken Toevoegen</a>
+            <a class="btn btn-primary" href="/voorstellingen">Terug naar alle voorstellingen</a>
     </body>
 </html>

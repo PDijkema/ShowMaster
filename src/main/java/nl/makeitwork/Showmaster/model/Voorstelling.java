@@ -30,6 +30,9 @@ public class Voorstelling {
         return "Id "+ voorstellingId + " naam " + naam + " datum " + datum ;
     }
 
+
+
+
     public Integer getVoorstellingId() {
         return voorstellingId;
     }

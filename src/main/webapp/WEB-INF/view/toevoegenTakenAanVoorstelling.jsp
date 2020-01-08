@@ -2,16 +2,15 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <!doctype html>
-<html lang="en" xmlns:form="http://www.w3.org/1999/xhtml" xmlns:c="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>Beheer Taken</title>
 </head>
     <body>
-        <h1>
-            Beheer voorstelling
-        </h1>
+        <jsp:include page="navbar.jsp" />
+        <h1>Beheer voorstelling</h1>
 
         <form:form action="/taken/toevoegen" method="post">
             <table>
@@ -43,10 +42,9 @@
                 <td>
                     <input type="hidden" name="voorstellingId" value="${taak.taakId}"/></p>
                     <input type="submit" class="btn btn-primary" value="Opslaan">
+                    <a class="btn btn-primary" href="/voorstellingen">Terug naar alle voorstellingen</a>
                 </td>
             </table>
         </form:form>
-        <a class="btn btn-primary" href="/voorstellingen">Overzicht Voorstellingen</a>
     </body>
-
 </html>

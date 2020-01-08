@@ -12,33 +12,33 @@
 
   <title>Nieuwe/Wijzig voorstelling</title>
 </head>
+
     <body>
+        <jsp:include page="navbar.jsp" />
         <h1>Beheer voorstelling</h1>
-        <form:form action="/voorstelling/toevoegen" modelAttribute="voorstelling" method="post">
-            <form:hidden path="voorstellingId"/>
-            <table>
-                <div>
+            <form:form action="/voorstelling/toevoegen" modelAttribute="voorstelling" method="post">
+                <form:hidden path="voorstellingId"/>
+                <table>
+                    <div>
+                        <tr>
+                            <td>Naam voorstelling:</td>
+                            <td>
+                                <form:input class="form-control mb-2 mr-sm-2" path="naam" required="required" />
+                            </td>
+                        </tr>
+                        <tr>
+                             <td>Datum en tijdstip:</td>
+                             <td>
+                                <form:input type="datetime-local" class="form-control mb-2 mr-sm-2" path="datum" value="${dateString}" required="required" />
+                             </td>
+                        </tr>
+                    </div>
                     <tr>
-                        <td>Naam voorstelling:</td>
-                        <td>
-                            <form:input class="form-control mb-2 mr-sm-2" path="naam" required="required" />
+                        <td colspan="1">
+                            <input type="submit" class="btn btn-primary" value="Opslaan"/>
                         </td>
                     </tr>
-                    <tr>
-                         <td>Datum en tijdstip:</td>
-                         <td>
-                            <form:input type="datetime-local" class="form-control mb-2 mr-sm-2" path="datum" value="${dateString}" required="required" />
-                         </td>
-                    </tr>
-                </div>
-                <tr>
-                    <td colspan="1">
-                        <input type="submit" class="btn btn-primary" value="Opslaan"/>
-                    </td>
-                </tr>
-            </table>
-        </form:form>
-                <a class="btn btn-primary" href="/toevoegenTaken">Taken Toevoegen</a>
-                <a class="btn btn-primary" href="/voorstellingen">Overzicht Voorstellingen</a>
+                </table>
+            </form:form>
     </body>
 </html>

@@ -12,6 +12,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @Author Gert Postma
@@ -65,6 +66,7 @@ public class Medewerker implements UserDetails {
     @JoinColumn(name = "vasteTaakId", referencedColumnName = "taakId")
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     private Taak vasteTaak;
+
 
     public Boolean getPlanner() {
         return planner;
