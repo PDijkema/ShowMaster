@@ -9,9 +9,8 @@
     <title>Beheer Taken</title>
 </head>
     <body>
-        <h1>
-            Beheer voorstelling
-        </h1>
+        <jsp:include page="navbar.jsp" />
+        <h1>Beheer voorstelling</h1>
 
         <form:form action="/taken/toevoegen" method="post">
             <table>
@@ -43,10 +42,9 @@
                 <td>
                     <input type="hidden" name="voorstellingId" value="${taak.taakId}"/></p>
                     <input type="submit" class="btn btn-primary" value="Opslaan">
+                    <a class="btn btn-primary" href="/voorstellingen">Terug naar alle voorstellingen</a>
                 </td>
             </table>
         </form:form>
-        <a class="btn btn-primary" href="/voorstellingen">Overzicht Voorstellingen</a>
     </body>
-
 </html>
