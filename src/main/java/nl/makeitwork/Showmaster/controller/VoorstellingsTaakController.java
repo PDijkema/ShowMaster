@@ -54,6 +54,17 @@ public class VoorstellingsTaakController {
         return "redirect:/voorstelling/details/" + voorstellingId;
     }
 
+    @GetMapping("/voorstellingsTaak/medewerkerKoppelen/{voorstellingId}/{voorstellingsTaakId}")
+    protected String koppelenMedewerkerAanVoorstellingsTaak(@PathVariable("voorstellingId") Integer voorstellingId,
+                                                            @PathVariable("voorstellingsTaakId") Integer voorstellingsTaakId) {
+
+
+        System.out.println("VoorstellingID " + voorstellingId);
+        System.out.println("VoorstellingsTaakID: " + voorstellingsTaakId);
+
+        return "redirect:/voorstelling/details/" + voorstellingId;
+    }
+
 
 
 

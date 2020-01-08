@@ -36,6 +36,7 @@
             <tr>
                 <th scope="col">Taak</th>
                 <th scope="col">Medewerker</th>
+                <th scope="col">Koppelen</th>
                 <th scope="col">Verwijderen</th>
             </tr>
         </thead>
@@ -47,9 +48,11 @@
                         <c:choose>
                             <c:when test="${empty takenBijVoorstelling.getMedewerker().getGebruikersnaam()}">
                                 Openstaand
+                                <td><a href="/voorstellingsTaak/medewerkerKoppelen/${voorstelling.voorstellingId}/<c:out value="${takenBijVoorstelling.voorstellingsTaakId}" />">Koppelen</a></td>
                             </c:when>
                             <c:otherwise>
                                 <c:out value="${takenBijVoorstelling.getMedewerker().getGebruikersnaam()}"/>
+                                <td>Aanpassen</td>
                             </c:otherwise>
                         </c:choose>
                     </td>
@@ -63,7 +66,7 @@
         <table>
             <tbody>
                 <c:forEach items="${alleTaken}" var="taak">
-                    <td></td><a class="btn btn-primary" href="/voorstellingsTaak/toevoegen/${voorstelling.voorstellingId}/<c:out value="${taak.taakId}" />"><c:out value="${taak.taakNaam}"/></a></td>
+                    <td><a class="btn btn-primary" href="/voorstellingsTaak/toevoegen/${voorstelling.voorstellingId}/<c:out value="${taak.taakId}" />"><c:out value="${taak.taakNaam}"/></a></td>
                 </c:forEach>
             </tbody>
         </table>
