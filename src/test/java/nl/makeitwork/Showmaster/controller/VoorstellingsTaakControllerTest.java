@@ -32,7 +32,7 @@ class VoorstellingsTaakControllerTest {
 
     @Autowired
     private VoorstellingsTaakController voorstellingsTaakController;
-    
+
 
     @Test
     void verwijderenTaakBijVoorstelling() {
