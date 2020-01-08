@@ -14,24 +14,29 @@
     <meta charset="UTF-8">
     <title>Details Voorstelling</title>
 </head>
-    <table>
-        <h1>Details voorstelling</h1>
+    <body>
+    <jsp:include page="navbar.jsp" />
+    <h1>Details voorstelling</h1>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Naam voorstelling</th>
+                <th scope="col">Datum en tijdstip</th>
+            </tr>
+        </thead>
         <tr>
-            <td scope="col">Naam voorstelling:</td>
             <td scope="col">${voorstelling.naam}</td>
-        </tr>
-        <tr>
-            <td scope="col">Datum en tijdstip:</td>
             <td scope="col">${voorstelling.datum}</td>
         </tr>
     </table>
 
-    <h1>Taken</h1>
+    <h1>Diensten bij voorstelling</h1>
     <table class="table table-hover">
         <thead>
             <tr>
                 <th scope="col">Taak</th>
                 <th scope="col">Medewerker</th>
+                <th scope="col">Verwijderen</th>
             </tr>
         </thead>
         <tbody>
@@ -48,11 +53,23 @@
                             </c:otherwise>
                         </c:choose>
                     </td>
+                    <td><a href="/voorstellingsTaak/verwijderen/${voorstelling.voorstellingId}/<c:out value="${takenBijVoorstelling.voorstellingsTaakId}" />">Delete</a></td>
                 </tr>
             </c:forEach>
         </tbody>
     </table>
-        <a class="btn btn-primary" href="/toevoegenTaken">Taken Toevoegen</a>
-        <a class="btn btn-primary" href="/voorstellingen">Overzicht Voorstellingen</a>
+
+    <h1>Diensten toevoegen</h1>
+        <table>
+            <tbody>
+                <c:forEach items="${alleTaken}" var="taak">
+                    <td></td><a class="btn btn-primary" href="/voorstellingsTaak/toevoegen/${voorstelling.voorstellingId}/<c:out value="${taak.taakId}" />"><c:out value="${taak.taakNaam}"/></a></td>
+                </c:forEach>
+            </tbody>
+        </table>
     </body>
+
+</table>
+<h1>Terug naar</h1>
+<a class="btn btn-primary" href="/voorstellingen">Overzicht Voorstellingen</a>
 </html>
