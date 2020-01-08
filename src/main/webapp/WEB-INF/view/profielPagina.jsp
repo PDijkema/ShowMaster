@@ -19,7 +19,7 @@
                 <h1>Profielpagina</h1>
                 <h2 class="form-signin-heading">Persoonlijke gegevens</h2>
 
-                <form:hidden path="medewerkerId" />
+                <form:hidden path="profielId" />
 
                 <table>
                     <tr>

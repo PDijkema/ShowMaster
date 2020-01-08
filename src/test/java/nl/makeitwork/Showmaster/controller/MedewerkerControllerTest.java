@@ -2,6 +2,8 @@ package nl.makeitwork.Showmaster.controller;
 
 
 import nl.makeitwork.Showmaster.model.Medewerker;
+import nl.makeitwork.Showmaster.model.MedewerkerProfielGegevens;
+import nl.makeitwork.Showmaster.repository.MedewerkerProfielGegevensRepository;
 import nl.makeitwork.Showmaster.repository.MedewerkerRepository;
 import nl.makeitwork.Showmaster.service.MedewerkerService;
 import org.junit.Assert;
@@ -47,6 +49,9 @@ class MedewerkerControllerTest {
     @Autowired
     private WebApplicationContext webApplicationContext;
 
+    @Autowired
+    private MedewerkerProfielGegevensRepository medewerkerProfielGegevensRepository;
+
 
     @Before
     public void setup() throws Exception {
@@ -88,26 +93,29 @@ class MedewerkerControllerTest {
     @Test
     void testUpdateMedewerker() throws Exception {
 
-       /* // Arrange
-        Medewerker testmedewerker1 = new Medewerker();
-        setGebruikersgegevensTestMedewerker1(testmedewerker1);
-        medewerkerRepository.save(testmedewerker1);
+        // Arrange
+        Medewerker testMedewerker1 = new Medewerker();
+        setGebruikersgegevensTestMedewerker1(testMedewerker1);
+        medewerkerRepository.save(testMedewerker1);
 
         BindingResult result = mock(BindingResult.class);
         when(result.hasErrors()).thenReturn(false);
         String verwachteAchternaam = "Vries";
 
-        vulProfielgegevens(testmedewerker1);
+        MedewerkerProfielGegevens profielGegevensTestMedewerker1 =(medewerkerProfielGegevensRepository.findByMedewerker(testMedewerker1));
+
+        vulProfielgegevens(profielGegevensTestMedewerker1);
+
 
         // Activate
-        medewerkerController.updateMedewerker(testmedewerker1, result);
+        medewerkerController.updateMedewerker(profielGegevensTestMedewerker1, result);
 
         // Assert
-        Assert.assertEquals(testmedewerker1.getAchternaam(), verwachteAchternaam);
-    }*/
+        Assert.assertEquals(profielGegevensTestMedewerker1.getAchternaam(), verwachteAchternaam);
+    }
 
 
-        /*@Test
+        @Test
         public void verwijderGebruikerTest () throws Exception {
             //Arrange
             BindingResult bindingResult = mock(BindingResult.class);
@@ -129,16 +137,16 @@ class MedewerkerControllerTest {
             //Assert
             Assert.assertNull(medewerkerRepository.findByGebruikersnaam("test12345"));
 
-        }*/
+        }
 
-    /*public void setGebruikersgegevensTestMedewerker1(Medewerker testMedewerker) {
+    public void setGebruikersgegevensTestMedewerker1(Medewerker testMedewerker) {
         testMedewerker.setGebruikersnaam("test4567");
         testMedewerker.setWachtwoord("test4567");
         testMedewerker.setWachtwoordBevestigen("test4567");
         testMedewerker.setPlanner(false);
     }
 
-    public void vulProfielgegevens(Medewerker opgehaaldeMedewerker) {
+    public void vulProfielgegevens(MedewerkerProfielGegevens opgehaaldeMedewerker) {
         opgehaaldeMedewerker.setVoornaam("Piet");
         opgehaaldeMedewerker.setTussenvoegsel("de");
         opgehaaldeMedewerker.setAchternaam("Vries");
@@ -149,8 +157,8 @@ class MedewerkerControllerTest {
         opgehaaldeMedewerker.setPostcode("8607HH");
         opgehaaldeMedewerker.setWoonplaats("Putten");
         opgehaaldeMedewerker.setTelefoonnummer("06-84431841");
-    }*/
     }
+
 }
 
 

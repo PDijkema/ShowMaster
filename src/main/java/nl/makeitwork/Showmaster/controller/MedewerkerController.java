@@ -68,6 +68,8 @@ public class MedewerkerController {
         if (bindingResult.hasErrors()) {
             return "registratieFormulier";
         }
+
+        System.out.println("Test");
         medewerkerService.save(registratieFormulier);
         securityService.autoLogin(registratieFormulier.getGebruikersnaam(), registratieFormulier.getWachtwoordBevestigen());
         registratieFormulier.setWachtwoordBevestigen("");

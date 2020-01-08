@@ -48,6 +48,10 @@ public class Medewerker implements UserDetails {
             fetch = FetchType.LAZY, optional = false)
     private MedewerkerProfielGegevens medewerkerProfielGegevens;
 
+    public Medewerker() {
+        this.medewerkerProfielGegevens = new MedewerkerProfielGegevens();
+        this.medewerkerProfielGegevens.setMedewerker(this);
+    }
 
     public Boolean getPlanner() {
         return planner;

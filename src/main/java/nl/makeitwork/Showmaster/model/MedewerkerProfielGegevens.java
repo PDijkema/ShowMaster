@@ -7,9 +7,11 @@ import java.time.LocalDate;
 
 @Entity
 public class MedewerkerProfielGegevens {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer medewerkerId;
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private Integer profielId;
+
 
     private String voornaam;
 
@@ -36,8 +38,16 @@ public class MedewerkerProfielGegevens {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "medewerker_id")
-    @MapsId
+    //@MapsId ("medewerkerId")
     private Medewerker medewerker;
+
+    public Integer getProfielId() {
+        return profielId;
+    }
+
+    public void setProfielId(Integer profielId) {
+        this.profielId = profielId;
+    }
 
     public Medewerker getMedewerker() {
         return medewerker;
@@ -45,14 +55,6 @@ public class MedewerkerProfielGegevens {
 
     public void setMedewerker(Medewerker medewerker) {
         this.medewerker = medewerker;
-    }
-
-    public Integer getMedewerkerId() {
-        return medewerkerId;
-    }
-
-    public void setMedewerkerId(Integer medewerkerId) {
-        this.medewerkerId = medewerkerId;
     }
 
     public String getVoornaam() {

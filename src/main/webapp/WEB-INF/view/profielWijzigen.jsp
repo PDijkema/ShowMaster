@@ -19,8 +19,8 @@
                 <h1>Profiel wijzigen</h1>
                 <h2 class="form-signin-heading">Persoonlijke gegevens</h2>
 
-                <form:hidden path="medewerkerId" />
-
+                <form:hidden path="profielId" />
+                <form:hidden path="medewerker.medewerkerId" />
 
 
                 <spring:bind path="voornaam">
