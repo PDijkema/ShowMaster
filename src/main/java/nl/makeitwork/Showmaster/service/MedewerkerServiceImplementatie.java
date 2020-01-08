@@ -26,7 +26,6 @@ public class MedewerkerServiceImplementatie implements MedewerkerService {
     public void save(Medewerker medewerker) {
         medewerker.setWachtwoord(bCryptPasswordEncoder.encode(medewerker.getPassword()));
         medewerkerRepository.save(medewerker);
-        //medewerkerProfielGegevensRepository.save(medewerker.getMedewerkerProfielGegevens());
 
 
 

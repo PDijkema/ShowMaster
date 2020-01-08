@@ -38,7 +38,6 @@ public class MedewerkerProfielGegevens {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "medewerker_id")
-    //@MapsId ("medewerkerId")
     private Medewerker medewerker;
 
     public Integer getProfielId() {
