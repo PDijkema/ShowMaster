@@ -1,8 +1,6 @@
 package nl.makeitwork.Showmaster.controller;
 
 import nl.makeitwork.Showmaster.model.Medewerker;
-import nl.makeitwork.Showmaster.model.MedewerkerProfielGegevens;
-import nl.makeitwork.Showmaster.repository.MedewerkerProfielGegevensRepository;
 import nl.makeitwork.Showmaster.repository.MedewerkerRepository;
 import nl.makeitwork.Showmaster.repository.TaakRepository;
 import nl.makeitwork.Showmaster.service.MedewerkerService;
@@ -19,8 +17,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import java.util.Optional;
 
 
 /**
@@ -68,8 +64,6 @@ public class MedewerkerController {
         if (bindingResult.hasErrors()) {
             return "registratieFormulier";
         }
-
-        System.out.println("Test");
         medewerkerService.save(registratieFormulier);
         securityService.autoLogin(registratieFormulier.getGebruikersnaam(), registratieFormulier.getWachtwoordBevestigen());
         registratieFormulier.setWachtwoordBevestigen("");
@@ -83,9 +77,7 @@ public class MedewerkerController {
             model.addAttribute("error", "Uw gebruikersnaam en/of wachtwoord is ongeldig");
 
         if (logout != null)
-            model.addAttribute("message", "U bent succesvol uiteglogd");
-
-
+            model.addAttribute("message", "U bent succesvol uitgelogd");
         return "login";
     }
 
@@ -128,8 +120,6 @@ public class MedewerkerController {
 
         model.addAttribute("medewerkerProfielGegevens", medewerkerProfielGegevensRepository.findByMedewerker(ingelogdeMedewerker));
         model.addAttribute("takenLijst", taakRepository.findAll());
-
-
         return "profielWijzigen";
     }
 

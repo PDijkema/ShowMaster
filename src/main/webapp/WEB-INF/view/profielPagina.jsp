@@ -12,7 +12,7 @@
 </head>
 
     <body>
-
+        <jsp:include page="navbar.jsp" />
         <div class="container">
 
             <form:form modelAttribute="medewerkerProfielGegevens" class="form-signin">
@@ -122,10 +122,7 @@
                 </table>
 
                 <button class="btn btn-primary" type="submit">Gegevens wijzigen</button>
-                <a href="/medewerker/welkom">  <button type="button" class="btn btn-primary">Terug naar welkom</button> </a>
-
             </form:form>
-            </div>
-
-        </body>
+        </div>
+    </body>
 </html>
