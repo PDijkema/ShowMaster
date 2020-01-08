@@ -36,11 +36,11 @@ public class VoorstellingsTaakController {
     @Autowired
     private VoorstellingsTaakRepository voorstellingsTaakRepository;
 
-    @GetMapping("/toevoegenTaken")
+/*    @GetMapping("/toevoegenTaken")
     protected String toevoegenTakenAanVoorstelling(Model model) {
         model.addAttribute("alleTaken", taakRepository.findAll());
         return "toevoegenTakenAanVoorstelling";
-    }
+    }*/
 
 
     @GetMapping("/voorstellingsTaak/verwijderen/{voorstellingId}/{voorstellingsTaakId}")
@@ -52,6 +52,13 @@ public class VoorstellingsTaakController {
         voorstellingsTaakRepository.deleteById(voorstellingsTaakId);
 
         return "redirect:/voorstelling/details/" + voorstellingId;
+    }
+
+    @GetMapping("/voorstellingsTaak/toevoegen/{voorstellingId}/{taakId}")
+    protected String toevoegenTaakAanVoorstelling(Model model) {
+        System.out.println("werkt");
+        model.addAttribute("alleTaken", taakRepository.findAll());
+        return "redirect:/voorstellingen";
     }
 
 

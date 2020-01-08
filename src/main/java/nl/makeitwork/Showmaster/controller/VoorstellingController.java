@@ -50,6 +50,7 @@ public class VoorstellingController {
 
     @GetMapping("/voorstelling/wijzigen/{voorstellingId}")
     protected String wijzigenVoorstellingen(@PathVariable Integer voorstellingId, Model model, HttpServletRequest request) {
+
         Optional<Voorstelling> voorstelling = voorstellingRepository.findById(voorstellingId);
         model.addAttribute("alleTaken", taakRepository.findAll());
         if (!voorstelling.isPresent()) {
@@ -92,16 +93,12 @@ public class VoorstellingController {
         }
         return "redirect:/voorstellingen";
     }
-    //toegevoegd vanwege opsplitsing
+
     @PostMapping("/voorstelling/wijzigen")
     protected String UpdateVoorstelling(@ModelAttribute("voorstelling") Voorstelling voorstelling, BindingResult result) {
 
         if (!result.hasErrors()) {
             voorstellingRepository.save(voorstelling);
- /*           for (Taak taak : taakRepository.findAll()) {
-                standaardTakenOpslaanBijVoorstelling(taak.getStandaardBezetting(), voorstelling, taak);
-            }*/
-
         } else {
             return "wijzigVoorstelling";
         }

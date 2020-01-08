@@ -14,40 +14,23 @@
     <meta charset="UTF-8">
     <title>Details Voorstelling</title>
 </head>
-    <table>
-        <h1>Details voorstelling</h1>
+    <body>
+
+    <h1>Details voorstelling</h1>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Naam voorstelling</th>
+                <th scope="col">Datum en tijdstip</th>
+            </tr>
+        </thead>
         <tr>
-            <td scope="col">Naam voorstelling:</td>
             <td scope="col">${voorstelling.naam}</td>
-        </tr>
-        <tr>
-            <td scope="col">Datum en tijdstip:</td>
             <td scope="col">${voorstelling.datum}</td>
         </tr>
     </table>
-    <table>
-        <thead>
-        <tr>
-            <th scope="col">Taak</th>
-            <th scope="col">TaakId</th>
-            <th scope="col">Toevoegen</th>
-        </tr>
-        </thead>
-        <tbody>
-            <c:forEach items="${alleTaken}" var="taak">
-                <tr>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <td><c:out value="${taak.taakNaam}"/></td>
-                            <td><c:out value="${taak.taakId}"/></td>
-                            <td><a href="/taak/toevoegen/<c:out value="${taak.taakId}" />">Add</a></td>
-                        </div>
-                    </div>
-                </tr>
-            </c:forEach>
-        </tbody>
-    </table>
-    <h1>Taken</h1>
+
+    <h1>Diensten bij voorstelling</h1>
     <table class="table table-hover">
         <thead>
             <tr>
@@ -75,6 +58,17 @@
             </c:forEach>
         </tbody>
     </table>
-        <a class="btn btn-primary" href="/voorstellingen">Overzicht Voorstellingen</a>
+
+    <h1>Diensten toevoegen</h1>
+        <table>
+            <tbody>
+                <c:forEach items="${alleTaken}" var="taak">
+                    <td></td><a class="btn btn-primary" href="/voorstellingsTaak/toevoegen/{voorstellingId}/<c:out value="${taak.taakId}" />"><c:out value="${taak.taakNaam}"/></a></td>
+                </c:forEach>
+            </tbody>
+        </table>
     </body>
+
+</table>
+<a class="btn btn-primary" href="/voorstellingen">Overzicht Voorstellingen</a>
 </html>
