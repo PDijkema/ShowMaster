@@ -45,7 +45,7 @@ public class VoorstellingController {
     @GetMapping("/voorstelling/toevoegen")
     protected String toevoegenVoorstellingen(Voorstelling voorstelling, Model model) {
         model.addAttribute("alleTaken", taakRepository.findAll());
-        return "wijzigVoorstelling";
+        return "toevoegenVoorstelling";
     }
 
     @GetMapping("/voorstelling/wijzigen/{voorstellingId}")
@@ -79,13 +79,28 @@ public class VoorstellingController {
     }
 
     @PostMapping("/voorstelling/toevoegen")
-    protected String saveOrUpdateVoorstelling(@ModelAttribute("voorstelling") Voorstelling voorstelling, BindingResult result) {
+    protected String saveVoorstelling(@ModelAttribute("voorstelling") Voorstelling voorstelling, BindingResult result) {
 
         if (!result.hasErrors()) {
             voorstellingRepository.save(voorstelling);
             for (Taak taak : taakRepository.findAll()) {
                 standaardTakenOpslaanBijVoorstelling(taak.getStandaardBezetting(), voorstelling, taak);
             }
+
+        } else {
+            return "toevoegenVoorstelling";
+        }
+        return "redirect:/voorstellingen";
+    }
+    //toegevoegd vanwege opsplitsing
+    @PostMapping("/voorstelling/wijzigen")
+    protected String UpdateVoorstelling(@ModelAttribute("voorstelling") Voorstelling voorstelling, BindingResult result) {
+
+        if (!result.hasErrors()) {
+            voorstellingRepository.save(voorstelling);
+ /*           for (Taak taak : taakRepository.findAll()) {
+                standaardTakenOpslaanBijVoorstelling(taak.getStandaardBezetting(), voorstelling, taak);
+            }*/
 
         } else {
             return "wijzigVoorstelling";
