@@ -69,14 +69,10 @@ public class MedewerkerController {
 
     @GetMapping("/login")
     public String login(Model model, String error, String logout) {
-
         if (error != null)
             model.addAttribute("error", "Uw gebruikersnaam en/of wachtwoord is ongeldig");
-
         if (logout != null)
             model.addAttribute("message", "U bent succesvol uitgelogd");
-
-
         return "login";
     }
 
@@ -87,19 +83,9 @@ public class MedewerkerController {
 
     @GetMapping({"/","/planner"})
     public String isPlanner (@AuthenticationPrincipal Medewerker medewerker){
-
-        if (medewerker.getAuthorities().stream().anyMatch(r -> r.getAuthority().equals("ROLE_PLANNER"))) {
-            return "redirect:/planner/inlogkeuze";
-        }
-
         return "redirect:/medewerker/welkom";
-
     }
 
-    @GetMapping("/planner/inlogkeuze")
-    public String inlogKeuzePlanner(Model model) {
-        return "inlogKeuzePlanner";
-    }
 
     @GetMapping("/profielpagina")
     protected String showProfielPagina(Model model, @AuthenticationPrincipal Medewerker ingelogdeMedewerker) {
@@ -122,18 +108,12 @@ public class MedewerkerController {
     @PostMapping("/profiel/wijzigen")
     public String updateMedewerker(@ModelAttribute("medewerker") Medewerker ingelogdeMedewerker,
                                    BindingResult result) {
-
         if (result.hasErrors()) {
             return "profielWijzigen";
         } else {
             medewerkerRepository.save(ingelogdeMedewerker);
             return "redirect:/profielpagina";
         }
-    }
-
-    @GetMapping("/planner/welkom")
-    public String welkomPlanner(Model model) {
-        return "welkomPlanner";
     }
 
     @GetMapping("/planner/gebruiker/overzicht")
@@ -148,7 +128,6 @@ public class MedewerkerController {
         medewerkerRepository.deleteById(medewerkerId);
         return "redirect:/planner/gebruiker/overzicht";
     }
-
 }
 
 
