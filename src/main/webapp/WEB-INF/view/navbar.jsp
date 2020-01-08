@@ -1,5 +1,6 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
 <!DOCTYPE html>
@@ -32,6 +33,7 @@
                             <li class="nav-item active">
                                 <a class="nav-link" href="/medewerker/welkom">Startpagina <span class="sr-only">(current)</span></a>
                             </li>
+                            <sec:authorize access="hasRole('PLANNER')">
                             <li class="nav-item">
                                 <a class="nav-link" href="/voorstellingen">Voorstellingen</a>
                             </li>
@@ -44,6 +46,7 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="/registreer">Gebruiker aanmaken</a>
                             </li>
+                            </sec:authorize>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Mijn profiel
