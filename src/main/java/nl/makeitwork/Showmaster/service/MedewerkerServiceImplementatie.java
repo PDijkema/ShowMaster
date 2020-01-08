@@ -1,6 +1,9 @@
 package nl.makeitwork.Showmaster.service;
 
 import nl.makeitwork.Showmaster.model.Medewerker;
+import nl.makeitwork.Showmaster.model.MedewerkerProfielGegevens;
+import nl.makeitwork.Showmaster.repository.MedewerkerInschrijvingVoorstellingRepository;
+import nl.makeitwork.Showmaster.repository.MedewerkerProfielGegevensRepository;
 import nl.makeitwork.Showmaster.repository.MedewerkerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -15,11 +18,18 @@ public class MedewerkerServiceImplementatie implements MedewerkerService {
     private MedewerkerRepository medewerkerRepository;
 
     @Autowired
+    MedewerkerProfielGegevensRepository medewerkerProfielGegevensRepository;
+
+    @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public void save(Medewerker medewerker) {
         medewerker.setWachtwoord(bCryptPasswordEncoder.encode(medewerker.getPassword()));
         medewerkerRepository.save(medewerker);
+        MedewerkerProfielGegevens medewerkerProfielGegevens = new MedewerkerProfielGegevens();
+        medewerkerProfielGegevens.setMedewerker(medewerker);
+        medewerkerProfielGegevensRepository.save(medewerkerProfielGegevens);
+
     }
 
     @Override
