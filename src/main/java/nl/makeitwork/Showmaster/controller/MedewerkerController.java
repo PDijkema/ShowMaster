@@ -1,6 +1,8 @@
 package nl.makeitwork.Showmaster.controller;
 
 import nl.makeitwork.Showmaster.model.Medewerker;
+import nl.makeitwork.Showmaster.model.MedewerkerProfielGegevens;
+import nl.makeitwork.Showmaster.repository.MedewerkerProfielGegevensRepository;
 import nl.makeitwork.Showmaster.repository.MedewerkerRepository;
 import nl.makeitwork.Showmaster.repository.TaakRepository;
 import nl.makeitwork.Showmaster.service.MedewerkerService;
@@ -17,6 +19,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.List;
 
 
 /**
@@ -89,18 +93,11 @@ public class MedewerkerController {
     @GetMapping({"/","/planner"})
     public String isPlanner (@AuthenticationPrincipal Medewerker medewerker){
 
-        if (medewerker.getAuthorities().stream().anyMatch(r -> r.getAuthority().equals("ROLE_PLANNER"))) {
-            return "redirect:/planner/inlogkeuze";
-        }
 
         return "redirect:/medewerker/welkom";
 
     }
 
-    @GetMapping("/planner/inlogkeuze")
-    public String inlogKeuzePlanner(Model model) {
-        return "inlogKeuzePlanner";
-    }
 
     @GetMapping("/profielpagina")
     protected String showProfielPagina(Model model, @AuthenticationPrincipal Medewerker ingelogdeMedewerker) {
@@ -135,14 +132,14 @@ public class MedewerkerController {
         }
     }
 
-    @GetMapping("/planner/welkom")
-    public String welkomPlanner(Model model) {
-        return "welkomPlanner";
-    }
-
     @GetMapping("/planner/gebruiker/overzicht")
-    public String gebruikerOverzicht (Model model) {
-        model.addAttribute("alleGebruikers",medewerkerRepository.findAll());
+    public String gebruikerOverzicht (Model model,@AuthenticationPrincipal Medewerker ingelogdeMedwerker) {
+        List<Medewerker> alleGebruikers = medewerkerRepository.findAll();
+
+        alleGebruikers.removeIf(medewerker -> medewerker.getMedewerkerId().equals(ingelogdeMedwerker.getMedewerkerId()));
+
+
+        model.addAttribute("alleGebruikers",alleGebruikers);
 
         return "gebruikerOverzicht";
     }
