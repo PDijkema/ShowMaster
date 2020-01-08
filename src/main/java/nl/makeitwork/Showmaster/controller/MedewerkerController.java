@@ -116,7 +116,6 @@ public class MedewerkerController {
         }
     }
 
-
     @GetMapping("/planner/gebruiker/overzicht")
     public String gebruikerOverzicht (Model model) {
         model.addAttribute("alleGebruikers",medewerkerRepository.findAll());

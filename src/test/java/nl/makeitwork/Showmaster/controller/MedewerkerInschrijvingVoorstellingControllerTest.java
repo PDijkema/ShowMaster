@@ -19,9 +19,12 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.ui.Model;
 import org.springframework.web.context.WebApplicationContext;
+
 import javax.servlet.ServletContext;
+
 import java.time.LocalDateTime;
 import java.time.Month;
+
 import static org.mockito.Mockito.mock;
 
 @RunWith(SpringRunner.class)

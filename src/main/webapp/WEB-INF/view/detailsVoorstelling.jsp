@@ -4,7 +4,7 @@
 
 
 <!DOCTYPE html>
-<table lang="en" xmlns:c="http://www.w3.org/1999/XSL/Transform">
+<table lang="en">
 <head>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -15,7 +15,7 @@
     <title>Details Voorstelling</title>
 </head>
     <body>
-
+    <jsp:include page="navbar.jsp" />
     <h1>Details voorstelling</h1>
     <table class="table table-hover">
         <thead>
