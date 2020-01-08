@@ -1,8 +1,6 @@
 package nl.makeitwork.Showmaster.controller;
 
-import nl.makeitwork.Showmaster.model.Medewerker;
-import nl.makeitwork.Showmaster.model.MedewerkerInschrijvingVoorstelling;
-import nl.makeitwork.Showmaster.model.Voorstelling;
+import nl.makeitwork.Showmaster.model.*;
 import nl.makeitwork.Showmaster.repository.*;
 import org.junit.Assert;
 import org.junit.Before;
@@ -22,6 +20,9 @@ import org.springframework.web.context.WebApplicationContext;
 import javax.servlet.ServletContext;
 import java.time.LocalDateTime;
 import java.time.Month;
+import java.util.List;
+import java.util.Optional;
+
 import static org.mockito.Mockito.mock;
 
 @RunWith(SpringRunner.class)
@@ -71,5 +72,64 @@ class VoorstellingsTaakControllerTest {
         Assert.assertNotNull(servletContext);
         Assert.assertTrue(servletContext instanceof MockServletContext);
         Assert.assertNotNull(webApplicationContext.getBean("voorstellingsTaakController"));
+    }
+
+    @Test
+    void toevoegenTaakAanVoorstelling() {
+
+        //arrange
+        Taak testTaak = new Taak();
+        testTaak.setTaakNaam("Bar");
+        testTaak.setStandaardBezetting(2);
+
+        Voorstelling testVoorstelling = new Voorstelling();
+        LocalDateTime datum = LocalDateTime.of(2020, Month.JANUARY, 18, 20, 30);
+        testVoorstelling.setNaam("Soldaat van Oranje");
+        testVoorstelling.setDatum(datum);
+
+        //activate
+        taakRepository.save(testTaak);
+        voorstellingRepository.save(testVoorstelling);
+
+        voorstellingsTaakController.toevoegenTaakAanVoorstelling(testTaak.getTaakId(), testVoorstelling.getVoorstellingId());
+
+        List<VoorstellingsTaak> voorstellingsTaken = voorstellingsTaakRepository.
+            findVoorstellingstaakByVoorstellingId(testVoorstelling.getVoorstellingId());
+
+        //assert
+        Assert.assertNotNull(voorstellingsTaken);
+    }
+
+    @Test
+    void verwijderenTaakBijVoorstelling() {
+
+        //arrange
+        Taak testTaak = new Taak();
+        testTaak.setTaakNaam("Bar");
+        testTaak.setStandaardBezetting(2);
+
+        Voorstelling testVoorstelling = new Voorstelling();
+        LocalDateTime datum = LocalDateTime.of(2020, Month.JANUARY, 18, 20, 30);
+        testVoorstelling.setNaam("Soldaat van Oranje");
+        testVoorstelling.setDatum(datum);
+
+        //activate
+        taakRepository.save(testTaak);
+        voorstellingRepository.save(testVoorstelling);
+        voorstellingsTaakController.toevoegenTaakAanVoorstelling(testTaak.getTaakId(), testVoorstelling.getVoorstellingId());
+
+        List<VoorstellingsTaak> voorstellingsTaken = voorstellingsTaakRepository.
+            findVoorstellingstaakByVoorstellingId(testVoorstelling.getVoorstellingId());
+
+        Assert.assertNotNull(voorstellingsTaken);
+        VoorstellingsTaak testVoorstellingstaak = voorstellingsTaken.get(0);
+
+        voorstellingsTaakController.verwijderenTaakBijVoorstelling(testVoorstellingstaak.getVoorstellingsTaakId(),
+            testVoorstelling.getVoorstellingId());
+
+        List<VoorstellingsTaak> voorstellingsTakenNaVerwijderen = voorstellingsTaakRepository.
+            findVoorstellingstaakByVoorstellingId(testVoorstelling.getVoorstellingId());
+        //assert
+        Assert.assertNotEquals(voorstellingsTaken.size(), voorstellingsTakenNaVerwijderen.size());
     }
 }
