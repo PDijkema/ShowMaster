@@ -15,68 +15,67 @@
 
         <div class="container">
 
-            <form:form modelAttribute="medewerker" class="form-signin">
+            <form:form modelAttribute="medewerkerProfielGegevens" class="form-signin">
                 <h1>Profielpagina</h1>
                 <h2 class="form-signin-heading">Persoonlijke gegevens</h2>
 
                 <form:hidden path="medewerkerId" />
-                <form:hidden path="planner" />
 
                 <table>
                     <tr>
                         <th>Gebruikersnaam</th>
                     </tr>
                     <tr>
-                        <td>${medewerker.gebruikersnaam}</td>
+                        <td>${medewerkerProfielGegevens.getMedewerker().getGebruikersnaam()}</td>
                     </tr>
                     <tr></tr>
                     <tr>
                         <th>Voornaam</th>
                     </tr>
                     <tr>
-                        <td>${medewerker.voornaam} &nbsp;</td>
+                        <td>${medewerkerProfielGegevens.voornaam} &nbsp;</td>
                     </tr>
                     <tr></tr>
                     <tr>
                         <th>Tussenvoegsel</th>
                     </tr>
                     <tr>
-                        <td>${medewerker.tussenvoegsel} &nbsp;</td>
+                        <td>${medewerkerProfielGegevens.tussenvoegsel} &nbsp;</td>
                     </tr>
                     <tr></tr>
                     <tr>
                         <th>Achternaam</th>
                     </tr>
                     <tr>
-                        <td>${medewerker.achternaam} &nbsp;</td>
+                        <td>${medewerkerProfielGegevens.achternaam} &nbsp;</td>
                     </tr>
                     <tr></tr>
                     <tr>
                         <th>Emailadres</th>
                     </tr>
                     <tr>
-                        <td>${medewerker.emailadres} &nbsp;</td>
+                        <td>${medewerkerProfielGegevens.emailadres} &nbsp;</td>
                     </tr>
                     <tr></tr>
                     <tr>
                         <th>Geboortedatum</th>
                     </tr>
                     <tr>
-                        <td>${medewerker.geboortedatum} &nbsp;</td>
+                        <td>${medewerkerProfielGegevens.geboortedatum} &nbsp;</td>
                     </tr>
                     <tr></tr>
                     <tr>
                         <th>Telefoonnummer</th>
                     </tr>
                     <tr>
-                        <td>${medewerker.telefoonnummer} &nbsp;</td>
+                        <td>${medewerkerProfielGegevens.telefoonnummer} &nbsp;</td>
                     </tr>
                     <tr></tr>
                     <tr>
                         <th>Voorkeurstaak</th>
                     </tr>
                     <tr>
-                        <td>${medewerker.voorkeurstaak.taakNaam} &nbsp;</td>
+                        <td>${medewerkerProfielGegevens.getMedewerker().voorkeurstaak.taakNaam} &nbsp;</td>
                     </tr>
                     <tr></tr>
                     <tr></tr>
@@ -89,35 +88,35 @@
                         <th>Straatnaam</th>
                     </tr>
                     <tr>
-                        <td>${medewerker.straatnaam} &nbsp;</td>
+                        <td>${medewerkerProfielGegevens.straatnaam} &nbsp;</td>
                     </tr>
                     <tr></tr>
                     <tr>
                         <th>Huisnummer</th>
                     </tr>
                     <tr>
-                        <td>${medewerker.huisnummer} &nbsp;</td>
+                        <td>${medewerkerProfielGegevens.huisnummer} &nbsp;</td>
                     </tr>
                     <tr></tr>
                     <tr>
                         <th>Toevoeging</th>
                     </tr>
                     <tr>
-                        <td>${medewerker.toevoeging} &nbsp;</td>
+                        <td>${medewerkerProfielGegevens.toevoeging} &nbsp;</td>
                     </tr>
                     <tr></tr>
                     <tr>
                         <th>Postcode</th>
                     </tr>
                     <tr>
-                        <td>${medewerker.postcode} &nbsp;</td>
+                        <td>${medewerkerProfielGegevens.postcode} &nbsp;</td>
                     </tr>
                     <tr></tr>
                     <tr>
                         <th>Woonplaats</th>
                     </tr>
                     <tr>
-                        <td>${medewerker.woonplaats} &nbsp;</td>
+                        <td>${medewerkerProfielGegevens.woonplaats} &nbsp;</td>
                     </tr>
                     <tr></tr>
                 </table>

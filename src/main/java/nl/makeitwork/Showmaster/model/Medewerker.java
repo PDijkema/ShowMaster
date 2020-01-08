@@ -53,6 +53,14 @@ public class Medewerker implements UserDetails {
         return planner;
     }
 
+    public MedewerkerProfielGegevens getMedewerkerProfielGegevens() {
+        return medewerkerProfielGegevens;
+    }
+
+    public void setMedewerkerProfielGegevens(MedewerkerProfielGegevens medewerkerProfielGegevens) {
+        this.medewerkerProfielGegevens = medewerkerProfielGegevens;
+    }
+
     public void setPlanner(Boolean planner) {
         this.planner = planner;
     }

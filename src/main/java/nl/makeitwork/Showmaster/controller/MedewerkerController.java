@@ -1,6 +1,8 @@
 package nl.makeitwork.Showmaster.controller;
 
 import nl.makeitwork.Showmaster.model.Medewerker;
+import nl.makeitwork.Showmaster.model.MedewerkerProfielGegevens;
+import nl.makeitwork.Showmaster.repository.MedewerkerProfielGegevensRepository;
 import nl.makeitwork.Showmaster.repository.MedewerkerRepository;
 import nl.makeitwork.Showmaster.repository.TaakRepository;
 import nl.makeitwork.Showmaster.service.MedewerkerService;
@@ -17,6 +19,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.Optional;
 
 
 /**
@@ -44,6 +48,9 @@ public class MedewerkerController {
 
     @Autowired
     private MedewerkerRepository medewerkerRepository;
+
+    @Autowired
+    private MedewerkerProfielGegevensRepository medewerkerProfielGegevensRepository;
 
     @Autowired
     TaakRepository taakRepository;
@@ -103,7 +110,9 @@ public class MedewerkerController {
 
     @GetMapping("/profielpagina")
     protected String showProfielPagina(Model model, @AuthenticationPrincipal Medewerker ingelogdeMedewerker) {
-        model.addAttribute("medewerker", medewerkerRepository.findByGebruikersnaam(ingelogdeMedewerker.getGebruikersnaam()));
+
+
+        model.addAttribute("medewerkerProfielGegevens", medewerkerProfielGegevensRepository.findByMedewerker(ingelogdeMedewerker));
         return "profielPagina";
     }
 
@@ -114,19 +123,22 @@ public class MedewerkerController {
 
     @GetMapping("/profiel/wijzigen")
     protected String showProfielWijzigen(Model model, @AuthenticationPrincipal Medewerker ingelogdeMedewerker) {
-        model.addAttribute("medewerker", medewerkerRepository.findByGebruikersnaam(ingelogdeMedewerker.getGebruikersnaam()));
+
+        model.addAttribute("medewerkerProfielGegevens", medewerkerProfielGegevensRepository.findByMedewerker(ingelogdeMedewerker));
         model.addAttribute("takenLijst", taakRepository.findAll());
+
+
         return "profielWijzigen";
     }
 
     @PostMapping("/profiel/wijzigen")
-    public String updateMedewerker(@ModelAttribute("medewerker") Medewerker ingelogdeMedewerker,
-                                   BindingResult result) {
+    public String updateMedewerker(@ModelAttribute("medewerkerProfielGegevens") MedewerkerProfielGegevens medewerkerProfielGegevens,
+                                   BindingResult result ) {
 
         if (result.hasErrors()) {
             return "profielWijzigen";
         } else {
-            medewerkerRepository.save(ingelogdeMedewerker);
+            medewerkerProfielGegevensRepository.save(medewerkerProfielGegevens);
             return "redirect:/profielpagina";
         }
     }

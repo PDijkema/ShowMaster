@@ -9,7 +9,7 @@ import java.time.LocalDate;
 public class MedewerkerProfielGegevens {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer medewerkerProfielGegevensId;
+    private Integer medewerkerId;
 
     private String voornaam;
 
@@ -47,12 +47,12 @@ public class MedewerkerProfielGegevens {
         this.medewerker = medewerker;
     }
 
-    public Integer getMedewerkerProfielGegevensId() {
-        return medewerkerProfielGegevensId;
+    public Integer getMedewerkerId() {
+        return medewerkerId;
     }
 
-    public void setMedewerkerProfielGegevensId(Integer medewerkerProfielGegevensId) {
-        this.medewerkerProfielGegevensId = medewerkerProfielGegevensId;
+    public void setMedewerkerId(Integer medewerkerId) {
+        this.medewerkerId = medewerkerId;
     }
 
     public String getVoornaam() {
