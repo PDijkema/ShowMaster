@@ -35,7 +35,7 @@ public class VoorstellingsTaakController {
     private TaakRepository taakRepository;
     @Autowired
     private VoorstellingsTaakRepository voorstellingsTaakRepository;
-    
+
     @GetMapping("/voorstellingsTaak/verwijderen/{voorstellingId}/{voorstellingsTaakId}")
     protected String verwijderenTaakBijVoorstelling(@PathVariable("voorstellingsTaakId") Integer voorstellingsTaakId,
                                                     @PathVariable("voorstellingId") Integer voorstellingId) {
