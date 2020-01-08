@@ -29,7 +29,7 @@ import static org.mockito.Mockito.mock;
 @SpringBootTest
 @AutoConfigureMockMvc
 @TestPropertySource(locations = "classpath:test.properties")
-class VoorstellingsTaakControllerTest {
+class MedewerkerInschrijvingVoorstellingControllerTest {
 
     @Autowired
     private VoorstellingRepository voorstellingRepository;
@@ -55,8 +55,6 @@ class VoorstellingsTaakControllerTest {
     @Autowired
     private MedewerkerRepository medewerkerRepository;
 
-    @Autowired
-    private VoorstellingsTaakController voorstellingsTaakController;
 
     @Before
     public void setup() throws Exception {
@@ -64,12 +62,66 @@ class VoorstellingsTaakControllerTest {
     }
 
     @Test
-    public void beanTestVoorstellingsTaakController() {
-
+    public void beanTestMedewerkerInschrijvingVoorstellingController() {
+        //Arrange
+        //Activate
         ServletContext servletContext = webApplicationContext.getServletContext();
+
 
         Assert.assertNotNull(servletContext);
         Assert.assertTrue(servletContext instanceof MockServletContext);
-        Assert.assertNotNull(webApplicationContext.getBean("voorstellingsTaakController"));
+        Assert.assertNotNull(webApplicationContext.getBean("medewerkerInschrijvingVoorstellingController"));
+    }
+
+    @Test
+    void openVoorstellingenOphalen() {
+
+        //Arrange
+        Model model = mock(Model.class);
+        Medewerker medewerker = new Medewerker();
+
+        //Assert
+        Assert.assertEquals(medewerkerInschrijvingVoorstellingController.openVoorstellingenOphalen(model,medewerker),"openVoorstellingen");
+
+
+    }
+
+    @Test
+    void inschrijvenVoorstelling() {
+        // Arrange
+        Voorstelling voorstelling1 = new Voorstelling();
+        voorstelling1.setNaam("Lion King");
+        voorstelling1.setDatum(LocalDateTime.of(2020, Month.JANUARY, 18, 20, 30));
+        voorstellingRepository.save(voorstelling1);
+
+        Voorstelling voorstelling2 = new Voorstelling();
+        voorstelling1.setNaam("Lion King2");
+        voorstelling1.setDatum(LocalDateTime.of(2020, Month.JANUARY, 18, 20, 30));
+        voorstellingRepository.save(voorstelling1);
+
+        Medewerker medewerker = new Medewerker();
+        medewerker.setGebruikersnaam("Pieter");
+        medewerkerRepository.save(medewerker);
+
+
+
+        MedewerkerInschrijvingVoorstelling medewerkerInschrijvingVoorstelling = new MedewerkerInschrijvingVoorstelling();
+        medewerkerInschrijvingVoorstelling.setMedewerker(medewerker);
+        medewerkerInschrijvingVoorstelling.setVoorstelling(voorstelling1);
+
+
+        //Activate
+        //Er wordt met dezelfde voorstellingId en medewerker een inschrijving gedaan, dit zou maar 1x mogen gebeuren.
+        medewerkerInschrijvingVoorstellingController.inschrijvenVoorstelling(voorstelling1.getVoorstellingId(),medewerker);
+        medewerkerInschrijvingVoorstellingController.inschrijvenVoorstelling(voorstelling1.getVoorstellingId(),medewerker);
+
+
+        //Assert
+        Assert.assertEquals(medewerkerInschrijvingVoorstellingController.inschrijvenVoorstelling(voorstelling2.getVoorstellingId(),medewerker),
+               "redirect:/voorstelling/weergeven/openvoorstelling");
+
+
+        Assert.assertEquals(medewerkerInschrijvingVoorstellingRepository.findAll().size(),2);
+
     }
 }

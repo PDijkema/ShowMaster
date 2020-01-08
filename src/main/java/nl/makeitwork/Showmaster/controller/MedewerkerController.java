@@ -115,7 +115,7 @@ public class MedewerkerController {
             return "redirect:/profielpagina";
         }
     }
-    
+
 
     @GetMapping("/planner/gebruiker/overzicht")
     public String gebruikerOverzicht (Model model) {
