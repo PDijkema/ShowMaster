@@ -2,6 +2,7 @@ package nl.makeitwork.Showmaster.model;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.hibernate.annotations.SortNatural;
 
 import javax.persistence.*;
 import java.util.Set;
