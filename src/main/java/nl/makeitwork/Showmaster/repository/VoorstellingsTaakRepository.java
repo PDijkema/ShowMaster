@@ -20,6 +20,6 @@ import java.util.List;
 public interface VoorstellingsTaakRepository extends JpaRepository<VoorstellingsTaak, Integer> {
 
 
-   List<VoorstellingsTaak> findByVoorstellingVoorstellingIdOrderByTaakTaakId(Integer voorstellingId);
+   List<VoorstellingsTaak> findByVoorstellingVoorstellingIdOrderByTaakTaakNaam(Integer voorstellingId);
 
 }

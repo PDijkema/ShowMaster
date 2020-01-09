@@ -69,7 +69,7 @@ public class VoorstellingController {
         Optional<Voorstelling> voorstelling = voorstellingRepository.findById(voorstellingId);
 
 
-        List<VoorstellingsTaak> voorstellingsTaken = voorstellingsTaakRepository.findByVoorstellingVoorstellingIdOrderByTaakTaakId(voorstellingId);
+        List<VoorstellingsTaak> voorstellingsTaken = voorstellingsTaakRepository.findByVoorstellingVoorstellingIdOrderByTaakTaakNaam(voorstellingId);
 
 
         if (!voorstelling.isPresent()) {

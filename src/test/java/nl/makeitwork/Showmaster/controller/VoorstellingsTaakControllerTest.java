@@ -15,13 +15,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.ui.Model;
 import org.springframework.web.context.WebApplicationContext;
 import javax.servlet.ServletContext;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.List;
-import java.util.Optional;
 
 import static org.mockito.Mockito.mock;
 
@@ -94,7 +92,7 @@ class VoorstellingsTaakControllerTest {
         voorstellingsTaakController.toevoegenTaakAanVoorstelling(testTaak.getTaakId(), testVoorstelling.getVoorstellingId());
 
         List<VoorstellingsTaak> voorstellingsTaken = voorstellingsTaakRepository.
-                findByVoorstellingVoorstellingIdOrderByTaakTaakId(testVoorstelling.getVoorstellingId());
+                findByVoorstellingVoorstellingIdOrderByTaakTaakNaam(testVoorstelling.getVoorstellingId());
 
         //assert
         Assert.assertNotNull(voorstellingsTaken);
@@ -119,7 +117,7 @@ class VoorstellingsTaakControllerTest {
         voorstellingsTaakController.toevoegenTaakAanVoorstelling(testTaak.getTaakId(), testVoorstelling.getVoorstellingId());
 
         List<VoorstellingsTaak> voorstellingsTaken = voorstellingsTaakRepository.
-                findByVoorstellingVoorstellingIdOrderByTaakTaakId(testVoorstelling.getVoorstellingId());
+                findByVoorstellingVoorstellingIdOrderByTaakTaakNaam(testVoorstelling.getVoorstellingId());
 
         Assert.assertNotNull(voorstellingsTaken);
         VoorstellingsTaak testVoorstellingstaak = voorstellingsTaken.get(0);
@@ -128,7 +126,7 @@ class VoorstellingsTaakControllerTest {
             testVoorstelling.getVoorstellingId());
 
         List<VoorstellingsTaak> voorstellingsTakenNaVerwijderen = voorstellingsTaakRepository.
-                findByVoorstellingVoorstellingIdOrderByTaakTaakId(testVoorstelling.getVoorstellingId());
+                findByVoorstellingVoorstellingIdOrderByTaakTaakNaam(testVoorstelling.getVoorstellingId());
         //assert
         Assert.assertNotEquals(voorstellingsTaken.size(), voorstellingsTakenNaVerwijderen.size());
     }
