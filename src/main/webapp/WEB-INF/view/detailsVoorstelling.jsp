@@ -53,7 +53,7 @@
                             </c:otherwise>
                         </c:choose>
                     </td>
-                    <td><a href="/planner/voorstellingsTaak/verwijderen/${voorstelling.voorstellingId}/<c:out value="${takenBijVoorstelling.voorstellingsTaakId}" />">Delete</a></td>
+                    <td><a href="/planner/voorstellingsTaak/verwijderen/${voorstelling.voorstellingId}/<c:out value='${takenBijVoorstelling.voorstellingsTaakId}' />">Delete</a></td>
                 </tr>
             </c:forEach>
         </tbody>
@@ -63,7 +63,7 @@
         <table>
             <tbody>
                 <c:forEach items="${alleTaken}" var="taak">
-                    <td></td><a class="btn btn-primary" href="/planner/voorstellingsTaak/toevoegen/${voorstelling.voorstellingId}/<c:out value="${taak.taakId}" />"><c:out value="${taak.taakNaam}"/></a></td>
+                    <td></td><a class="btn btn-primary" href="/planner/voorstellingsTaak/toevoegen/${voorstelling.voorstellingId}/<c:out value='${taak.taakId}' />"><c:out value="${taak.taakNaam}"/></a></td>
                 </c:forEach>
             </tbody>
         </table>

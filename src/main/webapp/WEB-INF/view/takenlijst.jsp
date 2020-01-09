@@ -14,7 +14,7 @@
     <title>Standaard taken</title>
   </head>
       <body>
-        <jsp::include page="navbar.jsp" />
+        <jsp:include page="navbar.jsp" />
         <h1>Lijst standaardtaken</h1>
 
         <form:form action="/planner/takenlijst" modelAttribute="taak">
