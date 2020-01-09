@@ -1,6 +1,8 @@
 package nl.makeitwork.Showmaster.controller;
 
 import nl.makeitwork.Showmaster.model.Medewerker;
+import nl.makeitwork.Showmaster.model.MedewerkerProfielGegevens;
+import nl.makeitwork.Showmaster.repository.MedewerkerProfielGegevensRepository;
 import nl.makeitwork.Showmaster.repository.MedewerkerRepository;
 import nl.makeitwork.Showmaster.repository.TaakRepository;
 import nl.makeitwork.Showmaster.repository.VoorstellingRepository;
@@ -18,6 +20,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.List;
 
 
 /**
@@ -47,6 +51,9 @@ public class MedewerkerController {
     private MedewerkerRepository medewerkerRepository;
 
     @Autowired
+    private MedewerkerProfielGegevensRepository medewerkerProfielGegevensRepository;
+
+    @Autowired
     TaakRepository taakRepository;
 
     @Autowired
@@ -73,8 +80,10 @@ public class MedewerkerController {
 
     @GetMapping("/login")
     public String login(Model model, String error, String logout) {
+
         if (error != null)
             model.addAttribute("error", "Uw gebruikersnaam en/of wachtwoord is ongeldig");
+
         if (logout != null)
             model.addAttribute("message", "U bent succesvol uitgelogd");
         return "login";
@@ -89,13 +98,18 @@ public class MedewerkerController {
 
     @GetMapping({"/","/planner"})
     public String isPlanner (@AuthenticationPrincipal Medewerker medewerker){
+
+
         return "redirect:/medewerker/welkom";
+
     }
 
 
     @GetMapping("/profielpagina")
     protected String showProfielPagina(Model model, @AuthenticationPrincipal Medewerker ingelogdeMedewerker) {
-        model.addAttribute("medewerker", medewerkerRepository.findByGebruikersnaam(ingelogdeMedewerker.getGebruikersnaam()));
+
+
+        model.addAttribute("medewerkerProfielGegevens", medewerkerProfielGegevensRepository.findByMedewerker(ingelogdeMedewerker));
         return "profielPagina";
     }
 
@@ -106,25 +120,32 @@ public class MedewerkerController {
 
     @GetMapping("/profiel/wijzigen")
     protected String showProfielWijzigen(Model model, @AuthenticationPrincipal Medewerker ingelogdeMedewerker) {
-        model.addAttribute("medewerker", medewerkerRepository.findByGebruikersnaam(ingelogdeMedewerker.getGebruikersnaam()));
+
+        model.addAttribute("medewerkerProfielGegevens", medewerkerProfielGegevensRepository.findByMedewerker(ingelogdeMedewerker));
         model.addAttribute("takenLijst", taakRepository.findAll());
         return "profielWijzigen";
     }
 
     @PostMapping("/profiel/wijzigen")
-    public String updateMedewerker(@ModelAttribute("medewerker") Medewerker ingelogdeMedewerker,
-                                   BindingResult result) {
+    public String updateMedewerker(@ModelAttribute("medewerkerProfielGegevens") MedewerkerProfielGegevens medewerkerProfielGegevens,
+                                   BindingResult result ) {
+
         if (result.hasErrors()) {
             return "profielWijzigen";
         } else {
-            medewerkerRepository.save(ingelogdeMedewerker);
+            medewerkerProfielGegevensRepository.save(medewerkerProfielGegevens);
             return "redirect:/profielpagina";
         }
     }
 
     @GetMapping("/planner/gebruiker/overzicht")
-    public String gebruikerOverzicht (Model model) {
-        model.addAttribute("alleGebruikers",medewerkerRepository.findAll());
+    public String gebruikerOverzicht (Model model,@AuthenticationPrincipal Medewerker ingelogdeMedwerker) {
+        List<Medewerker> alleGebruikers = medewerkerRepository.findAll();
+
+        alleGebruikers.removeIf(medewerker -> medewerker.getMedewerkerId().equals(ingelogdeMedwerker.getMedewerkerId()));
+
+
+        model.addAttribute("alleGebruikers",alleGebruikers);
 
         return "gebruikerOverzicht";
     }
@@ -134,6 +155,7 @@ public class MedewerkerController {
         medewerkerRepository.deleteById(medewerkerId);
         return "redirect:/planner/gebruiker/overzicht";
     }
+
 }
 
 

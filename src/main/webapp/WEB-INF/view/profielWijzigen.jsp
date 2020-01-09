@@ -14,23 +14,13 @@
     <body>
         <jsp:include page="navbar.jsp" />
         <div class="container">
-            <form:form method="POST" modelAttribute="medewerker" class="form-signin">
+            <form:form method="POST" modelAttribute="medewerkerProfielGegevens" class="form-signin">
                 <h1>Profiel wijzigen</h1>
                 <h2 class="form-signin-heading">Persoonlijke gegevens</h2>
 
-                <form:hidden path="medewerkerId" />
-                <form:hidden path="wachtwoord" />
-                <form:hidden path="planner" />
+                <form:hidden path="profielId" />
+                <form:hidden path="medewerker.medewerkerId" />
 
-                    <spring:bind path="gebruikersnaam">
-                        <div class="form-group ${status.error ? 'has-error' : ''}">
-                            <label for="gebruikersnaam" class="col-sm-3 control-label">Gebruikersnaam* </label>
-                            <form:input type="text" path="gebruikersnaam" class="form-control"
-                            placeholder="Gebruikersnaam"
-                            autofocus="true"></form:input>
-                            <form:errors path="gebruikersnaam"></form:errors>
-                        </div>
-                    </spring:bind>
 
                     <spring:bind path="voornaam">
                         <div>
@@ -80,15 +70,7 @@
                         </div>
                     </spring:bind>
 
-                    <spring:bind path="voorkeurstaak">
-                        <div>
-                            <label for="voorkeurstaak" class="col-sm-3 control-label">Voorkeurstaak</label>
-                                <form:select path="voorkeurstaak">
-                                <form:option value="0" label="Select" />
-                                <form:options items="${takenLijst}" itemValue="taakId" itemLabel="taakNaam" />
-                                </form:select>
-                        </div>
-                    </spring:bind>
+
 
                     <hr>
                     <hr>
@@ -133,9 +115,11 @@
                         </div>
                     </spring:bind>
                 <p>*Verplichte velden</p>
+
                 <button class="btn btn-primary" type="submit">Opslaan</button>
                 <a class="btn btn-primary" href="/profielpagina">Annuleren</a>
             </form:form>
         </div>
+
     </body>
 </html>

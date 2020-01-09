@@ -41,7 +41,7 @@ class VoorstellingControllerTest {
         voorstelling.setDatum(datum);
 
         //activate
-        voorstellingController.saveOrUpdateVoorstelling(voorstelling, result);
+        voorstellingController.saveVoorstelling(voorstelling, result);
 
         //assert
         Assert.assertNotNull(voorstellingRepository.findById(voorstelling.getVoorstellingId()));
@@ -66,7 +66,7 @@ class VoorstellingControllerTest {
         voorstelling.setDatum(datum);
 
         //activate
-        voorstellingController.saveOrUpdateVoorstelling(voorstelling, result);
+        voorstellingController.saveVoorstelling(voorstelling, result);
         voorstellingController.verwijderVoorstelling(voorstelling.getVoorstellingId());
 
         //assert

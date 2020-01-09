@@ -34,29 +34,6 @@ public class Medewerker implements UserDetails {
 
     private Boolean planner;
 
-    private String voornaam;
-
-    private String tussenvoegsel;
-
-    private String achternaam;
-
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate geboortedatum;
-
-    private String straatnaam;
-
-    private Integer huisnummer;
-
-    private String toevoeging;
-
-    private String postcode;
-
-    private String woonplaats;
-
-    private String emailadres;
-
-    private String telefoonnummer;
-
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "voorkeurstaakId", referencedColumnName = "taakId")
     @OnDelete(action = OnDeleteAction.NO_ACTION)
@@ -67,9 +44,25 @@ public class Medewerker implements UserDetails {
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     private Taak vasteTaak;
 
+    @OneToOne(mappedBy = "medewerker", cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY, optional = false)
+    private MedewerkerProfielGegevens medewerkerProfielGegevens;
+
+    public Medewerker() {
+        this.medewerkerProfielGegevens = new MedewerkerProfielGegevens();
+        this.medewerkerProfielGegevens.setMedewerker(this);
+    }
 
     public Boolean getPlanner() {
         return planner;
+    }
+
+    public MedewerkerProfielGegevens getMedewerkerProfielGegevens() {
+        return medewerkerProfielGegevens;
+    }
+
+    public void setMedewerkerProfielGegevens(MedewerkerProfielGegevens medewerkerProfielGegevens) {
+        this.medewerkerProfielGegevens = medewerkerProfielGegevens;
     }
 
     public void setPlanner(Boolean planner) {
@@ -108,93 +101,6 @@ public class Medewerker implements UserDetails {
         this.wachtwoord = wachtwoord;
     }
 
-    public String getVoornaam() {
-        return voornaam;
-    }
-
-    public void setVoornaam(String voornaam) {
-        this.voornaam = voornaam;
-    }
-
-    public String getTussenvoegsel() {
-        return tussenvoegsel;
-    }
-
-    public void setTussenvoegsel(String tussenvoegsel) {
-        this.tussenvoegsel = tussenvoegsel;
-    }
-
-    public String getAchternaam() {
-        return achternaam;
-    }
-
-    public void setAchternaam(String achternaam) {
-        this.achternaam = achternaam;
-    }
-
-    public LocalDate getGeboortedatum() {
-        return geboortedatum;
-    }
-
-    public void setGeboortedatum(LocalDate geboortedatum) {
-        this.geboortedatum = geboortedatum;
-    }
-
-    public String getStraatnaam() {
-        return straatnaam;
-    }
-
-    public void setStraatnaam(String straatnaam) {
-        this.straatnaam = straatnaam;
-    }
-
-    public Integer getHuisnummer() {
-        return huisnummer;
-    }
-
-    public void setHuisnummer(Integer huisnummer) {
-        this.huisnummer = huisnummer;
-    }
-
-    public String getToevoeging() {
-        return toevoeging;
-    }
-
-    public void setToevoeging(String toevoeging) {
-        this.toevoeging = toevoeging;
-    }
-
-    public String getPostcode() {
-        return postcode;
-    }
-
-    public void setPostcode(String postcode) {
-        this.postcode = postcode;
-    }
-
-    public String getWoonplaats() {
-        return woonplaats;
-    }
-
-    public void setWoonplaats(String woonplaats) {
-        this.woonplaats = woonplaats;
-    }
-
-    public String getEmailadres() {
-        return emailadres;
-    }
-
-    public void setEmailadres(String emailadres) {
-        this.emailadres = emailadres;
-    }
-
-    public String getTelefoonnummer() {
-        return telefoonnummer;
-    }
-
-    public void setTelefoonnummer(String telefoonnummer) {
-        this.telefoonnummer = telefoonnummer;
-    }
 
     public Taak getVoorkeurstaak() {
         return voorkeurstaak;
@@ -222,7 +128,6 @@ public class Medewerker implements UserDetails {
         authorities.add(new SimpleGrantedAuthority("ROLE_MEDEWERKER"));
         return authorities;
     }
-
 
     @Override
     public String getPassword() {

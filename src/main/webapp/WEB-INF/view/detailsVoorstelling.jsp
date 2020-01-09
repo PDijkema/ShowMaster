@@ -16,45 +16,60 @@
 </head>
     <body>
     <jsp:include page="navbar.jsp" />
-        <table>
-            <h1>Details voorstelling</h1>
+    <h1>Details voorstelling</h1>
+    <table class="table table-hover">
+        <thead>
             <tr>
-                <td scope="col">Naam voorstelling:</td>
-                <td scope="col">${voorstelling.naam}</td>
+                <th scope="col">Naam voorstelling</th>
+                <th scope="col">Datum en tijdstip</th>
             </tr>
-            <tr>
-                <td scope="col">Datum en tijdstip:</td>
-                <td scope="col">${voorstelling.datum}</td>
-            </tr>
-        </table>
+        </thead>
+        <tr>
+            <td scope="col">${voorstelling.naam}</td>
+            <td scope="col">${voorstelling.datum}</td>
+        </tr>
+    </table>
 
-        <h1>Taken</h1>
-        <table class="table table-hover">
-            <thead>
+    <h1>Diensten bij voorstelling</h1>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Taak</th>
+                <th scope="col">Medewerker</th>
+                <th scope="col">Verwijderen</th>
+            </tr>
+        </thead>
+        <tbody>
+            <c:forEach items="${takenBijVoorstelling}" var="takenBijVoorstelling">
                 <tr>
-                    <th scope="col">Taak</th>
-                    <th scope="col">Medewerker</th>
+                    <td><c:out value="${takenBijVoorstelling.getTaak().getTaakNaam()}"/></td>
+                    <td>
+                        <c:choose>
+                            <c:when test="${empty takenBijVoorstelling.getMedewerker().getGebruikersnaam()}">
+                                Openstaand
+                            </c:when>
+                            <c:otherwise>
+                                <c:out value="${takenBijVoorstelling.getMedewerker().getGebruikersnaam()}"/>
+                            </c:otherwise>
+                        </c:choose>
+                    </td>
+                    <td><a href="/voorstellingsTaak/verwijderen/${voorstelling.voorstellingId}/<c:out value="${takenBijVoorstelling.voorstellingsTaakId}" />">Delete</a></td>
                 </tr>
-            </thead>
+            </c:forEach>
+        </tbody>
+    </table>
+
+    <h1>Diensten toevoegen</h1>
+        <table>
             <tbody>
-                <c:forEach items="${takenBijVoorstelling}" var="takenBijVoorstelling">
-                    <tr>
-                        <td><c:out value="${takenBijVoorstelling.getTaak().getTaakNaam()}"/></td>
-                        <td>
-                            <c:choose>
-                                <c:when test="${empty takenBijVoorstelling.getMedewerker().getGebruikersnaam()}">
-                                    Openstaand
-                                </c:when>
-                                <c:otherwise>
-                                    <c:out value="${takenBijVoorstelling.getMedewerker().getGebruikersnaam()}"/>
-                                </c:otherwise>
-                            </c:choose>
-                        </td>
-                    </tr>
+                <c:forEach items="${alleTaken}" var="taak">
+                    <td></td><a class="btn btn-primary" href="/voorstellingsTaak/toevoegen/${voorstelling.voorstellingId}/<c:out value="${taak.taakId}" />"><c:out value="${taak.taakNaam}"/></a></td>
                 </c:forEach>
             </tbody>
         </table>
-            <a class="btn btn-primary" href="/toevoegenTaken">Taken Toevoegen</a>
-            <a class="btn btn-primary" href="/voorstellingen">Terug naar alle voorstellingen</a>
     </body>
+
+</table>
+<h1>Terug naar</h1>
+<a class="btn btn-primary" href="/voorstellingen">Overzicht Voorstellingen</a>
 </html>
