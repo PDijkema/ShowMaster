@@ -1,15 +1,18 @@
 package nl.makeitwork.Showmaster.controller;
 
-import nl.makeitwork.Showmaster.model.Taak;
-import nl.makeitwork.Showmaster.model.Voorstelling;
-import nl.makeitwork.Showmaster.model.VoorstellingsTaak;
+import nl.makeitwork.Showmaster.model.*;
+import nl.makeitwork.Showmaster.repository.MedewerkerInschrijvingVoorstellingRepository;
 import nl.makeitwork.Showmaster.repository.TaakRepository;
 import nl.makeitwork.Showmaster.repository.VoorstellingRepository;
 import nl.makeitwork.Showmaster.repository.VoorstellingsTaakRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -27,6 +30,8 @@ public class VoorstellingsTaakController {
     private TaakRepository taakRepository;
     @Autowired
     private VoorstellingsTaakRepository voorstellingsTaakRepository;
+    @Autowired
+    private MedewerkerInschrijvingVoorstellingRepository medewerkerInschrijvingVoorstellingRepository;
 
     @GetMapping("/voorstellingsTaak/verwijderen/{voorstellingId}/{voorstellingsTaakId}")
     protected String verwijderenTaakBijVoorstelling(@PathVariable("voorstellingsTaakId") Integer voorstellingsTaakId,
@@ -56,13 +61,42 @@ public class VoorstellingsTaakController {
 
     @GetMapping("/voorstellingsTaak/medewerkerKoppelen/{voorstellingId}/{voorstellingsTaakId}")
     protected String koppelenMedewerkerAanVoorstellingsTaak(@PathVariable("voorstellingId") Integer voorstellingId,
-                                                            @PathVariable("voorstellingsTaakId") Integer voorstellingsTaakId) {
+                                                            @PathVariable("voorstellingsTaakId") Integer voorstellingsTaakId,
+                                                            Model model) {
+
+        // haal alle medewerkerinschrijvingen op een voorstelling op
+        List<MedewerkerInschrijvingVoorstelling> inschrijvingByVoorstellingId =
+            medewerkerInschrijvingVoorstellingRepository.findInschrijvingByVoorstellingId(voorstellingId);
 
 
+        // filter alle beschikbare medewerkers uit de inschrijvingen die al een toegewezen taak in Voorstellingstaken
+        // bij de betreffende voorstelling hebben.
+        List<Medewerker> beschikbareMedewerkers = new ArrayList<>();
+
+        for (MedewerkerInschrijvingVoorstelling m : inschrijvingByVoorstellingId) {
+            beschikbareMedewerkers.add(m.getMedewerker());
+            System.out.println("ik ben beschikbaar: " + m.getMedewerker().getGebruikersnaam());
+        }
+
+
+        // bovenstaande levert een lijst beschikbare medewerkers op die gekoppeld kunnen worden aan de voorstellingstaak.
+        // deze toevoegen aan model
+        model.addAttribute("voorstellingsTaak", voorstellingsTaakRepository.findById(voorstellingsTaakId));
+        model.addAttribute("voorstellingId", voorstellingId);
+
+
+        //-------------------------------------------------------------------------------------------------------------
+        // [TIJDELIJK] print Id's van voorstellingstaken en voorstellingen in terminal
         System.out.println("VoorstellingID " + voorstellingId);
         System.out.println("VoorstellingsTaakID: " + voorstellingsTaakId);
 
-        return "redirect:/voorstelling/details/" + voorstellingId;
+        // [TIJDELIJK] print alle gebruikersnamen van inschrijvingen op specifieke voorstelling op
+        for (MedewerkerInschrijvingVoorstelling i : inschrijvingByVoorstellingId) {
+            System.out.println(i.getMedewerker().getGebruikersnaam());
+        }
+        //--------------------------------------------------------------------------------------------------------------
+
+        return "medewerkerKoppelenAanVoorstellingsTaak";
     }
 
 
