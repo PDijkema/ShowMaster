@@ -2,9 +2,7 @@ package nl.makeitwork.Showmaster.controller;
 
 import nl.makeitwork.Showmaster.model.Medewerker;
 import nl.makeitwork.Showmaster.model.MedewerkerProfielGegevens;
-import nl.makeitwork.Showmaster.repository.MedewerkerProfielGegevensRepository;
-import nl.makeitwork.Showmaster.repository.MedewerkerRepository;
-import nl.makeitwork.Showmaster.repository.TaakRepository;
+import nl.makeitwork.Showmaster.repository.*;
 import nl.makeitwork.Showmaster.service.MedewerkerService;
 import nl.makeitwork.Showmaster.service.MedewerkerServiceImplementatie;
 import nl.makeitwork.Showmaster.service.SecurityService;
@@ -53,6 +51,9 @@ public class MedewerkerController {
     private MedewerkerProfielGegevensRepository medewerkerProfielGegevensRepository;
 
     @Autowired
+    VoorstellingsTaakRepository voorstellingsTaakRepository;
+
+    @Autowired
     TaakRepository taakRepository;
 
     @GetMapping("/registreer")
@@ -87,13 +88,12 @@ public class MedewerkerController {
 
     @GetMapping("/startpagina")
     public String welkomMedewerker(Model model) {
+
         return "welkomMedewerker";
     }
 
     @GetMapping("/")
     public String doorverwijzenStartpagina (@AuthenticationPrincipal Medewerker medewerker){
-
-
         return "redirect:/startpagina";
 
     }

@@ -17,7 +17,7 @@
         <jsp::include page="navbar.jsp" />
         <h1>Lijst standaardtaken</h1>
 
-        <form:form action="/takenlijst" modelAttribute="taak">
+        <form:form action="/planner/takenlijst" modelAttribute="taak">
             <table class="table table-hover">
                 <thead>
                     <tr>

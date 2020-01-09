@@ -94,7 +94,7 @@ class VoorstellingsTaakControllerTest {
         voorstellingsTaakController.toevoegenTaakAanVoorstelling(testTaak.getTaakId(), testVoorstelling.getVoorstellingId());
 
         List<VoorstellingsTaak> voorstellingsTaken = voorstellingsTaakRepository.
-            findVoorstellingstaakByVoorstellingId(testVoorstelling.getVoorstellingId());
+                findByVoorstellingVoorstellingIdOrderByTaakTaakId(testVoorstelling.getVoorstellingId());
 
         //assert
         Assert.assertNotNull(voorstellingsTaken);
@@ -119,7 +119,7 @@ class VoorstellingsTaakControllerTest {
         voorstellingsTaakController.toevoegenTaakAanVoorstelling(testTaak.getTaakId(), testVoorstelling.getVoorstellingId());
 
         List<VoorstellingsTaak> voorstellingsTaken = voorstellingsTaakRepository.
-            findVoorstellingstaakByVoorstellingId(testVoorstelling.getVoorstellingId());
+                findByVoorstellingVoorstellingIdOrderByTaakTaakId(testVoorstelling.getVoorstellingId());
 
         Assert.assertNotNull(voorstellingsTaken);
         VoorstellingsTaak testVoorstellingstaak = voorstellingsTaken.get(0);
@@ -128,7 +128,7 @@ class VoorstellingsTaakControllerTest {
             testVoorstelling.getVoorstellingId());
 
         List<VoorstellingsTaak> voorstellingsTakenNaVerwijderen = voorstellingsTaakRepository.
-            findVoorstellingstaakByVoorstellingId(testVoorstelling.getVoorstellingId());
+                findByVoorstellingVoorstellingIdOrderByTaakTaakId(testVoorstelling.getVoorstellingId());
         //assert
         Assert.assertNotEquals(voorstellingsTaken.size(), voorstellingsTakenNaVerwijderen.size());
     }

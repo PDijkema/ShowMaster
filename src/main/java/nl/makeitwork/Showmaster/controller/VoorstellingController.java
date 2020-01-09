@@ -67,7 +67,10 @@ public class VoorstellingController {
 
         model.addAttribute("alleTaken", taakRepository.findAll());
         Optional<Voorstelling> voorstelling = voorstellingRepository.findById(voorstellingId);
-        List<VoorstellingsTaak> voorstellingsTaken = voorstellingsTaakRepository.findVoorstellingstaakByVoorstellingId(voorstellingId);
+
+
+        List<VoorstellingsTaak> voorstellingsTaken = voorstellingsTaakRepository.findByVoorstellingVoorstellingIdOrderByTaakTaakId(voorstellingId);
+
 
         if (!voorstelling.isPresent()) {
             return "redirect:/planner/alleVoorstellingen";
