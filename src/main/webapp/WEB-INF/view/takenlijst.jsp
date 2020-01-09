@@ -14,6 +14,7 @@
     <title>Standaard taken</title>
   </head>
       <body>
+        <jsp::include page="navbar.jsp" />
         <h1>Lijst standaardtaken</h1>
 
         <form:form action="/takenlijst" modelAttribute="taak">
@@ -34,8 +35,6 @@
                     </c:forEach>
                 </tbody>
             </table>
-
         </form:form>
-        <a href="/planner/welkom">  <button type="button" class="btn btn-primary">Terug naar welkom</button> </a>
       </body>
 </html>

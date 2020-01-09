@@ -22,7 +22,23 @@
                     <c:forEach items="${alleGebruikers}" var="gebruiker">
                     <tr>
                         <td><c:out value="${gebruiker.gebruikersnaam}"/></td>
-                        <td><a href="/planner/gebruiker/verwijderen/<c:out value="${gebruiker.medewerkerId}" />">Verwijderen</a></td>
+
+
+
+
+                        <td>
+
+                            <a href="/planner/gebruiker/verwijderen/<c:out value="${gebruiker.medewerkerId}" />">Verwijderen</a>
+
+
+
+                        </td>
+
+
+
+
+
+
                     </tr>
                     </c:forEach>
                 </tbody>
