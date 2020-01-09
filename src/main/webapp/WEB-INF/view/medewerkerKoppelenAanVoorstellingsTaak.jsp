@@ -17,17 +17,15 @@
         <body>
             <h1>Medewerker Koppelen aan Taak</h1>
 
-            <form:form action="/voorstelling/toevoegen" modelAttribute="voorstellingsTaak" method="post">
+            <form:form action="/voorstellingsTaak/medewerkerKoppelen/{voorstellingId}/{voorstellingsTaakId}/{medewerkerId}" modelAttribute="voorstellingsTaak" method="post">
+                <form:hidden path="voorstellingId"/>
                 <table>
 
 
-                    <c:forEach items="${alleMedewerkerInschrijvingen}" var="medewerkerInschrijvingVoorstelling">
+                    <c:forEach items="${beschikbareMedewerkers}" var="medewerker">
                         <tr>
-                            <td><c:out value="${voorstelling.naam}"/></td>
-                            <td><c:out value="${voorstelling.datum}"/></td>
-                            <td><a href="/voorstelling/details/<c:out value="${voorstelling.voorstellingId}" />">Taakbeheer</a></td>
-                            <td><a href="/voorstelling/wijzigen/<c:out value="${voorstelling.voorstellingId}" />">Wijzigen</a></td>
-                            <td><a href="/voorstelling/verwijderen/<c:out value="${voorstelling.voorstellingId}" />">Verwijderen</a></td>
+                            <td><c:out value="${medewerker.gebruikersnaam}"/></td>
+                            <input type="submit" class="btn btn-primary" value="Opslaan"/>
                         </tr>
                     </c:forEach>
 

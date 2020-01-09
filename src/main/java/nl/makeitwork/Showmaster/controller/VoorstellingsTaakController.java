@@ -10,7 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -75,6 +77,7 @@ public class VoorstellingsTaakController {
 
         for (MedewerkerInschrijvingVoorstelling m : inschrijvingByVoorstellingId) {
             beschikbareMedewerkers.add(m.getMedewerker());
+            //[TIJDELIJK]
             System.out.println("ik ben beschikbaar: " + m.getMedewerker().getGebruikersnaam());
         }
 
@@ -83,6 +86,7 @@ public class VoorstellingsTaakController {
         // deze toevoegen aan model
         model.addAttribute("voorstellingsTaak", voorstellingsTaakRepository.findById(voorstellingsTaakId));
         model.addAttribute("voorstellingId", voorstellingId);
+        model.addAttribute("beschikbareMedewerkers", beschikbareMedewerkers);
 
 
         //-------------------------------------------------------------------------------------------------------------
@@ -97,6 +101,15 @@ public class VoorstellingsTaakController {
         //--------------------------------------------------------------------------------------------------------------
 
         return "medewerkerKoppelenAanVoorstellingsTaak";
+
+    }
+
+    @PostMapping("/voorstellingsTaak/medewerkerKoppelen/{voorstellingId}/{voorstellingsTaakId}/{medewerkerId}")
+    protected String opslaanMedewerkerBijVoorstellingstaak(@PathVariable("voorstellingId") Integer voorstellingId,
+                                                           @PathVariable("voorstellingsTaakId") Integer voorstellingsTaakId,
+                                                           @PathVariable("medewerkerId") Integer medewerkerId) {
+
+        return "redirect:/voorstelling/details/" + voorstellingId;
     }
 
 
