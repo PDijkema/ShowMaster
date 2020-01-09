@@ -44,13 +44,6 @@ public class MedewerkerInschrijvingVoorstellingController {
 
 
 
-        /*for (MedewerkerInschrijvingVoorstelling medewerkerInschrijvingVoorsteelling:medewerkerInschrijvingVoorstellingList) {
-            voorstellingen.remove(medewerkerInschrijvingVoorsteelling.getVoorstelling());
-        }
-*/
-
-
-
         model.addAttribute("inschrijvingen",medewerkerInschrijvingVoorstellingList);
         model.addAttribute("voorstellingLijst", voorstellingen);
 
@@ -59,8 +52,6 @@ public class MedewerkerInschrijvingVoorstellingController {
 
     @GetMapping("/voorstelling/weergeven/openvoorstelling/inschrijven/{voorstellingId}")
     public String inschrijvenVoorstelling(@PathVariable Integer voorstellingId, @AuthenticationPrincipal Medewerker ingelogdeMedewerker) {
-
-
 
         List<MedewerkerInschrijvingVoorstelling> medewerkerInschrijvingVoorstellingList = medewerkerInschrijvingVoorstellingRepository.findAll();
 

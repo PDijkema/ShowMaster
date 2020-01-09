@@ -85,16 +85,16 @@ public class MedewerkerController {
         return "login";
     }
 
-    @GetMapping("/medewerker/welkom")
+    @GetMapping("/startpagina")
     public String welkomMedewerker(Model model) {
         return "welkomMedewerker";
     }
 
-    @GetMapping({"/","/planner"})
-    public String isPlanner (@AuthenticationPrincipal Medewerker medewerker){
+    @GetMapping("/")
+    public String doorverwijzenStartpagina (@AuthenticationPrincipal Medewerker medewerker){
 
 
-        return "redirect:/medewerker/welkom";
+        return "redirect:/startpagina";
 
     }
 

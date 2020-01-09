@@ -30,6 +30,6 @@
                         </c:forEach>
                     </tbody>
                 </table>
-            <a class="btn btn-primary" href="/voorstelling/toevoegen">Voeg voorstelling toe</a>
+            <a class="btn btn-primary" href="/planner/voorstelling/toevoegen">Voeg voorstelling toe</a>
     </body>
 </html>

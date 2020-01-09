@@ -32,24 +32,24 @@ public class TaakController {
     @Autowired
     private VoorstellingsTaakRepository voorstellingsTaakRepository;
 
-    @GetMapping("/taak/aanmaken")
+    @GetMapping("/planner/taak/aanmaken")
     protected String showTaakAanmaken(Taak taak) {
         return "taakAanmaken";
     }
 
 
-    @PostMapping("/taak/aanmaken")
+    @PostMapping("/planner/taak/aanmaken")
     protected String saveOrUpdateTaakAanmaken(Taak taak) {
         if (taak.getTaakNaam() != null && !taak.getTaakNaam().isEmpty() &&
                 taak.getStandaardBezetting() != null) {
             taakRepository.save(taak);
-            return "redirect:/takenlijst";
+            return "redirect:/planner/takenlijst";
         } else {
             return "taakAanmaken";
         }
     }
 
-    @GetMapping("/taak/add/{taakId}")
+    @GetMapping("/planner/taak/add/{taakId}")
     protected String addTaak(@PathVariable("taakId") final Integer taakId, HttpServletRequest request ) {
         Optional<Taak> taak = taakRepository.findById(taakId);
 
@@ -63,7 +63,7 @@ public class TaakController {
 
             voorstellingsTaakRepository.save(voorstellingsTaak);
         }
-        return "redirect:/voorstelling/details/{voorstellingId}";
+        return "redirect:/planner/voorstelling/details/{voorstellingId}";
     }
 
 
@@ -73,7 +73,7 @@ public class TaakController {
 
 
 
-    @GetMapping("/takenlijst")
+    @GetMapping("/planner/takenlijst")
     protected String showTakenlijst(Model model){
         model.addAttribute("alleTaken", taakRepository.findAll());
         model.addAttribute("taak", new Taak());
@@ -121,10 +121,10 @@ public class TaakController {
         return "redirect:/takenlijst";
     }
 
-    @GetMapping("/taak/verwijderen/{taakId}")
+    @GetMapping("/planner/taak/verwijderen/{taakId}")
     public String verwijderStandaardTaak(@PathVariable Integer taakId) {
         taakRepository.deleteById(taakId);
-        return "redirect:/takenlijst";
+        return "redirect:/planner/takenlijst";
     }
 
 }

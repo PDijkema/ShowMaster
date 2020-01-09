@@ -39,6 +39,6 @@
                 </tr>
             </table>
         </form:form>
-                <a class="btn btn-primary" href="/voorstellingen">Overzicht Voorstellingen</a>
+                <a class="btn btn-primary" href="/planner/voorstellingen">Overzicht Voorstellingen</a>
     </body>
 </html>
