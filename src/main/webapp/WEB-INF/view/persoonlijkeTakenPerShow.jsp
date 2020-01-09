@@ -8,7 +8,9 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
     <body>
-        <h1>Rooster voor <c:out value="${medewerker.voornaam}"/></h1>
+        <h2>Persoonlijk rooster</h2>
+            <form:hidden path="profielId" />
+
             <table class="table table-hover">
                 <thead>
                     <tr>
@@ -19,23 +21,12 @@
                     </tr>
                 </thead>
                 <tbody>
-
-                    <!-- dit moet het worden, alle voorstellingen waarvoor de ingelogde medewerker is ingepland -->
-                    <!-- <c:forEach items="${alleVoorstellingsTaken}" var="voorstellingstaak"/> -->
-                    <!-- <c:if test="${voorstellingstaak.medewerkerId == medewerker.medewerkerId}">  -->
-
-                   <!--  <tr> -->
-                        <!-- <td><c:out value="${voorstellingstaak.voorstellingId.naam}"/></td> -->
-                        <!-- <td><c:out value="${voorstellingstaak.voorstellingId.datum}"/></td> -->
-                        <!-- <td><c:out value="${voorstellingstaak.taakId.taakNaam}"/></td> </c:if> -->
-
-
-                    <c:forEach items="${alleVoorstellingen}" var="voorstelling">
-                    <tr>
-                        <td><c:out value="${voorstelling.naam}"/></td>
-                        <td><c:out value="${voorstelling.datum}"/></td>
-
-                    </tr>
+                    <c:forEach items="${allePersoonlijkeVoorstellingsTaken}" var="allePersoonlijkeVoorstellingsTaken">
+                        <tr>
+                            <td><c:out value="${allePersoonlijkeVoorstellingsTaken.voorstelling().naam()}"/></td>
+                            <td><c:out value="${allePersoonlijkeVoorstellingsTaken.voorstelling().datum()}"/></td>
+                            <td><c:out value="${allePersoonlijkeVoorstellingsTaken.taak().taakNaam()}"/></td>
+                        </tr>
                     </c:forEach>
                 </tbody>
             </table>
