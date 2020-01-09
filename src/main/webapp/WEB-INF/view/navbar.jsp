@@ -35,10 +35,10 @@
                             </li>
                             <sec:authorize access="hasRole('PLANNER')">
                             <li class="nav-item">
-                                <a class="nav-link" href="/voorstellingen">Voorstellingen</a>
+                                <a class="nav-link" href="/planner/voorstellingen">Voorstellingen</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/taak/aanmaken">Taak aanmaken</a>
+                                <a class="nav-link" href="/planner/taak/aanmaken">Taak aanmaken</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="/planner/gebruiker/overzicht">Gebruiker overzicht</a>
