@@ -22,7 +22,7 @@
         <header>
             <div class="header-bottom">
                 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                    <a class="navbar-brand" href="#">
+                    <a class="navbar-brand" href="/startpagina">
                     <img src="https://hetbolwerk.nl/wp-content/themes/hetbolwerk/images/hetbolwerklogo.svg" height="30" class="d-inline-block align-top" alt="Poppodium Het Bolwerk">
                     </a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,14 +31,14 @@
                     <div class="collapse navbar-collapse" id="navbarNavDropdown">
                         <ul class="navbar-nav">
                             <li class="nav-item active">
-                                <a class="nav-link" href="/medewerker/welkom">Startpagina <span class="sr-only">(current)</span></a>
+                                <a class="nav-link" href="/startpagina">Startpagina <span class="sr-only">(current)</span></a>
                             </li>
                             <sec:authorize access="hasRole('PLANNER')">
                             <li class="nav-item">
-                                <a class="nav-link" href="/voorstellingen">Voorstellingen</a>
+                                <a class="nav-link" href="/planner/voorstellingen">Voorstellingen</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/taak/aanmaken">Taak aanmaken</a>
+                                <a class="nav-link" href="/planner/taak/aanmaken">Taak aanmaken</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="/planner/gebruiker/overzicht">Gebruiker overzicht</a>

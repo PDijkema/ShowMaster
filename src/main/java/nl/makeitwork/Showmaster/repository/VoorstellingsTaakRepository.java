@@ -1,5 +1,7 @@
 package nl.makeitwork.Showmaster.repository;
 
+import nl.makeitwork.Showmaster.model.Medewerker;
+import nl.makeitwork.Showmaster.model.Voorstelling;
 import nl.makeitwork.Showmaster.model.VoorstellingsTaak;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
