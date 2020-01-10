@@ -92,6 +92,11 @@ public class TaakController {
         taak2.setStandaardBezetting(1);
         taakRepository.save(taak2);
 
+        Taak taak4 = new Taak();
+        taak4.setTaakNaam("Kaartcontrole");
+        taak4.setStandaardBezetting(1);
+        taakRepository.save(taak4);
+
         Taak taak3 = new Taak();
         taak3.setTaakNaam("Garderobe");
         taak3.setStandaardBezetting(1);
@@ -102,7 +107,6 @@ public class TaakController {
         taak5.setStandaardBezetting(1);
         taakRepository.save(taak5);
 
-/*
         Taak taak6 = new Taak();
         taak6.setTaakNaam("Backstage");
         taak6.setStandaardBezetting(1);
@@ -116,7 +120,7 @@ public class TaakController {
         Taak taak8 = new Taak();
         taak8.setTaakNaam("Steward");
         taak8.setStandaardBezetting(1);
-        taakRepository.save(taak8);*/
+        taakRepository.save(taak8);
 
         return "redirect:/takenlijst";
     }
