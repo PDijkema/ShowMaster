@@ -1,6 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -23,9 +22,9 @@
                 <tbody>
                     <c:forEach items="${allePersoonlijkeVoorstellingsTaken}" var="allePersoonlijkeVoorstellingsTaken">
                         <tr>
-                            <td><c:out value="${allePersoonlijkeVoorstellingsTaken.voorstelling().naam()}"/></td>
-                            <td><c:out value="${allePersoonlijkeVoorstellingsTaken.voorstelling().datum()}"/></td>
-                            <td><c:out value="${allePersoonlijkeVoorstellingsTaken.taak().taakNaam()}"/></td>
+                            <td><c:out value="${allePersoonlijkeVoorstellingsTaken.getVoorstelling().getNaam()}"/></td>
+                            <td><c:out value="${allePersoonlijkeVoorstellingsTaken.getVoorstelling().getDatum()}"/></td>
+                            <td><c:out value="${allePersoonlijkeVoorstellingsTaken.getTaak().getTaakNaam()}"/></td>
                         </tr>
                     </c:forEach>
                 </tbody>
