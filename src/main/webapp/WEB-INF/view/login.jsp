@@ -31,15 +31,27 @@
 
         <div class="form-group ${error != null ? 'has-error' : ''}">
             <span>${message}</span>
+
+            <div class="my-2">
             <input name="username" type="text" class="form-control" placeholder="Gebruikersnaam"
                    autofocus="true"/>
+            </div>
+
+                <div class="my-2">
             <input name="password" type="password" class="form-control" placeholder="Wachtwoord"/>
-            <span>${error}</span>
+
+                </div>
+
+            <div><span>${error}</span></div>
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
-            <button class="btn btn-primary" type="submit">Log in</button>
+            <div class="my-2">
+                <button class="btn btn-primary" type="submit">Log in</button>
+                <a href="${contextPath}/registreer"> <button class="btn btn-primary" type="submit">Gebruiker aanmaken</button></a>
+            </div>
 
-            <h4><a href="${contextPath}/registreer">Gebruiker aanmaken</a></h4>
+
+
         </div>
       </form>
     </div>
