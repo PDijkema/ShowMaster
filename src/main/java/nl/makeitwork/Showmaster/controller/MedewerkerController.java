@@ -60,9 +60,6 @@ public class MedewerkerController {
     @Autowired
     VoorstellingRepository voorstellingRepository;
 
-    @Autowired
-    VoorstellingsTaakRepository voorstellingsTaakRepository;
-
     @GetMapping("/registreer")
     protected String showRegistratieFormulier(Model model) {
         model.addAttribute("registratieFormulier", new Medewerker());
@@ -96,7 +93,7 @@ public class MedewerkerController {
         model.addAttribute("medewerkerProfielGegevens", medewerkerProfielGegevensRepository.findByMedewerker(ingelogdeMedewerker));
         model.addAttribute("alleVoorstellingen", voorstellingRepository.findAll());
 
-        List<VoorstellingsTaak> voorstellingsTaken = voorstellingsTaakRepository.findVoorstellingstaakByMedewerkerId(ingelogdeMedewerker.getMedewerkerId());
+        List<VoorstellingsTaak> voorstellingsTaken = voorstellingsTaakRepository.findByMedewerkerMedewerkerId(ingelogdeMedewerker.getMedewerkerId());
         model.addAttribute("allePersoonlijkeVoorstellingsTaken", voorstellingsTaken);
 
         return "welkomMedewerker";
