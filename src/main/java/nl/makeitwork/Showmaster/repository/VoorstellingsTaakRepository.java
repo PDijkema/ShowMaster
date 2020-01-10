@@ -19,7 +19,10 @@ import java.util.List;
 @Repository
 public interface VoorstellingsTaakRepository extends JpaRepository<VoorstellingsTaak, Integer> {
 
+    @Query(value= "SELECT * FROM voorstelling_heeft_taak AS v WHERE voorstelling_id = :voorstellingId ORDER BY v.taak_id", nativeQuery = true)
+    List<VoorstellingsTaak> findVoorstellingstaakByVoorstellingId(@Param("voorstellingId")Integer voorstellingId);
 
-   List<VoorstellingsTaak> findByVoorstellingVoorstellingIdOrderByTaakTaakNaam(Integer voorstellingId);
+    @Query(value= "SELECT * FROM voorstelling_heeft_taak WHERE medewerker_id = :medewerkerId", nativeQuery = true)
+    List<VoorstellingsTaak> findVoorstellingstaakByMedewerkerId(@Param("medewerkerId")Integer medewerkerId);
 
 }
