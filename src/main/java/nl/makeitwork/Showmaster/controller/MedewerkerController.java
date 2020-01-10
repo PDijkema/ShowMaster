@@ -60,9 +60,6 @@ public class MedewerkerController {
     @Autowired
     VoorstellingRepository voorstellingRepository;
 
-    @Autowired
-    VoorstellingsTaakRepository voorstellingsTaakRepository;
-
     @GetMapping("/registreer")
     protected String showRegistratieFormulier(Model model) {
         model.addAttribute("registratieFormulier", new Medewerker());
