@@ -52,6 +52,9 @@ public class MedewerkerController {
     private MedewerkerProfielGegevensRepository medewerkerProfielGegevensRepository;
 
     @Autowired
+    VoorstellingsTaakRepository voorstellingsTaakRepository;
+
+    @Autowired
     TaakRepository taakRepository;
 
     @Autowired
@@ -87,7 +90,7 @@ public class MedewerkerController {
         return "login";
     }
 
-    @GetMapping("/medewerker/welkom")
+    @GetMapping("/startpagina")
     public String welkomMedewerker(Model model, @AuthenticationPrincipal Medewerker ingelogdeMedewerker) {
         model.addAttribute("medewerker", medewerkerRepository.findByGebruikersnaam(ingelogdeMedewerker.getGebruikersnaam()));
         model.addAttribute("medewerkerProfielGegevens", medewerkerProfielGegevensRepository.findByMedewerker(ingelogdeMedewerker));
@@ -99,10 +102,10 @@ public class MedewerkerController {
         return "welkomMedewerker";
         }
 
-    @GetMapping({"/","/planner"})
-    public String isPlanner (@AuthenticationPrincipal Medewerker medewerker){
-        return "redirect:/medewerker/welkom";
-    }
+    @GetMapping("/")
+    public String doorverwijzenStartpagina (@AuthenticationPrincipal Medewerker medewerker){
+        return "redirect:/startpagina";
+}
 
     @GetMapping("/profielpagina")
     protected String showProfielPagina(Model model, @AuthenticationPrincipal Medewerker ingelogdeMedewerker) {

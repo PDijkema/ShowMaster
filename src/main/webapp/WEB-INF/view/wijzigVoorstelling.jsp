@@ -15,7 +15,7 @@
     <body>
         <jsp:include page="navbar.jsp" />
         <h1>Wijzigen gegevens voorstelling</h1>
-        <form:form action="/voorstelling/wijzigen" modelAttribute="voorstelling" method="post">
+        <form:form action="/planner/voorstelling/wijzigen" modelAttribute="voorstelling" method="post">
             <form:hidden path="voorstellingId"/>
             <table>
                 <div>
@@ -39,6 +39,6 @@
                 </tr>
             </table>
         </form:form>
-                <a class="btn btn-primary" href="/voorstellingen">Overzicht Voorstellingen</a>
+                <a class="btn btn-primary" href="/planner/voorstellingen">Overzicht Voorstellingen</a>
     </body>
 </html>

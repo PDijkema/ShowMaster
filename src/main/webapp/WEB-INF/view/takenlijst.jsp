@@ -17,7 +17,7 @@
         <jsp:include page="navbar.jsp" />
         <h1>Lijst standaardtaken</h1>
 
-        <form:form action="/takenlijst" modelAttribute="taak">
+        <form:form action="/planner/takenlijst" modelAttribute="taak">
             <table class="table table-hover">
                 <thead>
                     <tr>
@@ -30,7 +30,7 @@
                     <tr>
                         <td><c:out value="${taak.taakNaam}" /></td>
                         <td><c:out value="${taak.standaardBezetting}" /></td>
-                        <td><a href="/taak/verwijderen/<c:out value="${taak.taakId}" />">Verwijderen</a></td>
+                        <td><a href="/planner/taak/verwijderen/<c:out value="${taak.taakId}" />">Verwijderen</a></td>
                     </tr>
                     </c:forEach>
                 </tbody>
