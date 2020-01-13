@@ -73,5 +73,5 @@
             <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
         </body>
     <h1>Terug naar</h1>
-        <a class="btn btn-primary" href="/voorstellingen">Overzicht Voorstellingen</a>
+        <a class="btn btn-primary" href="planner/voorstellingen">Overzicht Voorstellingen</a>
 </html>
