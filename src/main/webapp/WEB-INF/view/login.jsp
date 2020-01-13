@@ -13,7 +13,10 @@
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        <script src="\resources\js\validation.js"></script>
 	</head>
+
+
 
   <body>
     <header>
@@ -26,7 +29,7 @@
         </div>
 
     <div class="container">
-      <form method="POST" action="${contextPath}/login" class="form-signin">
+      <form method="POST" action="${contextPath}/login"  class="needs-validation" novalidate="true">
         <h2 class="form-heading">Log in</h2>
 
         <div class="form-group ${error != null ? 'has-error' : ''}">
@@ -34,11 +37,11 @@
 
             <div class="my-2">
             <input name="username" type="text" class="form-control" placeholder="Gebruikersnaam"
-                   autofocus="true"/>
+                   autofocus="true" required="true">
             </div>
 
                 <div class="my-2">
-            <input name="password" type="password" class="form-control" placeholder="Wachtwoord"/>
+            <input name="password" type="password" class="form-control" placeholder="Wachtwoord" required="true"/>
 
                 </div>
 
@@ -47,7 +50,7 @@
 
             <div class="my-2">
                 <button class="btn btn-primary" type="submit">Log in</button>
-                <a href="${contextPath}/registreer"> <button class="btn btn-primary" type="submit">Gebruiker aanmaken</button></a>
+                <a href="${contextPath}/registreer"> <button class="btn btn-primary" type="button" >Gebruiker aanmaken</button></a>
             </div>
 
 
