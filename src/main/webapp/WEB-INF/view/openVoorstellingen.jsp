@@ -8,6 +8,7 @@
 <head>
     <title></title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="../resources/css/custom.css" type="text/css" rel="stylesheet">
 </head>
 
 <body>
@@ -26,7 +27,7 @@
                     <tr>
                         <td><c:out value="${voorstelling.getNaam()}"/></td>
                         <td><c:out value="${voorstelling.getDatum()}"/></td>
-                        <td><a class="btn btn-primary" href="/voorstelling/weergeven/openvoorstelling/inschrijven/<c:out value="${voorstelling.voorstellingId}"/>" role="button">Inschrijven</a></td>
+                        <td><a class="btn btn-primary" href="/voorstelling/weergeven/openvoorstelling/inschrijven/<c:out value="${voorstelling.voorstellingId}"/>" role="button">INSCHRIJVEN</a></td>
                     </tr>
                 </c:forEach>
             </tbody>

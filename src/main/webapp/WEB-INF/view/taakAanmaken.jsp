@@ -5,6 +5,7 @@
     <head>
         <title>Maak een nieuwe taak aan</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link href="../../resources/css/custom.css" type="text/css" rel="stylesheet">
     </head>
 
     <body>
@@ -25,13 +26,8 @@
                         <form:input path="standaardBezetting" />
                     </td>
                 </tr>
-
-                <tr>
-                    <td colspan="2">
-                         <button class="btn btn-primary" type="submit">Sla taak op</button>
-                    </td>
-                </tr>
             </table>
         </form:form>
+        <button class="btn btn-primary" type="submit">SLA TAAK OP</button>
     </body>
 </html>
