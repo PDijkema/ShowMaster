@@ -51,7 +51,8 @@
 
                 </div>
 
-            <div><span class="alert-danger" >${error}</span></div>
+            <div class="text-danger">
+            <small>${error}</small> </div>
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
             <div class="my-2">
