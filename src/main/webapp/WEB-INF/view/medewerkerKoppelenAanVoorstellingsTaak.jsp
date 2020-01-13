@@ -18,7 +18,7 @@
             <h1>Medewerker Koppelen aan Taak</h1>
 
             <form:form action="/voorstellingsTaak/medewerkerKoppelen/{voorstellingId}/{voorstellingsTaakId}/{medewerkerId}" modelAttribute="voorstellingsTaak" method="post">
-                <form:hidden path="voorstellingId"/>
+                <!--<form:hidden path="voorstellingId"/>-->
                 <table>
 
 
