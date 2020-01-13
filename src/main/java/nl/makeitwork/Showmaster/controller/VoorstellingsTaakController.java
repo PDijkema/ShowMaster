@@ -35,7 +35,7 @@ public class VoorstellingsTaakController {
     @Autowired
     private MedewerkerInschrijvingVoorstellingRepository medewerkerInschrijvingVoorstellingRepository;
 
-    @GetMapping("/voorstellingsTaak/verwijderen/{voorstellingId}/{voorstellingsTaakId}")
+    @GetMapping("/planner/voorstellingsTaak/verwijderen/{voorstellingId}/{voorstellingsTaakId}")
     protected String verwijderenTaakBijVoorstelling(@PathVariable("voorstellingsTaakId") Integer voorstellingsTaakId,
                                                     @PathVariable("voorstellingId") Integer voorstellingId) {
 
@@ -45,7 +45,7 @@ public class VoorstellingsTaakController {
         return "redirect:/voorstelling/details/" + voorstellingId;
     }
 
-    @GetMapping("/voorstellingsTaak/toevoegen/{voorstellingId}/{taakId}")
+    @GetMapping("/planner/voorstellingsTaak/toevoegen/{voorstellingId}/{taakId}")
     protected String toevoegenTaakAanVoorstelling(@PathVariable("taakId") Integer taakId,
                                                   @PathVariable("voorstellingId") Integer voorstellingId) {
 
@@ -58,7 +58,7 @@ public class VoorstellingsTaakController {
 
         voorstellingsTaakRepository.save(voorstellingsTaak);
 
-        return "redirect:/voorstelling/details/" + voorstellingId;
+        return "redirect:/planner/voorstelling/details/" + voorstellingId;
     }
 
     @GetMapping("/voorstellingsTaak/medewerkerKoppelen/{voorstellingId}/{voorstellingsTaakId}")
