@@ -33,19 +33,25 @@
         <h2 class="form-heading">Log in</h2>
 
         <div class="form-group ${error != null ? 'has-error' : ''}">
-            <span>${message}</span>
+            <span class = "alert-success">${message}</span>
 
             <div class="my-2">
             <input name="username" type="text" class="form-control" placeholder="Gebruikersnaam"
                    autofocus="true" required="true">
+                <div class="invalid-feedback">
+                    Voer een gebruikersnaam in
+                </div>
             </div>
 
                 <div class="my-2">
             <input name="password" type="password" class="form-control" placeholder="Wachtwoord" required="true"/>
+                    <div class="invalid-feedback">
+                        Voer een wachtwoord in
+                    </div>
 
                 </div>
 
-            <div><span>${error}</span></div>
+            <div><span class="alert-danger" >${error}</span></div>
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
             <div class="my-2">

@@ -31,7 +31,7 @@
 
             <div class="form-group ${status.error ? 'has-error' : ''}">
                 <form:input type="text" path="gebruikersnaam" class="form-control" placeholder="Gebruikersnaam" autofocus="true" required="true" pattern="[^\s]+"></form:input>
-                <form:errors path="gebruikersnaam"></form:errors>
+                <form:errors path="gebruikersnaam" cssClass="alert alert-danger" element="div"></form:errors>
 
             </div>
         </spring:bind>
@@ -39,7 +39,7 @@
         <spring:bind path="wachtwoord">
             <div class="form-group ${status.error ? 'has-error' : ''}">
                 <form:input type="password" path="wachtwoord" class="form-control" placeholder="Wachtwoord" required="true" pattern="[^\s]+"></form:input>
-                <form:errors path="wachtwoord" ></form:errors>
+                <form:errors path="wachtwoord" cssClass="alert alert-danger" element="div"></form:errors>
             </div>
         </spring:bind>
 
@@ -47,7 +47,7 @@
             <div class="form-group ${status.error ? 'has-error' : ''}">
                 <form:input type="password" path="wachtwoordBevestigen" class="form-control"
                             placeholder="Wachtwoord bevestigen" required="true" pattern="[^\s]+"></form:input>
-                <form:errors path="wachtwoordBevestigen"></form:errors>
+                <form:errors path="wachtwoordBevestigen" cssClass="alert alert-danger" element="div"></form:errors>
             </div>
         </spring:bind>
 
@@ -60,8 +60,6 @@
         <button class="btn btn-primary" type="submit">Verstuur</button>
     </form:form>
 </div>
-
-
 
 </body>
 </html>
