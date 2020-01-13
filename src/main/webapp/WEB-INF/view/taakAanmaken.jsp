@@ -26,8 +26,12 @@
                         <form:input path="standaardBezetting" />
                     </td>
                 </tr>
+                <tr>
+                    <td>
+                        <button class="btn btn-primary" type="submit">SLA TAAK OP</button>
+                    </td>
+                </tr>
             </table>
         </form:form>
-        <button class="btn btn-primary" type="submit">SLA TAAK OP</button>
     </body>
 </html>

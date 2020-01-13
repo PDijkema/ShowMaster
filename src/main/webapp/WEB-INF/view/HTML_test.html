@@ -1,0 +1,23 @@
+$( '#headerNavbar .navbar-nav a' ).on( 'click', function () {
+$( '#headerNavbar .navbar-nav' ).find( 'nav-item active' ).removeClass( 'active' );
+$( this ).parent( 'nav-item' ).addClass( 'active' );
+});
+
+$('#headerNavbar .navbar-nav .nav-item').on('click', function(){
+$('#headerNavbar .navbar-nav .nav-item.active').find()removeClass('active');
+$(this).addClass('active');
+})>
+
+
+$(document).ready(function() {
+$(document).on('click', '.nav-item a', function (e) {
+$(this).parent().addClass('active').siblings().removeClass('active');
+});
+});
+
+$('#headerNavbar .navbar-nav a').on("click", "nav-item", function(){
+$(".active").removeClass("active");
+setTimeout(function(){  // Let the previous finish the bubbling mess
+$(this).addClass("active"); // Yey! all fine! Every LI has the active class
+}, 1);
+});
