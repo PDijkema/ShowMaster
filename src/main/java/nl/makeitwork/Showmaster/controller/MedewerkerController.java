@@ -52,13 +52,13 @@ public class MedewerkerController {
     private MedewerkerProfielGegevensRepository medewerkerProfielGegevensRepository;
 
     @Autowired
+    VoorstellingsTaakRepository voorstellingsTaakRepository;
+
+    @Autowired
     TaakRepository taakRepository;
 
     @Autowired
     VoorstellingRepository voorstellingRepository;
-
-    @Autowired
-    VoorstellingsTaakRepository voorstellingsTaakRepository;
 
     @GetMapping("/registreer")
     protected String showRegistratieFormulier(Model model) {
@@ -87,22 +87,22 @@ public class MedewerkerController {
         return "login";
     }
 
-    @GetMapping("/medewerker/welkom")
+    @GetMapping("/startpagina")
     public String welkomMedewerker(Model model, @AuthenticationPrincipal Medewerker ingelogdeMedewerker) {
         model.addAttribute("medewerker", medewerkerRepository.findByGebruikersnaam(ingelogdeMedewerker.getGebruikersnaam()));
         model.addAttribute("medewerkerProfielGegevens", medewerkerProfielGegevensRepository.findByMedewerker(ingelogdeMedewerker));
         model.addAttribute("alleVoorstellingen", voorstellingRepository.findAll());
 
-        List<VoorstellingsTaak> voorstellingsTaken = voorstellingsTaakRepository.findVoorstellingstaakByMedewerkerId(ingelogdeMedewerker.getMedewerkerId());
+        List<VoorstellingsTaak> voorstellingsTaken = voorstellingsTaakRepository.findByMedewerkerMedewerkerId(ingelogdeMedewerker.getMedewerkerId());
         model.addAttribute("allePersoonlijkeVoorstellingsTaken", voorstellingsTaken);
 
         return "welkomMedewerker";
         }
 
-    @GetMapping({"/","/planner"})
-    public String isPlanner (@AuthenticationPrincipal Medewerker medewerker){
-        return "redirect:/medewerker/welkom";
-    }
+    @GetMapping("/")
+    public String doorverwijzenStartpagina (@AuthenticationPrincipal Medewerker medewerker){
+        return "redirect:/startpagina";
+}
 
     @GetMapping("/profielpagina")
     protected String showProfielPagina(Model model, @AuthenticationPrincipal Medewerker ingelogdeMedewerker) {

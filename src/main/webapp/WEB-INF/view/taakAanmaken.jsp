@@ -11,7 +11,7 @@
         <jsp:include page="navbar.jsp" />
         <h1>Maak een nieuwe taak aan</h1>
 
-        <form:form action="/taak/aanmaken" modelAttribute="taak" method="post">
+        <form:form action="/planner/taak/aanmaken" modelAttribute="taak" method="post">
             <table>
                 <tr>
                     <td>Taaknaam:</td>
