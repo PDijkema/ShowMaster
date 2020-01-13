@@ -31,7 +31,9 @@
 
             <div class="form-group ${status.error ? 'has-error' : ''}">
                 <form:input type="text" path="gebruikersnaam" class="form-control ${status.error ? 'is-invalid' : ' '}" placeholder="Gebruikersnaam" autofocus="true" required="true" pattern="[^\s]+"></form:input>
-
+                <div class="invalid-feedback">
+                    Voer een geldige gebruikersnaam in
+                </div>
                 <small><form:errors path="gebruikersnaam" cssClass="text-danger" element="div"></form:errors> </small>
 
             </div>
@@ -40,6 +42,9 @@
         <spring:bind path="wachtwoord">
             <div class="form-group ${status.error ? 'has-error' : ''}">
                 <form:input type="password" path="wachtwoord" class="form-control ${status.error ? 'is-invalid' : ''}" placeholder="Wachtwoord" required="true" pattern="[^\s]+"></form:input>
+                <div class="invalid-feedback">
+                    Voer een geldig wachtwoord in
+                </div>
                 <small><form:errors path="wachtwoord" cssClass="text-danger" element="div"></form:errors></small>
             </div>
         </spring:bind>
