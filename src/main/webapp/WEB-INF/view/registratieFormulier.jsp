@@ -30,24 +30,25 @@
         <spring:bind path="gebruikersnaam">
 
             <div class="form-group ${status.error ? 'has-error' : ''}">
-                <form:input type="text" path="gebruikersnaam" class="form-control" placeholder="Gebruikersnaam" autofocus="true" required="true" pattern="[^\s]+"></form:input>
-                <form:errors path="gebruikersnaam" cssClass="alert alert-danger" element="div"></form:errors>
+                <form:input type="text" path="gebruikersnaam" class="form-control ${status.error ? 'is-invalid' : ' '}" placeholder="Gebruikersnaam" autofocus="true" required="true" pattern="[^\s]+"></form:input>
+
+                <small><form:errors path="gebruikersnaam" cssClass="text-danger" element="div"></form:errors> </small>
 
             </div>
         </spring:bind>
 
         <spring:bind path="wachtwoord">
             <div class="form-group ${status.error ? 'has-error' : ''}">
-                <form:input type="password" path="wachtwoord" class="form-control" placeholder="Wachtwoord" required="true" pattern="[^\s]+"></form:input>
-                <form:errors path="wachtwoord" cssClass="alert alert-danger" element="div"></form:errors>
+                <form:input type="password" path="wachtwoord" class="form-control ${status.error ? 'is-invalid' : ''}" placeholder="Wachtwoord" required="true" pattern="[^\s]+"></form:input>
+                <small><form:errors path="wachtwoord" cssClass="text-danger" element="div"></form:errors></small>
             </div>
         </spring:bind>
 
         <spring:bind path="wachtwoordBevestigen">
             <div class="form-group ${status.error ? 'has-error' : ''}">
-                <form:input type="password" path="wachtwoordBevestigen" class="form-control"
+                <form:input type="password" path="wachtwoordBevestigen" class="form-control ${status.error ? 'is-invalid' : ' '}"
                             placeholder="Wachtwoord bevestigen" required="true" pattern="[^\s]+"></form:input>
-                <form:errors path="wachtwoordBevestigen" cssClass="alert alert-danger" element="div"></form:errors>
+                <small><form:errors path="wachtwoordBevestigen" cssClass="text-danger" element="div"></form:errors></small>
             </div>
         </spring:bind>
 
