@@ -29,7 +29,7 @@
                             <td>
                                 <c:choose>
                                     <c:when test="${voorstelling.status == 'Ongepubliceerd'}">
-                                        <a class="btn btn-primary" href="/planner/voorstelling/publiceren/<c:out value='${voorstelling.voorstellingId}' />">Publiceer</a>
+                                        <a onclick="return confirm('Weet je het zeker?')" class="btn btn-primary" href="/planner/voorstelling/publiceren/<c:out value='${voorstelling.voorstellingId}' />">Publiceer</a>
                                     </c:when>
                                     <c:otherwise>
                                         <!-- nothing yet -->

@@ -36,7 +36,12 @@ public class Voorstelling {
 
     @Override
     public String toString() {
-        return "Id "+ voorstellingId + " naam " + naam + " datum " + datum ;
+        return "Voorstelling{" +
+            "voorstellingId=" + voorstellingId +
+            ", naam='" + naam + '\'' +
+            ", datum=" + datum +
+            ", status='" + status + '\'' +
+            '}';
     }
 
     public Integer getVoorstellingId() {

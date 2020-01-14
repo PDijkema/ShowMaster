@@ -81,8 +81,11 @@ public class VoorstellingController {
     }
 
     @GetMapping("/planner/voorstelling/publiceren/{voorstellingId}")
-    protected String publiceerVoorstelling() {
-        System.out.println("publiceren!!");
+    protected String publiceerVoorstelling(@PathVariable Integer voorstellingId) {
+        Optional<Voorstelling> voorstelling = voorstellingRepository.findById(voorstellingId);
+
+        voorstelling.ifPresent(value -> value.setStatus("Gepubliceerd"));
+        voorstelling.ifPresent(value -> voorstellingRepository.save(value));
 
         return "redirect:/planner/voorstellingen";
     }
