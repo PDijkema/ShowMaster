@@ -9,7 +9,7 @@
         <meta charset="utf-8">
         <!-- <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <link href="../../resources/css/custom.css" type="text/css" rel="stylesheet">
+        <link href="\resources\css\custom.css" type="text/css" rel="stylesheet">
 
         <title>Nieuwe voorstelling</title>
     </head>
@@ -40,6 +40,6 @@
                 </tr>
             </table>
         </form:form>
-        <a class="btn btn-primary" href="/planner/voorstellingen">OVERZICHT VOORSTELLINGEN</a>
+        <a class="btn btn-primary" href="/planner/voorstellingen">Overzicht voorstellingen</a>
     </body>
 </html>

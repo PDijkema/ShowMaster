@@ -10,7 +10,7 @@
 
     <!-- Bootstrap CSS en custom css -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link href="../resources/css/custom.css" type="text/css" rel="stylesheet">
+    <link href="\resources\css\custom.css" type="text/css" rel="stylesheet">
 
     <title>Standaard taken</title>
   </head>
@@ -31,7 +31,7 @@
                     <tr>
                         <td><c:out value="${taak.taakNaam}" /></td>
                         <td><c:out value="${taak.standaardBezetting}" /></td>
-                        <td><a href="/planner/taak/verwijderen/<c:out value="${taak.taakId}" />">VERWIJDEREN</a></td>
+                        <td><a href="/planner/taak/verwijderen/<c:out value="${taak.taakId}" />">Verwijderen</a></td>
                     </tr>
                     </c:forEach>
                 </tbody>
