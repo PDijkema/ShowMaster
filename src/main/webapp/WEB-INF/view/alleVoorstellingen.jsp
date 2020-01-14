@@ -24,9 +24,9 @@
                         <tr>
                             <td><c:out value="${voorstelling.naam}"/></td>
                             <td><c:out value="${voorstelling.datum}"/></td>
-                            <td><a href="/planner/voorstelling/details/<c:out value="${voorstelling.voorstellingId}" />">Taakbeheer</a></td>
-                            <td><a href="/planner/voorstelling/wijzigen/<c:out value="${voorstelling.voorstellingId}" />">Wijzigen</a></td>
-                            <td><a href="/planner/voorstelling/verwijderen/<c:out value="${voorstelling.voorstellingId}" />">Verwijderen</a></td>
+                            <td><a href="/planner/voorstelling/details/<c:out value='${voorstelling.voorstellingId}' />">Taakbeheer</a></td>
+                            <td><a href="/planner/voorstelling/wijzigen/<c:out value='${voorstelling.voorstellingId}' />">Wijzigen</a></td>
+                            <td><a href="/planner/voorstelling/verwijderen/<c:out value='${voorstelling.voorstellingId}' />">Verwijderen</a></td>
                         </tr>
                         </c:forEach>
                     </tbody>

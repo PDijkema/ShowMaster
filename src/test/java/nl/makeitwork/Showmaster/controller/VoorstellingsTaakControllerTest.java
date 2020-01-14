@@ -130,4 +130,38 @@ class VoorstellingsTaakControllerTest {
         //assert
         Assert.assertNotEquals(voorstellingsTaken.size(), voorstellingsTakenNaVerwijderen.size());
     }
+
+    @Test
+    void opslaanMedewerkerBijVoorstellingstaak() {
+
+        //arrange
+        VoorstellingsTaak testVoorstellingsTaak = new VoorstellingsTaak();
+
+        Voorstelling testVoorstelling = new Voorstelling();
+        LocalDateTime datum = LocalDateTime.of(2020, Month.FEBRUARY, 18, 20, 30);
+        testVoorstelling.setNaam("Soldaat van Blauw");
+        testVoorstelling.setDatum(datum);
+
+        Medewerker testMedewerker = new Medewerker();
+        testMedewerker.setGebruikersnaam("testMedewerker");
+        testMedewerker.setWachtwoord("test12345");
+        testMedewerker.setWachtwoordBevestigen("test12346");
+        testMedewerker.setPlanner(false);
+
+        //activate
+        voorstellingsTaakRepository.save(testVoorstellingsTaak);
+        voorstellingRepository.save(testVoorstelling);
+        medewerkerRepository.save(testMedewerker);
+
+        voorstellingsTaakController.opslaanMedewerkerBijVoorstellingstaak(testVoorstelling.getVoorstellingId(),
+            testVoorstellingsTaak.getVoorstellingsTaakId(), testMedewerker.getMedewerkerId());
+
+        List<VoorstellingsTaak> testVoorstellingsTaken = voorstellingsTaakRepository.
+            findByVoorstellingVoorstellingIdOrderByTaakTaakNaam(testVoorstelling.getVoorstellingId());
+
+        //assert
+        for (VoorstellingsTaak v: testVoorstellingsTaken) {
+            Assert.assertNotNull(v.getMedewerker());
+        }
+    }
 }
