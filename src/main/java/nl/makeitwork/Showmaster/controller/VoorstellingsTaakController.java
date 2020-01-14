@@ -41,7 +41,7 @@ public class VoorstellingsTaakController {
         Optional<VoorstellingsTaak> voorstellingsTaak = voorstellingsTaakRepository.findById(voorstellingsTaakId);
         voorstellingsTaakRepository.deleteById(voorstellingsTaakId);
 
-        return "redirect:planner/voorstelling/details/" + voorstellingId;
+        return "redirect:/planner/voorstelling/details/" + voorstellingId;
     }
 
     @GetMapping("/planner/voorstellingsTaak/toevoegen/{voorstellingId}/{taakId}")
@@ -66,41 +66,17 @@ public class VoorstellingsTaakController {
                                                             ,@PathVariable("voorstellingsTaakId") Integer voorstellingsTaakId,
                                                             Model model) {
 
-
-
         Optional<VoorstellingsTaak> voorstellingsTaak = voorstellingsTaakRepository.findById(voorstellingsTaakId);
         Optional<Voorstelling> voorstelling = voorstellingRepository.findById(voorstellingId);
 
-        // haal alle medewerkerinschrijvingen op een voorstelling op en maak er een lijst van medewerkers van
         List<MedewerkerInschrijvingVoorstelling> inschrijvingByVoorstellingId =
             medewerkerInschrijvingVoorstellingRepository.findInschrijvingByVoorstellingId(voorstellingId);
 
-        // haal reeds ingevulde taken van dezelfde voorstelling op en maak er een lijst van (ingeplande) medewerkers
-        List<VoorstellingsTaak> alleVoorstellingsTaken = voorstellingsTaakRepository.findByVoorstellingVoorstellingIdOrderByTaakTaakNaam(voorstellingId);
-
+        List<VoorstellingsTaak> alleVoorstellingsTaken =
+            voorstellingsTaakRepository.findByVoorstellingVoorstellingIdOrderByTaakTaakNaam(voorstellingId);
 
         alleVoorstellingsTaken.forEach(d-> inschrijvingByVoorstellingId.removeIf(r-> r.getMedewerker() == d.getMedewerker()));
 
-        System.out.println(inschrijvingByVoorstellingId);
-
-
-        //---TIJDELIJK VOOR PRINTEN
-        System.out.println("voor filteren");
-        for (MedewerkerInschrijvingVoorstelling m: inschrijvingByVoorstellingId) {
-            System.out.println(m.getMedewerker());
-        }
-
-
-
-        //---TIJDELIJK VOOR PRINTEN
-        System.out.println("na filteren");
-        for (MedewerkerInschrijvingVoorstelling m: inschrijvingByVoorstellingId) {
-            System.out.println(m.getMedewerker());
-
-        }
-
-        // bovenstaande levert een lijst beschikbare medewerkers op die gekoppeld kunnen worden aan de voorstellingstaak.
-        // deze toevoegen aan model
         voorstellingsTaak.ifPresent(taak -> model.addAttribute("voorstellingsTaak", taak));
         model.addAttribute("voorstellingId", voorstellingId);
         model.addAttribute("beschikbareMedewerkers", inschrijvingByVoorstellingId);
