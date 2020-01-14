@@ -12,7 +12,7 @@
 </head>
     <body>
         <jsp:include page="navbar.jsp" />
-            <h2>Welkom <c:out value="${medewerkerProfielGegevens.voornaam}"/></h2>
+            <h1>Welkom <c:out value="${medewerkerProfielGegevens.voornaam}"/></h1>
             <form:hidden path="profielId" />
             <jsp:include page="persoonlijkeTakenPerShow.jsp" />
             <a href="/voorstelling/weergeven/openvoorstelling"> <button type="button" class="btn btn-primary">Inschrijven</button></a>

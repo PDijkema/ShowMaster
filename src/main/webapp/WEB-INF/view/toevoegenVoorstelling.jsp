@@ -35,7 +35,7 @@
                 </div>
                 <tr>
                     <td colspan="1">
-                        <input type="submit" class="btn btn-primary" value="OPSLAAN"/>
+                        <input type="submit" class="btn btn-primary" value="Opslaan"/>
                     </td>
                 </tr>
             </table>

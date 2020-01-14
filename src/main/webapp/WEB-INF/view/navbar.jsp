@@ -21,51 +21,34 @@
         <form:hidden path="planner" />
 
         <header>
-            <div id="headerNavbar" class="container">
+            <div id="headerNavbar">
                 <nav class="navbar navbar-expand-lg navbar-light bg-light">
                     <a class="navbar-brand" href="/startpagina">
                     <img src="https://hetbolwerk.nl/wp-content/themes/hetbolwerk/images/hetbolwerklogo.svg" height="30" class="d-inline-block align-top" alt="Poppodium Het Bolwerk">
                     </a>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
                         </button>
-                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <a class="nav-link" href="/startpagina">STARTPAGINA <span class="sr-only">(current)</span></a>
-                            </li>
+                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                        <div class="navbar-nav">
+                            <a class="nav-item nav-link active" href="/startpagina">STARTPAGINA <span class="sr-only">(current)</span></a>
                             <sec:authorize access="hasRole('PLANNER')">
-                            <li class="nav-item">
-                                <a class="nav-link" href="/planner/voorstellingen">VOORSTELLINGEN</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/planner/taak/aanmaken">TAAK AANMAKEN</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/planner/gebruikeroverzicht">GEBRUIKER OVERZICHT</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/registreer">GEBRUIKER AANMAKEN</a>
-                            </li>
+                                <a class="nav-item nav-link" href="/planner/voorstellingen">VOORSTELLINGEN</a>
+                                <a class="nav-item nav-link" href="/planner/taak/aanmaken">TAAK AANMAKEN</a>
+                                <a class="nav-item nav-link" href="/planner/gebruikeroverzicht">GEBRUIKERSOVERZICHT</a>
+                                <a class="nav-item nav-link" href="/registreer">GEBRUIKER AANMAKEN</a>
                             </sec:authorize>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                MIJN PROFIEL
-                                </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" href="/profielpagina">MIJN PROFIELGEGEVENS</a>
-                                    <c:if test="${pageContext.request.userPrincipal.name != null}">
-                                        <form id="logoutform" action="${contextPath}/logout" method="post">
-                                        <input name="utf8" type="hidden" value="✓">
-                                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                                    </c:if>
-                                        <button type="submit" class="dropdown-item dropdown-signout">
-                                        UITLOGGEN
-                                        </button>
-                                        </form>
-                            </div>
-                            </li>
-                        </ul>
+                            <a class="nav-item nav-link" href="/profielpagina">PROFIELGEGEVENS</a>
+                            <c:if test="${pageContext.request.userPrincipal.name != null}">
+                                <form id="logoutform" action="${contextPath}/logout" method="post">
+                                    <input name="utf8" type="hidden" value="✓">
+                                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                            </c:if>
+                                    <button class="btn btn-outline-primary" type="submit">
+                                    Uitloggen
+                                    </button>
+                                </form>
+                        </div>
                     </div>
                 </nav>
             </div>

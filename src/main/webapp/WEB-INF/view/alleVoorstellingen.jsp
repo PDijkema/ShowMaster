@@ -10,13 +10,15 @@
 </head>
     <body>
         <jsp:include page="navbar.jsp" />
-            <h1>Overzicht Voorstellingen</h1>
+            <h1>Overzicht voorstellingen</h1>
                 <table class="table table-hover">
                     <thead>
                         <tr>
                             <th scope ="col">Naam</th>
                             <th scope ="col">Datum en tijd</td>
                             <th scope ="col">Taakbeheer</td>
+                            <th scope ="col">Wijzigen</td>
+                            <th scope ="col">Verwijderen</td>
                         </tr>
                     </thead>
                     <tbody>
@@ -25,8 +27,15 @@
                             <td><c:out value="${voorstelling.naam}"/></td>
                             <td><c:out value="${voorstelling.datum}"/></td>
                             <td><a href="/planner/voorstelling/details/<c:out value="${voorstelling.voorstellingId}" />">Taakbeheer</a></td>
-                            <td><a href="/planner/voorstelling/wijzigen/<c:out value="${voorstelling.voorstellingId}" />">Wijzigen</a></td>
-                            <td><a href="/planner/voorstelling/verwijderen/<c:out value="${voorstelling.voorstellingId}" />">Verwijderen</a></td>
+                            <td><a href="/planner/voorstelling/wijzigen/<c:out value="${voorstelling.voorstellingId}" />">
+                                <img src="/resources/images/icons/pencil.svg" alt="" width="30" height="30" title="Wijzigen" />
+                                </a>
+                            </td>
+                            <td>
+                                <a href="/planner/voorstelling/verwijderen/<c:out value="${voorstelling.voorstellingId}" />">
+                                <img src="/resources/images/icons/trash.svg" alt="" width="30" height="30" title="Verwijderen" />
+                                </a>
+                            </td>
                         </tr>
                         </c:forEach>
                     </tbody>

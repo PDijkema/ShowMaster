@@ -12,11 +12,12 @@
 </head>
     <body>
         <jsp:include page="navbar.jsp" />
-        <h1>Overzicht Gebruikers</h1>
+        <h1>Gebruikersoverzicht</h1>
             <table class="table table-hover">
                 <thead>
                     <tr>
                         <th scope ="col">Naam</th>
+                        <th scope ="col">Verwijderen</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -25,7 +26,9 @@
                         <td><c:out value="${gebruiker.gebruikersnaam}"/></td>
 
                         <td>
-                            <a href="/planner/gebruiker/verwijderen/<c:out value="${gebruiker.medewerkerId}" />">Verwijderen</a>
+                            <a href="/planner/gebruiker/verwijderen/<c:out value="${gebruiker.medewerkerId}"/>">
+                                <img src="/resources/images/icons/trash.svg" alt="" width="30" height="30" title="Verwijderen" />
+                            </a>
                         </td>
 
                     </tr>

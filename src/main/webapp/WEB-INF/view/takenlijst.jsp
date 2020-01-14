@@ -24,6 +24,7 @@
                     <tr>
                         <th scope ="col">Taaknaam</th>
                         <th scope ="col">Standaard bezetting</td>
+                        <th scope ="col">Verwijderen</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -31,7 +32,11 @@
                     <tr>
                         <td><c:out value="${taak.taakNaam}" /></td>
                         <td><c:out value="${taak.standaardBezetting}" /></td>
-                        <td><a href="/planner/taak/verwijderen/<c:out value="${taak.taakId}" />">Verwijderen</a></td>
+                        <td>
+                            <a href="/planner/taak/verwijderen/<c:out value="${taak.taakId}" />">
+                            <img src="/resources/images/icons/trash.svg" alt="" width="30" height="30" title="Verwijderen" />
+                            </a>
+                        </td>
                     </tr>
                     </c:forEach>
                 </tbody>
