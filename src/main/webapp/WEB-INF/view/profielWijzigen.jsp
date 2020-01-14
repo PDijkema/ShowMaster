@@ -6,6 +6,7 @@
   <head>
       <meta charset="utf-8">
       <title>Profiel wijzigen</title>
+      <script src="\resources\js\validation.js"></script>
 
      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -14,7 +15,7 @@
     <body>
         <jsp:include page="navbar.jsp" />
         <div class="container">
-            <form:form method="POST" modelAttribute="medewerkerProfielGegevens" class="form-signin">
+            <form:form method="POST" modelAttribute="medewerkerProfielGegevens" novalidate="true" class="needs-validation" >
                 <h1>Profiel wijzigen</h1>
                 <h2 class="form-signin-heading">Persoonlijke gegevens</h2>
 
@@ -26,7 +27,10 @@
                         <div>
                             <label for="voornaam" class="col-sm-3 control-label">Voornaam* </label>
                             <form:input type="text" path="voornaam" class="form-control"
-                            placeholder="Voornaam"></form:input>
+                            placeholder="Voornaam" required="true" pattern="[^\s]+"></form:input>
+                            <div class="invalid-feedback">
+                                Voer hier je voornaam in.
+                            </div>
                         </div>
                     </spring:bind>
 
@@ -40,17 +44,23 @@
 
                     <spring:bind path="achternaam">
                         <div>
-                            <label for="achternaam" class="col-sm-3 control-label">Achternaam</label>
+                            <label for="achternaam" class="col-sm-3 control-label">Achternaam*</label>
                             <form:input type="text" path="achternaam" class="form-control"
-                            placeholder="Achternaam"></form:input>
+                            placeholder="Achternaam" required="true" pattern="[^\s]+"></form:input>
+                            <div class="invalid-feedback">
+                                Voer hier je achternaam in.
+                            </div>
                         </div>
                     </spring:bind>
 
                     <spring:bind path="emailadres">
                         <div>
-                            <label for="emailadres" class="col-sm-3 control-label">Emailadres</label>
+                            <label for="emailadres" class="col-sm-3 control-label">Emailadres*</label>
                             <form:input type="email" path="emailadres" class="form-control"
-                            placeholder="Emailadres"></form:input>
+                            placeholder="Emailadres" required="true"></form:input>
+                            <div class="invalid-feedback">
+                                Voer hier je e-mailadres is
+                            </div>
                         </div>
                     </spring:bind>
 
@@ -64,9 +74,12 @@
 
                     <spring:bind path="telefoonnummer">
                         <div>
-                            <label for="telefoonnumer" class="col-sm-3 control-label">Telefoonnummer</label>
+                            <label for="telefoonnumer" class="col-sm-3 control-label">Telefoonnummer*</label>
                             <form:input type="text" path="telefoonnummer" class="form-control"
-                            placeholder="Telefoonnummer"></form:input>
+                            placeholder="Telefoonnummer" required="true" pattern="\d{1,16}"></form:input>
+                            <div class="invalid-feedback">
+                                Voer hier je telefoonummer in.
+                            </div>
                         </div>
                     </spring:bind>
 
