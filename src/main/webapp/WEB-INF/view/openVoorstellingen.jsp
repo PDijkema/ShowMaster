@@ -28,7 +28,7 @@
                             <tr>
                                 <td><c:out value="${voorstelling.getNaam()}"/></td>
                                 <td><c:out value="${voorstelling.getDatum()}"/></td>
-                                <td><a class="btn btn-primary" href="/voorstelling/weergeven/openvoorstelling/inschrijven/<c:out value="${voorstelling.voorstellingId}"/>" role="button">Inschrijven</a></td>
+                                <td><a class="btn btn-primary" href="/voorstelling/weergeven/openvoorstelling/inschrijven/<c:out value='${voorstelling.voorstellingId}'/>" role="button">Inschrijven</a></td>
                             </tr>
                         </c:when>
                     </c:choose>
