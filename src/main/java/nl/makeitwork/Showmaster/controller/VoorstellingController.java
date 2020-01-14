@@ -80,10 +80,19 @@ public class VoorstellingController {
         }
     }
 
+    @GetMapping("/planner/voorstelling/publiceren/{voorstellingId}")
+    protected String publiceerVoorstelling() {
+        System.out.println("publiceren!!");
+
+        return "redirect:/planner/voorstellingen";
+    }
+
+
     @PostMapping("/planner/voorstelling/toevoegen")
     protected String saveVoorstelling(@ModelAttribute("voorstelling") Voorstelling voorstelling, BindingResult result) {
 
         if (!result.hasErrors()) {
+            voorstelling.setStatus("Ongepubliceerd");
             voorstellingRepository.save(voorstelling);
             for (Taak taak : taakRepository.findAll()) {
                 standaardTakenOpslaanBijVoorstelling(taak.getStandaardBezetting(), voorstelling, taak);
@@ -92,7 +101,7 @@ public class VoorstellingController {
         } else {
             return "toevoegenVoorstelling";
         }
-        return "redirect:/voorstellingen";
+        return "redirect:/planner/voorstellingen";
     }
 
     @PostMapping("/planner/voorstelling/wijzigen")
@@ -116,7 +125,7 @@ public class VoorstellingController {
         }
     }
 
-    @GetMapping("/voorstelling/verwijderen/{voorstellingId}")
+    @GetMapping("/planner/voorstelling/verwijderen/{voorstellingId}")
     protected String verwijderVoorstelling(@PathVariable Integer voorstellingId) {
         voorstellingRepository.deleteById(voorstellingId);
         return "redirect:/planner/voorstellingen";

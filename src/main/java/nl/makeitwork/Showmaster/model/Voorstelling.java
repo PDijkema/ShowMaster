@@ -24,14 +24,20 @@ public class Voorstelling {
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime datum;
 
+    private String status;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     @Override
     public String toString() {
         return "Id "+ voorstellingId + " naam " + naam + " datum " + datum ;
     }
-
-
-
 
     public Integer getVoorstellingId() {
         return voorstellingId;
