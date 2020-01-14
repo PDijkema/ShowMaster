@@ -21,12 +21,18 @@
                     <td>Taaknaam:</td>
                     <td>
                         <form:input class="form-control mb-2 mr-sm-2" path="taakNaam" required="true" />
+                        <div class="invalid-feedback">
+                            Voer een geldige taaknaam in.
+                        </div>
                     </td>
                 </tr>
                 <tr>
                     <td>Standaard bezetting:</td>
                     <td>
-                        <form:input class="form-control mb-2 mr-sm-2" path="standaardBezetting" required="true" input="integer" pattern="\d{1,5}"  />
+                        <form:input class="form-control mb-2 mr-sm-2" path="standaardBezetting" required="true" input="integer" pattern="\d{1,5}" min="0"  />
+                        <div class="invalid-feedback">
+                            Voer een getal in.
+                        </div>
                     </td>
                 </tr>
 
