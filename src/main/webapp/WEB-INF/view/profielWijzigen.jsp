@@ -15,7 +15,7 @@
     <body>
         <jsp:include page="navbar.jsp" />
         <div class="container">
-            <form:form method="POST" modelAttribute="medewerkerProfielGegevens" novalidate="true" class="needs-validation" >
+            <form:form method="POST" modelAttribute="medewerkerProfielGegevens" novalidate="true" class="was-validated needs-validation">
                 <h1>Profiel wijzigen</h1>
                 <h2 class="form-signin-heading">Persoonlijke gegevens</h2>
 
@@ -27,7 +27,7 @@
                         <div>
                             <label for="voornaam" class="col-sm-3 control-label">Voornaam* </label>
                             <form:input type="text" path="voornaam" class="form-control"
-                            placeholder="Voornaam" required="true" pattern="[^\s]+"></form:input>
+                            placeholder="Voornaam" required="true" pattern="^([- \w\d\u00c0-\u024f]+)$"></form:input>
                             <div class="invalid-feedback">
                                 Voer hier je voornaam in.
                             </div>
