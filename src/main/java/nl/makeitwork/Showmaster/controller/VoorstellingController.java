@@ -91,6 +91,14 @@ public class VoorstellingController {
     }
 
 
+    @GetMapping("/planner/voorstelling/annuleren/{voorstellingId}")
+    protected String annuleerVoorstelling(@PathVariable Integer voorstellingId) {
+        System.out.println("geannuleerd!");
+
+        return "redirect:/planner/voorstellingen";
+    }
+
+
     @PostMapping("/planner/voorstelling/toevoegen")
     protected String saveVoorstelling(@ModelAttribute("voorstelling") Voorstelling voorstelling, BindingResult result) {
 

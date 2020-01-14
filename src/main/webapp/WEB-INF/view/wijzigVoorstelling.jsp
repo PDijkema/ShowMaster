@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ page import = "jared.simpledatabase.*" %>
 
 <!doctype html>
 <html lang="en" xmlns:form="http://www.w3.org/1999/xhtml">
@@ -14,7 +15,7 @@
 </head>
     <body>
         <jsp:include page="navbar.jsp" />
-        <h1>Wijzigen gegevens voorstelling</h1>
+        <h1>Wijzigen voorstelling</h1>
         <form:form action="/planner/voorstelling/wijzigen" modelAttribute="voorstelling" method="post">
             <form:hidden path="voorstellingId"/>
             <table>
@@ -30,6 +31,15 @@
                          <td>
                             <form:input type="datetime-local" class="form-control mb-2 mr-sm-2" path="datum" value="${dateString}" required="required" />
                          </td>
+                    </tr>
+                    <tr>
+                        <td>Status:</td>
+                        <td>
+                            <input class="form-control" type="text" placeholder="${voorstelling.status}" readonly>
+                        </td>
+                        <td>
+                            <a onclick="return confirm('Weet je het zeker?')" class="btn btn-secondary" href="/planner/voorstelling/annuleren/${voorstelling.voorstellingId}">Annuleren</a>
+                        </td>
                     </tr>
                 </div>
                 <tr>
