@@ -1,16 +1,15 @@
 package nl.makeitwork.Showmaster.controller;
 
-import nl.makeitwork.Showmaster.model.Taak;
-import nl.makeitwork.Showmaster.model.Voorstelling;
-import nl.makeitwork.Showmaster.model.VoorstellingsTaak;
-import nl.makeitwork.Showmaster.repository.TaakRepository;
-import nl.makeitwork.Showmaster.repository.VoorstellingRepository;
-import nl.makeitwork.Showmaster.repository.VoorstellingsTaakRepository;
+import nl.makeitwork.Showmaster.model.*;
+import nl.makeitwork.Showmaster.repository.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import java.util.Optional;
+import java.util.*;
+
 
 
 /**
@@ -27,6 +26,10 @@ public class VoorstellingsTaakController {
     private TaakRepository taakRepository;
     @Autowired
     private VoorstellingsTaakRepository voorstellingsTaakRepository;
+    @Autowired
+    private MedewerkerInschrijvingVoorstellingRepository medewerkerInschrijvingVoorstellingRepository;
+    @Autowired
+    private MedewerkerRepository medewerkerRepository;
 
     @GetMapping("/planner/voorstellingsTaak/verwijderen/{voorstellingId}/{voorstellingsTaakId}")
     protected String verwijderenTaakBijVoorstelling(@PathVariable("voorstellingsTaakId") Integer voorstellingsTaakId,
@@ -35,7 +38,7 @@ public class VoorstellingsTaakController {
         Optional<VoorstellingsTaak> voorstellingsTaak = voorstellingsTaakRepository.findById(voorstellingsTaakId);
         voorstellingsTaakRepository.deleteById(voorstellingsTaakId);
 
-        return "redirect:/voorstelling/details/" + voorstellingId;
+        return "redirect:/planner/voorstelling/details/" + voorstellingId;
     }
 
     @GetMapping("/planner/voorstellingsTaak/toevoegen/{voorstellingId}/{taakId}")
@@ -46,66 +49,58 @@ public class VoorstellingsTaakController {
         Optional<Taak> taak = taakRepository.findById(taakId);
 
         VoorstellingsTaak voorstellingsTaak = new VoorstellingsTaak();
-        voorstellingsTaak.setVoorstelling(voorstelling.get());
-        voorstellingsTaak.setTaak(taak.get());
+
+        voorstelling.ifPresent(voorstellingsTaak::setVoorstelling);
+        taak.ifPresent(voorstellingsTaak::setTaak);
 
         voorstellingsTaakRepository.save(voorstellingsTaak);
 
         return "redirect:/planner/voorstelling/details/" + voorstellingId;
     }
 
+    @GetMapping("/planner/voorstellingsTaak/medewerkerKoppelen/{voorstellingId}/{voorstellingsTaakId}")
+    protected String koppelenMedewerkerAanVoorstellingsTaak(@PathVariable("voorstellingId") Integer voorstellingId,
+                                                            @PathVariable("voorstellingsTaakId") Integer voorstellingsTaakId,
+                                                            Model model) {
 
+        Optional<VoorstellingsTaak> voorstellingsTaak = voorstellingsTaakRepository.findById(voorstellingsTaakId);
+        Optional<Voorstelling> voorstelling = voorstellingRepository.findById(voorstellingId);
 
+        // Lijst alle inschrijvingen op één voorstelling
+        List<MedewerkerInschrijvingVoorstelling> inschrijvingenBijVoorstellingId =
+            medewerkerInschrijvingVoorstellingRepository.findInschrijvingByVoorstellingId(voorstellingId);
 
+        // Lijst alle taken bij één voorstelling
+        List<VoorstellingsTaak> alleVoorstellingsTakenBijVoorstellingId =
+            voorstellingsTaakRepository.findByVoorstellingVoorstellingIdOrderByTaakTaakNaam(voorstellingId);
 
+        // Reeds ingevulde taken filteren om alle nog beschikbare medewerkers te kunnen laten zien
+        alleVoorstellingsTakenBijVoorstellingId.forEach
+            (d-> inschrijvingenBijVoorstellingId.removeIf(r-> r.getMedewerker() == d.getMedewerker()));
 
+        voorstellingsTaak.ifPresent(taak -> model.addAttribute("voorstellingsTaak", taak));
+        model.addAttribute("voorstellingId", voorstellingId);
+        model.addAttribute("beschikbareMedewerkers", inschrijvingenBijVoorstellingId);
+        voorstellingsTaak.ifPresent(taak -> model.addAttribute("taak", taak.getTaak().getTaakNaam()));
+        voorstelling.ifPresent(value -> model.addAttribute("voorstelling", value.getNaam()));
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*    @PostMapping("/taken/toevoegen")
-    protected String saveOrUpdateTakenBijVoorstelling(TaakSelectie taakSelectie, BindingResult result, HttpServletRequest request) {
-        Integer voorstellingId = (Integer)(request.getSession().getAttribute("voorstellingId"));
-        Voorstelling voorstelling = voorstellingRepository.findById(voorstellingId).get();
-
-        if (!result.hasErrors()) {
-
-            int bar = taakSelectie.getBar();
-            int kaartVerkoop = taakSelectie.getKaartverkoop();
-            int garderobe = taakSelectie.getGarderobe();
-
-            takenOpslaanBijVoorstelling(bar, voorstelling, taakRepository.findByTaakNaam("Bar"));
-            takenOpslaanBijVoorstelling(kaartVerkoop, voorstelling, taakRepository.findByTaakNaam("Kaartverkoop"));
-            takenOpslaanBijVoorstelling(garderobe, voorstelling, taakRepository.findByTaakNaam("Garderobe"));
-
-        } else {
-        }
-        return "redirect:/voorstellingen";
+        return "medewerkerKoppelenAanVoorstellingsTaak";
     }
 
-    protected void takenOpslaanBijVoorstelling(int taakAantal, Voorstelling voorstelling, Taak taak) {
+    @GetMapping("/planner/voorstellingsTaak/medewerkerKoppelen/{voorstellingId}/{voorstellingsTaakId}/{medewerkerId}")
+    protected String opslaanMedewerkerBijVoorstellingstaak(@PathVariable("voorstellingId") Integer voorstellingId,
+                                                           @PathVariable("voorstellingsTaakId") Integer voorstellingsTaakId,
+                                                           @PathVariable("medewerkerId") Integer medewerkerId) {
 
-        for (int i = 0; i < taakAantal; i++) {
-            VoorstellingsTaak voorstellingsTaak = new VoorstellingsTaak();
-            voorstellingsTaak.setTaak(taak);
-            voorstellingsTaak.setVoorstelling(voorstelling);
-            voorstellingsTaakRepository.save(voorstellingsTaak);
+        Optional<VoorstellingsTaak> voorstellingsTaak = voorstellingsTaakRepository.findById(voorstellingsTaakId);
+        Optional<Medewerker> medewerker = medewerkerRepository.findById(medewerkerId);
+
+        if (voorstellingsTaak.isPresent() && medewerker.isPresent()) {
+            voorstellingsTaak.get().setMedewerker(medewerker.get());
+            voorstellingsTaakRepository.save(voorstellingsTaak.get());
+        } else {
+            return "redirect:/planner/voorstelling/details/" + voorstellingId;
         }
-    }*/
+        return "redirect:/planner/voorstelling/details/" + voorstellingId;
+    }
 }

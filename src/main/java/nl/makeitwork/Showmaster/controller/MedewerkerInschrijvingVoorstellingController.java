@@ -44,6 +44,7 @@ public class MedewerkerInschrijvingVoorstellingController {
 
 
 
+
         model.addAttribute("inschrijvingen",medewerkerInschrijvingVoorstellingList);
         model.addAttribute("voorstellingLijst", voorstellingen);
 

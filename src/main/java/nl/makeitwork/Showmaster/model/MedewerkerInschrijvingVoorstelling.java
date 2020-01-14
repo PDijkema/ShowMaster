@@ -46,4 +46,13 @@ public class MedewerkerInschrijvingVoorstelling {
     public void setVoorstelling(Voorstelling voorstelling) {
         this.voorstelling = voorstelling;
     }
+
+    @Override
+    public String toString() {
+        return "MedewerkerInschrijvingVoorstelling{" +
+            "medewerkerInschrijvingTaakId=" + medewerkerInschrijvingTaakId +
+            ", medewerker=" + medewerker +
+            ", voorstelling=" + voorstelling +
+            '}';
+    }
 }
