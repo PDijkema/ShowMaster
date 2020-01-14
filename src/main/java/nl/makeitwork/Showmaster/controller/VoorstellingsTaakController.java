@@ -8,11 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.*;
-import java.util.concurrent.CopyOnWriteArrayList;
+
 
 
 /**
@@ -62,29 +59,31 @@ public class VoorstellingsTaakController {
     }
 
     @GetMapping("/planner/voorstellingsTaak/medewerkerKoppelen/{voorstellingId}/{voorstellingsTaakId}")
-    protected String koppelenMedewerkerAanVoorstellingsTaak(@PathVariable("voorstellingId") Integer voorstellingId
-                                                            ,@PathVariable("voorstellingsTaakId") Integer voorstellingsTaakId,
+    protected String koppelenMedewerkerAanVoorstellingsTaak(@PathVariable("voorstellingId") Integer voorstellingId,
+                                                            @PathVariable("voorstellingsTaakId") Integer voorstellingsTaakId,
                                                             Model model) {
 
         Optional<VoorstellingsTaak> voorstellingsTaak = voorstellingsTaakRepository.findById(voorstellingsTaakId);
         Optional<Voorstelling> voorstelling = voorstellingRepository.findById(voorstellingId);
 
-        List<MedewerkerInschrijvingVoorstelling> inschrijvingByVoorstellingId =
+        // Lijst alle inschrijvingen op één voorstelling
+        List<MedewerkerInschrijvingVoorstelling> inschrijvingenBijVoorstellingId =
             medewerkerInschrijvingVoorstellingRepository.findInschrijvingByVoorstellingId(voorstellingId);
-
-        List<VoorstellingsTaak> alleVoorstellingsTaken =
+        
+        // Lijst alle taken bij één voorstelling
+        List<VoorstellingsTaak> alleVoorstellingsTakenBijVoorstellingId =
             voorstellingsTaakRepository.findByVoorstellingVoorstellingIdOrderByTaakTaakNaam(voorstellingId);
 
-        alleVoorstellingsTaken.forEach(d-> inschrijvingByVoorstellingId.removeIf(r-> r.getMedewerker() == d.getMedewerker()));
+        // Reeds ingevulde taken filteren om alle nog beschikbare medewerkers te kunnen laten zien
+        alleVoorstellingsTakenBijVoorstellingId.forEach(d-> inschrijvingenBijVoorstellingId.removeIf(r-> r.getMedewerker() == d.getMedewerker()));
 
         voorstellingsTaak.ifPresent(taak -> model.addAttribute("voorstellingsTaak", taak));
         model.addAttribute("voorstellingId", voorstellingId);
-        model.addAttribute("beschikbareMedewerkers", inschrijvingByVoorstellingId);
+        model.addAttribute("beschikbareMedewerkers", inschrijvingenBijVoorstellingId);
         voorstellingsTaak.ifPresent(taak -> model.addAttribute("taak", taak.getTaak().getTaakNaam()));
         voorstelling.ifPresent(value -> model.addAttribute("voorstelling", value.getNaam()));
 
         return "medewerkerKoppelenAanVoorstellingsTaak";
-
     }
 
     @GetMapping("/planner/voorstellingsTaak/medewerkerKoppelen/{voorstellingId}/{voorstellingsTaakId}/{medewerkerId}")
@@ -103,59 +102,4 @@ public class VoorstellingsTaakController {
         }
         return "redirect:/planner/voorstelling/details/" + voorstellingId;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*    @PostMapping("/taken/toevoegen")
-    protected String saveOrUpdateTakenBijVoorstelling(TaakSelectie taakSelectie, BindingResult result, HttpServletRequest request) {
-        Integer voorstellingId = (Integer)(request.getSession().getAttribute("voorstellingId"));
-        Voorstelling voorstelling = voorstellingRepository.findById(voorstellingId).get();
-
-        if (!result.hasErrors()) {
-
-            int bar = taakSelectie.getBar();
-            int kaartVerkoop = taakSelectie.getKaartverkoop();
-            int garderobe = taakSelectie.getGarderobe();
-
-            takenOpslaanBijVoorstelling(bar, voorstelling, taakRepository.findByTaakNaam("Bar"));
-            takenOpslaanBijVoorstelling(kaartVerkoop, voorstelling, taakRepository.findByTaakNaam("Kaartverkoop"));
-            takenOpslaanBijVoorstelling(garderobe, voorstelling, taakRepository.findByTaakNaam("Garderobe"));
-
-        } else {
-        }
-        return "redirect:/voorstellingen";
-    }
-
-    protected void takenOpslaanBijVoorstelling(int taakAantal, Voorstelling voorstelling, Taak taak) {
-
-        for (int i = 0; i < taakAantal; i++) {
-            VoorstellingsTaak voorstellingsTaak = new VoorstellingsTaak();
-            voorstellingsTaak.setTaak(taak);
-            voorstellingsTaak.setVoorstelling(voorstelling);
-            voorstellingsTaakRepository.save(voorstellingsTaak);
-        }
-    }*/
 }
