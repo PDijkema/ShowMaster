@@ -4,7 +4,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:c="http://www.w3.org/1999/XSL/Transform">
 <head>
     <title></title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -23,11 +23,15 @@
             </thead>
             <tbody>
                 <c:forEach items="${voorstellingLijst}" var="voorstelling">
-                    <tr>
-                        <td><c:out value="${voorstelling.getNaam()}"/></td>
-                        <td><c:out value="${voorstelling.getDatum()}"/></td>
-                        <td><a class="btn btn-primary" href="/voorstelling/weergeven/openvoorstelling/inschrijven/<c:out value="${voorstelling.voorstellingId}"/>" role="button">Inschrijven</a></td>
-                    </tr>
+                    <c:choose>
+                        <c:when test="${voorstelling.status == 'Gepubliceerd'}">
+                            <tr>
+                                <td><c:out value="${voorstelling.getNaam()}"/></td>
+                                <td><c:out value="${voorstelling.getDatum()}"/></td>
+                                <td><a class="btn btn-primary" href="/voorstelling/weergeven/openvoorstelling/inschrijven/<c:out value="${voorstelling.voorstellingId}"/>" role="button">Inschrijven</a></td>
+                            </tr>
+                        </c:when>
+                    </c:choose>
                 </c:forEach>
             </tbody>
         </table>
