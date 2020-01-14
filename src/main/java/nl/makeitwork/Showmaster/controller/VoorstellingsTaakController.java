@@ -69,6 +69,8 @@ public class VoorstellingsTaakController {
                                                             ,@PathVariable("voorstellingsTaakId") Integer voorstellingsTaakId,
                                                             Model model) {
 
+
+
         Optional<VoorstellingsTaak> voorstellingsTaak = voorstellingsTaakRepository.findById(voorstellingsTaakId);
         Optional<Voorstelling> voorstelling = voorstellingRepository.findById(voorstellingId);
 
@@ -78,6 +80,12 @@ public class VoorstellingsTaakController {
 
         // haal reeds ingevulde taken van dezelfde voorstelling op en maak er een lijst van (ingeplande) medewerkers
         List<VoorstellingsTaak> alleVoorstellingsTaken = voorstellingsTaakRepository.findByVoorstellingVoorstellingIdOrderByTaakTaakNaam(voorstellingId);
+
+
+        alleVoorstellingsTaken.forEach(d-> inschrijvingByVoorstellingId.removeIf(r-> r.getMedewerker() == d.getMedewerker()));
+
+        System.out.println(inschrijvingByVoorstellingId);
+
 
         //---TIJDELIJK VOOR PRINTEN
         System.out.println("voor filteren");
