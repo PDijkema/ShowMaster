@@ -21,3 +21,13 @@ setTimeout(function(){  // Let the previous finish the bubbling mess
 $(this).addClass("active"); // Yey! all fine! Every LI has the active class
 }, 1);
 });
+
+$( '#headerNavbar .navbar-nav a' ).on( 'click', function () {
+$( '#headerNavbar .navbar-nav' ).find( 'li.active' ).removeClass( 'active' );
+$( this ).parent( 'li' ).addClass( 'active' );
+});
+
+$('#headerNavbar .navbar-nav .nav-item').click(function(){
+$('#headerNavbar .navbar-nav .nav-item').removeClass('active');
+$(this).addClass('active');
+})

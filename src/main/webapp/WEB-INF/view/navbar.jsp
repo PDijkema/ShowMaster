@@ -43,7 +43,7 @@
                                 <a class="nav-link" href="/planner/taak/aanmaken">TAAK AANMAKEN</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/planner/gebruiker/overzicht">GEBRUIKER OVERZICHT</a>
+                                <a class="nav-link" href="/planner/gebruikeroverzicht">GEBRUIKER OVERZICHT</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="/registreer">GEBRUIKER AANMAKEN</a>

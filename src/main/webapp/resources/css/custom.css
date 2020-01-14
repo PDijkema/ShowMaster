@@ -17,9 +17,10 @@ header .nav-item {
     text-decoration: none;
 }
 
-#headerNavbar .navbar-light .navbar-nav .active > .nav-link {
+#headerNavbar .navbar-light .navbar-nav li.active > a {
     color:rgba(11, 114, 169, 1)
 }
+
 
 /* buttons in font als Bolwerk site */
 button,optgroup,select,textarea
@@ -36,3 +37,4 @@ button,optgroup,select,textarea
 a
 {color:#0B72A9;text-decoration:none;background-color:transparent}
 a:hover{text-decoration:underline}
+
