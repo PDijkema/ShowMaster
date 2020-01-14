@@ -56,7 +56,7 @@
 
             <div class="my-2">
                 <button class="btn btn-primary" type="submit">LOG IN</button>
-                <a href="${contextPath}/registreer"> <button class="btn btn-primary" type="button" >Gebruiker aanmaken</button></a>
+                <a href="${contextPath}/registreer"> <button class="btn btn-primary" type="button" >GEBRUIKER AANMAKEN</button></a>
             </div>
 
 
