@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
     <body>
+        <jsp:include page="navbar.jsp" />
         <h1>Overzicht Gebruikers</h1>
             <table class="table table-hover">
                 <thead>
@@ -21,11 +22,14 @@
                     <c:forEach items="${alleGebruikers}" var="gebruiker">
                     <tr>
                         <td><c:out value="${gebruiker.gebruikersnaam}"/></td>
-                        <td><a href="/planner/gebruiker/verwijderen/<c:out value="${gebruiker.medewerkerId}" />">Verwijderen</a></td>
+
+                        <td>
+                            <a href="/planner/gebruiker/verwijderen/<c:out value="${gebruiker.medewerkerId}" />">Verwijderen</a>
+                        </td>
+
                     </tr>
                     </c:forEach>
                 </tbody>
             </table>
-             <a href="/planner/welkom">  <button type="button" class="btn btn-primary">Terug naar welkom</button> </a>
     </body>
 </html>
