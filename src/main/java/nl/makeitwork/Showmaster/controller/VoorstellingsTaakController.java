@@ -69,13 +69,14 @@ public class VoorstellingsTaakController {
         // Lijst alle inschrijvingen op één voorstelling
         List<MedewerkerInschrijvingVoorstelling> inschrijvingenBijVoorstellingId =
             medewerkerInschrijvingVoorstellingRepository.findInschrijvingByVoorstellingId(voorstellingId);
-        
+
         // Lijst alle taken bij één voorstelling
         List<VoorstellingsTaak> alleVoorstellingsTakenBijVoorstellingId =
             voorstellingsTaakRepository.findByVoorstellingVoorstellingIdOrderByTaakTaakNaam(voorstellingId);
 
         // Reeds ingevulde taken filteren om alle nog beschikbare medewerkers te kunnen laten zien
-        alleVoorstellingsTakenBijVoorstellingId.forEach(d-> inschrijvingenBijVoorstellingId.removeIf(r-> r.getMedewerker() == d.getMedewerker()));
+        alleVoorstellingsTakenBijVoorstellingId.forEach
+            (d-> inschrijvingenBijVoorstellingId.removeIf(r-> r.getMedewerker() == d.getMedewerker()));
 
         voorstellingsTaak.ifPresent(taak -> model.addAttribute("voorstellingsTaak", taak));
         model.addAttribute("voorstellingId", voorstellingId);
