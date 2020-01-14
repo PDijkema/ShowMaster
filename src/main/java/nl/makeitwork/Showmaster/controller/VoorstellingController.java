@@ -19,6 +19,7 @@ import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * @author Pieter Dijkema
@@ -60,6 +61,16 @@ public class VoorstellingController {
             model.addAttribute("voorstelling", voorstelling.get());
             return "wijzigVoorstelling";
         }
+    }
+
+    @GetMapping("/voorstelling/rooster/{voorstellingId}")
+    protected String roosterVoorstelling(@PathVariable Integer voorstellingId, Model model){
+        List<VoorstellingsTaak> voorstellingOverzicht = voorstellingsTaakRepository.findByVoorstellingVoorstellingId(voorstellingId);
+        voorstellingOverzicht.removeIf(r->r.getMedewerker()== null);
+
+        model.addAttribute("voorstellingOverzicht",voorstellingOverzicht);
+
+    return "roosterVoorstelling";
     }
 
     @GetMapping("/planner/voorstelling/details/{voorstellingId}")
