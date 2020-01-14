@@ -15,25 +15,24 @@
         <title>Details Voorstelling</title>
     </head>
         <body>
-            <h1>Medewerker Koppelen aan Taak</h1>
+            <h1>Taak invullen</h1>
+            <h2>Taak: ${taak}</h2>
+            <h2>Voorstelling: ${voorstelling}</h2>
 
             <form:form action="/planner/voorstellingsTaak/medewerkerKoppelen/${voorstellingId}/${voorstellingsTaakId}/${medewerker.medewerkerId}" modelAttribute="voorstellingsTaak" method="post">
                 <form:hidden path="voorstellingsTaakId"/>
                 <table>
-
-
-                    <c:forEach items="${beschikbareMedewerkers}" var="medewerker">
+                    <c:forEach items="${beschikbareMedewerkers}" var="medewerkerInschrijvingVoorstelling">
                         <tr>
-                            <td><c:out value="${medewerker.gebruikersnaam}"/></td>
+                            <td><c:out value="${medewerkerInschrijvingVoorstelling.medewerker.gebruikersnaam}"/></td>
                             <td></td>
-                            <td><a href="/planner/voorstellingsTaak/medewerkerKoppelen/${voorstellingId}/${voorstellingsTaakId}/${medewerker.medewerkerId}">Selecteer</a></td>
+                            <td><a href="/planner/voorstellingsTaak/medewerkerKoppelen/${voorstellingId}/${voorstellingsTaakId}/${medewerkerInschrijvingVoorstelling.medewerker.medewerkerId}">Selecteer</a></td>
                         </tr>
                     </c:forEach>
-
-
                 </table>
             </form:form>
 
         </body>
     <a class="btn btn-primary" href="/planner/voorstelling/details/${voorstellingId}">Terug</a>
+
 </html>

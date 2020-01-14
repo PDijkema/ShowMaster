@@ -2,6 +2,7 @@ package nl.makeitwork.Showmaster.controller;
 
 import nl.makeitwork.Showmaster.model.*;
 import nl.makeitwork.Showmaster.repository.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,8 +12,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 
 /**
@@ -52,8 +55,9 @@ public class VoorstellingsTaakController {
         Optional<Taak> taak = taakRepository.findById(taakId);
 
         VoorstellingsTaak voorstellingsTaak = new VoorstellingsTaak();
-        voorstellingsTaak.setVoorstelling(voorstelling.get());
-        voorstellingsTaak.setTaak(taak.get());
+
+        voorstelling.ifPresent(voorstellingsTaak::setVoorstelling);
+        taak.ifPresent(voorstellingsTaak::setTaak);
 
         voorstellingsTaakRepository.save(voorstellingsTaak);
 
@@ -65,28 +69,45 @@ public class VoorstellingsTaakController {
                                                             ,@PathVariable("voorstellingsTaakId") Integer voorstellingsTaakId,
                                                             Model model) {
 
-        // haal alle medewerkerinschrijvingen op een voorstelling op
+        Optional<VoorstellingsTaak> voorstellingsTaak = voorstellingsTaakRepository.findById(voorstellingsTaakId);
+        Optional<Voorstelling> voorstelling = voorstellingRepository.findById(voorstellingId);
+
+        // haal alle medewerkerinschrijvingen op een voorstelling op en maak er een lijst van medewerkers van
         List<MedewerkerInschrijvingVoorstelling> inschrijvingByVoorstellingId =
             medewerkerInschrijvingVoorstellingRepository.findInschrijvingByVoorstellingId(voorstellingId);
 
+        // haal reeds ingevulde taken van dezelfde voorstelling op en maak er een lijst van (ingeplande) medewerkers
+        List<VoorstellingsTaak> alleVoorstellingsTaken = voorstellingsTaakRepository.findByVoorstellingVoorstellingIdOrderByTaakTaakNaam(voorstellingId);
 
-        // filter alle beschikbare medewerkers uit de inschrijvingen die al een toegewezen taak in Voorstellingstaken
-        // bij de betreffende voorstelling hebben.
-        List<Medewerker> beschikbareMedewerkers = new ArrayList<>();
+        //---TIJDELIJK VOOR PRINTEN
+        System.out.println("voor filteren");
+        for (MedewerkerInschrijvingVoorstelling m: inschrijvingByVoorstellingId) {
+            System.out.println(m.getMedewerker());
+        }
 
-        if (!inschrijvingByVoorstellingId.isEmpty()) {
-            for (MedewerkerInschrijvingVoorstelling m : inschrijvingByVoorstellingId) {
-                beschikbareMedewerkers.add(m.getMedewerker());
+        // haal reeds ingevulde taken van dezelfde voorstelling op en maak er een lijst van (ingeplande) medewerkers van
+        List<MedewerkerInschrijvingVoorstelling> beschikbareMedewerkers = new ArrayList<>();
+        for (MedewerkerInschrijvingVoorstelling m : inschrijvingByVoorstellingId) {
+            for (VoorstellingsTaak v : alleVoorstellingsTaken) {
+
             }
         }
-        //TODO reeds ingeplande medewerkers uit de lijst halen.
 
+
+        //---TIJDELIJK VOOR PRINTEN
+        System.out.println("na filteren");
+        for (MedewerkerInschrijvingVoorstelling m: inschrijvingByVoorstellingId) {
+            System.out.println(m.getMedewerker());
+
+        }
 
         // bovenstaande levert een lijst beschikbare medewerkers op die gekoppeld kunnen worden aan de voorstellingstaak.
         // deze toevoegen aan model
-        model.addAttribute("voorstellingsTaak", voorstellingsTaakRepository.findById(voorstellingsTaakId));
+        voorstellingsTaak.ifPresent(taak -> model.addAttribute("voorstellingsTaak", taak));
         model.addAttribute("voorstellingId", voorstellingId);
-        model.addAttribute("beschikbareMedewerkers", beschikbareMedewerkers);
+        model.addAttribute("beschikbareMedewerkers", inschrijvingByVoorstellingId);
+        voorstellingsTaak.ifPresent(taak -> model.addAttribute("taak", taak.getTaak().getTaakNaam()));
+        voorstelling.ifPresent(value -> model.addAttribute("voorstelling", value.getNaam()));
 
         return "medewerkerKoppelenAanVoorstellingsTaak";
 

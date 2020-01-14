@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 
 /**
@@ -20,6 +21,10 @@ public interface VoorstellingsTaakRepository extends JpaRepository<Voorstellings
 
     List<VoorstellingsTaak> findByVoorstellingVoorstellingIdOrderByTaakTaakNaam(Integer voorstellingId);
 
+    CopyOnWriteArrayList<VoorstellingsTaak> findByVoorstellingVoorstellingId(Integer voorstellingId);
+
     List<VoorstellingsTaak> findByMedewerkerMedewerkerId(Integer medewerkerId);
 
+    @Query(value = "select * from voorstelling_heeft_taak where medewerker_id is not null and voorstelling_id = :voorstellingId", nativeQuery = true)
+    List<VoorstellingsTaak> findIngeplandeVoorstellingsTakenByVoorstellingId(@Param("voorstellingId") Integer voorstellingId);
 }
