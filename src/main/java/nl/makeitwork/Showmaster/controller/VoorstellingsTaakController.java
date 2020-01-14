@@ -11,10 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.persistence.criteria.CriteriaBuilder;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 
@@ -85,13 +82,6 @@ public class VoorstellingsTaakController {
             System.out.println(m.getMedewerker());
         }
 
-        // haal reeds ingevulde taken van dezelfde voorstelling op en maak er een lijst van (ingeplande) medewerkers van
-        List<MedewerkerInschrijvingVoorstelling> beschikbareMedewerkers = new ArrayList<>();
-        for (MedewerkerInschrijvingVoorstelling m : inschrijvingByVoorstellingId) {
-            for (VoorstellingsTaak v : alleVoorstellingsTaken) {
-
-            }
-        }
 
 
         //---TIJDELIJK VOOR PRINTEN
