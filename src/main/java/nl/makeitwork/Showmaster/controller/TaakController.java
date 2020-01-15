@@ -104,22 +104,22 @@ public class TaakController {
 
         Taak taak5 = new Taak();
         taak5.setTaakNaam("Foto");
-        taak5.setStandaardBezetting(1);
+        taak5.setStandaardBezetting(0);
         taakRepository.save(taak5);
 
         Taak taak6 = new Taak();
         taak6.setTaakNaam("Backstage");
-        taak6.setStandaardBezetting(1);
+        taak6.setStandaardBezetting(0);
         taakRepository.save(taak6);
 
         Taak taak7 = new Taak();
         taak7.setTaakNaam("Catering");
-        taak7.setStandaardBezetting(2);
+        taak7.setStandaardBezetting(0);
         taakRepository.save(taak7);
 
         Taak taak8 = new Taak();
         taak8.setTaakNaam("Steward");
-        taak8.setStandaardBezetting(1);
+        taak8.setStandaardBezetting(0);
         taakRepository.save(taak8);
 
         return "redirect:/takenlijst";
