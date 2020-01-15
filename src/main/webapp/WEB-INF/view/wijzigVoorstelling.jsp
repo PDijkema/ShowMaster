@@ -14,6 +14,37 @@
 
     <title>Wijzig voorstelling</title>
 </head>
+<<<<<<<<< Temporary merge branch 1
+<body>
+<jsp:include page="navbar.jsp" />
+<h1>Wijzigen gegevens voorstelling</h1>
+<form:form action="/planner/voorstelling/wijzigen" modelAttribute="voorstelling" method="post" novalidate="true" class="needs-validation">
+    <form:hidden path="voorstellingId"/>
+    <table>
+        <div>
+            <tr>
+                <td>Naam voorstelling:</td>
+                <td>
+                    <form:input class="form-control mb-2 mr-sm-2" path="naam" required="required" />
+                </td>
+            </tr>
+            <tr>
+                <td>Datum en tijdstip:</td>
+                <td>
+                    <form:input type="datetime-local" class="form-control mb-2 mr-sm-2" path="datum" value="${dateString}" required="required" />
+                </td>
+            </tr>
+        </div>
+        <tr>
+            <td colspan="1">
+                <input type="submit" class="btn btn-primary" value="Opslaan"/>
+            </td>
+        </tr>
+    </table>
+</form:form>
+<a class="btn btn-primary" href="/planner/voorstellingen">Overzicht Voorstellingen</a>
+</body>
+=========
     <body>
         <jsp:include page="navbar.jsp" />
         <h1>Wijzigen voorstelling</h1>
@@ -39,21 +70,28 @@
                             <input class="form-control" type="text" placeholder="${voorstelling.status}" readonly>
                         </td>
                         <td>
-                            <a onclick="return confirm('Weet je het zeker?')" class="btn btn-danger" href="/planner/voorstelling/annuleren/${voorstelling.voorstellingId}">Voorstelling annuleren</a>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
+                                Voorstelling annuleren
+                            </button>
+                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Voorstelling annuleren</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Weet je het zeker?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <a class="btn btn-danger" href="/planner/voorstelling/annuleren/${voorstelling.voorstellingId}">Voorstelling annuleren</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </td>
                     </tr>
                 </div>
@@ -66,4 +104,5 @@
         </form:form>
                 <a class="btn btn-primary" href="/planner/voorstellingen">Overzicht Voorstellingen</a>
     </body>
+>>>>>>>>> Temporary merge branch 2
 </html>
