@@ -54,7 +54,7 @@ public class VoorstellingController {
         Optional<Voorstelling> voorstelling = voorstellingRepository.findById(voorstellingId);
         model.addAttribute("alleTaken", taakRepository.findAll());
         if (!voorstelling.isPresent()) {
-            return "redirect:/alleVoorstellingen";
+            return "redirect:/planner/voorstellingen";
         } else {
             request.getSession().setAttribute("voorstellingId", voorstellingId);
             model.addAttribute("voorstelling", voorstelling.get());
@@ -71,7 +71,7 @@ public class VoorstellingController {
         List<VoorstellingsTaak> voorstellingsTaken = voorstellingsTaakRepository.findByVoorstellingVoorstellingIdOrderByTaakTaakNaam(voorstellingId);
 
         if (!voorstelling.isPresent()) {
-            return "redirect:/planner/alleVoorstellingen";
+            return "redirect:/planner/voorstellingen";
         } else {
             request.getSession().setAttribute("voorstellingId", voorstellingId);
             model.addAttribute("takenBijVoorstelling", voorstellingsTaken);
@@ -92,7 +92,7 @@ public class VoorstellingController {
         } else {
             return "toevoegenVoorstelling";
         }
-        return "redirect:/voorstellingen";
+        return "redirect:/planner/voorstellingen";
     }
 
     @PostMapping("/planner/voorstelling/wijzigen")
@@ -116,7 +116,7 @@ public class VoorstellingController {
         }
     }
 
-    @GetMapping("/voorstelling/verwijderen/{voorstellingId}")
+    @GetMapping("/planner/voorstelling/verwijderen/{voorstellingId}")
     protected String verwijderVoorstelling(@PathVariable Integer voorstellingId) {
         voorstellingRepository.deleteById(voorstellingId);
         return "redirect:/planner/voorstellingen";

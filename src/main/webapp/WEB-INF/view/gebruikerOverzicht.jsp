@@ -6,7 +6,8 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title></title>
+    <title>Gebruikersoverzicht</title>
+    <script src="https://kit.fontawesome.com/1eeb88da0f.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="\resources\css\custom.css" type="text/css" rel="stylesheet">
 </head>
@@ -24,10 +25,9 @@
                     <c:forEach items="${alleGebruikers}" var="gebruiker">
                     <tr>
                         <td><c:out value="${gebruiker.gebruikersnaam}"/></td>
-
                         <td>
                             <a href="/planner/gebruiker/verwijderen/<c:out value="${gebruiker.medewerkerId}"/>">
-                                <img src="/resources/images/icons/trash.svg" alt="" width="30" height="30" title="Verwijderen" />
+                                <i class="fas fa-trash" title="Verwijderen"></i>
                             </a>
                         </td>
 

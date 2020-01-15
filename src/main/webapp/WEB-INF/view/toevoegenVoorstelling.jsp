@@ -16,7 +16,7 @@
     <body>
         <jsp:include page="navbar.jsp" />
         <h1>Nieuwe voorstelling</h1>
-        <form:form action="/voorstelling/toevoegen" modelAttribute="voorstelling" method="post">
+        <form:form modelAttribute="voorstelling" method="post">
             <form:hidden path="voorstellingId"/>
             <table>
                 <div>

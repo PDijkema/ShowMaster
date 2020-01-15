@@ -2,166 +2,103 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link href="\resources\css\custom.css" type="text/css" rel="stylesheet">
-    <meta charset="UTF-8">
-    <title>Details Voorstelling</title>
-</head>
-        <body>
-        <jsp:include page="navbar.jsp" />
+    <head>
+        <script src="https://kit.fontawesome.com/1eeb88da0f.js" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link href="\resources\css\custom.css" type="text/css" rel="stylesheet">
+        <meta charset="UTF-8">
+        <title>Details voorstelling</title>
+    </head>
 
-        <div class="page-wrapper bg">
-        		<div class="container">
-        			<div class="row">
+    <body>
+    <jsp:include page="navbar.jsp"/>
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h1 class="display-4">${voorstelling.naam}</h1>
+                <h2>${voorstelling.datum}</h2>
+            </div>
+        </div>
 
-        				<div class="col-12 page-header">
-        					<!---->
-        				</div>
+        <div class="container-fluid">
+            <div class="row flex-xl-nowrap">
+                <div class="col-md-3 col-xl-2 bd-sidebar">
+                    <h3>Taak toevoegen</h3>
+                    <ul class="nav flex-column">
+                        <c:forEach items="${alleTaken}" var="taak">
+                            <li class="nav-item"><a href="/planner/voorstellingsTaak/toevoegen/${voorstelling.voorstellingId}/
+                    <c:out value=" ${taak.taakId}" />">
+                                <c:out value="${taak.taakNaam}"/>
+                                </a>
+                            </li>
+                        </c:forEach>
+                    </ul>
+                </div>
 
-        									<div class="featured-page col-12">
-        						<div class="row">
-        														<div class="col-12">
-        								<div class="row">
-        									<div class="thumbnail col-12 col-lg-4" style="background-image: url(https://hetbolwerk.nl/wp-content/uploads/2018/08/visual-poppodiumhetbolwerk.jpg);">
-        									</div>
-        									<div class="info col-12 col-lg-8">
-        										<div class="title">
-        											Nieuws										</div>
-        										<p>Blijf op de hoogte van het laatste nieuws.</p>
+                <main class="col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
+                    <h1>Diensten bij voorstelling</h1>
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th scope="col">Taak</th>
+                            <th scope="col">Medewerker</th>
+                            <th scope="col">Medewerker toewijzen/wijzigen</th>
+                            <th scope="col">Verwijderen</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <c:forEach items="${takenBijVoorstelling}" var="takenBijVoorstelling">
+                            <tr>
+                                <td>
+                                    <c:out value="${takenBijVoorstelling.getTaak().getTaakNaam()}"/>
+                                </td>
+                                <td>
+                                    <c:choose>
+                                        <c:when test="${empty takenBijVoorstelling.getMedewerker().getGebruikersnaam()}">
+                                            Openstaand
+                                <td>
+                                    <a href="/planner/voorstellingsTaak/medewerkerKoppelen/${voorstelling.voorstellingId}/<c:out value='${takenBijVoorstelling.voorstellingsTaakId}' />">
+                                        <i class="fas fa-user-plus" title="Invullen"></i>
+                                    </a>
+                                </td>
+                                </c:when>
+                                <c:otherwise>
+                                    <c:out value="${takenBijVoorstelling.getMedewerker().getGebruikersnaam()}"/>
+                                    <td>
+                                        <a href="/planner/voorstellingsTaak/medewerkerKoppelen/${voorstelling.voorstellingId}/<c:out value='${takenBijVoorstelling.voorstellingsTaakId}' />">
+                                            <i class="far fa-edit" title="Wijzigen"></i>
+                                        </a>
+                                    </td>
+                                </c:otherwise>
+                                </c:choose>
+                                </td>
+                                <td>
+                                    <a href="/planner/voorstellingsTaak/verwijderen/${voorstelling.voorstellingId}/<c:out value='${takenBijVoorstelling.voorstellingsTaakId}' />">
+                                        <i class="fas fa-trash" title="Verwijderen"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+                    <a class="btn btn-primary" href="/planner/voorstellingen">Overzicht Voorstellingen</a>
+                </main>
+            </div>
+        </div>
 
-
-<h1>Details voorstelling</h1>
-            <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Naam voorstelling</th>
-                                        <th scope="col">Datum en tijdstip</th>
-                                    </tr>
-                                </thead>
-                                <tr>
-                                    <td scope="col">${voorstelling.naam}</td>
-                                    <td scope="col">${voorstelling.datum}</td>
-                                </tr>
-                            </table>
-
-
-
-
-
-        										<div class="buttons">
-
-
-        															<a href="https://hetbolwerk.nl/nieuws/" title="Alle nieuws" class="button">
-        																Alle nieuws															</a>
-
-
-
-
-        															<a target="_blank" href="https://www.facebook.com/poppodiumhetbolwerk/" title="Facebook" class="button">
-        																Facebook															</a>
-
-
-
-
-        															<a target="_blank" href="https://www.instagram.com/het_bolwerk/" title="Instagram" class="button">
-        																Instagram															</a>
-
-
-        																				</div>
-
-        									</div>
-        								</div>
-        							</div>
-
-        						</div>
-        					</div>
-        					<div class="col-12 content-wrapper">
-                                    					<div class="row">
-                                    						<div class="col-12 col-md-4">
-                                            <aside>
-                                                <h1>Taak toevoegen</h1>
-                                                    <table>
-                                                        <tbody>
-                                                            <c:forEach items="${alleTaken}" var="taak">
-                                                                <td><a class="btn btn-primary" href="/planner/voorstellingsTaak/toevoegen/${voorstelling.voorstellingId}/<c:out value="${taak.taakId}" />"><c:out value="${taak.taakNaam}"/></a></td>
-                                                            </c:forEach>
-                                                        </tbody>
-                                                    </table>
-                                                <!-- <ul> -->
-                                                   <!-- <li class="page_item page-item-1468 current_page_item"><a href="https://hetbolwerk.nl/info/bereikbaarheid/">Bereikbaarheid &amp; Parkeren</a></li> -->
-                                                   <!-- <li class="page_item page-item-1387"><a href="https://hetbolwerk.nl/info/noorderkerkzaal/">Noorderkerkzaal</a></li> -->
-                                                   <!-- <li class="page_item page-item-1073"><a href="https://hetbolwerk.nl/info/praktische-info/">Praktische info</a></li> -->
-                                                   <!-- <li class="page_item page-item-127"><a href="https://hetbolwerk.nl/info/tickets/">Tickets</a></li> -->
-                                               <!-- </ul> -->
-                                            </aside>
-                                        </div>
-                                        </div>
-                                                    <div class="col-12 col-md-8 article-wrapper">
-                                                        <article>
-                                                             <h1>Diensten bij voorstelling</h1>
-                                                                <table class="table table-hover">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th scope="col">Taak</th>
-                                                                            <th scope="col">Medewerker</th>
-                                                                            <th scope="col">Taak invullen</th>
-                                                                            <th scope="col">Verwijderen</th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        <c:forEach items="${takenBijVoorstelling}" var="takenBijVoorstelling">
-                                                                            <tr>
-                                                                                <td><c:out value="${takenBijVoorstelling.getTaak().getTaakNaam()}"/></td>
-                                                                                <td>
-                                                                                    <c:choose>
-                                                                                        <c:when test="${empty takenBijVoorstelling.getMedewerker().getGebruikersnaam()}">
-                                                                                            Openstaand
-                                                                                            <td>
-                                                                                                <a href="/planner/voorstellingsTaak/medewerkerKoppelen/${voorstelling.voorstellingId}/<c:out value='${takenBijVoorstelling.voorstellingsTaakId}' />">
-                                                                                                    <img src="/resources/images/icons/person.svg" alt="" width="30" height="30" title="Invullen" />
-                                                                                                </a>
-                                                                                            </td>
-                                                                                        </c:when>
-                                                                                        <c:otherwise>
-                                                                                            <c:out value="${takenBijVoorstelling.getMedewerker().getGebruikersnaam()}"/>
-                                                                                            <td>
-                                                                                                <a href="/planner/voorstellingsTaak/medewerkerKoppelen/${voorstelling.voorstellingId}/<c:out value='${takenBijVoorstelling.voorstellingsTaakId}' />">
-                                                                                                    <img src="/resources/images/icons/pencil.svg" alt="" width="30" height="30" title="Wijzigen" />
-                                                                                                </a>
-                                                                                            </td>
-                                                                                        </c:otherwise>
-                                                                                    </c:choose>
-                                                                                </td>
-                                                                                <td>
-                                                                                    <a href="/planner/voorstellingsTaak/verwijderen/${voorstelling.voorstellingId}/<c:out value='${takenBijVoorstelling.voorstellingsTaakId}' />">
-                                                                                        <img src="/resources/images/icons/trash.svg" alt="" width="30" height="30" title="Verwijderen" />
-                                                                                    </a>
-                                                                                </td>
-                                                                            </tr>
-                                                                        </c:forEach>
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
-                                                        </article>
-                                                    </div>
-                                                </div>
-                                            </div>
-        			</div>
-        		</div>
-        	</div>
-
-            <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-        </body>
-    <h1>Terug naar</h1>
-        <a class="btn btn-primary" href="/planner/voorstellingen">Overzicht Voorstellingen</a>
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+                integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+                crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+                integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+                crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+                integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+                crossorigin="anonymous"></script>
+    </body>
 </html>

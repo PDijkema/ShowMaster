@@ -55,3 +55,7 @@ svg.a:link, svg.a:visited {
 svg.a:hover, svg.a:active {
   outline: dotted 1px blue;
 }
+
+i.fas {
+    color: #0B72A9;
+  }

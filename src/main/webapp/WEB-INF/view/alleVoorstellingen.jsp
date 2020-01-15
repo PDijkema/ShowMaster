@@ -4,7 +4,8 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title></title>
+    <title>Voorstellingen</title>
+    <script src="https://kit.fontawesome.com/1eeb88da0f.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="\resources\css\custom.css" type="text/css" rel="stylesheet">
 </head>
@@ -26,14 +27,17 @@
                         <tr>
                             <td><c:out value="${voorstelling.naam}"/></td>
                             <td><c:out value="${voorstelling.datum}"/></td>
-                            <td><a href="/planner/voorstelling/details/<c:out value="${voorstelling.voorstellingId}" />">Taakbeheer</a></td>
+                            <td><a href="/planner/voorstelling/details/<c:out value="${voorstelling.voorstellingId}" />">
+                                <i class="fas fa-user-edit" title="Taakbeheer"></i>
+                                </a>
+                            </td>
                             <td><a href="/planner/voorstelling/wijzigen/<c:out value="${voorstelling.voorstellingId}" />">
-                                <img src="/resources/images/icons/pencil.svg" alt="" width="30" height="30" title="Wijzigen" />
+                                <i class="far fa-edit" title="Wijzigen"></i>
                                 </a>
                             </td>
                             <td>
                                 <a href="/planner/voorstelling/verwijderen/<c:out value="${voorstelling.voorstellingId}" />">
-                                <img src="/resources/images/icons/trash.svg" alt="" width="30" height="30" title="Verwijderen" />
+                                <i class="fas fa-trash" title="Verwijderen"></i>
                                 </a>
                             </td>
                         </tr>
