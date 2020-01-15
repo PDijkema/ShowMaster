@@ -5,6 +5,7 @@
 <head>
     <title></title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="\resources\js\ajax.js"></script>
 </head>
     <body>
         <h2>Persoonlijk rooster</h2>
@@ -36,7 +37,7 @@
                             </td>
                             <td><c:out value="${allePersoonlijkeVoorstellingsTaken.getVoorstelling().getDatum()}"/></td>
                             <td><c:out value="${allePersoonlijkeVoorstellingsTaken.getTaak().getTaakNaam()}"/></td>
-                            <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" onclick="loadDoc(${allePersoonlijkeVoorstellingsTaken.getVoorstelling().getVoorstellingId()})">
+                            <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" onclick="roosterLaden(${allePersoonlijkeVoorstellingsTaken.getVoorstelling().getVoorstellingId()})">
                                 Rooster bekijken
                             </button></td>
                         </tr>
@@ -65,16 +66,7 @@
 
 
         <script>
-function loadDoc(voorstellingId) {
-  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-      document.getElementById("rooster").innerHTML = this.responseText;
-    }
-  };
-  xhttp.open("GET", "voorstelling/rooster/" + voorstellingId, true);
-  xhttp.send();
-}
+
 </script>
 
 

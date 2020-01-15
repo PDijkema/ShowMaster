@@ -14,37 +14,6 @@
 
     <title>Wijzig voorstelling</title>
 </head>
-<<<<<<<<< Temporary merge branch 1
-<body>
-<jsp:include page="navbar.jsp" />
-<h1>Wijzigen gegevens voorstelling</h1>
-<form:form action="/planner/voorstelling/wijzigen" modelAttribute="voorstelling" method="post" novalidate="true" class="needs-validation">
-    <form:hidden path="voorstellingId"/>
-    <table>
-        <div>
-            <tr>
-                <td>Naam voorstelling:</td>
-                <td>
-                    <form:input class="form-control mb-2 mr-sm-2" path="naam" required="required" />
-                </td>
-            </tr>
-            <tr>
-                <td>Datum en tijdstip:</td>
-                <td>
-                    <form:input type="datetime-local" class="form-control mb-2 mr-sm-2" path="datum" value="${dateString}" required="required" />
-                </td>
-            </tr>
-        </div>
-        <tr>
-            <td colspan="1">
-                <input type="submit" class="btn btn-primary" value="Opslaan"/>
-            </td>
-        </tr>
-    </table>
-</form:form>
-<a class="btn btn-primary" href="/planner/voorstellingen">Overzicht Voorstellingen</a>
-</body>
-=========
     <body>
         <jsp:include page="navbar.jsp" />
         <h1>Wijzigen voorstelling</h1>
@@ -104,5 +73,5 @@
         </form:form>
                 <a class="btn btn-primary" href="/planner/voorstellingen">Overzicht Voorstellingen</a>
     </body>
->>>>>>>>> Temporary merge branch 2
+
 </html>
