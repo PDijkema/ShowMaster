@@ -39,6 +39,20 @@
                         </td>
                         <td>
                             <a onclick="return confirm('Weet je het zeker?')" class="btn btn-danger" href="/planner/voorstelling/annuleren/${voorstelling.voorstellingId}">Voorstelling annuleren</a>
+
+
+                            
+
+
+
+
+
+
+
+
+
+
+
                         </td>
                     </tr>
                 </div>
