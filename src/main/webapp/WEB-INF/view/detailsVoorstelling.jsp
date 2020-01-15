@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
               integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link href="\resources\css\custom.css" type="text/css" rel="stylesheet">
         <meta charset="UTF-8">
         <title>Details voorstelling</title>
@@ -62,13 +63,13 @@
                                         <c:when test="${empty takenBijVoorstelling.getMedewerker().getGebruikersnaam()}">
                                             Openstaand
                                 <td>
-                                    <i class="fas fa-user-plus" title="Invullen" data-toggle="modal" data-target="#exampleModal" onclick="taakInvullen(${voorstelling.voorstellingId}, ${takenBijVoorstelling.voorstellingsTaakId})"></i>
+                                    <button class="fas fa-user-plus" title="Invullen" data-toggle="modal" data-target="#exampleModal" onclick="taakInvullen(${voorstelling.voorstellingId}, ${takenBijVoorstelling.voorstellingsTaakId})"/>
                                 </td>
                                 </c:when>
                                 <c:otherwise>
                                     <c:out value="${takenBijVoorstelling.getMedewerker().getGebruikersnaam()}"/>
                                     <td>
-                                        <i class="far fa-edit" title="Wijzigen" data-toggle="modal" data-target="#exampleModal" onclick="loadDoc(${voorstelling.voorstellingId}, ${takenBijVoorstelling.voorstellingsTaakId})"></i>
+                                        <i onclick="loadDoc(${voorstelling.voorstellingId}, ${takenBijVoorstelling.voorstellingsTaakId})" class="far fa-edit" title="Wijzigen" data-toggle="modal" data-target="#exampleModal" ></i>
                                     </td>
                                 </c:otherwise>
                                 </c:choose>
@@ -91,7 +92,7 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Taak beheren</h5>
+                            <h2 class="modal-title" id="exampleModalLabel">Taak beheren</h2>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>

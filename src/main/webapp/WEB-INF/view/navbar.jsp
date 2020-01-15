@@ -35,7 +35,7 @@
                             <sec:authorize access="hasRole('PLANNER')">
                                 <a class="nav-item nav-link" href="/planner/voorstellingen">VOORSTELLINGEN</a>
                                 <a class="nav-item nav-link" href="/planner/taak/aanmaken">TAAK AANMAKEN</a>
-                                <a class="nav-item nav-link" href="/planner/gebruikeroverzicht">GEBRUIKERSOVERZICHT</a>
+                                <a class="nav-item nav-link" href="/planner/gebruiker/overzicht">GEBRUIKERSOVERZICHT</a>
                                 <a class="nav-item nav-link" href="/registreer">GEBRUIKER AANMAKEN</a>
                             </sec:authorize>
                             <a class="nav-item nav-link" href="/profielpagina">PROFIELGEGEVENS</a>

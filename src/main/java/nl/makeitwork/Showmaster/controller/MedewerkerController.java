@@ -133,7 +133,7 @@ public class MedewerkerController {
         }
     }
 
-    @GetMapping("/planner/gebruikeroverzicht")
+    @GetMapping("/planner/gebruiker/overzicht")
     public String gebruikerOverzicht (Model model,@AuthenticationPrincipal Medewerker ingelogdeMedwerker) {
         List<Medewerker> alleGebruikers = medewerkerRepository.findAll();
         alleGebruikers.removeIf(medewerker -> medewerker.getMedewerkerId().equals(ingelogdeMedwerker.getMedewerkerId()));
@@ -144,7 +144,7 @@ public class MedewerkerController {
     @GetMapping("/planner/gebruiker/verwijderen/{medewerkerId}")
     public String verwijderGebruiker(@PathVariable Integer medewerkerId) {
         medewerkerRepository.deleteById(medewerkerId);
-        return "redirect:/planner/gebruikeroverzicht";
+        return "redirect:/planner/gebruiker/overzicht";
     }
 
 }
