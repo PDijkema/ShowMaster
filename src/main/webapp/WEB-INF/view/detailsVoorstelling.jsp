@@ -11,6 +11,8 @@
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <meta charset="utf-8">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="\resources\js\ajax.js"></script>
+
         <meta charset="UTF-8">
         <title>Details Voorstelling</title>
     </head>
@@ -47,11 +49,19 @@
                                     <c:choose>
                                         <c:when test="${empty takenBijVoorstelling.getMedewerker().getGebruikersnaam()}">
                                             Openstaand
-                                            <td><a href="/planner/voorstellingsTaak/medewerkerKoppelen/${voorstelling.voorstellingId}/<c:out value='${takenBijVoorstelling.voorstellingsTaakId}' />">Invullen</a></td>
+                                            <td>
+
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" onclick="taakInvullen(${voorstelling.voorstellingId}, ${takenBijVoorstelling.voorstellingsTaakId})">
+                                    Invullen
+                                </button>
+
+                            </td>
                                         </c:when>
                                         <c:otherwise>
                                             <c:out value="${takenBijVoorstelling.getMedewerker().getGebruikersnaam()}"/>
-                                            <td><a href="/planner/voorstellingsTaak/medewerkerKoppelen/${voorstelling.voorstellingId}/<c:out value='${takenBijVoorstelling.voorstellingsTaakId}' />">Wijzigen</a></td>
+                                            <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" onclick="loadDoc(${voorstelling.voorstellingId}, ${takenBijVoorstelling.voorstellingsTaakId})">
+                                                Wijzigen
+                                            </button></td>
                                         </c:otherwise>
                                     </c:choose>
                                 </td>
@@ -74,6 +84,25 @@
         </body>
     <h1>Terug naar</h1>
         <a class="btn btn-primary" href="/planner/voorstellingen">Overzicht Voorstellingen</a>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Taak beheren</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p id="rooster"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">sluiten</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 </html>
-
-
