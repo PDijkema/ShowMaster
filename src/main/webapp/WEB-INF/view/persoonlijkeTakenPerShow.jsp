@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:c="http://www.w3.org/1999/XSL/Transform">
 <head>
     <title></title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -14,6 +14,7 @@
                 <thead>
                     <tr>
                         <th scope ="col">Naam</th>
+                        <th scope ="col"></th>
                         <th scope ="col">Datum en tijd</td>
                         <th scope ="col">Taak</td>
                         <th scope ="col">Collega's</td>
@@ -23,6 +24,16 @@
                     <c:forEach items="${allePersoonlijkeVoorstellingsTaken}" var="allePersoonlijkeVoorstellingsTaken">
                         <tr>
                             <td><c:out value="${allePersoonlijkeVoorstellingsTaken.getVoorstelling().getNaam()}"/></td>
+                            <td>
+                                <c:choose>
+                                    <c:when test="${allePersoonlijkeVoorstellingsTaken.getVoorstelling().getStatus() == 'Geannuleerd'}">
+                                        <span class="badge badge-danger">Voorstelling Geannuleerd</span>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <!-- nothing yet -->
+                                    </c:otherwise>
+                                </c:choose>
+                            </td>
                             <td><c:out value="${allePersoonlijkeVoorstellingsTaken.getVoorstelling().getDatum()}"/></td>
                             <td><c:out value="${allePersoonlijkeVoorstellingsTaken.getTaak().getTaakNaam()}"/></td>
                             <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" onclick="loadDoc(${allePersoonlijkeVoorstellingsTaken.getVoorstelling().getVoorstellingId()})">
