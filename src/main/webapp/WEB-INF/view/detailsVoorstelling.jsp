@@ -3,7 +3,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:c="http://www.w3.org/1999/XSL/Transform" xmlns:jsp="http://java.sun.com/JSP/Page">
     <head>
         <script src="https://kit.fontawesome.com/1eeb88da0f.js" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -28,7 +28,7 @@
         <div class="container-fluid">
             <div class="row flex-xl-nowrap">
                 <div class="col-md-3 col-xl-2 bd-sidebar">
-                    <h3>Taak toevoegen</h3>
+                    <h3>Dienst toevoegen</h3>
                     <ul class="nav flex-column">
                         <c:forEach items="${alleTaken}" var="taak">
                             <li class="nav-item"><a href="/planner/voorstellingsTaak/toevoegen/${voorstelling.voorstellingId}/
@@ -62,17 +62,13 @@
                                         <c:when test="${empty takenBijVoorstelling.getMedewerker().getGebruikersnaam()}">
                                             Openstaand
                                 <td>
-                                    <a href="/planner/voorstellingsTaak/medewerkerKoppelen/${voorstelling.voorstellingId}/<c:out value='${takenBijVoorstelling.voorstellingsTaakId}' />">
-                                        <i class="fas fa-user-plus" title="Invullen"></i>
-                                    </a>
+                                    <i class="fas fa-user-plus" title="Invullen" data-toggle="modal" data-target="#exampleModal" onclick="taakInvullen(${voorstelling.voorstellingId}, ${takenBijVoorstelling.voorstellingsTaakId})"></i>
                                 </td>
                                 </c:when>
                                 <c:otherwise>
                                     <c:out value="${takenBijVoorstelling.getMedewerker().getGebruikersnaam()}"/>
                                     <td>
-                                        <a href="/planner/voorstellingsTaak/medewerkerKoppelen/${voorstelling.voorstellingId}/<c:out value='${takenBijVoorstelling.voorstellingsTaakId}' />">
-                                            <i class="far fa-edit" title="Wijzigen"></i>
-                                        </a>
+                                        <i class="far fa-edit" title="Wijzigen" data-toggle="modal" data-target="#exampleModal" onclick="loadDoc(${voorstelling.voorstellingId}, ${takenBijVoorstelling.voorstellingsTaakId})"></i>
                                     </td>
                                 </c:otherwise>
                                 </c:choose>
@@ -90,6 +86,29 @@
                 </main>
             </div>
         </div>
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Taak beheren</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p id="rooster"></p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">sluiten</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+
+        </script>
 
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
                 integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
