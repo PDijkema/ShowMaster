@@ -53,8 +53,8 @@ public class VoorstellingController {
 
         Optional<Voorstelling> voorstelling = voorstellingRepository.findById(voorstellingId);
         model.addAttribute("alleTaken", taakRepository.findAll());
-        if (!voorstelling.isPresent()) {
-            return "redirect:/alleVoorstellingen";
+        if (!voorstelling.isPresent() || voorstelling.get().getStatus().equals("Geannuleerd")) {
+            return "redirect:/planner/voorstellingen";
         } else {
             request.getSession().setAttribute("voorstellingId", voorstellingId);
             model.addAttribute("voorstelling", voorstelling.get());
@@ -70,8 +70,8 @@ public class VoorstellingController {
 
         List<VoorstellingsTaak> voorstellingsTaken = voorstellingsTaakRepository.findByVoorstellingVoorstellingIdOrderByTaakTaakNaam(voorstellingId);
 
-        if (!voorstelling.isPresent()) {
-            return "redirect:/planner/alleVoorstellingen";
+        if (!voorstelling.isPresent() || voorstelling.get().getStatus().equals("Geannuleerd")) {
+            return "redirect:/planner/voorstellingen";
         } else {
             request.getSession().setAttribute("voorstellingId", voorstellingId);
             model.addAttribute("takenBijVoorstelling", voorstellingsTaken);
