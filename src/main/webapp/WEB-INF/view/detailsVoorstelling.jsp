@@ -60,7 +60,7 @@
                                         </c:when>
                                         <c:otherwise>
                                             <c:out value="${takenBijVoorstelling.getMedewerker().getGebruikersnaam()}"/>
-                                            <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" onclick="loadDoc(${voorstelling.voorstellingId}, ${takenBijVoorstelling.voorstellingsTaakId})">
+                                            <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" onclick="loadDoc(${voorstelling.voorstellingId}, ${takenBijVoorstelling.voorstellingsTaakId}, '${contextPath}')">
                                                 Wijzigen
                                             </button></td>
                                         </c:otherwise>
@@ -75,7 +75,7 @@
                 <table>
                     <tbody>
                         <c:forEach items="${alleTaken}" var="taak">
-                            <td><a class="btn btn-primary" href="${contextPath}/planner/voorstellingsTaak/toevoegen/${voorstelling.voorstellingId}/<c:out value="${taak.taakId}" />"><c:out value="${taak.taakNaam}"/></a></td>
+                            <td><a class="btn btn-primary" href="${contextPath}/planner/voorstellingsTaak/toevoegen/${voorstelling.voorstellingId}/<c:out value='${taak.taakId}' />"><c:out value="${taak.taakNaam}"/></a></td>
                         </c:forEach>
                     </tbody>
                 </table>

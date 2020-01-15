@@ -9,6 +9,8 @@
     <script src="\resources\js\ajax.js"></script>
 </head>
     <body>
+
+
         <h2>Persoonlijk rooster</h2>
             <form:hidden path="profielId" />
 
@@ -23,6 +25,7 @@
                     </tr>
                 </thead>
                 <tbody>
+
                     <c:forEach items="${allePersoonlijkeVoorstellingsTaken}" var="allePersoonlijkeVoorstellingsTaken">
                         <tr>
                             <td><c:out value="${allePersoonlijkeVoorstellingsTaken.getVoorstelling().getNaam()}"/></td>
@@ -38,7 +41,7 @@
                             </td>
                             <td><c:out value="${allePersoonlijkeVoorstellingsTaken.getVoorstelling().getDatum()}"/></td>
                             <td><c:out value="${allePersoonlijkeVoorstellingsTaken.getTaak().getTaakNaam()}"/></td>
-                            <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" onclick="roosterLaden(${allePersoonlijkeVoorstellingsTaken.getVoorstelling().getVoorstellingId()})">
+                            <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" onclick="roosterLaden(${allePersoonlijkeVoorstellingsTaken.getVoorstelling().getVoorstellingId()}, '${contextPath}')">
                                 Rooster bekijken
                             </button></td>
                         </tr>
