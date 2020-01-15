@@ -53,8 +53,8 @@ public class VoorstellingController {
 
         Optional<Voorstelling> voorstelling = voorstellingRepository.findById(voorstellingId);
         model.addAttribute("alleTaken", taakRepository.findAll());
-        if (!voorstelling.isPresent()) {
-            return "redirect:/alleVoorstellingen";
+        if (!voorstelling.isPresent() || voorstelling.get().getStatus().equals("Geannuleerd")) {
+            return "redirect:/planner/voorstellingen";
         } else {
             request.getSession().setAttribute("voorstellingId", voorstellingId);
             model.addAttribute("voorstelling", voorstelling.get());
@@ -70,8 +70,8 @@ public class VoorstellingController {
 
         List<VoorstellingsTaak> voorstellingsTaken = voorstellingsTaakRepository.findByVoorstellingVoorstellingIdOrderByTaakTaakNaam(voorstellingId);
 
-        if (!voorstelling.isPresent()) {
-            return "redirect:/planner/alleVoorstellingen";
+        if (!voorstelling.isPresent() || voorstelling.get().getStatus().equals("Geannuleerd")) {
+            return "redirect:/planner/voorstellingen";
         } else {
             request.getSession().setAttribute("voorstellingId", voorstellingId);
             model.addAttribute("takenBijVoorstelling", voorstellingsTaken);
@@ -80,10 +80,33 @@ public class VoorstellingController {
         }
     }
 
+    @GetMapping("/planner/voorstelling/publiceren/{voorstellingId}")
+    protected String publiceerVoorstelling(@PathVariable Integer voorstellingId) {
+        Optional<Voorstelling> voorstelling = voorstellingRepository.findById(voorstellingId);
+
+        voorstelling.ifPresent(value -> value.setStatus("Gepubliceerd"));
+        voorstelling.ifPresent(value -> voorstellingRepository.save(value));
+
+        return "redirect:/planner/voorstellingen";
+    }
+
+
+    @GetMapping("/planner/voorstelling/annuleren/{voorstellingId}")
+    protected String annuleerVoorstelling(@PathVariable Integer voorstellingId) {
+        Optional<Voorstelling> voorstelling = voorstellingRepository.findById(voorstellingId);
+
+        voorstelling.ifPresent(value -> value.setStatus("Geannuleerd"));
+        voorstelling.ifPresent(value -> voorstellingRepository.save(value));
+
+        return "redirect:/planner/voorstellingen";
+    }
+
+
     @PostMapping("/planner/voorstelling/toevoegen")
     protected String saveVoorstelling(@ModelAttribute("voorstelling") Voorstelling voorstelling, BindingResult result) {
 
         if (!result.hasErrors()) {
+            voorstelling.setStatus("Ongepubliceerd");
             voorstellingRepository.save(voorstelling);
             for (Taak taak : taakRepository.findAll()) {
                 standaardTakenOpslaanBijVoorstelling(taak.getStandaardBezetting(), voorstelling, taak);
@@ -92,7 +115,7 @@ public class VoorstellingController {
         } else {
             return "toevoegenVoorstelling";
         }
-        return "redirect:/voorstellingen";
+        return "redirect:/planner/voorstellingen";
     }
 
     @PostMapping("/planner/voorstelling/wijzigen")
@@ -116,7 +139,7 @@ public class VoorstellingController {
         }
     }
 
-    @GetMapping("/voorstelling/verwijderen/{voorstellingId}")
+    @GetMapping("/planner/voorstelling/verwijderen/{voorstellingId}")
     protected String verwijderVoorstelling(@PathVariable Integer voorstellingId) {
         voorstellingRepository.deleteById(voorstellingId);
         return "redirect:/planner/voorstellingen";
