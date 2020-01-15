@@ -16,10 +16,12 @@
                     <thead>
                         <tr>
                             <th scope ="col">Naam</th>
-                            <th scope ="col">Datum en tijd</td>
-                            <th scope ="col">Status</td>
+                            <th scope ="col">Datum en tijd</th>
+                            <th scope ="col">Status</th>
                             <th></th>
-                            <th scope ="col">Taakbeheer</td>
+                            <th scope ="col">Taakbeheer</th>
+                            <th scope ="col">Wijzigen</th>
+                            <th scope ="col">Verwijderen</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -30,7 +32,7 @@
                             <td>
                                 <c:choose>
                                     <c:when test="${voorstelling.status == 'Geannuleerd'}">
-                                        <span class="badge badge-danger">Voorstelling Geannuleerd</span>
+                                        <span class="badge badge-danger">Voorstelling geannuleerd</span>
                                     </c:when>
                                     <c:otherwise>
                                         <c:out value="${voorstelling.status}"/>
@@ -71,7 +73,9 @@
                                         <!-- nothing yet  -->
                                     </c:when>
                                     <c:otherwise>
-                                        <a href="/planner/voorstelling/details/<c:out value='${voorstelling.voorstellingId}' />">Taakbeheer</a>
+                                        <a href="/planner/voorstelling/details/<c:out value="${voorstelling.voorstellingId}" />">
+                                            <i class="fas fa-user-edit" title="Taakbeheer"></i>
+                                        </a>
                                     </c:otherwise>
                                 </c:choose>
                             </td>
@@ -81,11 +85,15 @@
                                         <!-- nothing yet -->
                                     </c:when>
                                     <c:otherwise>
-                                <a href="/planner/voorstelling/wijzigen/<c:out value='${voorstelling.voorstellingId}' />">Wijzigen</a>
+                                    <a href="/planner/voorstelling/wijzigen/<c:out value="${voorstelling.voorstellingId}" />">
+                                        <i class="far fa-edit" title="Wijzigen"></i>
+                                    </a>
                                     </c:otherwise>
                                 </c:choose>
                             </td>
-                            <td><a href="/planner/voorstelling/verwijderen/<c:out value='${voorstelling.voorstellingId}' />">Verwijderen</a></td>
+                            <td><a href="/planner/voorstelling/verwijderen/<c:out value='${voorstelling.voorstellingId}' />">
+                            <i class="fas fa-trash" title="Verwijderen"></i>
+                            </a></td>
                         </tr>
                         </c:forEach>
                     </tbody>
