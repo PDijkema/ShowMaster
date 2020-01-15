@@ -17,6 +17,7 @@
 
 
 <table class="table table-hover">
+    <h6>Voorstelling: ${voorstelling.naam}</h6>
     <thead>
     <tr>
         <th scope="col">Taak</th>

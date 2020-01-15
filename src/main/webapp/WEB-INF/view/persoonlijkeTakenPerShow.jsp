@@ -43,7 +43,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <p id="demo"></p>
+                        <p id="rooster"></p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">sluiten</button>
@@ -58,7 +58,7 @@ function loadDoc(voorstellingId) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-      document.getElementById("demo").innerHTML = this.responseText;
+      document.getElementById("rooster").innerHTML = this.responseText;
     }
   };
   xhttp.open("GET", "voorstelling/rooster/" + voorstellingId, true);

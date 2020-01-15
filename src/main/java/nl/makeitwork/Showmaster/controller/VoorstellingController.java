@@ -55,7 +55,7 @@ public class VoorstellingController {
         Optional<Voorstelling> voorstelling = voorstellingRepository.findById(voorstellingId);
         model.addAttribute("alleTaken", taakRepository.findAll());
         if (!voorstelling.isPresent()) {
-            return "redirect:/alleVoorstellingen";
+            return "redirect:/planner/voorstellingen";
         } else {
             request.getSession().setAttribute("voorstellingId", voorstellingId);
             model.addAttribute("voorstelling", voorstelling.get());
@@ -65,10 +65,14 @@ public class VoorstellingController {
 
     @GetMapping("/voorstelling/rooster/{voorstellingId}")
     protected String roosterVoorstelling(@PathVariable Integer voorstellingId, Model model){
+
         List<VoorstellingsTaak> voorstellingOverzicht = voorstellingsTaakRepository.findByVoorstellingVoorstellingId(voorstellingId);
         voorstellingOverzicht.removeIf(r->r.getMedewerker()== null);
 
+        Voorstelling voorstelling = voorstellingRepository.findByVoorstellingId(voorstellingId);
+
         model.addAttribute("voorstellingOverzicht",voorstellingOverzicht);
+        model.addAttribute("voorstelling", voorstelling);
 
     return "roosterVoorstelling";
     }
@@ -82,7 +86,7 @@ public class VoorstellingController {
         List<VoorstellingsTaak> voorstellingsTaken = voorstellingsTaakRepository.findByVoorstellingVoorstellingIdOrderByTaakTaakNaam(voorstellingId);
 
         if (!voorstelling.isPresent()) {
-            return "redirect:/planner/alleVoorstellingen";
+            return "redirect:/planner/voorstellingen";
         } else {
             request.getSession().setAttribute("voorstellingId", voorstellingId);
             model.addAttribute("takenBijVoorstelling", voorstellingsTaken);
@@ -103,7 +107,7 @@ public class VoorstellingController {
         } else {
             return "toevoegenVoorstelling";
         }
-        return "redirect:/voorstellingen";
+        return "redirect:/planner/voorstellingen";
     }
 
     @PostMapping("/planner/voorstelling/wijzigen")
