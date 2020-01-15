@@ -5,7 +5,7 @@ function roosterLaden(voorstellingId) {
       document.getElementById("rooster").innerHTML = this.responseText;
     }
   };
-  xhttp.open("GET", "voorstelling/rooster/" + voorstellingId, true);
+  xhttp.open("GET", "/voorstelling/rooster/" + voorstellingId, true);
   xhttp.send();
 }
 
