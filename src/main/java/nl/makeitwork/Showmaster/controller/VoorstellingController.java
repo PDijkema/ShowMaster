@@ -93,7 +93,10 @@ public class VoorstellingController {
 
     @GetMapping("/planner/voorstelling/annuleren/{voorstellingId}")
     protected String annuleerVoorstelling(@PathVariable Integer voorstellingId) {
-        System.out.println("geannuleerd!");
+        Optional<Voorstelling> voorstelling = voorstellingRepository.findById(voorstellingId);
+
+        voorstelling.ifPresent(value -> value.setStatus("Geannuleerd"));
+        voorstelling.ifPresent(value -> voorstellingRepository.save(value));
 
         return "redirect:/planner/voorstellingen";
     }

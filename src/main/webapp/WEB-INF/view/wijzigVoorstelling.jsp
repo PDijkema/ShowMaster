@@ -38,7 +38,7 @@
                             <input class="form-control" type="text" placeholder="${voorstelling.status}" readonly>
                         </td>
                         <td>
-                            <a onclick="return confirm('Weet je het zeker?')" class="btn btn-secondary" href="/planner/voorstelling/annuleren/${voorstelling.voorstellingId}">'${voorstelling.naam}' annuleren</a>
+                            <a onclick="return confirm('Weet je het zeker?')" class="btn btn-danger" href="/planner/voorstelling/annuleren/${voorstelling.voorstellingId}">Voorstelling annuleren</a>
                         </td>
                     </tr>
                 </div>
