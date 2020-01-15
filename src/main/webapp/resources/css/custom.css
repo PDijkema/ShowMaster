@@ -56,6 +56,6 @@ svg.a:hover, svg.a:active {
   outline: dotted 1px blue;
 }
 
-i.fas {
+i.fas, i.far {
     color: #0B72A9;
   }

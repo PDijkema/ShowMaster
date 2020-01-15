@@ -127,9 +127,10 @@
                         </div>
                     </spring:bind>
                 <p>*Verplichte velden</p>
+
+                <button class="btn btn-primary" type="submit">Opslaan</button>
+                <a class="btn btn-primary" href="/profielpagina">Annuleren</a>
             </form:form>
-            <button class="btn btn-primary" type="submit">Opslaan</button>
-            <a class="btn btn-primary" href="/profielpagina">Annuleren</a>
         </div>
 
     </body>

@@ -2,8 +2,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
-            <h5>Taak: ${taak}</h5>
-            <h5>Voorstelling: ${voorstelling}</h5>
+            <h2>Taak: ${taak}</h2>
+            <h2>Voorstelling: ${voorstelling}</h2>
 
             <form:form action="/planner/voorstellingsTaak/medewerkerKoppelen/${voorstellingId}/${voorstellingsTaakId}/${medewerker.medewerkerId}" modelAttribute="voorstellingsTaak" method="post">
                 <form:hidden path="voorstellingsTaakId"/>

@@ -5,15 +5,14 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:c="http://www.w3.org/1999/XSL/Transform" xmlns:jsp="http://java.sun.com/JSP/Page">
     <head>
-        <script src="https://kit.fontawesome.com/1eeb88da0f.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link href="\resources\css\custom.css" type="text/css" rel="stylesheet">
-        <meta charset="UTF-8">
+        <script src="\resources\js\ajax.js"></script>
+        <script src="https://kit.fontawesome.com/1eeb88da0f.js" crossorigin="anonymous"></script>
         <title>Details voorstelling</title>
     </head>
 
@@ -63,7 +62,7 @@
                                         <c:when test="${empty takenBijVoorstelling.getMedewerker().getGebruikersnaam()}">
                                             Openstaand
                                 <td>
-                                    <button class="fas fa-user-plus" title="Invullen" data-toggle="modal" data-target="#exampleModal" onclick="taakInvullen(${voorstelling.voorstellingId}, ${takenBijVoorstelling.voorstellingsTaakId})"/>
+                                    <i class="fas fa-user-plus" title="Invullen" data-toggle="modal" data-target="#exampleModal" onclick="taakInvullen(${voorstelling.voorstellingId}, ${takenBijVoorstelling.voorstellingsTaakId})"/></i>
                                 </td>
                                 </c:when>
                                 <c:otherwise>
