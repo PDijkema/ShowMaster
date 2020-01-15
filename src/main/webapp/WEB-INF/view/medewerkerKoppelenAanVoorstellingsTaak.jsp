@@ -15,9 +15,8 @@
         <title>Details Voorstelling</title>
     </head>
         <body>
-            <h1>Taak invullen</h1>
-            <h2>Taak: ${taak}</h2>
-            <h2>Voorstelling: ${voorstelling}</h2>
+            <h5>Taak: ${taak}</h5>
+            <h5>Voorstelling: ${voorstelling}</h5>
 
             <form:form action="/planner/voorstellingsTaak/medewerkerKoppelen/${voorstellingId}/${voorstellingsTaakId}/${medewerker.medewerkerId}" modelAttribute="voorstellingsTaak" method="post">
                 <form:hidden path="voorstellingsTaakId"/>

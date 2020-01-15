@@ -47,11 +47,19 @@
                                     <c:choose>
                                         <c:when test="${empty takenBijVoorstelling.getMedewerker().getGebruikersnaam()}">
                                             Openstaand
-                                            <td><a href="/planner/voorstellingsTaak/medewerkerKoppelen/${voorstelling.voorstellingId}/<c:out value='${takenBijVoorstelling.voorstellingsTaakId}' />">Invullen</a></td>
+                                            <td>
+
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" onclick="loadDoc(${voorstelling.voorstellingId}, ${takenBijVoorstelling.voorstellingsTaakId})">
+                                    Invullen
+                                </button>
+
+                            </td>
                                         </c:when>
                                         <c:otherwise>
                                             <c:out value="${takenBijVoorstelling.getMedewerker().getGebruikersnaam()}"/>
-                                            <td><a href="/planner/voorstellingsTaak/medewerkerKoppelen/${voorstelling.voorstellingId}/<c:out value='${takenBijVoorstelling.voorstellingsTaakId}' />">Wijzigen</a></td>
+                                            <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" onclick="loadDoc(${voorstelling.voorstellingId}, ${takenBijVoorstelling.voorstellingsTaakId})">
+                                                Wijzigen
+                                            </button></td>
                                         </c:otherwise>
                                     </c:choose>
                                 </td>
@@ -74,4 +82,37 @@
         </body>
     <h1>Terug naar</h1>
         <a class="btn btn-primary" href="/planner/voorstellingen">Overzicht Voorstellingen</a>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Taak beheren</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p id="rooster"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">sluiten</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+function loadDoc(voorstellingId, taakId ) {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("rooster").innerHTML = this.responseText;
+    }
+  };
+  xhttp.open("GET", "/planner/voorstellingsTaak/medewerkerKoppelen/" + voorstellingId + "/"+ taakId, true);
+  xhttp.send();
+}
+</script>
+
 </html>
