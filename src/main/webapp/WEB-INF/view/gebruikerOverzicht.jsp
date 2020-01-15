@@ -24,7 +24,7 @@
                         <td><c:out value="${gebruiker.gebruikersnaam}"/></td>
 
                         <td>
-                            <a href="/planner/gebruiker/verwijderen/<c:out value="${gebruiker.medewerkerId}" />">Verwijderen</a>
+                            <a href="${contextPath}/planner/gebruiker/verwijderen/<c:out value="${gebruiker.medewerkerId}" />">Verwijderen</a>
                         </td>
 
                     </tr>

@@ -56,7 +56,7 @@
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <a class="btn btn-danger" href="/planner/voorstelling/annuleren/${voorstelling.voorstellingId}">Voorstelling annuleren</a>
+                                            <a class="btn btn-danger" href="${contextPath}/planner/voorstelling/annuleren/${voorstelling.voorstellingId}">Voorstelling annuleren</a>
                                         </div>
                                     </div>
                                 </div>
@@ -71,7 +71,7 @@
                 </tr>
             </table>
         </form:form>
-                <a class="btn btn-primary" href="/planner/voorstellingen">Overzicht Voorstellingen</a>
+                <a class="btn btn-primary" href="${contextPath}/planner/voorstellingen">Overzicht Voorstellingen</a>
     </body>
 
 </html>

@@ -12,7 +12,7 @@
 <jsp:include page="navbar.jsp" />
 <h1>U heeft geen toegang tot deze pagina</h1>
 
-<a class="btn btn-primary" href="/startpagina">Terug naaar de startpagina</a>
+<a class="btn btn-primary" href="${contextPath}/startpagina">Terug naaar de startpagina</a>
 
 </body>
 

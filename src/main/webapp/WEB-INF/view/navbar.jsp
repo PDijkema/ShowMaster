@@ -32,20 +32,20 @@
                     <div class="collapse navbar-collapse" id="navbarNavDropdown">
                         <ul class="navbar-nav">
                             <li class="nav-item active">
-                                <a class="nav-link" href="/startpagina">Startpagina <span class="sr-only">(current)</span></a>
+                                <a class="nav-link" href="${contextPath}/startpagina">Startpagina <span class="sr-only">(current)</span></a>
                             </li>
                             <sec:authorize access="hasRole('PLANNER')">
                             <li class="nav-item">
-                                <a class="nav-link" href="/planner/voorstellingen">Voorstellingen</a>
+                                <a class="nav-link" href="${contextPath}/planner/voorstellingen">Voorstellingen</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/planner/taak/aanmaken">Taak aanmaken</a>
+                                <a class="nav-link" href="${contextPath}/planner/taak/aanmaken">Taak aanmaken</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/planner/gebruiker/overzicht">Gebruiker overzicht</a>
+                                <a class="nav-link" href="${contextPath}/planner/gebruiker/overzicht">Gebruiker overzicht</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/registreer">Gebruiker aanmaken</a>
+                                <a class="nav-link" href="${contextPath}/registreer">Gebruiker aanmaken</a>
                             </li>
                             </sec:authorize>
                             <li class="nav-item dropdown">
@@ -53,7 +53,7 @@
                                 Mijn profiel
                                 </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" href="/profielpagina">Mijn profielgegevens</a>
+                                <a class="dropdown-item" href="${contextPath}/profielpagina">Mijn profielgegevens</a>
                                     <c:if test="${pageContext.request.userPrincipal.name != null}">
                                         <form id="logoutform" action="${contextPath}/logout" method="post">
                                         <input name="utf8" type="hidden" value="✓">

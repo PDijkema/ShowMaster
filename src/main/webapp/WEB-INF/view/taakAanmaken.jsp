@@ -15,7 +15,7 @@
         <jsp:include page="navbar.jsp" />
         <h1>Maak een nieuwe taak aan</h1>
 
-        <form:form action="/planner/taak/aanmaken" modelAttribute="taak" method="post" novalidate="true" class="needs-validation">
+        <form:form action="${contextPath}/planner/taak/aanmaken" modelAttribute="taak" method="post" novalidate="true" class="needs-validation">
             <table>
                 <tr>
                     <td>Taaknaam:</td>

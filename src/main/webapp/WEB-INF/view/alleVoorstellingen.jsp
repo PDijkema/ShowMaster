@@ -55,7 +55,7 @@
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                        <a class="btn btn-primary btn" href="/planner/voorstelling/publiceren/<c:out value='${voorstelling.voorstellingId}' />">Publiceer</a>
+                                                        <a class="btn btn-primary btn" href="${contextPath}/planner/voorstelling/publiceren/<c:out value='${voorstelling.voorstellingId}' />">Publiceer</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -69,7 +69,7 @@
                                         <!-- nothing yet  -->
                                     </c:when>
                                     <c:otherwise>
-                                        <a href="/planner/voorstelling/details/<c:out value='${voorstelling.voorstellingId}' />">Taakbeheer</a>
+                                        <a href="${contextPath}/planner/voorstelling/details/<c:out value='${voorstelling.voorstellingId}' />">Taakbeheer</a>
                                     </c:otherwise>
                                 </c:choose>
                             </td>
@@ -79,15 +79,15 @@
                                         <!-- nothing yet -->
                                     </c:when>
                                     <c:otherwise>
-                                <a href="/planner/voorstelling/wijzigen/<c:out value='${voorstelling.voorstellingId}' />">Wijzigen</a>
+                                <a href="${contextPath}/planner/voorstelling/wijzigen/<c:out value='${voorstelling.voorstellingId}' />">Wijzigen</a>
                                     </c:otherwise>
                                 </c:choose>
                             </td>
-                            <td><a href="/planner/voorstelling/verwijderen/<c:out value='${voorstelling.voorstellingId}' />">Verwijderen</a></td>
+                            <td><a href="${contextPath}/planner/voorstelling/verwijderen/<c:out value='${voorstelling.voorstellingId}' />">Verwijderen</a></td>
                         </tr>
                         </c:forEach>
                     </tbody>
                 </table>
-            <a class="btn btn-primary" href="/planner/voorstelling/toevoegen">Voeg voorstelling toe</a>
+            <a class="btn btn-primary" href="${contextPath}/planner/voorstelling/toevoegen">Voeg voorstelling toe</a>
     </body>
 </html>
