@@ -47,7 +47,7 @@
                         <tr>
                             <th scope="col">Taak</th>
                             <th scope="col">Medewerker</th>
-                            <th scope="col">Medewerker toewijzen/wijzigen</th>
+                            <th scope="col">Toewijzen/wijzigen</th>
                             <th scope="col">Verwijderen</th>
                         </tr>
                         </thead>
