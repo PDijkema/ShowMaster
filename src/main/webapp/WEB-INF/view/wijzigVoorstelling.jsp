@@ -73,4 +73,5 @@
         </form:form>
                 <a class="btn btn-primary" href="/planner/voorstellingen">Overzicht Voorstellingen</a>
     </body>
+
 </html>

@@ -62,6 +62,20 @@ public class VoorstellingController {
         }
     }
 
+    @GetMapping("/voorstelling/rooster/{voorstellingId}")
+    protected String roosterVoorstelling(@PathVariable Integer voorstellingId, Model model){
+
+        List<VoorstellingsTaak> voorstellingOverzicht = voorstellingsTaakRepository.findByVoorstellingVoorstellingId(voorstellingId);
+        voorstellingOverzicht.removeIf(r->r.getMedewerker()== null);
+
+        Voorstelling voorstelling = voorstellingRepository.findByVoorstellingId(voorstellingId);
+
+        model.addAttribute("voorstellingOverzicht",voorstellingOverzicht);
+        model.addAttribute("voorstelling", voorstelling);
+
+    return "roosterVoorstelling";
+    }
+
     @GetMapping("/planner/voorstelling/details/{voorstellingId}")
     protected String detailsVoorstelling(@PathVariable Integer voorstellingId, Model model, HttpServletRequest request) {
 
