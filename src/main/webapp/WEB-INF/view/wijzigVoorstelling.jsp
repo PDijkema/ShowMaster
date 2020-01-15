@@ -18,7 +18,7 @@
     <body>
         <jsp:include page="navbar.jsp" />
         <h1>Wijzigen voorstelling</h1>
-        <form:form action="/planner/voorstelling/wijzigen" modelAttribute="voorstelling" method="post">
+        <form:form action="${contextPath}/planner/voorstelling/wijzigen" modelAttribute="voorstelling" method="post">
             <form:hidden path="voorstellingId"/>
             <table>
                 <div>
