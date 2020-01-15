@@ -29,7 +29,28 @@
                             <td>
                                 <c:choose>
                                     <c:when test="${voorstelling.status == 'Ongepubliceerd'}">
-                                        <a onclick="return confirm('Weet je het zeker?')" class="btn btn-secondary btn-sm" href="/planner/voorstelling/publiceren/<c:out value='${voorstelling.voorstellingId}' />">Publiceer</a>
+                                        <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#exampleModal">
+                                            Publiceer
+                                        </button>
+                                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Voorstelling publiceren</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        Medewerkers kunnen zicht nu inschrijven voor deze voorstelling. Weet je het zeker?
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <a class="btn btn-primary btn" href="/planner/voorstelling/publiceren/<c:out value='${voorstelling.voorstellingId}' />">Publiceer</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </c:when>
                                     <c:otherwise>
                                         <!-- nothing yet -->
