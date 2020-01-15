@@ -16,7 +16,7 @@
                             <th scope ="col">Naam</th>
                             <th scope ="col">Datum en tijd</td>
                             <th scope ="col">Status</td>
-                            <td></td>
+                            <th></th>
                             <th scope ="col">Taakbeheer</td>
                         </tr>
                     </thead>
@@ -36,8 +36,26 @@
                                     </c:otherwise>
                                 </c:choose>
                             </td>
-                            <td><a href="/planner/voorstelling/details/<c:out value='${voorstelling.voorstellingId}' />">Taakbeheer</a></td>
-                            <td><a href="/planner/voorstelling/wijzigen/<c:out value='${voorstelling.voorstellingId}' />">Wijzigen</a></td>
+                            <td>
+                                <c:choose>
+                                    <c:when test="${voorstelling.status == 'Geannuleerd'}">
+                                        <!-- nothing yet -->
+                                    </c:when>
+                                    <c:otherwise>
+                                        <a href="/planner/voorstelling/details/<c:out value='${voorstelling.voorstellingId}' />">Taakbeheer</a>
+                                    </c:otherwise>
+                                </c:choose>
+                            </td>
+                            <td>
+                                <c:choose>
+                                    <c:when test="${voorstelling.status == 'Geannuleerd'}">
+                                        <!-- nothing yet -->
+                                    </c:when>
+                                    <c:otherwise>
+                                <a href="/planner/voorstelling/wijzigen/<c:out value='${voorstelling.voorstellingId}' />">Wijzigen</a>
+                                    </c:otherwise>
+                                </c:choose>
+                            </td>
                             <td><a href="/planner/voorstelling/verwijderen/<c:out value='${voorstelling.voorstellingId}' />">Verwijderen</a></td>
                         </tr>
                         </c:forEach>
