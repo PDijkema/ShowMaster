@@ -11,6 +11,8 @@
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <meta charset="utf-8">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="\resources\js\ajax.js"></script>
+
         <meta charset="UTF-8">
         <title>Details Voorstelling</title>
     </head>
@@ -49,7 +51,7 @@
                                             Openstaand
                                             <td>
 
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" onclick="loadDoc(${voorstelling.voorstellingId}, ${takenBijVoorstelling.voorstellingsTaakId})">
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" onclick="taakInvullen(${voorstelling.voorstellingId}, ${takenBijVoorstelling.voorstellingsTaakId})">
                                     Invullen
                                 </button>
 
@@ -103,16 +105,7 @@
     </div>
 
     <script>
-function loadDoc(voorstellingId, taakId ) {
-  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-      document.getElementById("rooster").innerHTML = this.responseText;
-    }
-  };
-  xhttp.open("GET", "/planner/voorstellingsTaak/medewerkerKoppelen/" + voorstellingId + "/"+ taakId, true);
-  xhttp.send();
-}
+
 </script>
 
 </html>
