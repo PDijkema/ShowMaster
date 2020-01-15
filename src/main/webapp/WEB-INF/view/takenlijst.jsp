@@ -31,7 +31,7 @@
                     <tr>
                         <td><c:out value="${taak.taakNaam}" /></td>
                         <td><c:out value="${taak.standaardBezetting}" /></td>
-                        <td><a href="${contextPath}/planner/taak/verwijderen/<c:out value="${taak.taakId}" />">Verwijderen</a></td>
+                        <td><a href="${contextPath}/planner/taak/verwijderen/<c:out value='${taak.taakId}' />">Verwijderen</a></td>
                     </tr>
                     </c:forEach>
                 </tbody>
