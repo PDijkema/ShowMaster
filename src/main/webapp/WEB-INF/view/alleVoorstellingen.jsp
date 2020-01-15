@@ -66,7 +66,7 @@
                             <td>
                                 <c:choose>
                                     <c:when test="${voorstelling.status == 'Geannuleerd'}">
-                                        <!-- nothing yet -->
+                                        <!-- nothing yet  -->
                                     </c:when>
                                     <c:otherwise>
                                         <a href="/planner/voorstelling/details/<c:out value='${voorstelling.voorstellingId}' />">Taakbeheer</a>
