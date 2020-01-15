@@ -25,13 +25,15 @@
                         <tr>
                             <td><c:out value="${medewerkerInschrijvingVoorstelling.medewerker.gebruikersnaam}"/></td>
                             <td></td>
-                            <td><a href="/planner/voorstellingsTaak/medewerkerKoppelen/${voorstellingId}/${voorstellingsTaakId}/${medewerkerInschrijvingVoorstelling.medewerker.medewerkerId}">Selecteer</a></td>
+                            <td>
+                                <a class="btn btn-primary" href="/planner/voorstellingsTaak/medewerkerKoppelen/${voorstellingId}/${voorstellingsTaakId}/${medewerkerInschrijvingVoorstelling.medewerker.medewerkerId}">Selecteer</a>
+                            </td>
                         </tr>
                     </c:forEach>
                 </table>
             </form:form>
 
         </body>
-    <a class="btn btn-primary" href="/planner/voorstelling/details/${voorstellingId}">Terug</a>
+
 
 </html>
