@@ -25,7 +25,16 @@
                         <tr>
                             <td><c:out value="${voorstelling.naam}"/></td>
                             <td><c:out value="${voorstelling.datum}"/></td>
-                            <td><c:out value="${voorstelling.status}"/></td>
+                            <td>
+                                <c:choose>
+                                    <c:when test="${voorstelling.status == 'Geannuleerd'}">
+                                        <span class="badge badge-danger">Voorstelling Geannuleerd</span>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <c:out value="${voorstelling.status}"/>
+                                    </c:otherwise>
+                                </c:choose>
+                            </td>
                             <td>
                                 <c:choose>
                                     <c:when test="${voorstelling.status == 'Ongepubliceerd'}">
@@ -52,9 +61,6 @@
                                             </div>
                                         </div>
                                     </c:when>
-                                    <c:otherwise>
-                                        <!-- nothing yet -->
-                                    </c:otherwise>
                                 </c:choose>
                             </td>
                             <td>
