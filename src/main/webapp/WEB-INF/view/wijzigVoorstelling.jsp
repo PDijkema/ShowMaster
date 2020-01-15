@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ page import = "jared.simpledatabase.*" %>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
 <!doctype html>
 <html lang="en" xmlns:form="http://www.w3.org/1999/xhtml">
