@@ -52,7 +52,7 @@
                                             Openstaand
                                             <td>
 
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" onclick="taakInvullen(${voorstelling.voorstellingId}, ${takenBijVoorstelling.voorstellingsTaakId}, '${contextPath}')">
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" onclick="taakInvullen(${voorstelling.voorstellingId}, ${takenBijVoorstelling.voorstellingsTaakId}, ${contextPath})">
                                     Invullen
                                 </button>
 
@@ -60,7 +60,7 @@
                                         </c:when>
                                         <c:otherwise>
                                             <c:out value="${takenBijVoorstelling.getMedewerker().getGebruikersnaam()}"/>
-                                            <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" onclick="taakInvullen(${voorstelling.voorstellingId}, ${takenBijVoorstelling.voorstellingsTaakId}, '${contextPath}')">
+                                            <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" onclick="taakInvullen(${voorstelling.voorstellingId}, ${takenBijVoorstelling.voorstellingsTaakId}, ${contextPath})">
                                                 Wijzigen
                                             </button></td>
                                         </c:otherwise>
