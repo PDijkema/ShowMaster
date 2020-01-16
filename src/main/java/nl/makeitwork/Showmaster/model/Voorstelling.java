@@ -21,7 +21,7 @@ public class Voorstelling {
     @NotNull
     private String naam;
     @NotNull
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    @DateTimeFormat(pattern = "dd-MM-yyyy HH:mm")
     private LocalDateTime datum;
 
     private String status;
