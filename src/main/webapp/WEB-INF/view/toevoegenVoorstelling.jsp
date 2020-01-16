@@ -54,10 +54,12 @@
 </form:form>
 <a class="btn btn-primary" href="/planner/voorstellingen">Overzicht Voorstellingen</a>
 
+
+
 <script>
-    $("#datetime-local").datetimepicker({
+$("#datetime-local").datetimepicker({
     format: "d-m-Y H:i",
-    });
+});
 </script>
 
 </body>
