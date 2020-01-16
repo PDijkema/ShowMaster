@@ -21,14 +21,14 @@
         <div class="jumbotron jumbotron-fluid">
             <div class="container">
                 <h1 id="voorstellingDisplay4" class="display-4">${voorstelling.naam}</h1>
-                <h2>${voorstelling.datum}</h2>
+                <h3 id="voorstellingDatumDisplay4" class="display-4"> ${voorstelling.datum}</h3>
             </div>
         </div>
 
         <div class="container-fluid">
             <div class="row flex-xl-nowrap">
-                <div class="col-md-3 col-xl-2 bd-sidebar">
-                    <h3>Dienst toevoegen</h3>
+                <div class="col-md-3 col-xl-2 py-md-3 pl-md-5 bd-sidebar">
+                    <h2>Dienst toevoegen</h2>
                     <ul class="nav flex-column">
                         <c:forEach items="${alleTaken}" var="taak">
                             <li class="nav-item"><a href="/planner/voorstellingsTaak/toevoegen/${voorstelling.voorstellingId}/
