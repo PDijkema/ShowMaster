@@ -13,6 +13,8 @@
         <meta charset="utf-8">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <script src="\resources\js\ajax.js"></script>
+        <script>var contextPathJS = "${pageContext.request.contextPath}"</script>
+
 
         <meta charset="UTF-8">
         <title>Details Voorstelling</title>
@@ -32,6 +34,7 @@
                         <td scope="col">${voorstelling.datum}</td>
                     </tr>
                 </table>
+
             <h1>Diensten bij voorstelling</h1>
                 <table class="table table-hover">
                     <thead>
@@ -52,15 +55,14 @@
                                             Openstaand
                                             <td>
 
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" onclick="taakInvullen(${voorstelling.voorstellingId}, ${takenBijVoorstelling.voorstellingsTaakId}, '${contextPath}')">
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" onclick="taakInvullen(${voorstelling.voorstellingId}, ${takenBijVoorstelling.voorstellingsTaakId}, contextPathJS)">
                                     Invullen
                                 </button>
-
                             </td>
                                         </c:when>
                                         <c:otherwise>
                                             <c:out value="${takenBijVoorstelling.getMedewerker().getGebruikersnaam()}"/>
-                                            <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" onclick="taakInvullen(${voorstelling.voorstellingId}, ${takenBijVoorstelling.voorstellingsTaakId}, ${contextPath})">
+                                            <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" onclick="taakInvullen(${voorstelling.voorstellingId}, ${takenBijVoorstelling.voorstellingsTaakId}, contextPathJS)">
                                                 Wijzigen
                                             </button></td>
                                         </c:otherwise>
@@ -104,6 +106,8 @@
             </div>
         </div>
     </div>
+
+
 
 
 </html>
