@@ -1,57 +1,59 @@
 package nl.makeitwork.Showmaster.controller;
 
+import nl.makeitwork.Showmaster.helper.ExcelPOIHelper;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.annotation.Resource;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.io.InputStream;
 
 @Controller
 public class UploadController {
 
-    //Save the uploaded file to this folder
-    private static String UPLOADED_FOLDER = "/resources/excels/";
+    private String fileLocation;
 
-    @GetMapping("/upload")
-    public String index() {
-        return "upload";
+    @PostMapping("/uploadExcelFile")
+    public String uploadFile(Model model, MultipartFile file) throws IOException {
+        InputStream in = file.getInputStream();
+        File currDir = new File(".");
+        String path = currDir.getAbsolutePath();
+        fileLocation = path.substring(0, path.length() - 1) + file.getOriginalFilename();
+        FileOutputStream f = new FileOutputStream(fileLocation);
+        int ch = 0;
+        while ((ch = in.read()) != -1) {
+            f.write(ch);
+        }
+        f.flush();
+        f.close();
+        model.addAttribute("message", "File: " + file.getOriginalFilename()
+                + " has been uploaded successfully!");
+        return "excel";
     }
 
-    //@RequestMapping(value = "/upload", method = RequestMethod.POST)
-    @PostMapping("/upload") // //new annotation since 4.3
-    public String singleFileUpload(@RequestParam("file") MultipartFile file,
-                                   RedirectAttributes redirectAttributes) {
+    @Resource(name = "excelPOIHelper")
+    private ExcelPOIHelper excelPOIHelper;
 
-        if (file.isEmpty()) {
-            redirectAttributes.addFlashAttribute("message", "Kies een bestand om te uploaden");
-            return "redirect:uploadStatus";
+    @RequestMapping(method = RequestMethod.GET, value = "/readPOI")
+    public String readPOI(Model model) throws IOException {
+
+        if (fileLocation != null) {
+            if (fileLocation.endsWith(".xlsx") || fileLocation.endsWith(".xls")) {
+                Map<Integer, List<MyCell>> data
+                        = excelPOIHelper.readExcel(fileLocation);
+                model.addAttribute("data", data);
+            } else {
+                model.addAttribute("message", "Not a valid excel file!");
+            }
+        } else {
+            model.addAttribute("message", "File missing! Please upload an excel file.");
         }
-
-        try {
-
-            // Get the file and save it somewhere
-            byte[] bytes = file.getBytes();
-            Path path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
-            Files.write(path, bytes);
-
-            redirectAttributes.addFlashAttribute("message",
-                    "Het uploaden van '" + file.getOriginalFilename() + "'" + "is geslaagd");
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return "redirect:/uploadStatus";
-    }
-
-    @GetMapping("/uploadStatus")
-    public String uploadStatus() {
-        return "uploadStatus";
+        return "excel";
     }
 }
