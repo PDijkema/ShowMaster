@@ -20,7 +20,7 @@
     <jsp:include page="navbar.jsp"/>
         <div class="jumbotron jumbotron-fluid">
             <div class="container">
-                <h1 class="display-4">${voorstelling.naam}</h1>
+                <h1 id="voorstellingDisplay4" class="display-4">${voorstelling.naam}</h1>
                 <h2>${voorstelling.datum}</h2>
             </div>
         </div>
