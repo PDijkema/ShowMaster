@@ -179,6 +179,7 @@ public class VoorstellingController {
     protected String setupTakenInDatabase() {
 
         Voorstelling voorstelling1 = new Voorstelling();
+        
         voorstelling1.setNaam("Lion King");
         voorstelling1.setLocalDateTime(LocalDateTime.of(2020, Month.JANUARY, 18, 20, 30));
         voorstelling1.setStatus("Gepubliceerd");
