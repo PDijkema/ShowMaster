@@ -122,10 +122,12 @@ public class VoorstellingController {
 
         if (!result.hasErrors()) {
             voorstelling.setStatus("Ongepubliceerd");
-/*            DateTimeFormatter aFormatter = DateTimeFormatter.ofPattern("dd-MM-yyy HH:mm");
-            LocalDateTime localDateTime = voorstelling.getDatum();
+
+            DateTimeFormatter aFormatter = DateTimeFormatter.ofPattern("dd MMMM yyyy HH:mm");
+            LocalDateTime localDateTime = voorstelling.getLocalDateTime();
             String formattedString = localDateTime.format(aFormatter);
-            System.out.println("formatted datum: " + formattedString);*/
+
+            voorstelling.setDatum(formattedString);
 
             voorstellingRepository.save(voorstelling);
             for (Taak taak : taakRepository.findAll()) {
@@ -142,6 +144,13 @@ public class VoorstellingController {
     protected String UpdateVoorstelling(@ModelAttribute("voorstelling") Voorstelling voorstelling, BindingResult result) {
 
         if (!result.hasErrors()) {
+
+            DateTimeFormatter aFormatter = DateTimeFormatter.ofPattern("dd MMMM yyyy HH:mm");
+            LocalDateTime localDateTime = voorstelling.getLocalDateTime();
+            String formattedString = localDateTime.format(aFormatter);
+
+            voorstelling.setDatum(formattedString);
+
             voorstellingRepository.save(voorstelling);
         } else {
             return "wijzigVoorstelling";
@@ -170,19 +179,19 @@ public class VoorstellingController {
 
         Voorstelling voorstelling1 = new Voorstelling();
         voorstelling1.setNaam("Lion King");
-        voorstelling1.setDatum(LocalDateTime.of(2020, Month.JANUARY, 18, 20, 30));
+        voorstelling1.setLocalDateTime(LocalDateTime.of(2020, Month.JANUARY, 18, 20, 30));
         voorstelling1.setStatus("Gepubliceerd");
         voorstellingRepository.save(voorstelling1);
 
         Voorstelling voorstelling2 = new Voorstelling();
         voorstelling2.setNaam("Soldaat van Oranje");
-        voorstelling2.setDatum(LocalDateTime.of(2020, Month.JANUARY, 16, 20, 00));
+        voorstelling2.setLocalDateTime(LocalDateTime.of(2020, Month.JANUARY, 16, 20, 00));
         voorstelling2.setStatus("Gepubliceerd");
         voorstellingRepository.save(voorstelling2);
 
         Voorstelling voorstelling3 = new Voorstelling();
         voorstelling3.setNaam("Assepoester");
-        voorstelling3.setDatum(LocalDateTime.of(2020, Month.FEBRUARY, 5, 16, 00));
+        voorstelling3.setLocalDateTime(LocalDateTime.of(2020, Month.FEBRUARY, 5, 16, 00));
         voorstelling3.setStatus("Ongepubliceerd");
         voorstellingRepository.save(voorstelling3);
 

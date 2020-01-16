@@ -29,18 +29,10 @@
                     <form:input class="form-control mb-2 mr-sm-2" path="naam" required="required" />
                 </td>
             </tr>
-<!--
             <tr>
                 <td>Datum en tijdstip:</td>
                 <td>
-                    <form:input type="datetime-local" class="form-control mb-2 mr-sm-2" path="datum" value="${dateString}" required="required" />
-                </td>
-            </tr>
-  -->
-            <tr>
-                <td>Datum en tijdstip:</td>
-                <td>
-                    <form:input id="datetime-local" class="form-control mb-2 mr-sm-2" path="datum" value="${dateString}" required="required" />
+                    <form:input id="datetime-local" class="form-control mb-2 mr-sm-2" path="localDateTime" value="${dateString}" required="required" />
                 </td>
             </tr>
 
@@ -57,13 +49,9 @@
 
 
 <script>
-$("#datetime-local").datetimepicker({
-    format: "d-m-Y H:i",
+    $("#datetime-local").datetimepicker({
+        format: "d-m-Y H:i",
 });
 </script>
-
 </body>
-
-
-
 </html>
