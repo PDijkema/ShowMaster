@@ -1,3 +1,4 @@
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +13,7 @@
 <jsp:include page="navbar.jsp" />
 <h1>U heeft geen toegang tot deze pagina</h1>
 
-<a class="btn btn-primary" href="/startpagina">Terug naaar de startpagina</a>
+<a class="btn btn-primary" href="${contextPath}/startpagina">Terug naar de startpagina</a>
 
 </body>
 
