@@ -152,7 +152,7 @@ public class VoorstellingController {
             voorstelling.setDatum(formattedString);
 
             voorstellingRepository.save(voorstelling);
-            
+
         } else {
             return "wijzigVoorstelling";
         }
