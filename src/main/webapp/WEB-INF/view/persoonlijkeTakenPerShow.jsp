@@ -5,10 +5,11 @@
 <head>
     <title></title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="\resources\css\custom.css" type="text/css" rel="stylesheet">
     <script src="\resources\js\ajax.js"></script>
 </head>
     <body>
-        <h2>Persoonlijk rooster</h2>
+        <h2>Wanneer moet je werken?</h2>
             <form:hidden path="profielId" />
 
             <table class="table table-hover">
@@ -28,7 +29,7 @@
                             <td>
                                 <c:choose>
                                     <c:when test="${allePersoonlijkeVoorstellingsTaken.getVoorstelling().getStatus() == 'Geannuleerd'}">
-                                        <span class="badge badge-danger">Voorstelling Geannuleerd</span>
+                                        <span class="badge badge-danger">Geannuleerd</span>
                                     </c:when>
                                     <c:otherwise>
                                         <!-- nothing yet -->
@@ -49,7 +50,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Rooster</h5>
+                        <h2 class="modal-title" id="exampleModalLabel">Rooster</h2>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -58,7 +59,7 @@
                         <p id="rooster"></p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">sluiten</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>
                     </div>
                 </div>
             </div>

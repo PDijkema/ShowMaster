@@ -12,7 +12,7 @@
 <jsp:include page="navbar.jsp" />
 <h1>De pagina die u probeert te bereiken bestaat niet.</h1>
 
-<a class="btn btn-primary" href="/startpagina">Terug naaar de startpagina</a>
+<a class="btn btn-primary" href="/startpagina">Terug naar de startpagina</a>
 
 </body>
 
