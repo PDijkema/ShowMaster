@@ -8,7 +8,7 @@
     <title>Voorstellingen</title>
     <script src="https://kit.fontawesome.com/1eeb88da0f.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link href="\resources\css\custom.css" type="text/css" rel="stylesheet">
+    <link href="${contextPath}\resources\css\custom.css" type="text/css" rel="stylesheet">
 </head>
     <body>
         <jsp:include page="navbar.jsp" />
