@@ -21,8 +21,18 @@ public class Voorstelling {
     @NotNull
     private String naam;
     @NotNull
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
-    private LocalDateTime datum;
+    @DateTimeFormat(pattern = "dd-MM-yyyy HH:mm")
+    private LocalDateTime localDateTime;
+
+    private String datum;
+
+    public String getDatum() {
+        return datum;
+    }
+
+    public void setDatum(String datum) {
+        this.datum = datum;
+    }
 
     private String status;
 
@@ -32,16 +42,6 @@ public class Voorstelling {
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    @Override
-    public String toString() {
-        return "Voorstelling{" +
-            "voorstellingId=" + voorstellingId +
-            ", naam='" + naam + '\'' +
-            ", datum=" + datum +
-            ", status='" + status + '\'' +
-            '}';
     }
 
     public Integer getVoorstellingId() {
@@ -60,12 +60,22 @@ public class Voorstelling {
         this.naam = naam;
     }
 
-    public LocalDateTime getDatum() {
-        return datum;
+    public LocalDateTime getLocalDateTime() {
+        return localDateTime;
     }
 
-    public void setDatum(LocalDateTime datum) {
-        this.datum = datum;
+    public void setLocalDateTime(LocalDateTime localDateTime) {
+        this.localDateTime = localDateTime;
     }
 
+    @Override
+    public String toString() {
+        return "Voorstelling{" +
+            "voorstellingId=" + voorstellingId +
+            ", naam='" + naam + '\'' +
+            ", localDateTime=" + localDateTime +
+            ", datum='" + datum + '\'' +
+            ", status='" + status + '\'' +
+            '}';
+    }
 }

@@ -12,10 +12,14 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link href="${contextPath}\resources\css\custom.css" type="text/css" rel="stylesheet">
 
+    <link rel="stylesheet" href="\resources\js\jquery.datetimepicker.min.css">
+    <script src="\resources\js\jquery.js"></script>
+    <script src="\resources\js\jquery.datetimepicker.full.js"></script>
+
+
     <title>Nieuwe voorstelling</title>
 </head>
 <body>
-<jsp:include page="navbar.jsp" />
 <h1>Nieuwe voorstelling</h1>
 <form:form action="${contextPath}/planner/voorstelling/toevoegen" modelAttribute="voorstelling" method="post">
     <form:hidden path="voorstellingId"/>
@@ -30,7 +34,7 @@
             <tr>
                 <td>Datum en tijdstip:</td>
                 <td>
-                    <form:input type="datetime-local" class="form-control mb-2 mr-sm-2" path="datum" value="${dateString}" required="required" />
+                    <form:input id="datetime-local" class="form-control mb-2 mr-sm-2" path="localDateTime" value="${dateString}" required="required" />
                 </td>
             </tr>
         </div>
@@ -42,5 +46,13 @@
     </table>
 </form:form>
 <a class="btn btn-primary" href="${contextPath}/planner/voorstellingen">Overzicht voorstellingen</a>
+
+
+
+<script>
+    $("#datetime-local").datetimepicker({
+        format: "d-m-Y H:i",
+});
+</script>
 </body>
 </html>

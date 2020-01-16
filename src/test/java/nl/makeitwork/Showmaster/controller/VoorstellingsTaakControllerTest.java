@@ -83,7 +83,7 @@ class VoorstellingsTaakControllerTest {
         Voorstelling testVoorstelling = new Voorstelling();
         LocalDateTime datum = LocalDateTime.of(2020, Month.JANUARY, 18, 20, 30);
         testVoorstelling.setNaam("Soldaat van Oranje");
-        testVoorstelling.setDatum(datum);
+        testVoorstelling.setLocalDateTime(datum);
 
         //activate
         taakRepository.save(testTaak);
@@ -109,7 +109,7 @@ class VoorstellingsTaakControllerTest {
         Voorstelling testVoorstelling = new Voorstelling();
         LocalDateTime datum = LocalDateTime.of(2020, Month.JANUARY, 18, 20, 30);
         testVoorstelling.setNaam("Soldaat van Oranje");
-        testVoorstelling.setDatum(datum);
+        testVoorstelling.setLocalDateTime(datum);
 
         //activate
         taakRepository.save(testTaak);
@@ -140,7 +140,7 @@ class VoorstellingsTaakControllerTest {
         Voorstelling testVoorstelling = new Voorstelling();
         LocalDateTime datum = LocalDateTime.of(2020, Month.FEBRUARY, 18, 20, 30);
         testVoorstelling.setNaam("Soldaat van Blauw");
-        testVoorstelling.setDatum(datum);
+        testVoorstelling.setLocalDateTime(datum);
 
         Medewerker testMedewerker = new Medewerker();
         testMedewerker.setGebruikersnaam("testMedewerker");

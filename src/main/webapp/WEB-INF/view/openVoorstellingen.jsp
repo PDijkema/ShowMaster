@@ -43,6 +43,7 @@
                 <thead>
                     <tr>
                         <th scope ="col">Voorstelling naam</th>
+                        <th scope ="col"></th>
                         <th scope ="col">Datum en tijd</th>
                     </tr>
                 </thead>
@@ -50,6 +51,16 @@
                     <c:forEach items="${inschrijvingen}" var="inschrijving">
                         <tr>
                             <td><c:out value="${inschrijving.getVoorstelling().getNaam()}"/></td>
+                            <td>
+                                <c:choose>
+                                    <c:when test="${inschrijving.getVoorstelling().getStatus() == 'Geannuleerd'}">
+                                        <span class="badge badge-danger">Voorstelling Geannuleerd</span>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <!-- nothing yet -->
+                                    </c:otherwise>
+                                </c:choose>
+                            </td>
                             <td><c:out value="${inschrijving.getVoorstelling().getDatum()}"/></td>
                         </tr>
                     </c:forEach>
