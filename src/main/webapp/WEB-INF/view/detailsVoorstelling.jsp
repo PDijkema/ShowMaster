@@ -52,7 +52,7 @@
                                             Openstaand
                                             <td>
 
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" onclick="taakInvullen(${voorstelling.voorstellingId}, ${takenBijVoorstelling.voorstellingsTaakId})">
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" onclick="taakInvullen(${voorstelling.voorstellingId}, ${takenBijVoorstelling.voorstellingsTaakId}, '${contextPath}')">
                                     Invullen
                                 </button>
 
