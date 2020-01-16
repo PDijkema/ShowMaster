@@ -100,7 +100,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <p id="rooster"></p>
+                            <p id="taakInvullen"></p>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">sluiten</button>
