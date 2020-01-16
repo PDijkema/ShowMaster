@@ -4,7 +4,7 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
 <table class="table table-hover">
-    <h6>Voorstelling: ${voorstelling.naam}</h6>
+    <h3>Voorstelling: ${voorstelling.naam}</h3>
     <thead>
     <tr>
         <th scope="col">Taak</th>

@@ -3,8 +3,8 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
-            <h5>Taak: ${taak}</h5>
-            <h5>Voorstelling: ${voorstelling}</h5>
+            <h2>Taak: ${taak}</h2>
+            <h2>Voorstelling: ${voorstelling}</h2>
 
             <form:form action="${contextPath}/planner/voorstellingsTaak/medewerkerKoppelen/${voorstellingId}/${voorstellingsTaakId}/${medewerker.medewerkerId}" modelAttribute="voorstellingsTaak" method="post">
                 <form:hidden path="voorstellingsTaakId"/>

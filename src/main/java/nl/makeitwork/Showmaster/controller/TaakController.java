@@ -122,7 +122,7 @@ public class TaakController {
         taak8.setStandaardBezetting(0);
         taakRepository.save(taak8);
 
-        return "redirect:/takenlijst";
+        return "redirect:/planner/takenlijst";
     }
 
     @GetMapping("/planner/taak/verwijderen/{taakId}")
