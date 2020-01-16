@@ -642,8 +642,8 @@ var datetimepickerFactory = function ($) {
 
 	var dateHelper = null,
 		defaultDateHelper = null,
-		globalLocaleDefault = 'en',
-		globalLocale = 'en';
+		globalLocaleDefault = 'nl',
+		globalLocale = 'nl';
 
 	var dateFormatterOptionsDefault = {
 		meridiem: ['AM', 'PM']
