@@ -1,4 +1,5 @@
 package nl.makeitwork.Showmaster.controller;
+
 import nl.makeitwork.Showmaster.model.Taak;
 import nl.makeitwork.Showmaster.model.Voorstelling;
 import nl.makeitwork.Showmaster.model.VoorstellingsTaak;
@@ -63,17 +64,17 @@ public class VoorstellingController {
     }
 
     @GetMapping("/voorstelling/rooster/{voorstellingId}")
-    protected String roosterVoorstelling(@PathVariable Integer voorstellingId, Model model){
+    protected String roosterVoorstelling(@PathVariable Integer voorstellingId, Model model) {
 
         List<VoorstellingsTaak> voorstellingOverzicht = voorstellingsTaakRepository.findByVoorstellingVoorstellingId(voorstellingId);
-        voorstellingOverzicht.removeIf(r->r.getMedewerker()== null);
+        voorstellingOverzicht.removeIf(r -> r.getMedewerker() == null);
 
         Voorstelling voorstelling = voorstellingRepository.findByVoorstellingId(voorstellingId);
 
-        model.addAttribute("voorstellingOverzicht",voorstellingOverzicht);
+        model.addAttribute("voorstellingOverzicht", voorstellingOverzicht);
         model.addAttribute("voorstelling", voorstelling);
 
-    return "roosterVoorstelling";
+        return "roosterVoorstelling";
     }
 
     @GetMapping("/planner/voorstelling/details/{voorstellingId}")
@@ -158,6 +159,7 @@ public class VoorstellingController {
         voorstellingRepository.deleteById(voorstellingId);
         return "redirect:/planner/voorstellingen";
     }
+
 
     @GetMapping("/voorstellingen/setup")
     protected String setupTakenInDatabase() {
