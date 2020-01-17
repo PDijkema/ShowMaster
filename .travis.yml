@@ -4,7 +4,7 @@ services:
 before_install:
     - sudo mysql -e 'CREATE DATABASE showmastertest;'
     - sudo mysql -e 'select database();'
-    - sudo mysql -e CREATE USER 'userShowMaster' IDENTIFIED BY 'pwShowMaster';
+    - sudo mysql -e CREATE USER 'userShowMaster'@'%' IDENTIFIED BY 'the_password';
     - sudo mysql -e grant all privileges on showmastertest to 'userShowMaster';
     - sudo mysql -e FLUSH PRIVILEGES;
 install:
