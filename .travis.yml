@@ -4,9 +4,9 @@ services:
 before_install:
     - sudo mysql -e 'CREATE DATABASE showmastertest;'
     - sudo mysql -e 'select database();'
-    - sudo mysql -e 'CREATE USER \'userShowMaster\'@\'localhost\' IDENTIFIED BY \'pwShowMaster\';'
-    - sudo mysql -e 'grant all privileges on showmastertest to \'userShowMaster\';'
-    - sudo mysql -e 'FLUSH PRIVILEGES';
+    - sudo mysql -e "CREATE USER 'userShowMaster'@'localhost' IDENTIFIED BY 'pwShowMaster';"
+    - sudo mysql -e "grant all privileges on showmastertest to 'userShowMaster';"
+    - sudo mysql -e 'FLUSH PRIVILEGES;'
 install:
 - mvn -N io.takari:maven:wrapper
 - ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
