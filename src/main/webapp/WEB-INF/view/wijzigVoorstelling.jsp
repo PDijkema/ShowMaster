@@ -16,6 +16,7 @@
     <link href="${contextPath}\resources\css\custom.css" type="text/css" rel="stylesheet">
 
 
+    
 </head>
     <body>
         <jsp:include page="navbar.jsp" />
@@ -50,7 +51,7 @@
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Voorstelling annuleren</h5>
+                                            <h1 class="modal-title" id="exampleModalLabel">Voorstelling annuleren</h1>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
