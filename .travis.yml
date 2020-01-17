@@ -1,4 +1,12 @@
 language: java
+services:
+    - mysql
+before_install:
+    - sudo mysql -e 'CREATE DATABASE showmastertest;'
+    - sudo mysql -e 'select database();'
+    - sudo mysql -e CREATE USER 'userShowMaster'@'%' IDENTIFIED BY 'pwShowMaster';
+    - sudo mysql -e GRANT ALL PRIVILEGES ON *.* TO 'userShowMaster'@'%' WITH GRANT OPTION;
+    - sudo mysql -e FLUSH PRIVILEGES;
 install:
 - mvn -N io.takari:maven:wrapper
 - ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
