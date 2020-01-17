@@ -1,20 +1,21 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-      <meta charset="utf-8">
-      <title>Profiel wijzigen</title>
-
-     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-  </head>
+    <head>
+        <meta charset="utf-8">
+        <title>Profiel wijzigen</title>
+        <script src="${contextPath}\resources\js\validation.js"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link href="${contextPath}\resources\css\custom.css" type="text/css" rel="stylesheet">
+    </head>
 
     <body>
         <jsp:include page="navbar.jsp" />
         <div class="container">
-            <form:form method="POST" modelAttribute="medewerkerProfielGegevens" class="form-signin">
+            <form:form method="POST" modelAttribute="medewerkerProfielGegevens" novalidate="true" class="was-validated needs-validation">
                 <h1>Profiel wijzigen</h1>
                 <h2 class="form-signin-heading">Persoonlijke gegevens</h2>
 
@@ -26,7 +27,10 @@
                         <div>
                             <label for="voornaam" class="col-sm-3 control-label">Voornaam* </label>
                             <form:input type="text" path="voornaam" class="form-control"
-                            placeholder="Voornaam"></form:input>
+                            placeholder="Voornaam" required="true" pattern="^([- \w\d\u00c0-\u024f]+)$"></form:input>
+                            <div class="invalid-feedback">
+                                Voer hier je voornaam in.
+                            </div>
                         </div>
                     </spring:bind>
 
@@ -40,17 +44,23 @@
 
                     <spring:bind path="achternaam">
                         <div>
-                            <label for="achternaam" class="col-sm-3 control-label">Achternaam</label>
+                            <label for="achternaam" class="col-sm-3 control-label">Achternaam*</label>
                             <form:input type="text" path="achternaam" class="form-control"
-                            placeholder="Achternaam"></form:input>
+                            placeholder="Achternaam" required="true" pattern="[^\s]+"></form:input>
+                            <div class="invalid-feedback">
+                                Voer hier je achternaam in.
+                            </div>
                         </div>
                     </spring:bind>
 
                     <spring:bind path="emailadres">
                         <div>
-                            <label for="emailadres" class="col-sm-3 control-label">Emailadres</label>
+                            <label for="emailadres" class="col-sm-3 control-label">Emailadres*</label>
                             <form:input type="email" path="emailadres" class="form-control"
-                            placeholder="Emailadres"></form:input>
+                            placeholder="Emailadres" required="true"></form:input>
+                            <div class="invalid-feedback">
+                                Voer hier je e-mailadres is
+                            </div>
                         </div>
                     </spring:bind>
 
@@ -64,9 +74,12 @@
 
                     <spring:bind path="telefoonnummer">
                         <div>
-                            <label for="telefoonnumer" class="col-sm-3 control-label">Telefoonnummer</label>
+                            <label for="telefoonnumer" class="col-sm-3 control-label">Telefoonnummer*</label>
                             <form:input type="text" path="telefoonnummer" class="form-control"
-                            placeholder="Telefoonnummer"></form:input>
+                            placeholder="Telefoonnummer" required="true" pattern="\d{1,16}"></form:input>
+                            <div class="invalid-feedback">
+                                Voer hier je telefoonummer in.
+                            </div>
                         </div>
                     </spring:bind>
 
@@ -117,7 +130,7 @@
                 <p>*Verplichte velden</p>
 
                 <button class="btn btn-primary" type="submit">Opslaan</button>
-                <a class="btn btn-primary" href="/profielpagina">Annuleren</a>
+                <a class="btn btn-primary" href="${contextPath}/profielpagina">Annuleren</a>
             </form:form>
         </div>
 
