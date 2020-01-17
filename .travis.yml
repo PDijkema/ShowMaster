@@ -9,4 +9,4 @@ before_install:
     - sudo mysql -e 'FLUSH PRIVILEGES;'
 install:
 - mvn -N io.takari:maven:wrapper
-- ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+- ./mvnw clean install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
