@@ -38,7 +38,7 @@ class VoorstellingControllerTest {
         Voorstelling voorstelling = new Voorstelling();
         LocalDateTime datum = LocalDateTime.of(2020, Month.OCTOBER, 10, 20, 30);
         voorstelling.setNaam("Lion King");
-        voorstelling.setDatum(datum);
+        voorstelling.setLocalDateTime(datum);
 
         //activate
         voorstellingController.saveVoorstelling(voorstelling, result);
@@ -63,7 +63,7 @@ class VoorstellingControllerTest {
         Voorstelling voorstelling = new Voorstelling();
         LocalDateTime datum = LocalDateTime.of(2020, Month.JANUARY, 18, 20, 30);
         voorstelling.setNaam("Soldaat van Oranje");
-        voorstelling.setDatum(datum);
+        voorstelling.setLocalDateTime(datum);
 
         //activate
         voorstellingController.saveVoorstelling(voorstelling, result);
