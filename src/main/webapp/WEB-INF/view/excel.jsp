@@ -3,31 +3,34 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>  <!-- PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd" -->
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link href="${contextPath}\resources\css\custom.css" type="text/css" rel="stylesheet">
 <title>Excel Processing</title>
 </head>
 <body>
+    <jsp:include page="navbar.jsp" />
     <c:url value="/uploadExcelFile" var="uploadFileUrl" />
     <c:url value="/excelProcessing" var="resetUrl" />
     <c:url value="/readPOI" var="readPOIUrl" />
 
     <form method="post" enctype="multipart/form-data" action="${uploadFileUrl}">
         <input type="file" name="file" accept=".xls,.xlsx" /> 
-        <input type="submit" value="Upload file" />
+        <button class="btn btn-primary" type="submit">Upload bestand</button>
     </form>
     <br />
     <form method="GET" action="${resetUrl}">
-        <input type="submit" value="Reset" />
+        <button class="btn btn-primary" type="submit">Herstel</button>
     </form>
     <br /> ${message }
     <br />
     <br />
 
     <form action="${readPOIUrl }">
-        <input type="submit" value="Display file content" />
+        <button class="btn btn-primary" type="submit">Toon bestandsinhoud</button>
     </form>
     <br />
     <br />
