@@ -1,4 +1,16 @@
 language: java
+services:
+  - mysql
+before_install:
+  - sudo mysql -e 'CREATE DATABASE showmaster;'
+  - sudo mysql -e 'use showmaster;'
+  - sudo mysql -e "CREATE USER 'userShowMaster'@'localhost' IDENTIFIED BY 'pwShowMaster';"
+  - sudo mysql -e "GRANT ALL PRIVILEGES ON showmaster.* TO 'userShowMaster'@'localhost';"
+  - sudo mysql -e 'FLUSH PRIVILEGES;'
+  - sudo mysql -e 'CREATE DATABASE showmastertest;'
+  - sudo mysql -e 'use showmastertest;'
+  - sudo mysql -e "GRANT ALL PRIVILEGES ON showmastertest.* TO 'userShowMaster'@'localhost';"
+  - sudo mysql -e 'FLUSH PRIVILEGES;'
 install:
-- mvn -N io.takari:maven:wrapper
-- ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+  - mvn -N io.takari:maven:wrapper
+  - ./mvnw clean install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
