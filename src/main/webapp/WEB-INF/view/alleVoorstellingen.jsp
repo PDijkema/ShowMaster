@@ -22,13 +22,14 @@
 
         <div class="container">
             <a id="voegVoorstellingToeButton" class="btn btn-primary" href="${contextPath}/planner/voorstelling/toevoegen">Voeg voorstelling toe</a>
-            <!--<div class="container">-->
                 <div class="card-columns">
                     <c:forEach items="${alleVoorstellingen}" var="voorstelling">
                         <div class="card">
                             <div class="card-header"><h1><c:out value="${voorstelling.naam}"/></h1><c:out value="${voorstelling.datum}"/></div>
                             <div class="card-body">
-                                <p class="card-text">Nulla quis semper felis, vel ullamcorper velit. Vivamus velit lacus, feugiat a rutrum at, vestibulum.</p>
+
+                                <p class="card-text">Hey, Luke! May the Force be with you. Still, she's got a lot of spirit. I don't know, what do you think?</p>
+
                             </div>
                             <ul class="list-group list-group-flush" style="text-align:center">
                                 <li class="list-group-item">
@@ -80,7 +81,6 @@
                         </div>
                     </c:forEach>
                 </div>
-            <!--</div>-->
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
