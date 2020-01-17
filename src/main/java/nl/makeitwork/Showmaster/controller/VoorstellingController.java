@@ -36,6 +36,8 @@ public class VoorstellingController {
     private TaakRepository taakRepository;
     @Autowired
     private VoorstellingsTaakRepository voorstellingsTaakRepository;
+    @Autowired
+    private VoorstellingController voorstellingController;
 
 
     @GetMapping("/planner/voorstellingen")
@@ -185,20 +187,53 @@ public class VoorstellingController {
         voorstelling1.setNaam("Lion King");
         voorstelling1.setLocalDateTime(LocalDateTime.of(2020, Month.JANUARY, 18, 20, 30));
         voorstelling1.setStatus("Gepubliceerd");
+
+        DateTimeFormatter aFormatter = DateTimeFormatter.ofPattern("dd MMMM yyyy HH:mm");
+        LocalDateTime localDateTime = voorstelling1.getLocalDateTime();
+        String formattedString = localDateTime.format(aFormatter);
+
+        voorstelling1.setDatum(formattedString);
+
         voorstellingRepository.save(voorstelling1);
 
+
+        for (Taak taak : taakRepository.findAll()) {
+            standaardTakenOpslaanBijVoorstelling(taak.getStandaardBezetting(), voorstelling1, taak);}
+
         Voorstelling voorstelling2 = new Voorstelling();
+
         voorstelling2.setNaam("Soldaat van Oranje");
         voorstelling2.setLocalDateTime(LocalDateTime.of(2020, Month.JANUARY, 16, 20, 00));
         voorstelling2.setStatus("Gepubliceerd");
+
+        LocalDateTime localDateTime2 = voorstelling2.getLocalDateTime();
+        String formattedString2 = localDateTime2.format(aFormatter);
+
+        voorstelling2.setDatum(formattedString2);
+
         voorstellingRepository.save(voorstelling2);
 
+
+        for (Taak taak : taakRepository.findAll()) {
+            standaardTakenOpslaanBijVoorstelling(taak.getStandaardBezetting(), voorstelling2, taak);}
+
+
         Voorstelling voorstelling3 = new Voorstelling();
+
         voorstelling3.setNaam("Assepoester");
-        voorstelling3.setLocalDateTime(LocalDateTime.of(2020, Month.FEBRUARY, 5, 16, 00));
+        voorstelling3.setLocalDateTime(LocalDateTime.of(2020, Month.FEBRUARY, 8, 21, 00));
         voorstelling3.setStatus("Ongepubliceerd");
+
+        LocalDateTime localDateTime3 = voorstelling3.getLocalDateTime();
+        String formattedString3 = localDateTime3.format(aFormatter);
+
+        voorstelling3.setDatum(formattedString3);
+
         voorstellingRepository.save(voorstelling3);
 
+
+        for (Taak taak : taakRepository.findAll()) {
+            standaardTakenOpslaanBijVoorstelling(taak.getStandaardBezetting(), voorstelling2, taak);}
         return "redirect:/planner/voorstellingen";
     }
 }
