@@ -3,18 +3,14 @@ package nl.makeitwork.Showmaster.excel;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
-import org.apache.poi.xssf.usermodel.XSSFColor;
-import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
-import org.apache.poi.hssf.usermodel.HSSFFont;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.DateUtil;
 import org.springframework.stereotype.Component;
 
@@ -99,22 +95,6 @@ public class ExcelPOIHelper {
 
                             MyCell myCell = new MyCell();
 
-                            HSSFColor bgColor = cellStyle.getFillForegroundColorColor();
-                            if (bgColor != null) {
-                                short[] rgbColor = bgColor.getTriplet();
-                                myCell.setBgColor("rgb(" + rgbColor[0] + "," + rgbColor[1] + "," + rgbColor[2] + ")");
-                            }
-                            HSSFFont font = cell.getCellStyle()
-                                    .getFont(workbook);
-                            myCell.setTextSize(font.getFontHeightInPoints() + "");
-                            if (font.getBold()) {
-                                myCell.setTextWeight("bold");
-                            }
-                            HSSFColor textColor = font.getHSSFColor(workbook);
-                            if (textColor != null) {
-                                short[] rgbColor = textColor.getTriplet();
-                                myCell.setTextColor("rgb(" + rgbColor[0] + "," + rgbColor[1] + "," + rgbColor[2] + ")");
-                            }
                             myCell.setContent(readCellContent(cell));
                             data.get(i)
                                     .add(myCell);
@@ -151,21 +131,6 @@ public class ExcelPOIHelper {
                             XSSFCellStyle cellStyle = cell.getCellStyle();
 
                             MyCell myCell = new MyCell();
-                            XSSFColor bgColor = cellStyle.getFillForegroundColorColor();
-                            if (bgColor != null) {
-                                byte[] rgbColor = bgColor.getRGB();
-                                myCell.setBgColor("rgb(" + (rgbColor[0] < 0 ? (rgbColor[0] + 0xff) : rgbColor[0]) + "," + (rgbColor[1] < 0 ? (rgbColor[1] + 0xff) : rgbColor[1]) + "," + (rgbColor[2] < 0 ? (rgbColor[2] + 0xff) : rgbColor[2]) + ")");
-                            }
-                            XSSFFont font = cellStyle.getFont();
-                            myCell.setTextSize(font.getFontHeightInPoints() + "");
-                            if (font.getBold()) {
-                                myCell.setTextWeight("bold");
-                            }
-                            XSSFColor textColor = font.getXSSFColor();
-                            if (textColor != null) {
-                                byte[] rgbColor = textColor.getRGB();
-                                myCell.setTextColor("rgb(" + (rgbColor[0] < 0 ? (rgbColor[0] + 0xff) : rgbColor[0]) + "," + (rgbColor[1] < 0 ? (rgbColor[1] + 0xff) : rgbColor[1]) + "," + (rgbColor[2] < 0 ? (rgbColor[2] + 0xff) : rgbColor[2]) + ")");
-                            }
                             myCell.setContent(readCellContent(cell));
                             data.get(i)
                                     .add(myCell);

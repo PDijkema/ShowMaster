@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -37,9 +37,7 @@
             <c:forEach items="${data}" var="row">
                 <tr>
                     <c:forEach items="${row.value}" var="cell">
-                        <td style="border:1px solid black;height:20px;width:100px;
-                        background-color:${cell.bgColor};color:${cell.textColor};
-                        font-weight:${cell.textWeight};font-size:${cell.textSize}pt;">
+                        <td style="border:1px solid black;height:20px;width:100px">
                         ${cell.content}
                         </td>
                     </c:forEach>
