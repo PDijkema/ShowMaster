@@ -3,7 +3,7 @@ services:
     - mysql
 before_install:
     - sudo mysql -e 'CREATE DATABASE showmastertest;'
-    - sudo mysql -e 'select database();'
+    - sudo mysql -e 'use showmastertest;'
     - sudo mysql -e "CREATE USER 'userShowMaster'@'localhost' IDENTIFIED BY 'pwShowMaster';"
     - sudo mysql -e "grant all privileges on showmastertest to 'userShowMaster';"
     - sudo mysql -e 'FLUSH PRIVILEGES;'
