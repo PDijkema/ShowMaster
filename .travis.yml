@@ -4,7 +4,8 @@ services:
 before_install:
     - sudo mysql -e 'CREATE DATABASE showmastertest;'
     - sudo mysql -e 'select database();'
-    - sudo mysql -e grant all privileges on showmastertest.* to 'userShowMaster'@'localhost' identified by 'pwShowMaster';
+    - sudo mysql -e CREATE USER 'userShowMaster' IDENTIFIED BY 'pwShowMaster';
+    - sudo mysql -e grant all privileges on showmastertest to 'userShowMaster';
     - sudo mysql -e FLUSH PRIVILEGES;
 install:
 - mvn -N io.takari:maven:wrapper
