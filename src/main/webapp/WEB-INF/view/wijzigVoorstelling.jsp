@@ -16,6 +16,7 @@
     <link href="${contextPath}\resources\css\custom.css" type="text/css" rel="stylesheet">
 
 
+    
 </head>
     <body>
         <jsp:include page="navbar.jsp" />
