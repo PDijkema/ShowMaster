@@ -19,6 +19,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 @Repository
 public interface VoorstellingsTaakRepository extends JpaRepository<VoorstellingsTaak, Integer> {
 
+
     List<VoorstellingsTaak> findByVoorstellingVoorstellingIdOrderByTaakTaakNaam(Integer voorstellingId);
 
     CopyOnWriteArrayList<VoorstellingsTaak> findByVoorstellingVoorstellingId(Integer voorstellingId);

@@ -39,7 +39,7 @@
                                         </c:when>
                                         <c:when test="${voorstelling.status == 'Ongepubliceerd'}">
                                             <div>
-                                                <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#exampleModal" data-myvalue="${voorstelling.voorstellingId}">
+                                                <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#exampleModal" data-voorstelling="${voorstelling.voorstellingId}">
                                                     Publiceer
                                                 </button>
                                             </div>
@@ -100,14 +100,14 @@
                     </div>
                 </div>
             </div>
-            <script type="text/javascript">
-                $('#exampleModal').on('show.bs.modal', function (event) {
-                  var button = $(event.relatedTarget)
-                  var voorstellingId = button.data('myvalue')
-                  var modal = $(this)
-                  $('#publish').attr("href", "${contextPath}/planner/voorstelling/publiceren/" + voorstellingId);
-                })
-            </script>
+<script type="text/javascript">
+    $('#exampleModal').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget)
+      var voorstellingId = button.data('voorstelling')
+      var modal = $(this)
+      $('#publish').attr("href", "${contextPath}/planner/voorstelling/publiceren/" + voorstellingId);
+    })
+</script>
         </div>
     </body>
 </html>
