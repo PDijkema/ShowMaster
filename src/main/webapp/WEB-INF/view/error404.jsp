@@ -9,12 +9,8 @@
 </head>
 <body>
 
-
 <jsp:include page="navbar.jsp" />
 <h1>De pagina die u probeert te bereiken bestaat niet.</h1>
-
 <a class="btn btn-primary" href="${contextPath}/startpagina">Terug naar de startpagina</a>
-
 </body>
-
 </html>

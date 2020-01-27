@@ -30,15 +30,15 @@
                 </thead>
                 <tbody>
                     <c:forEach items="${alleTaken}" var="taak">
-                    <tr>
-                        <td><c:out value="${taak.taakNaam}" /></td>
-                        <td><c:out value="${taak.standaardBezetting}" /></td>
-                        <td>
-                            <a href="${contextPath}/planner/taak/verwijderen/<c:out value="${taak.taakId}" />">
-                            <img src="${contextPath}/resources/images/icons/trash.svg" alt="" width="30" height="30" title="Verwijderen" />
-                            </a>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td><c:out value="${taak.taakNaam}" /></td>
+                            <td><c:out value="${taak.standaardBezetting}" /></td>
+                            <td>
+                                <a href="${contextPath}/planner/taak/verwijderen/<c:out value="${taak.taakId}" />">
+                                <img src="${contextPath}/resources/images/icons/trash.svg" alt="" width="30" height="30" title="Verwijderen" />
+                                </a>
+                            </td>
+                        </tr>
                     </c:forEach>
                 </tbody>
             </table>

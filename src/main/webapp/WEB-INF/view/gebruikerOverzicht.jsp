@@ -25,15 +25,14 @@
                 </thead>
                 <tbody>
                     <c:forEach items="${alleGebruikers}" var="gebruiker">
-                    <tr>
-                        <td><c:out value="${gebruiker.gebruikersnaam}"/></td>
-                        <td>
-                            <a href="${contextPath}/planner/gebruiker/verwijderen/<c:out value="${gebruiker.medewerkerId}"/>">
-                                <i class="fas fa-trash" title="Verwijderen"></i>
-                            </a>
-                        </td>
-
-                    </tr>
+                        <tr>
+                            <td><c:out value="${gebruiker.gebruikersnaam}"/></td>
+                            <td>
+                                <a href="${contextPath}/planner/gebruiker/verwijderen/<c:out value="${gebruiker.medewerkerId}"/>">
+                                    <i class="fas fa-trash" title="Verwijderen"></i>
+                                </a>
+                            </td>
+                        </tr>
                     </c:forEach>
                 </tbody>
             </table>

@@ -5,7 +5,6 @@ import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -98,7 +97,6 @@ public class Medewerker implements UserDetails {
         this.wachtwoord = wachtwoord;
     }
 
-
     public Taak getVoorkeurstaak() {
         return voorkeurstaak;
     }
@@ -155,8 +153,5 @@ public class Medewerker implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-
-
-
 }
 

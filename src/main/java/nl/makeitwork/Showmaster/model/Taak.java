@@ -1,7 +1,6 @@
 package nl.makeitwork.Showmaster.model;
 import javax.persistence.*;
 
-
 /**
  * @author Karin Zoetendal
  * 11-12-19: Met deze klasse kun je een generieke taak aanmaken die -uitzonderingen daargelaten- voor elke voorstelling

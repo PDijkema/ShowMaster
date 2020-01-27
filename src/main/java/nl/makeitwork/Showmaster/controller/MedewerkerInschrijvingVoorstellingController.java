@@ -1,6 +1,5 @@
 package nl.makeitwork.Showmaster.controller;
 
-
 import nl.makeitwork.Showmaster.model.Medewerker;
 import nl.makeitwork.Showmaster.model.MedewerkerInschrijvingVoorstelling;
 import nl.makeitwork.Showmaster.model.Voorstelling;
@@ -38,9 +37,6 @@ public class MedewerkerInschrijvingVoorstellingController {
         medewerkerInschrijvingVoorstellingList.forEach(r->voorstellingen.remove(r.getVoorstelling()));
 
         medewerkerInschrijvingVoorstellingList.forEach(r->r.getVoorstelling().getNaam());
-
-
-
 
         model.addAttribute("inschrijvingen",medewerkerInschrijvingVoorstellingList);
         model.addAttribute("voorstellingLijst", voorstellingen);

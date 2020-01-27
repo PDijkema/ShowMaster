@@ -66,13 +66,6 @@ public class TaakController {
         return "redirect:/planner/voorstelling/details/{voorstellingId}";
     }
 
-
-
-
-
-
-
-
     @GetMapping("/planner/takenlijst")
     protected String showTakenlijst(Model model){
         model.addAttribute("alleTaken", taakRepository.findAll());
