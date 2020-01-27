@@ -16,7 +16,7 @@
         <jsp:include page="navbar.jsp" />
         <div class="jumbotron jumbotron-fluid">
             <div class="container">
-                <h1 id="voorstellingDisplay4">Overzicht voorstellingen</h1>
+                <h1 class="voorstellingDisplay4">Overzicht voorstellingen</h1>
             </div>
         </div>
 
@@ -27,7 +27,6 @@
                         <div class="card">
                             <div class="card-header"><h1><c:out value="${voorstelling.naam}"/></h1><c:out value="${voorstelling.datum}"/></div>
                             <div class="card-body">
-
                                 <p class="card-text">Hey, Luke! May the Force be with you. Still, she's got a lot of spirit. I don't know, what do you think?</p>
 
                             </div>

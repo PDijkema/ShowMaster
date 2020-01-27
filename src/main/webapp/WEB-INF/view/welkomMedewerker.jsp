@@ -12,8 +12,12 @@
 </head>
     <body>
         <jsp:include page="navbar.jsp" />
+        <div class="jumbotron jumbotron-fluid">
             <div class="container">
-                <h1>Welkom <c:out value="${medewerkerProfielGegevens.voornaam}"/></h1>
+                <h1 class="voorstellingDisplay4">Welkom <c:out value="${medewerkerProfielGegevens.voornaam}"/></h1>
+            </div>
+        </div>
+            <div class="container">
                 <form:hidden path="profielId" />
                 <jsp:include page="persoonlijkeTakenPerShow.jsp" />
                 <a href="${contextPath}/voorstelling/weergeven/openvoorstelling"> <button type="button" class="btn btn-primary">Inschrijven</button></a>
