@@ -14,6 +14,7 @@
 </head>
     <body>
         <jsp:include page="navbar.jsp" />
+        <div class="container">
         <h1>Gebruikersoverzicht</h1>
             <table class="table table-hover">
                 <thead>
@@ -36,5 +37,6 @@
                     </c:forEach>
                 </tbody>
             </table>
+        </div>
     </body>
 </html>

@@ -26,6 +26,7 @@
                     <a class="navbar-brand" href="/startpagina">
                     <img src="https://hetbolwerk.nl/wp-content/themes/hetbolwerk/images/hetbolwerklogo.svg" height="30" class="d-inline-block align-top" alt="Poppodium Het Bolwerk">
                     </a>
+                    <div class="container">
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
@@ -49,6 +50,7 @@
                                     </button>
                                 </form>
                         </div>
+                    </div>
                     </div>
                 </nav>
             </div>

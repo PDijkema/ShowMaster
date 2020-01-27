@@ -14,56 +14,58 @@
 
 <body>
     <jsp:include page="navbar.jsp" />
-    <h1>Overzicht open voorstellingen</h1>
-        <table  class="table table-hover"  >
-            <thead>
-                <tr>
-                    <th scope ="col">Voorstelling naam</th>
-                    <th scope ="col">Datum en tijd</th>
-                    <th scope ="col">Inschrijven</th>
-                </tr>
-            </thead>
-            <tbody>
-                <c:forEach items="${voorstellingLijst}" var="voorstelling">
-                    <c:choose>
-                        <c:when test="${voorstelling.status == 'Gepubliceerd'}">
-                            <tr>
-                                <td><c:out value="${voorstelling.getNaam()}"/></td>
-                                <td><c:out value="${voorstelling.getDatum()}"/></td>
-                                <td><a class="btn btn-primary" href="${contextPath}/voorstelling/weergeven/openvoorstelling/inschrijven/<c:out value='${voorstelling.voorstellingId}'/>" role="button">Inschrijven</a></td>
-                            </tr>
-                        </c:when>
-                    </c:choose>
-                </c:forEach>
-            </tbody>
-        </table>
-
-        <h1>Overzicht ingeschreven voorstellingen</h1>
+    <div class="container">
+        <h1>Overzicht open voorstellingen</h1>
             <table  class="table table-hover"  >
                 <thead>
                     <tr>
                         <th scope ="col">Voorstelling naam</th>
-                        <th scope ="col"></th>
                         <th scope ="col">Datum en tijd</th>
+                        <th scope ="col">Inschrijven</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <c:forEach items="${inschrijvingen}" var="inschrijving">
-                        <tr>
-                            <td><c:out value="${inschrijving.getVoorstelling().getNaam()}"/></td>
-                            <td>
-                                <c:choose>
-                                    <c:when test="${inschrijving.getVoorstelling().getStatus() == 'Geannuleerd'}">
-                                        <span class="badge badge-danger">Voorstelling Geannuleerd</span>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <!-- nothing yet -->
-                                    </c:otherwise>
-                                </c:choose>
-                            </td>
-                            <td><c:out value="${inschrijving.getVoorstelling().getDatum()}"/></td>
-                        </tr>
+                    <c:forEach items="${voorstellingLijst}" var="voorstelling">
+                        <c:choose>
+                            <c:when test="${voorstelling.status == 'Gepubliceerd'}">
+                                <tr>
+                                    <td><c:out value="${voorstelling.getNaam()}"/></td>
+                                    <td><c:out value="${voorstelling.getDatum()}"/></td>
+                                    <td><a class="btn btn-primary" href="${contextPath}/voorstelling/weergeven/openvoorstelling/inschrijven/<c:out value='${voorstelling.voorstellingId}'/>" role="button">Inschrijven</a></td>
+                                </tr>
+                            </c:when>
+                        </c:choose>
                     </c:forEach>
                 </tbody>
             </table>
+
+            <h1>Overzicht ingeschreven voorstellingen</h1>
+                <table  class="table table-hover"  >
+                    <thead>
+                        <tr>
+                            <th scope ="col">Voorstelling naam</th>
+                            <th scope ="col"></th>
+                            <th scope ="col">Datum en tijd</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach items="${inschrijvingen}" var="inschrijving">
+                            <tr>
+                                <td><c:out value="${inschrijving.getVoorstelling().getNaam()}"/></td>
+                                <td>
+                                    <c:choose>
+                                        <c:when test="${inschrijving.getVoorstelling().getStatus() == 'Geannuleerd'}">
+                                            <span class="badge badge-danger">Voorstelling Geannuleerd</span>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <!-- nothing yet -->
+                                        </c:otherwise>
+                                    </c:choose>
+                                </td>
+                                <td><c:out value="${inschrijving.getVoorstelling().getDatum()}"/></td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
+    </div>
 </body>
