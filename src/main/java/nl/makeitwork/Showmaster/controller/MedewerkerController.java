@@ -93,6 +93,7 @@ public class MedewerkerController {
         model.addAttribute("medewerkerProfielGegevens", medewerkerProfielGegevensRepository.findByMedewerker(ingelogdeMedewerker));
         model.addAttribute("alleVoorstellingen", voorstellingRepository.findAll());
 
+
         List<VoorstellingsTaak> voorstellingsTaken = voorstellingsTaakRepository.findByMedewerkerMedewerkerId(ingelogdeMedewerker.getMedewerkerId());
         model.addAttribute("allePersoonlijkeVoorstellingsTaken", voorstellingsTaken);
 

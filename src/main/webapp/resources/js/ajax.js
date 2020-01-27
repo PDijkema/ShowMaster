@@ -1,5 +1,3 @@
-
-
 function roosterLaden(voorstellingId, contextPath) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {

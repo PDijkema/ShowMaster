@@ -6,6 +6,9 @@ import nl.makeitwork.Showmaster.repository.TaakRepository;
 import nl.makeitwork.Showmaster.repository.VoorstellingRepository;
 import nl.makeitwork.Showmaster.repository.VoorstellingsTaakRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -38,8 +41,17 @@ public class VoorstellingController {
 
 
     @GetMapping("/planner/voorstellingen")
-    protected String alleVoorstellingen(Model model) {
-        model.addAttribute("alleVoorstellingen", voorstellingRepository.findAll());
+    protected String alleVoorstellingen(Model model, Integer paginaNr) {
+        Pageable twaalfVoorstellingen = PageRequest.of(0, 16);
+        Page<Voorstelling> voorstellingenPagina = voorstellingRepository.findAll(twaalfVoorstellingen);
+
+        List<Voorstelling> voorstellingList = voorstellingenPagina.toList();
+
+
+        model.addAttribute("alleVoorstellingen", voorstellingList);
+
+
+
         return "alleVoorstellingen";
     }
 

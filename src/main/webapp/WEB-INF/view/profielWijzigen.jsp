@@ -57,7 +57,7 @@
                         <div>
                             <label for="emailadres" class="col-sm-3 control-label">Emailadres*</label>
                             <form:input type="email" path="emailadres" class="form-control"
-                            placeholder="Emailadres" required="true"></form:input>
+                            placeholder="Emailadres" required="true" pattern=""></form:input>
                             <div class="invalid-feedback">
                                 Voer hier je e-mailadres is
                             </div>
