@@ -21,3 +21,14 @@ function taakInvullen(voorstellingId, taakId, contextPath) {
   xhttp.open("GET", contextPath +  "/planner/voorstellingsTaak/medewerkerKoppelen/" + voorstellingId + "/"+ taakId, true);
   xhttp.send();
 }
+
+function opslaanVoorstelling(voorstellingId, taakId, contextPath) {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("taakInvullen").innerHTML = this.responseText;
+    }
+  };
+  xhttp.open("GET", contextPath +  "/planner/voorstellingsTaak/medewerkerKoppelen/" + voorstellingId + "/"+ taakId, true);
+  xhttp.send();
+}
