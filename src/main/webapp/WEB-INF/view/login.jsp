@@ -22,16 +22,14 @@
         <div class="container">
             <div class="jumbotron">
                 <div class="container" id="loginscreenJumbotron" >
-                    <h1 class="display-4">ShowMaster</h1>
-                    <p class="lead"></p>
+                    <h1 class="display-2">ShowMaster</h1>
+                    <h1 class="display-4">We Plan, You Party</h1>
+
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-8">
-                    <div class="container">
-                        <h1 class="display-4"></h1>
-                        <p class="lead">We Plan, You Party</p>
-                    </div>
+                    <h1 class="display-4"></h1>
                 </div>
                 <div class="col-6 col-md-4">
                         <div class="container">
@@ -67,7 +65,6 @@
                 <div class="col-md-8">
                     <div class="container">
                         <h1 class="display-4"></h1>
-                        <p class="lead"></p>
                     </div>
                 </div>
             </div>

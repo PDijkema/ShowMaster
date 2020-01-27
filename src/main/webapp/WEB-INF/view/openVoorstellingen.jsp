@@ -19,6 +19,7 @@
             <h1 class="voorstellingDisplay4">Inschrijven</h1>
         </div>
     </div>
+    <div class="container">
         <div class="container">
             <h1>Open voorstellingen</h1>
             <div class="card-columns">
@@ -59,6 +60,7 @@
                     </div>
                 </c:forEach>
             </div>
+        </div>
         </div>
 
 <!--            <table  class="table table-hover"  >
