@@ -77,3 +77,7 @@ height: 55px;
 .card-header{
 height: 80px;
 }
+
+#loginscreenJumbotron {
+color: #dcdcdc;
+}
