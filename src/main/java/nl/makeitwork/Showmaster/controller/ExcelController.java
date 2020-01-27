@@ -24,12 +24,12 @@ public class ExcelController {
     @Resource(name = "excelPOIHelper")
     private ExcelPOIHelper excelPOIHelper;
 
-    @GetMapping("/excelProcessing")
+    @GetMapping("/planner/excelProcessing")
     public String getExcelProcessingPage() {
         return "excel";
     }
 
-    @PostMapping("/uploadExcelFile")
+    @PostMapping("/planner/uploadExcelFile")
     public String uploadFile(Model model, MultipartFile file) throws IOException {
         InputStream in = file.getInputStream();
         File currDir = new File(".");
@@ -47,7 +47,7 @@ public class ExcelController {
         return "excel";
     }
 
-    @GetMapping("/readPOI")
+    @GetMapping("/planner/readPOI")
     public String readPOI(Model model) throws IOException {
 
         if (fileLocation != null) {

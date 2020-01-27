@@ -13,11 +13,11 @@
 </head>
 <body>
     <jsp:include page="navbar.jsp" />
-    <c:url value="/uploadExcelFile" var="uploadFileUrl" />
-    <c:url value="/excelProcessing" var="resetUrl" />
-    <c:url value="/readPOI" var="readPOIUrl" />
+    <c:url value="/planner/uploadExcelFile" var="uploadFileUrl" />
+    <c:url value="/planner/excelProcessing" var="resetUrl" />
+    <c:url value="/planner/readPOI" var="readPOIUrl" />
 
-    <form method="post" enctype="multipart/form-data" action="${uploadFileUrl}">
+    <form method="post" enctype="multipart/form-data" action="${uploadFileUrl}?${_csrf.parameterName}=${_csrf.token}">
         <input type="file" name="file" accept=".xls,.xlsx" /> 
         <button class="btn btn-primary" type="submit">Upload bestand</button>
     </form>
