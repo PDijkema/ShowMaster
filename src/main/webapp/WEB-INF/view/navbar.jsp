@@ -23,7 +23,7 @@
         <header>
             <div id="headerNavbar">
                 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                    <a class="navbar-brand" href="/startpagina">
+                    <a class="navbar-brand" href="${contextPath}/startpagina">
                     <img src="https://hetbolwerk.nl/wp-content/themes/hetbolwerk/images/hetbolwerklogo.svg" height="30" class="d-inline-block align-top" alt="Poppodium Het Bolwerk">
                     </a>
                     <div class="container">
