@@ -1,5 +1,7 @@
 package nl.makeitwork.Showmaster.controller;
 
+import io.github.millij.poi.SpreadsheetReadException;
+import io.github.millij.poi.ss.reader.XlsReader;
 import nl.makeitwork.Showmaster.model.Taak;
 import nl.makeitwork.Showmaster.model.Voorstelling;
 import nl.makeitwork.Showmaster.model.VoorstellingsTaak;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
@@ -177,7 +180,6 @@ public class VoorstellingController {
         voorstellingRepository.deleteById(voorstellingId);
         return "redirect:/planner/voorstellingen";
     }
-
 
     @GetMapping("/voorstellingen/setup")
     protected String setupTakenInDatabase() {

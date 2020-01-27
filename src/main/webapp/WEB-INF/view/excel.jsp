@@ -15,7 +15,7 @@
     <jsp:include page="navbar.jsp" />
     <c:url value="/planner/uploadExcelFile" var="uploadFileUrl" />
     <c:url value="/planner/excelProcessing" var="resetUrl" />
-    <c:url value="/planner/readPOI" var="readPOIUrl" />
+    <c:url value="/planner/excel/voorstelling/toevoegen" var="excelVoorstellingToevoegen" />
 
     <form method="post" enctype="multipart/form-data" action="${uploadFileUrl}?${_csrf.parameterName}=${_csrf.token}">
         <input type="file" name="file" accept=".xls,.xlsx" /> 
@@ -29,25 +29,11 @@
     <br />
     <br />
 
-    <form action="${readPOIUrl }">
-        <button class="btn btn-primary" type="submit">Toon bestandsinhoud</button>
+    <form action="${excelVoorstellingToevoegen }">
+        <button class="btn btn-primary" type="submit">Voorstelling(en) toevoegen</button>
     </form>
     <br />
     <br />
-
-    <c:if test="${not empty data}">
-        <table style="border: 1px solid black; border-collapse: collapse;">
-            <c:forEach items="${data}" var="row">
-                <tr>
-                    <c:forEach items="${row.value}" var="cell">
-                        <td style="border:1px solid black;height:20px;width:100px">
-                        ${cell.content}
-                        </td>
-                    </c:forEach>
-                </tr>
-            </c:forEach>
-        </table>
-    </c:if>
 
 </body>
 </html>

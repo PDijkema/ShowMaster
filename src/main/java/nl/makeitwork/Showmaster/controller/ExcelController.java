@@ -1,7 +1,10 @@
 package nl.makeitwork.Showmaster.controller;
 
-import nl.makeitwork.Showmaster.excel.ExcelPOIHelper;
-import nl.makeitwork.Showmaster.excel.MyCell;
+import io.github.millij.poi.SpreadsheetReadException;
+import io.github.millij.poi.ss.reader.XlsReader;
+import io.github.millij.poi.ss.reader.XlsxReader;
+// import nl.makeitwork.Showmaster.excel.ExcelPOIHelper;
+import nl.makeitwork.Showmaster.model.Voorstelling;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,15 +17,14 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 public class ExcelController {
 
     private String fileLocation;
 
-    @Resource(name = "excelPOIHelper")
-    private ExcelPOIHelper excelPOIHelper;
+    /*@Resource(name = "excelPOIHelper")
+    private ExcelPOIHelper excelPOIHelper;*/
 
     @GetMapping("/planner/excelProcessing")
     public String getExcelProcessingPage() {
@@ -47,14 +49,14 @@ public class ExcelController {
         return "excel";
     }
 
-    @GetMapping("/planner/readPOI")
-    public String readPOI(Model model) throws IOException {
+    @GetMapping("/planner/excel/voorstelling/toevoegen")
+    public String excelVoorstellingToevoegen(Model model) throws SpreadsheetReadException {
 
         if (fileLocation != null) {
-            if (fileLocation.endsWith(".xlsx") || fileLocation.endsWith(".xls")) {
-                Map<Integer, List<MyCell>> data
-                        = excelPOIHelper.readExcel(fileLocation);
-                model.addAttribute("data", data);
+            if (fileLocation.endsWith(".xlsx")) {
+                readExcelXlsx(fileLocation);
+            } else if (fileLocation.endsWith(".xls")) {
+                readExcelXls(fileLocation);
             } else {
                 model.addAttribute("message", "Geen geschikt Excelbestand!");
             }
@@ -62,5 +64,25 @@ public class ExcelController {
             model.addAttribute("message", "Geen bestand beschikbaar! A.u.b. een Excelbestand uploaden.");
         }
         return "excel";
+    }
+
+    public void readExcelXlsx(String fileLocation) throws SpreadsheetReadException {
+
+        final File xlsxFile = new File(fileLocation);
+        final XlsxReader reader = new XlsxReader();
+        List<Voorstelling> voorstellingen = reader.read(Voorstelling.class, xlsxFile);
+        for (Voorstelling nieuweVoorstelling : voorstellingen) {
+            System.out.println(nieuweVoorstelling);
+        }
+    }
+
+    public void readExcelXls(String fileLocation) throws SpreadsheetReadException {
+
+        final File xlsFile = new File(fileLocation);
+        final XlsReader reader = new XlsReader();
+        List<Voorstelling> voorstellingen = reader.read(Voorstelling.class, xlsFile);
+        for (Voorstelling nieuweVoorstelling : voorstellingen) {
+            System.out.println(nieuweVoorstelling);
+        }
     }
 }

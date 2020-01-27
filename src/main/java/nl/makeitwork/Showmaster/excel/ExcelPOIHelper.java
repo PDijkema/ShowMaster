@@ -1,5 +1,7 @@
 package nl.makeitwork.Showmaster.excel;
 
+import io.github.millij.poi.ss.reader.XlsReader;
+import nl.makeitwork.Showmaster.model.Voorstelling;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
@@ -17,12 +19,10 @@ import org.springframework.stereotype.Component;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.IntStream;
 
+/*
 @Component
 public class ExcelPOIHelper {
 
@@ -51,6 +51,10 @@ public class ExcelPOIHelper {
 
         return data;
     }
+
+    final File xlsxFile = new File("<path_to_file>");
+    final XlsReader reader = new XlsReader();
+    List<Voorstelling> voorstellingen = reader.read(Voorstelling.class, xlsxFile);
 
     private String readCellContent(Cell cell) {
         String content;
@@ -150,3 +154,4 @@ public class ExcelPOIHelper {
     }
 
 }
+*/

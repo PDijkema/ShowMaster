@@ -68,7 +68,7 @@ color: #fff; font-size:1.5rem}
 #voorstellingDatumDisplay4 {
 color: #fff; font-size:1rem}
 
-#voegVoorstellingToeButton{margin-bottom: 15px}
+#voegVoorstellingToeButton, #voorstellingenImporterenExcelButton{margin-bottom: 15px}
 
 .list-group-item{
 height: 55px;

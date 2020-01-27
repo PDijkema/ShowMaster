@@ -1,5 +1,7 @@
 package nl.makeitwork.Showmaster.model;
 
+import io.github.millij.poi.ss.model.annotations.Sheet;
+import io.github.millij.poi.ss.model.annotations.SheetColumn;
 import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -11,6 +13,7 @@ import java.time.LocalDateTime;
  * aanmaken van een show/voorstelling
  */
 
+@Sheet
 @Entity
 @Table(name = "voorstelling")
 public class Voorstelling {
@@ -20,6 +23,7 @@ public class Voorstelling {
     private Integer voorstellingId;
     @NotNull
     private String naam;
+
     @NotNull
     @DateTimeFormat(pattern = "dd-MM-yyyy HH:mm")
     private LocalDateTime localDateTime;
@@ -52,6 +56,7 @@ public class Voorstelling {
         this.voorstellingId = voorstellingId;
     }
 
+    @SheetColumn("Voorstelling")
     public String getNaam() {
         return naam;
     }
@@ -60,6 +65,7 @@ public class Voorstelling {
         this.naam = naam;
     }
 
+    @SheetColumn("Datum")
     public LocalDateTime getLocalDateTime() {
         return localDateTime;
     }

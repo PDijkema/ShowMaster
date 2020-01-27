@@ -22,6 +22,7 @@
 
         <div class="container">
             <a id="voegVoorstellingToeButton" class="btn btn-primary" href="${contextPath}/planner/voorstelling/toevoegen">Voeg voorstelling toe</a>
+            <a id="voorstellingenImporterenExcelButton" class="btn btn-primary" href="${contextPath}/planner/excelProcessing">Voorstelling(en) importeren vanuit Excel</a>
                 <div class="card-columns">
                     <c:forEach items="${alleVoorstellingen}" var="voorstelling">
                         <div class="card">
