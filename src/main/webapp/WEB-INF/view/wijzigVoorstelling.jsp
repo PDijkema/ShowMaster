@@ -21,7 +21,7 @@
     <body>
         <jsp:include page="navbar.jsp" />
         <h1>Wijzigen voorstelling</h1>
-        <form:form action="/planner/voorstelling/wijzigen" modelAttribute="voorstelling" method="post">
+        <form:form action="${contextPath}/planner/voorstelling/wijzigen" modelAttribute="voorstelling" method="post">
             <form:hidden path="voorstellingId"/>
             <form:hidden path="status"/>
             <table>
@@ -79,9 +79,9 @@
                 <a class="btn btn-primary" href="${contextPath}/planner/voorstellingen">Overzicht voorstellingen</a>
 
 
-<link rel="stylesheet" href="\resources\js\jquery.datetimepicker.min.css">
-<script src="\resources\js\jquery.js"></script>
-<script src="\resources\js\jquery.datetimepicker.full.js"></script>
+<link rel="stylesheet" href="${contextPath}\resources\js\jquery.datetimepicker.min.css">
+<script src="${contextPath}\resources\js\jquery.js"></script>
+<script src="${contextPath}\resources\js\jquery.datetimepicker.full.js"></script>
 <script>
     $(document).ready(function(){
     $("#kalender").datetimepicker({
