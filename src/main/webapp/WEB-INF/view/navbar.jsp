@@ -26,28 +26,30 @@
                     <a class="navbar-brand" href="/startpagina">
                     <img src="https://hetbolwerk.nl/wp-content/themes/hetbolwerk/images/hetbolwerklogo.svg" height="30" class="d-inline-block align-top" alt="Poppodium Het Bolwerk">
                     </a>
+                    <div class="container">
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
-                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                        <div class="navbar-nav">
-                            <a class="nav-item nav-link active" href="${contextPath}/startpagina">STARTPAGINA <span class="sr-only">(current)</span></a>
-                            <sec:authorize access="hasRole('PLANNER')">
-                                <a class="nav-item nav-link" href="${contextPath}/planner/voorstellingen">VOORSTELLINGEN</a>
-                                <a class="nav-item nav-link" href="${contextPath}/planner/taak/aanmaken">TAAK AANMAKEN</a>
-                                <a class="nav-item nav-link" href="${contextPath}/planner/gebruiker/overzicht">GEBRUIKERSOVERZICHT</a>
-                                <a class="nav-item nav-link" href="${contextPath}/registreer">GEBRUIKER AANMAKEN</a>
-                            </sec:authorize>
-                            <a class="nav-item nav-link" href="${contextPath}/profielpagina">PROFIELGEGEVENS</a>
-                            <c:if test="${pageContext.request.userPrincipal.name != null}">
-                                <form id="logoutform" action="${contextPath}/logout" method="post">
-                                    <input name="utf8" type="hidden" value="✓">
-                                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                            </c:if>
-                                    <button class="btn btn-outline-primary" type="submit">
-                                    Uitloggen
-                                    </button>
-                                </form>
+                        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                            <div class="navbar-nav">
+                                <a class="nav-item nav-link active" href="${contextPath}/startpagina">STARTPAGINA <span class="sr-only">(current)</span></a>
+                                <sec:authorize access="hasRole('PLANNER')">
+                                    <a class="nav-item nav-link" href="${contextPath}/planner/voorstellingen">VOORSTELLINGEN</a>
+                                    <a class="nav-item nav-link" href="${contextPath}/planner/taak/aanmaken">TAAK AANMAKEN</a>
+                                    <a class="nav-item nav-link" href="${contextPath}/planner/gebruiker/overzicht">GEBRUIKERSOVERZICHT</a>
+                                    <a class="nav-item nav-link" href="${contextPath}/registreer">GEBRUIKER AANMAKEN</a>
+                                </sec:authorize>
+                                <a class="nav-item nav-link" href="${contextPath}/profielpagina">PROFIELGEGEVENS</a>
+                                <c:if test="${pageContext.request.userPrincipal.name != null}">
+                                    <form id="logoutform" action="${contextPath}/logout" method="post">
+                                        <input name="utf8" type="hidden" value="✓">
+                                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                                </c:if>
+                                        <button class="btn btn-outline-primary" type="submit">
+                                        Uitloggen
+                                        </button>
+                                    </form>
+                            </div>
                         </div>
                     </div>
                 </nav>

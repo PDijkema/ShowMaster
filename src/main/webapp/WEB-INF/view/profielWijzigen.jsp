@@ -22,7 +22,6 @@
                 <form:hidden path="profielId" />
                 <form:hidden path="medewerker.medewerkerId" />
 
-
                     <spring:bind path="voornaam">
                         <div>
                             <label for="voornaam" class="col-sm-3 control-label">Voornaam* </label>

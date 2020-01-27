@@ -64,17 +64,17 @@
                                     <c:choose>
                                         <c:when test="${empty takenBijVoorstelling.getMedewerker().getGebruikersnaam()}">
                                             Openstaand
-                                <td>
-                                    <i class="fas fa-user-plus" title="Invullen" data-toggle="modal" data-target="#exampleModal" onclick="taakInvullen(${voorstelling.voorstellingId}, ${takenBijVoorstelling.voorstellingsTaakId}, '${contextPath}')"/></i>
-                                </td>
-                                </c:when>
-                                <c:otherwise>
-                                    <c:out value="${takenBijVoorstelling.getMedewerker().getGebruikersnaam()}"/>
-                                    <td>
-                                        <i onclick="taakInvullen(${voorstelling.voorstellingId}, ${takenBijVoorstelling.voorstellingsTaakId}, '${contextPath}')" class="far fa-edit" title="Wijzigen" data-toggle="modal" data-target="#exampleModal" ></i>
-                                    </td>
-                                </c:otherwise>
-                                </c:choose>
+                                        <td>
+                                            <i class="fas fa-user-plus" title="Invullen" data-toggle="modal" data-target="#exampleModal" onclick="taakInvullen(${voorstelling.voorstellingId}, ${takenBijVoorstelling.voorstellingsTaakId}, '${contextPath}')"/></i>
+                                        </td>
+                                        </c:when>
+                                    <c:otherwise>
+                                        <c:out value="${takenBijVoorstelling.getMedewerker().getGebruikersnaam()}"/>
+                                        <td>
+                                            <i onclick="taakInvullen(${voorstelling.voorstellingId}, ${takenBijVoorstelling.voorstellingsTaakId}, '${contextPath}')" class="far fa-edit" title="Wijzigen" data-toggle="modal" data-target="#exampleModal" ></i>
+                                        </td>
+                                    </c:otherwise>
+                                    </c:choose>
                                 </td>
                                 <td>
                                     <a href="${contextPath}/planner/voorstellingsTaak/verwijderen/${voorstelling.voorstellingId}/<c:out value='${takenBijVoorstelling.voorstellingsTaakId}' />">

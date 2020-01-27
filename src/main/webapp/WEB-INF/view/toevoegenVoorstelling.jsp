@@ -34,7 +34,7 @@
             <tr>
                 <td>Datum en tijdstip:</td>
                 <td>
-                    <form:input id="datetime-local" class="form-control mb-2 mr-sm-2" path="localDateTime" value="${dateString}" required="required" />
+                    <form:input id="kalender" class="form-control mb-2 mr-sm-2" path="localDateTime" value="${dateString}" required="required" />
                 </td>
             </tr>
         </div>
@@ -47,12 +47,13 @@
 </form:form>
 <a class="btn btn-primary" href="${contextPath}/planner/voorstellingen">Overzicht voorstellingen</a>
 
-
-
 <script>
-    $("#datetime-local").datetimepicker({
-        format: "d-m-Y H:i",
-});
+    $(document).ready(function(){
+    $("#kalender").datetimepicker({
+    format: "d-m-Y H:i",
+    });
+    });
 </script>
+
 </body>
 </html>

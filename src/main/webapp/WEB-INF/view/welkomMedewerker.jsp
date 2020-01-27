@@ -12,10 +12,16 @@
 </head>
     <body>
         <jsp:include page="navbar.jsp" />
-            <h1>Welkom <c:out value="${medewerkerProfielGegevens.voornaam}"/></h1>
-            <form:hidden path="profielId" />
-            <jsp:include page="persoonlijkeTakenPerShow.jsp" />
-            <a href="${contextPath}/voorstelling/weergeven/openvoorstelling"> <button type="button" class="btn btn-primary">Inschrijven</button></a>
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h1 class="voorstellingDisplay4">Welkom <c:out value="${medewerkerProfielGegevens.voornaam}"/></h1>
+            </div>
+        </div>
+            <div class="container">
+                <form:hidden path="profielId" />
+                <jsp:include page="persoonlijkeTakenPerShow.jsp" />
+                <a href="${contextPath}/voorstelling/weergeven/openvoorstelling"> <button type="button" class="btn btn-primary">Inschrijven</button></a>
+            </div>
     </body>
 </html>
 

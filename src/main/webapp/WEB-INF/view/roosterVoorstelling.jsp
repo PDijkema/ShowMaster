@@ -13,13 +13,11 @@
     </thead>
     <tbody>
     <c:forEach items="${voorstellingOverzicht}" var="voorstellingOverzicht">
-
         <tr>
             <td><c:out value="${voorstellingOverzicht.getTaak().getTaakNaam()}"/></td>
             <td>
                 <c:out value="${voorstellingOverzicht.getMedewerker().getGebruikersnaam()}"/>
             </td>
-
         </tr>
     </c:forEach>
     </tbody>

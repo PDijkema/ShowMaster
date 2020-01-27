@@ -24,7 +24,6 @@
                     <td>
                         <form:input class="form-control" path="taakNaam" required="true" />
                          <div class="invalid-feedback">Voer een geldige taaknaam in.</div>
-
                     </td>
                 </tr>
                 <tr>

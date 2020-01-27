@@ -16,6 +16,7 @@
     <link href="${contextPath}\resources\css\custom.css" type="text/css" rel="stylesheet">
 
 
+
 </head>
     <body>
         <jsp:include page="navbar.jsp" />
@@ -34,7 +35,7 @@
                     <tr>
                         <td>Datum en tijdstip: </td>
                         <td>
-                            <form:input id="datetime-local" class="form-control mb-2 mr-sm-2" path="localDateTime" value="${dateString}" required="required" />
+                            <form:input id="kalender" class="form-control mb-2 mr-sm-2" path="localDateTime" value="${dateString}" required="required" />
                         </td>
                     </tr>
                     <tr>
@@ -50,7 +51,7 @@
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Voorstelling annuleren</h5>
+                                            <h1 class="modal-title" id="exampleModalLabel">Voorstelling annuleren</h1>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
@@ -78,17 +79,16 @@
                 <a class="btn btn-primary" href="${contextPath}/planner/voorstellingen">Overzicht voorstellingen</a>
 
 
-        <link rel="stylesheet" href="\resources\js\jquery.datetimepicker.min.css">
-        <script src="\resources\js\jquery.js"></script>
-        <script src="\resources\js\jquery.datetimepicker.full.js"></script>
-        <script>
-        $(document).ready(function(){
-            $("#datetime-local").datetimepicker({
-        format: "d-m-Y H:i",
-});
-
-});
-        </script>
+<link rel="stylesheet" href="\resources\js\jquery.datetimepicker.min.css">
+<script src="\resources\js\jquery.js"></script>
+<script src="\resources\js\jquery.datetimepicker.full.js"></script>
+<script>
+    $(document).ready(function(){
+    $("#kalender").datetimepicker({
+    format: "d-m-Y H:i",
+    });
+    });
+</script>
     </body>
 
 </html>

@@ -5,7 +5,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
-
 /**
  * @author Pieter Dijkema
  * aanmaken van een show/voorstelling
