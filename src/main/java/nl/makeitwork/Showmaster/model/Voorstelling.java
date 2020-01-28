@@ -3,10 +3,10 @@ package nl.makeitwork.Showmaster.model;
 import io.github.millij.poi.ss.model.annotations.Sheet;
 import io.github.millij.poi.ss.model.annotations.SheetColumn;
 import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
-
 
 /**
  * @author Pieter Dijkema
@@ -28,10 +28,11 @@ public class Voorstelling {
     @DateTimeFormat(pattern = "dd-MM-yyyy HH:mm")
     private LocalDateTime localDateTime;
 
+    @SheetColumn(value = "Datum")
     private String datum;
 
     public String getDatum() {
-        return datum;
+       return datum;
     }
 
     public void setDatum(String datum) {
@@ -65,9 +66,8 @@ public class Voorstelling {
         this.naam = naam;
     }
 
-    @SheetColumn("Datum")
     public LocalDateTime getLocalDateTime() {
-        return localDateTime;
+       return localDateTime;
     }
 
     public void setLocalDateTime(LocalDateTime localDateTime) {
@@ -77,11 +77,11 @@ public class Voorstelling {
     @Override
     public String toString() {
         return "Voorstelling{" +
-            "voorstellingId=" + voorstellingId +
-            ", naam='" + naam + '\'' +
-            ", localDateTime=" + localDateTime +
-            ", datum='" + datum + '\'' +
-            ", status='" + status + '\'' +
-            '}';
+                "voorstellingId=" + voorstellingId +
+                ", naam='" + naam + '\'' +
+                ", localDateTime=" + localDateTime +
+                ", datum='" + datum + '\'' +
+                ", status='" + status + '\'' +
+                '}';
     }
 }
