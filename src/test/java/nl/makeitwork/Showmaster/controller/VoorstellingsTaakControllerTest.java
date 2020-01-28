@@ -15,13 +15,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.ui.Model;
 import org.springframework.web.context.WebApplicationContext;
 import javax.servlet.ServletContext;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.List;
-import java.util.Optional;
 
 import static org.mockito.Mockito.mock;
 
@@ -85,7 +83,7 @@ class VoorstellingsTaakControllerTest {
         Voorstelling testVoorstelling = new Voorstelling();
         LocalDateTime datum = LocalDateTime.of(2020, Month.JANUARY, 18, 20, 30);
         testVoorstelling.setNaam("Soldaat van Oranje");
-        testVoorstelling.setDatum(datum);
+        testVoorstelling.setLocalDateTime(datum);
 
         //activate
         taakRepository.save(testTaak);
@@ -94,7 +92,7 @@ class VoorstellingsTaakControllerTest {
         voorstellingsTaakController.toevoegenTaakAanVoorstelling(testTaak.getTaakId(), testVoorstelling.getVoorstellingId());
 
         List<VoorstellingsTaak> voorstellingsTaken = voorstellingsTaakRepository.
-            findVoorstellingstaakByVoorstellingId(testVoorstelling.getVoorstellingId());
+                findByVoorstellingVoorstellingIdOrderByTaakTaakNaam(testVoorstelling.getVoorstellingId());
 
         //assert
         Assert.assertNotNull(voorstellingsTaken);
@@ -111,7 +109,7 @@ class VoorstellingsTaakControllerTest {
         Voorstelling testVoorstelling = new Voorstelling();
         LocalDateTime datum = LocalDateTime.of(2020, Month.JANUARY, 18, 20, 30);
         testVoorstelling.setNaam("Soldaat van Oranje");
-        testVoorstelling.setDatum(datum);
+        testVoorstelling.setLocalDateTime(datum);
 
         //activate
         taakRepository.save(testTaak);
@@ -119,7 +117,7 @@ class VoorstellingsTaakControllerTest {
         voorstellingsTaakController.toevoegenTaakAanVoorstelling(testTaak.getTaakId(), testVoorstelling.getVoorstellingId());
 
         List<VoorstellingsTaak> voorstellingsTaken = voorstellingsTaakRepository.
-            findVoorstellingstaakByVoorstellingId(testVoorstelling.getVoorstellingId());
+                findByVoorstellingVoorstellingIdOrderByTaakTaakNaam(testVoorstelling.getVoorstellingId());
 
         Assert.assertNotNull(voorstellingsTaken);
         VoorstellingsTaak testVoorstellingstaak = voorstellingsTaken.get(0);
@@ -128,8 +126,42 @@ class VoorstellingsTaakControllerTest {
             testVoorstelling.getVoorstellingId());
 
         List<VoorstellingsTaak> voorstellingsTakenNaVerwijderen = voorstellingsTaakRepository.
-            findVoorstellingstaakByVoorstellingId(testVoorstelling.getVoorstellingId());
+                findByVoorstellingVoorstellingIdOrderByTaakTaakNaam(testVoorstelling.getVoorstellingId());
         //assert
         Assert.assertNotEquals(voorstellingsTaken.size(), voorstellingsTakenNaVerwijderen.size());
+    }
+
+    @Test
+    void opslaanMedewerkerBijVoorstellingstaak() {
+
+        //arrange
+        VoorstellingsTaak testVoorstellingsTaak = new VoorstellingsTaak();
+
+        Voorstelling testVoorstelling = new Voorstelling();
+        LocalDateTime datum = LocalDateTime.of(2020, Month.FEBRUARY, 18, 20, 30);
+        testVoorstelling.setNaam("Soldaat van Blauw");
+        testVoorstelling.setLocalDateTime(datum);
+
+        Medewerker testMedewerker = new Medewerker();
+        testMedewerker.setGebruikersnaam("testMedewerker");
+        testMedewerker.setWachtwoord("test12345");
+        testMedewerker.setWachtwoordBevestigen("test12346");
+        testMedewerker.setPlanner(false);
+
+        //activate
+        voorstellingsTaakRepository.save(testVoorstellingsTaak);
+        voorstellingRepository.save(testVoorstelling);
+        medewerkerRepository.save(testMedewerker);
+
+        voorstellingsTaakController.opslaanMedewerkerBijVoorstellingstaak(testVoorstelling.getVoorstellingId(),
+            testVoorstellingsTaak.getVoorstellingsTaakId(), testMedewerker.getMedewerkerId());
+
+        List<VoorstellingsTaak> testVoorstellingsTaken = voorstellingsTaakRepository.
+            findByVoorstellingVoorstellingIdOrderByTaakTaakNaam(testVoorstelling.getVoorstellingId());
+
+        //assert
+        for (VoorstellingsTaak v: testVoorstellingsTaken) {
+            Assert.assertNotNull(v.getMedewerker());
+        }
     }
 }

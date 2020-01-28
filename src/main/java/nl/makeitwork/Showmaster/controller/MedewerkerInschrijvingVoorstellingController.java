@@ -1,10 +1,8 @@
 package nl.makeitwork.Showmaster.controller;
 
-
 import nl.makeitwork.Showmaster.model.Medewerker;
 import nl.makeitwork.Showmaster.model.MedewerkerInschrijvingVoorstelling;
 import nl.makeitwork.Showmaster.model.Voorstelling;
-import nl.makeitwork.Showmaster.model.VoorstellingsTaak;
 import nl.makeitwork.Showmaster.repository.MedewerkerInschrijvingVoorstellingRepository;
 import nl.makeitwork.Showmaster.repository.TaakRepository;
 import nl.makeitwork.Showmaster.repository.VoorstellingRepository;
@@ -14,8 +12,6 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.LinkedList;
 import java.util.List;
 
 
@@ -42,15 +38,6 @@ public class MedewerkerInschrijvingVoorstellingController {
 
         medewerkerInschrijvingVoorstellingList.forEach(r->r.getVoorstelling().getNaam());
 
-
-
-        /*for (MedewerkerInschrijvingVoorstelling medewerkerInschrijvingVoorsteelling:medewerkerInschrijvingVoorstellingList) {
-            voorstellingen.remove(medewerkerInschrijvingVoorsteelling.getVoorstelling());
-        }
-*/
-
-
-
         model.addAttribute("inschrijvingen",medewerkerInschrijvingVoorstellingList);
         model.addAttribute("voorstellingLijst", voorstellingen);
 
@@ -59,8 +46,6 @@ public class MedewerkerInschrijvingVoorstellingController {
 
     @GetMapping("/voorstelling/weergeven/openvoorstelling/inschrijven/{voorstellingId}")
     public String inschrijvenVoorstelling(@PathVariable Integer voorstellingId, @AuthenticationPrincipal Medewerker ingelogdeMedewerker) {
-
-
 
         List<MedewerkerInschrijvingVoorstelling> medewerkerInschrijvingVoorstellingList = medewerkerInschrijvingVoorstellingRepository.findAll();
 

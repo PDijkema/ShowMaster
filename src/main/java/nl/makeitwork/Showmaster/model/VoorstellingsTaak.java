@@ -2,10 +2,7 @@ package nl.makeitwork.Showmaster.model;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-import org.hibernate.annotations.SortNatural;
-
 import javax.persistence.*;
-import java.util.Set;
 
 /**
  * @author Pieter Dijkema
@@ -68,4 +65,13 @@ public class VoorstellingsTaak {
         this.medewerker = medewerker;
     }
 
+    @Override
+    public String toString() {
+        return "VoorstellingsTaak{" +
+            "voorstellingsTaakId=" + voorstellingsTaakId +
+            ", voorstelling=" + voorstelling +
+            ", taak=" + taak +
+            ", medewerker=" + medewerker +
+            '}';
+    }
 }

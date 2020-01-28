@@ -32,24 +32,24 @@ public class TaakController {
     @Autowired
     private VoorstellingsTaakRepository voorstellingsTaakRepository;
 
-    @GetMapping("/taak/aanmaken")
+    @GetMapping("/planner/taak/aanmaken")
     protected String showTaakAanmaken(Taak taak) {
         return "taakAanmaken";
     }
 
 
-    @PostMapping("/taak/aanmaken")
+    @PostMapping("/planner/taak/aanmaken")
     protected String saveOrUpdateTaakAanmaken(Taak taak) {
         if (taak.getTaakNaam() != null && !taak.getTaakNaam().isEmpty() &&
                 taak.getStandaardBezetting() != null) {
             taakRepository.save(taak);
-            return "redirect:/takenlijst";
+            return "redirect:/planner/takenlijst";
         } else {
             return "taakAanmaken";
         }
     }
 
-    @GetMapping("/taak/add/{taakId}")
+    @GetMapping("/planner/taak/add/{taakId}")
     protected String addTaak(@PathVariable("taakId") final Integer taakId, HttpServletRequest request ) {
         Optional<Taak> taak = taakRepository.findById(taakId);
 
@@ -63,17 +63,10 @@ public class TaakController {
 
             voorstellingsTaakRepository.save(voorstellingsTaak);
         }
-        return "redirect:/voorstelling/details/{voorstellingId}";
+        return "redirect:/planner/voorstelling/details/{voorstellingId}";
     }
 
-
-
-
-
-
-
-
-    @GetMapping("/takenlijst")
+    @GetMapping("/planner/takenlijst")
     protected String showTakenlijst(Model model){
         model.addAttribute("alleTaken", taakRepository.findAll());
         model.addAttribute("taak", new Taak());
@@ -92,6 +85,11 @@ public class TaakController {
         taak2.setStandaardBezetting(1);
         taakRepository.save(taak2);
 
+        Taak taak4 = new Taak();
+        taak4.setTaakNaam("Kaartcontrole");
+        taak4.setStandaardBezetting(1);
+        taakRepository.save(taak4);
+
         Taak taak3 = new Taak();
         taak3.setTaakNaam("Garderobe");
         taak3.setStandaardBezetting(1);
@@ -99,32 +97,31 @@ public class TaakController {
 
         Taak taak5 = new Taak();
         taak5.setTaakNaam("Foto");
-        taak5.setStandaardBezetting(1);
+        taak5.setStandaardBezetting(0);
         taakRepository.save(taak5);
 
-/*
         Taak taak6 = new Taak();
         taak6.setTaakNaam("Backstage");
-        taak6.setStandaardBezetting(1);
+        taak6.setStandaardBezetting(0);
         taakRepository.save(taak6);
 
         Taak taak7 = new Taak();
         taak7.setTaakNaam("Catering");
-        taak7.setStandaardBezetting(2);
+        taak7.setStandaardBezetting(0);
         taakRepository.save(taak7);
 
         Taak taak8 = new Taak();
         taak8.setTaakNaam("Steward");
-        taak8.setStandaardBezetting(1);
-        taakRepository.save(taak8);*/
+        taak8.setStandaardBezetting(0);
+        taakRepository.save(taak8);
 
-        return "redirect:/takenlijst";
+        return "redirect:/planner/takenlijst";
     }
 
-    @GetMapping("/taak/verwijderen/{taakId}")
+    @GetMapping("/planner/taak/verwijderen/{taakId}")
     public String verwijderStandaardTaak(@PathVariable Integer taakId) {
         taakRepository.deleteById(taakId);
-        return "redirect:/takenlijst";
+        return "redirect:/planner/takenlijst";
     }
 
 }

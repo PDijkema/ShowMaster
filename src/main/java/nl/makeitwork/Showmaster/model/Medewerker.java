@@ -2,17 +2,13 @@ package nl.makeitwork.Showmaster.model;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 /**
  * @Author Gert Postma
@@ -101,7 +97,6 @@ public class Medewerker implements UserDetails {
         this.wachtwoord = wachtwoord;
     }
 
-
     public Taak getVoorkeurstaak() {
         return voorkeurstaak;
     }
@@ -158,6 +153,5 @@ public class Medewerker implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-
 }
 

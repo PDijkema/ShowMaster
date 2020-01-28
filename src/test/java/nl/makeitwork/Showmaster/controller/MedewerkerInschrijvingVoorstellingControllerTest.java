@@ -94,12 +94,12 @@ class MedewerkerInschrijvingVoorstellingControllerTest {
         // Arrange
         Voorstelling voorstelling1 = new Voorstelling();
         voorstelling1.setNaam("Lion King");
-        voorstelling1.setDatum(LocalDateTime.of(2020, Month.JANUARY, 18, 20, 30));
+        voorstelling1.setLocalDateTime(LocalDateTime.of(2020, Month.JANUARY, 18, 20, 30));
         voorstellingRepository.save(voorstelling1);
 
         Voorstelling voorstelling2 = new Voorstelling();
         voorstelling1.setNaam("Lion King2");
-        voorstelling1.setDatum(LocalDateTime.of(2020, Month.JANUARY, 18, 20, 30));
+        voorstelling1.setLocalDateTime(LocalDateTime.of(2020, Month.JANUARY, 18, 20, 30));
         voorstellingRepository.save(voorstelling1);
 
         Medewerker medewerker = new Medewerker();

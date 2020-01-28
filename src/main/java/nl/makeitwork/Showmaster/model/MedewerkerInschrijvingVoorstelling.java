@@ -2,7 +2,6 @@ package nl.makeitwork.Showmaster.model;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-
 import javax.persistence.*;
 
 @Entity(name = "medewerkerInschrijvingVoorstelling")
@@ -45,5 +44,14 @@ public class MedewerkerInschrijvingVoorstelling {
 
     public void setVoorstelling(Voorstelling voorstelling) {
         this.voorstelling = voorstelling;
+    }
+
+    @Override
+    public String toString() {
+        return "MedewerkerInschrijvingVoorstelling{" +
+            "medewerkerInschrijvingTaakId=" + medewerkerInschrijvingTaakId +
+            ", medewerker=" + medewerker +
+            ", voorstelling=" + voorstelling +
+            '}';
     }
 }

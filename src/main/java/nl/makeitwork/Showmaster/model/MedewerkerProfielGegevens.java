@@ -1,7 +1,6 @@
 package nl.makeitwork.Showmaster.model;
 
 import org.springframework.format.annotation.DateTimeFormat;
-
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -11,7 +10,6 @@ public class MedewerkerProfielGegevens {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Integer profielId;
-
 
     private String voornaam;
 
