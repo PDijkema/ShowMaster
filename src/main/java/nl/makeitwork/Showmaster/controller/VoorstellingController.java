@@ -39,20 +39,60 @@ public class VoorstellingController {
     @Autowired
     private VoorstellingsTaakRepository voorstellingsTaakRepository;
 
-
     @GetMapping("/planner/voorstellingen")
-    protected String alleVoorstellingen(Model model, Integer paginaNr) {
-        Pageable twaalfVoorstellingen = PageRequest.of(0, 16);
+    protected String alleVoorstellingen(Model model) {
+
+        Pageable twaalfVoorstellingen = PageRequest.of(0, 12);
+
+
+
         Page<Voorstelling> voorstellingenPagina = voorstellingRepository.findAll(twaalfVoorstellingen);
 
-        List<Voorstelling> voorstellingList = voorstellingenPagina.toList();
 
-
-        model.addAttribute("alleVoorstellingen", voorstellingList);
+            List<Voorstelling> voorstellingList = voorstellingenPagina.toList();
+            model.addAttribute("alleVoorstellingen", voorstellingList);
 
 
 
         return "alleVoorstellingen";
+    }
+
+    @GetMapping("/planner/voorstellingen/{paginaNr}")
+    protected String alleVoorstellingen(@PathVariable Integer paginaNr, Model model) {
+
+        System.out.println("pagina nr = " + paginaNr);
+
+
+
+        Pageable twaalfVoorstellingen = PageRequest.of(paginaNr,12);
+
+        if (paginaNr == 0){
+            return null;
+        }
+
+
+
+
+
+        Page<Voorstelling> voorstellingenPagina = voorstellingRepository.findAll(twaalfVoorstellingen);
+
+
+
+        System.out.println("totaal pagina's = " + voorstellingenPagina.getTotalPages());
+
+
+
+
+        if (voorstellingenPagina.getTotalPages() > voorstellingenPagina.getNumber()){
+            List<Voorstelling> voorstellingList = voorstellingenPagina.toList();
+            model.addAttribute("alleVoorstellingen", voorstellingList);
+            System.out.println(voorstellingList);
+            return "opgehaaldeVoorstellingen";
+        }else return null;
+
+
+
+
     }
 
     @GetMapping("/planner/voorstelling/toevoegen")

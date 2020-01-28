@@ -1,52 +1,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 
-<!doctype html>
-<html lang="en">
-<head>
-    <title>Voorstellingen</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://kit.fontawesome.com/1eeb88da0f.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <link href="${contextPath}\resources\css\custom.css" type="text/css" rel="stylesheet">
-    <script src="${contextPath}\resources\js\ajax.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://kit.fontawesome.com/1eeb88da0f.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<link href="${contextPath}\resources\css\custom.css" type="text/css" rel="stylesheet">
+<script src="${contextPath}\resources\js\ajax.js"></script>
 
-    <script>
-        var x = 10;
-        var y = 1;
-
-        $(document).ready(function(){
-            window.addEventListener('scroll',(function(){
-                x++;
-
-                if(($(window).scrollTop() + $(window).height()) === ($(document).height())){
-                    voorstellingenHalen(y);
-                    console.log(y);
-                    y++;
-                }
-
-            }));
-        });
-    </script>
-
-
-
-
-
-
-</head>
-<body>
-<jsp:include page="navbar.jsp" />
-<div class="jumbotron jumbotron-fluid">
-    <div class="container">
-        <h1 id="voorstellingDisplay4">Overzicht voorstellingen</h1>
-    </div>
-</div>
-
+<html>
 <div class="container" >
-    <a id="voegVoorstellingToeButton" class="btn btn-primary" href="${contextPath}/planner/voorstelling/toevoegen">Voeg voorstelling toe</a>
     <!--<div class="container">-->
     <div class="card-columns">
         <c:forEach items="${alleVoorstellingen}" var="voorstelling" >
@@ -136,10 +101,4 @@
 </div>
 
 </body>
-
-<div class="voorstellingen" id="test"> </div>
 </html>
-
-
-
-
