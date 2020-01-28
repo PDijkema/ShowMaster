@@ -93,7 +93,7 @@
                             Medewerkers kunnen zicht nu inschrijven voor deze voorstelling. Weet je het zeker?
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>
                             <a class="btn btn-primary btn" id="publish" href="${contextPath}/planner/voorstelling/publiceren/ />">Publiceer</a>
                         </div>
                     </div>
