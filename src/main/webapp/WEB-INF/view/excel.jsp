@@ -18,8 +18,8 @@
     <c:url value="/planner/excel/voorstelling/toevoegen" var="excelVoorstellingToevoegen" />
 
     <form method="post" enctype="multipart/form-data" action="${uploadFileUrl}?${_csrf.parameterName}=${_csrf.token}">
-        <input type="file" name="file" accept=".xls,.xlsx" /> 
-        <button class="btn btn-primary" type="submit">Upload bestand</button>
+        <input id="gekozenBestand" type="file" name="file" accept=".xls,.xlsx"  />
+        <input id="uploaden" type="submit" class='btn btn-primary' disabled="disabled" value="Uploaden" />
     </form>
     <br />
     <form method="GET" action="${resetUrl}">
@@ -34,6 +34,7 @@
     </form>
     <br />
     <br />
+    <script src="${contextPath}\resources\js\jqueryExcelUpload.js" type='text/javascript'></script>
 
 </body>
 </html>
