@@ -44,11 +44,9 @@
 
                         <td><h1><c:out value="${voorstelling.getNaam()}"/></h1></td>
                         <td><c:out value="${voorstelling.getDatum()}"/></td>
-                        <td><a class="btn btn-secondary btn-lg my-2"  href="${contextPath}/voorstelling/weergeven/openvoorstelling/inschrijven/${voorstelling.voorstellingId}/${beschikbaar}"  role="button">Beschikbaar</a></td>
-                            <td><a class="btn btn-secondary btn-lg my-2" role="button" onclick="buttonClassveranderen('btn-secondary','btn-warning', this)">Misschien</a></td>
-                        <td><a class="btn btn-secondary btn-lg my-2" href="${contextPath}/voorstelling/weergeven/openvoorstelling/inschrijven/${voorstelling.voorstellingId}/${misschien}"  role="button">Misschien</a></td>
-                        <td><a class="btn btn-secondary btn-lg my-2" href="${contextPath}/voorstelling/weergeven/openvoorstelling/inschrijven/${voorstelling.voorstellingId}/${nietBeschikbaar}"  role="button">Niet Beschikbaar</a></td>
                             <td><a class="btn btn-secondary btn-lg my-2"  role="button" onclick="buttonClassveranderen('btn-secondary','btn-success', this) ">Beschikbaar</a></td>
+                            <td><a class="btn btn-secondary btn-lg my-2" role="button" onclick="buttonClassveranderen2('btn-secondary','btn-warning', this)">Misschien</a></td>
+                            <td><a class="btn btn-secondary btn-lg my-2" role="button" onclick="buttonClassveranderen3('btn-secondary','btn-danger', this)">Niet Beschikbaar</a></td>
 
                         </tr>
 
@@ -113,22 +111,37 @@
 
 
 
-
     function buttonClassveranderen(teVerwijderenKlasse, gewensteKlasse, thisParameter) {
         var myTable = document.getElementById('myTable');
-        var elem = $('a[role="button"]');
-
-
-        ($(elem).click(function () {
-            return ($(this).closest('tr').index())
-        }));
-
-
-
-
-        myTable.rows[x].cells[3].innerHTML = '<a class="btn btn-secondary btn-lg my-2" role="button" onclick="buttonClassveranderen(\'btn-secondary\',\'btn-warning\', this)">Beschikbaar</a>';
+        var x =  ($(thisParameter).closest('tr').index());
+        x++;
+        myTable.rows[x].cells[3].innerHTML = '<a class="btn btn-secondary btn-lg my-2" role="button" onclick="buttonClassveranderen2(\'btn-secondary\',\'btn-warning\', this)">Misschien</a>';
+        myTable.rows[x].cells[4].innerHTML = '<a class="btn btn-secondary btn-lg my-2" role="button" onclick="buttonClassveranderen3(\'btn-secondary\',\'btn-danger\', this)">Niet Beschikbaar</a>';
         $(thisParameter).removeClass(teVerwijderenKlasse).addClass(gewensteKlasse);
 
+
+    }
+
+    function buttonClassveranderen2(teVerwijderenKlasse, gewensteKlasse, thisParameter) {
+        var elem = $('a[id="buttonBeschikbaar"]');
+        var myTable = document.getElementById('myTable');
+        var x =  ($(thisParameter).closest('tr').index());
+        x++;
+        myTable.rows[x].cells[2].innerHTML = '<td><a class="btn btn-secondary btn-lg my-2" role="button" onclick="buttonClassveranderen(\'btn-secondary\',\'btn-success\', this)">Beschikbaar</a>';
+        myTable.rows[x].cells[4].innerHTML = '<td><a class="btn btn-secondary btn-lg my-2" role="button" onclick="buttonClassveranderen3(\'btn-secondary\',\'btn-danger\', this)">Niet Beschikbaar</a>';
+
+        $(thisParameter).removeClass(teVerwijderenKlasse).addClass(gewensteKlasse);
+
+    }
+    function buttonClassveranderen3(teVerwijderenKlasse, gewensteKlasse, thisParameter) {
+        var elem = $('a[id="buttonBeschikbaar"]');
+        var myTable = document.getElementById('myTable');
+        var x =  ($(thisParameter).closest('tr').index());
+        x++;
+        myTable.rows[x].cells[2].innerHTML = '<td><a class="btn btn-secondary btn-lg my-2" role="button" onclick="buttonClassveranderen(\'btn-secondary\',\'btn-success\', this)">Beschikbaar</a>';
+        myTable.rows[x].cells[3].innerHTML = '<td><a class="btn btn-secondary btn-lg my-2" role="button"  onclick="buttonClassveranderen2(\'btn-secondary\',\'btn-warning\', this)">Misschien</a>';
+
+        $(thisParameter).removeClass(teVerwijderenKlasse).addClass(gewensteKlasse);
 
     }
 </script>
