@@ -4,6 +4,7 @@ import io.github.millij.poi.SpreadsheetReadException;
 import io.github.millij.poi.ss.reader.XlsReader;
 import io.github.millij.poi.ss.reader.XlsxReader;
 import nl.makeitwork.Showmaster.model.Voorstelling;
+import nl.makeitwork.Showmaster.repository.VoorstellingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +25,9 @@ public class ExcelController {
 
     @Autowired
     VoorstellingController voorstellingController;
+
+    @Autowired
+    VoorstellingRepository voorstellingRepository;
 
     private String fileLocation;
 
@@ -64,7 +68,7 @@ public class ExcelController {
         } else {
             model.addAttribute("message", "Geen bestand beschikbaar! A.u.b. een Excelbestand uploaden.");
         }
-        return "excel";
+        return "redirect:/planner/voorstellingen";
     }
 
     public void readExcelXlsx(String fileLocation) throws SpreadsheetReadException {
@@ -74,10 +78,13 @@ public class ExcelController {
         List<Voorstelling> voorstellingen = reader.read(Voorstelling.class, xlsxFile);
         for (Voorstelling nieuweVoorstelling : voorstellingen) {
 
-            changeDateStringToLocalDateTime(nieuweVoorstelling);
+            datumStringFormatterenNaarLocalDateTime(nieuweVoorstelling);
 
-            voorstellingController.voorstellingOpslaanInclTaken(nieuweVoorstelling);
-            System.out.println(nieuweVoorstelling);
+            if (voorstellingRepository.findByNaam(nieuweVoorstelling.getNaam()) != null
+                    && voorstellingRepository.findByLocalDateTime(nieuweVoorstelling.getLocalDateTime()) != null) {
+            } else {
+                voorstellingController.voorstellingOpslaanInclTaken(nieuweVoorstelling);
+            }
         }
     }
 
@@ -88,14 +95,17 @@ public class ExcelController {
         List<Voorstelling> voorstellingen = reader.read(Voorstelling.class, xlsFile);
         for (Voorstelling nieuweVoorstelling : voorstellingen) {
 
-            changeDateStringToLocalDateTime(nieuweVoorstelling);
+            datumStringFormatterenNaarLocalDateTime(nieuweVoorstelling);
 
-            voorstellingController.voorstellingOpslaanInclTaken(nieuweVoorstelling);
-            System.out.println(nieuweVoorstelling);
+            if (voorstellingRepository.findByNaam(nieuweVoorstelling.getNaam()) != null
+                    && voorstellingRepository.findByLocalDateTime(nieuweVoorstelling.getLocalDateTime()) != null) {
+            } else {
+                voorstellingController.voorstellingOpslaanInclTaken(nieuweVoorstelling);
+            }
         }
     }
 
-    public void changeDateStringToLocalDateTime(Voorstelling voorstelling) {
+    public void datumStringFormatterenNaarLocalDateTime(Voorstelling voorstelling) {
         DateTimeFormatter aFormatter = DateTimeFormatter.ofPattern("dd/MM/yy HH:mm");
         String datum = voorstelling.getDatum();
         LocalDateTime localDateTime = LocalDateTime.parse(datum, aFormatter);
