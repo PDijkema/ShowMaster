@@ -3,6 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+<c:set var="beschikbaar" value="Beschikbaar"/>
+<c:set var="misschien" value="Misschien"/>
+<c:set var="nietBeschikbaar" value="Niet Beschikbaar"/>
 
 <!doctype html>
 <html lang="en" xmlns:c="http://www.w3.org/1999/XSL/Transform">
@@ -22,20 +25,37 @@
     <div class="container">
         <div class="container">
             <h1>Open voorstellingen</h1>
-            <div class="card-columns">
+            <table class="table table-hover" id="myTable">
+                <thead>
+                <tr>
+                    <th scope ="col">Voorstelling</th>
+                    <th scope ="col">Datum</th>
+                    <th scope ="col">Beschikbaar</th>
+                    <th scope ="col">Misschien</th>
+                    <th scope ="col">Niet Beschikbaar</th>
+                </tr>
+                </thead>
+
+                <tbody>
+
                 <c:forEach items="${voorstellingLijst}" var="voorstelling">
                     <c:if test="${voorstelling.status == 'Gepubliceerd'}">
-                        <div class="card">
-                            <div class="card-header">
-                                <h1><c:out value="${voorstelling.getNaam()}"/></h1><c:out value="${voorstelling.getDatum()}"/>
-                            </div>
-                        <div class="card-body">
-                            <a class="btn btn-primary" href="${contextPath}/voorstelling/weergeven/openvoorstelling/inschrijven/<c:out value='${voorstelling.voorstellingId}'/>" role="button">Inschrijven</a>
-                        </div>
-                        </div>
+                        <tr >
+
+                        <td><h1><c:out value="${voorstelling.getNaam()}"/></h1></td>
+                        <td><c:out value="${voorstelling.getDatum()}"/></td>
+                        <td><a class="btn btn-secondary btn-lg my-2"  href="${contextPath}/voorstelling/weergeven/openvoorstelling/inschrijven/${voorstelling.voorstellingId}/${beschikbaar}"  role="button">Beschikbaar</a></td>
+                            <td><a class="btn btn-secondary btn-lg my-2" role="button" onclick="buttonClassveranderen('btn-secondary','btn-warning', this)">Misschien</a></td>
+                        <td><a class="btn btn-secondary btn-lg my-2" href="${contextPath}/voorstelling/weergeven/openvoorstelling/inschrijven/${voorstelling.voorstellingId}/${misschien}"  role="button">Misschien</a></td>
+                        <td><a class="btn btn-secondary btn-lg my-2" href="${contextPath}/voorstelling/weergeven/openvoorstelling/inschrijven/${voorstelling.voorstellingId}/${nietBeschikbaar}"  role="button">Niet Beschikbaar</a></td>
+                            <td><a class="btn btn-secondary btn-lg my-2"  role="button" onclick="buttonClassveranderen('btn-secondary','btn-success', this) ">Beschikbaar</a></td>
+
+                        </tr>
+
                     </c:if>
                 </c:forEach>
-            </div>
+                </tbody>
+            </table>
         </div>
         <div class="container">
             <h1>Ingeschreven voorstellingen</h1>
@@ -51,7 +71,28 @@
                                     <span class="badge badge-danger">Voorstelling Geannuleerd</span>
                                 </c:when>
                                 <c:otherwise>
-                                    <span class="badge badge-success">Ingeschreven</span>
+
+                                        <div class="list-group mr-2">
+                                            <c:choose>
+                                            <c:when test="${inschrijving.getInschrijvingStatus() == 'Beschikbaar'}">
+                                                <button class="btn btn-success btn-lg my-2 focus {background: green;}" role="button">Beschikbaar</button>
+                                                <a class="btn btn-warning btn-lg my-2" href="${contextPath}/voorstelling/weergeven/openvoorstelling/inschrijven/<c:out value='${inschrijving.getVoorstelling().getVoorstellingId()}'/>"  role="button">Misschien</a>
+                                                <a class="btn btn-danger btn-lg my-2" href="${contextPath}/voorstelling/weergeven/openvoorstelling/inschrijven/<c:out value='${inschrijving.getVoorstelling().getVoorstellingId()}'/>"  role="button">Niet Beschikbaar</a>
+                                            </c:when>
+                                                <c:when test="${inschrijving.getInschrijvingStatus() == 'Misschien'}">
+                                                    <a class="btn btn-success btn-lg my-2" href="${contextPath}/voorstelling/weergeven/openvoorstelling/inschrijven/<c:out value='${inschrijving.getVoorstelling().getVoorstellingId()}'/>"  role="button">Beschikbaar</a>
+                                                    <button class="btn btn-warning btn-lg my-2 focus {background: yellow;}" role="button">Misschien</button>
+                                                    <a class="btn btn-danger btn-lg my-2" href="${contextPath}/voorstelling/weergeven/openvoorstelling/inschrijven/<c:out value='${inschrijving.getVoorstelling().getVoorstellingId()}'/>"  role="button">Niet Beschikbaar</a>
+                                                </c:when>
+                                                <c:when test="${inschrijving.getInschrijvingStatus() == 'Niet Beschikbaar'}">
+                                                    <a class="btn btn-success btn-lg my-2" href="${contextPath}/voorstelling/weergeven/openvoorstelling/inschrijven/<c:out value='${inschrijving.getVoorstelling().getVoorstellingId()}'/>"  role="button">Beschikbaar</a>
+                                                    <a class="btn btn-warning btn-lg my-2" href="${contextPath}/voorstelling/weergeven/openvoorstelling/inschrijven/<c:out value='${inschrijving.getVoorstelling().getVoorstellingId()}'/>"  role="button">Misschien</a>
+                                                    <button class="btn btn-danger btn-lg my-2 focus {background: red;}" role="button">Niet Beschikbaar</button>
+                                                </c:when>
+                                            </c:choose>
+
+                                        </div>
+
                                 </c:otherwise>
                             </c:choose>
                         </div>
@@ -61,3 +102,42 @@
         </div>
     </div>
 </body>
+
+<script>
+
+
+
+
+
+
+
+
+
+
+    function buttonClassveranderen(teVerwijderenKlasse, gewensteKlasse, thisParameter) {
+        var myTable = document.getElementById('myTable');
+        var elem = $('a[role="button"]');
+
+
+        ($(elem).click(function () {
+            return ($(this).closest('tr').index())
+        }));
+
+
+
+
+        myTable.rows[x].cells[3].innerHTML = '<a class="btn btn-secondary btn-lg my-2" role="button" onclick="buttonClassveranderen(\'btn-secondary\',\'btn-warning\', this)">Beschikbaar</a>';
+        $(thisParameter).removeClass(teVerwijderenKlasse).addClass(gewensteKlasse);
+
+
+    }
+</script>
+
+
+
+<script>
+
+
+</script>
+
+

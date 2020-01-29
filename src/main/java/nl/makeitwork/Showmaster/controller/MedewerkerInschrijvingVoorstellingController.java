@@ -44,8 +44,8 @@ public class MedewerkerInschrijvingVoorstellingController {
         return "openVoorstellingen";
     }
 
-    @GetMapping("/voorstelling/weergeven/openvoorstelling/inschrijven/{voorstellingId}")
-    public String inschrijvenVoorstelling(@PathVariable Integer voorstellingId, @AuthenticationPrincipal Medewerker ingelogdeMedewerker) {
+    @GetMapping("/voorstelling/weergeven/openvoorstelling/inschrijven/{voorstellingId}/{inschrijvingStatus}")
+    public String inschrijvenVoorstelling(@PathVariable Integer voorstellingId, @PathVariable String inschrijvingStatus, @AuthenticationPrincipal Medewerker ingelogdeMedewerker) {
 
         List<MedewerkerInschrijvingVoorstelling> medewerkerInschrijvingVoorstellingList = medewerkerInschrijvingVoorstellingRepository.findAll();
 
@@ -61,7 +61,7 @@ public class MedewerkerInschrijvingVoorstellingController {
         MedewerkerInschrijvingVoorstelling medewerkerInschrijvingVoorstelling = new MedewerkerInschrijvingVoorstelling();
         medewerkerInschrijvingVoorstelling.setMedewerker(ingelogdeMedewerker);
         medewerkerInschrijvingVoorstelling.setVoorstelling(voorstelling);
-        medewerkerInschrijvingVoorstelling.setInschrijvingStatus("Beschikbaar");
+        medewerkerInschrijvingVoorstelling.setInschrijvingStatus(inschrijvingStatus);
 
         medewerkerInschrijvingVoorstellingRepository.save(medewerkerInschrijvingVoorstelling);
         return "redirect:/voorstelling/weergeven/openvoorstelling";
