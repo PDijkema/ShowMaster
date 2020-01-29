@@ -135,7 +135,7 @@ public class VoorstellingController {
     protected String UpdateVoorstelling(@ModelAttribute("voorstelling") Voorstelling voorstelling, BindingResult result) {
 
         if (!result.hasErrors()) {
-            datumFormatterenNaarString(voorstelling);
+            voorstelling.localDateTimeFormatterenNaarString();
 
             voorstellingRepository.save(voorstelling);
         } else {
@@ -163,20 +163,12 @@ public class VoorstellingController {
     public void voorstellingOpslaanInclTaken(Voorstelling voorstelling) {
         voorstelling.setStatus("Ongepubliceerd");
 
-       datumFormatterenNaarString(voorstelling);
+       voorstelling.localDateTimeFormatterenNaarString();
 
         voorstellingRepository.save(voorstelling);
         for (Taak taak : taakRepository.findAll()) {
             standaardTakenOpslaanBijVoorstelling(taak.getStandaardBezetting(), voorstelling, taak);
         }
-    }
-
-    public void datumFormatterenNaarString(Voorstelling voorstelling) {
-        DateTimeFormatter aFormatter = DateTimeFormatter.ofPattern("dd MMMM yyyy HH:mm");
-        LocalDateTime localDateTime = voorstelling.getLocalDateTime();
-        String formattedString = localDateTime.format(aFormatter);
-
-        voorstelling.setDatum(formattedString);
     }
 
 

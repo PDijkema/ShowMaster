@@ -16,8 +16,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Controller
@@ -78,7 +76,7 @@ public class ExcelController {
         List<Voorstelling> voorstellingen = reader.read(Voorstelling.class, xlsxFile);
         for (Voorstelling nieuweVoorstelling : voorstellingen) {
 
-            datumStringFormatterenNaarLocalDateTime(nieuweVoorstelling);
+            nieuweVoorstelling.datumStringFormatterenNaarLocalDateTime();
 
             if (voorstellingRepository.findByNaam(nieuweVoorstelling.getNaam()) != null
                     && voorstellingRepository.findByLocalDateTime(nieuweVoorstelling.getLocalDateTime()) != null) {
@@ -95,7 +93,7 @@ public class ExcelController {
         List<Voorstelling> voorstellingen = reader.read(Voorstelling.class, xlsFile);
         for (Voorstelling nieuweVoorstelling : voorstellingen) {
 
-            datumStringFormatterenNaarLocalDateTime(nieuweVoorstelling);
+            nieuweVoorstelling.datumStringFormatterenNaarLocalDateTime();
 
             if (voorstellingRepository.findByNaam(nieuweVoorstelling.getNaam()) != null
                     && voorstellingRepository.findByLocalDateTime(nieuweVoorstelling.getLocalDateTime()) != null) {
@@ -103,13 +101,5 @@ public class ExcelController {
                 voorstellingController.voorstellingOpslaanInclTaken(nieuweVoorstelling);
             }
         }
-    }
-
-    public void datumStringFormatterenNaarLocalDateTime(Voorstelling voorstelling) {
-        DateTimeFormatter aFormatter = DateTimeFormatter.ofPattern("dd/MM/yy HH:mm");
-        String datum = voorstelling.getDatum();
-        LocalDateTime localDateTime = LocalDateTime.parse(datum, aFormatter);
-
-        voorstelling.setLocalDateTime(localDateTime);
     }
 }

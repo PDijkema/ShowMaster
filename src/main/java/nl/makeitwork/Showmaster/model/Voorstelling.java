@@ -7,6 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * @author Pieter Dijkema
@@ -30,6 +31,23 @@ public class Voorstelling {
 
     @SheetColumn(value = "Datum")
     private String datum;
+
+    public void datumStringFormatterenNaarLocalDateTime() {
+        DateTimeFormatter aFormatter = DateTimeFormatter.ofPattern("dd/MM/yy HH:mm");
+        String datum = getDatum();
+        LocalDateTime localDateTime = LocalDateTime.parse(datum, aFormatter);
+
+        setLocalDateTime(localDateTime);
+    }
+
+    public void localDateTimeFormatterenNaarString() {
+        DateTimeFormatter aFormatter = DateTimeFormatter.ofPattern("dd MMMM yyyy HH:mm");
+        LocalDateTime localDateTime = getLocalDateTime();
+        String formattedString = localDateTime.format(aFormatter);
+
+        setDatum(formattedString);
+    }
+
 
     public String getDatum() {
        return datum;
