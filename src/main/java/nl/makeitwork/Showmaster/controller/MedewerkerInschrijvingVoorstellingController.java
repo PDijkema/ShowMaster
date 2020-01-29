@@ -61,6 +61,7 @@ public class MedewerkerInschrijvingVoorstellingController {
         MedewerkerInschrijvingVoorstelling medewerkerInschrijvingVoorstelling = new MedewerkerInschrijvingVoorstelling();
         medewerkerInschrijvingVoorstelling.setMedewerker(ingelogdeMedewerker);
         medewerkerInschrijvingVoorstelling.setVoorstelling(voorstelling);
+        medewerkerInschrijvingVoorstelling.setInschrijvingStatus("Beschikbaar");
 
         medewerkerInschrijvingVoorstellingRepository.save(medewerkerInschrijvingVoorstelling);
         return "redirect:/voorstelling/weergeven/openvoorstelling";
