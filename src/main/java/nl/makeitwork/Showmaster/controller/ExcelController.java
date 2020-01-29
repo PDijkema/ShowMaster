@@ -4,7 +4,6 @@ import io.github.millij.poi.SpreadsheetReadException;
 import io.github.millij.poi.ss.reader.XlsReader;
 import io.github.millij.poi.ss.reader.XlsxReader;
 import nl.makeitwork.Showmaster.model.Voorstelling;
-import nl.makeitwork.Showmaster.repository.VoorstellingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,7 +23,7 @@ import java.util.List;
 public class ExcelController {
 
     @Autowired
-    VoorstellingRepository voorstellingRepository;
+    VoorstellingController voorstellingController;
 
     private String fileLocation;
 
@@ -40,7 +39,7 @@ public class ExcelController {
         String path = currDir.getAbsolutePath();
         fileLocation = path.substring(0, path.length() - 1) + file.getOriginalFilename();
         FileOutputStream f = new FileOutputStream(fileLocation);
-        int ch = 0;
+        int ch;
         while ((ch = in.read()) != -1) {
             f.write(ch);
         }
@@ -75,11 +74,9 @@ public class ExcelController {
         List<Voorstelling> voorstellingen = reader.read(Voorstelling.class, xlsxFile);
         for (Voorstelling nieuweVoorstelling : voorstellingen) {
 
-           // changeExcelDateToDataBaseFormat(nieuweVoorstelling);
             changeDateStringToLocalDateTime(nieuweVoorstelling);
 
-
-            //voorstellingRepository.save(nieuweVoorstelling);
+            voorstellingController.voorstellingOpslaanInclTaken(nieuweVoorstelling);
             System.out.println(nieuweVoorstelling);
         }
     }
@@ -91,24 +88,12 @@ public class ExcelController {
         List<Voorstelling> voorstellingen = reader.read(Voorstelling.class, xlsFile);
         for (Voorstelling nieuweVoorstelling : voorstellingen) {
 
-            //changeExcelDateToDataBaseFormat(nieuweVoorstelling);
             changeDateStringToLocalDateTime(nieuweVoorstelling);
 
-            //voorstellingRepository.save(nieuweVoorstelling);
+            voorstellingController.voorstellingOpslaanInclTaken(nieuweVoorstelling);
             System.out.println(nieuweVoorstelling);
         }
     }
-
-    /*public void changeExcelDateToDataBaseFormat(Voorstelling voorstelling) {
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yy HH:mm");
-        DateTimeFormatter dateTimeFormatterNew = DateTimeFormatter.ofPattern("dd-MMMM-yyyy HH:mm");
-        String excelDatum = voorstelling.getDatum();
-        LocalDateTime tijdelijkeLocalDateTime = LocalDateTime.parse(excelDatum, dateTimeFormatter);
-
-        String databaseDatum = dateTimeFormatterNew.format(tijdelijkeLocalDateTime);
-
-        voorstelling.setDatum(databaseDatum);
-    }*/
 
     public void changeDateStringToLocalDateTime(Voorstelling voorstelling) {
         DateTimeFormatter aFormatter = DateTimeFormatter.ofPattern("dd/MM/yy HH:mm");
