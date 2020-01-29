@@ -1,6 +1,9 @@
 package nl.makeitwork.Showmaster.controller;
 
+import io.github.millij.poi.SpreadsheetReadException;
+import nl.makeitwork.Showmaster.model.Voorstelling;
 import nl.makeitwork.Showmaster.repository.VoorstellingRepository;
+import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +11,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.io.File;
+
+
+
+/**
+ * @author Karin Zoetendal
+ * deze test gaat er vanuit dat de aangeleverde data in de Excelfile correct is, foutieve data worden dus niet getest
+ */
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -16,24 +26,28 @@ import static org.junit.jupiter.api.Assertions.*;
 class ExcelControllerTest {
 
     @Autowired
-    VoorstellingController voorstellingController;
+    ExcelController excelController;
 
     @Autowired
     VoorstellingRepository voorstellingRepository;
 
     @Test
-    void testUploadFile() {
-    }
+    public void readExcelXlsx() throws SpreadsheetReadException {
+        //Arrange
+        ClassLoader classLoader = this.getClass().getClassLoader();
 
-    @Test
-    void testExcelVoorstellingToevoegen() {
-    }
+        File testBestand1 = new File(classLoader.getResource("testVoorstellingen1.xlsx").getFile());
+        File testBestand2 = new File(classLoader.getResource("testVoorstellingen2.xlsx").getFile());
 
-    @Test
-    void testReadExcelXlsx() {
-    }
+        //activate
+        excelController.readExcelXlsx(testBestand1.getAbsolutePath());
+        excelController.readExcelXlsx(testBestand2.getAbsolutePath());
 
-    @Test
-    void datumStringFormatterenNaarLocalDateTime() {
+        Voorstelling opgehaaldeVoorstelling = voorstellingRepository.findByNaam("Lordi - + Almanac + Flesh Roxon");
+        Voorstelling tweedeOpgehaaldeVoorstelling = voorstellingRepository.findByNaam("Hit The North/ Diamond Head");
+
+        //assert
+        Assert.assertNotNull(opgehaaldeVoorstelling);
+
     }
 }
