@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html>
@@ -9,12 +10,8 @@
 </head>
 <body>
 
-
 <jsp:include page="navbar.jsp" />
 <h1>De pagina die u probeert te bereiken bestaat niet.</h1>
-
 <a class="btn btn-primary" href="${contextPath}/startpagina">Terug naar de startpagina</a>
-
 </body>
-
 </html>

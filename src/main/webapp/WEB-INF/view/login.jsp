@@ -19,52 +19,55 @@
 
   <body>
     <header>
-        <div class="header-bottom">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <a class="navbar-brand" href="#">
-                <img src="https://hetbolwerk.nl/wp-content/themes/hetbolwerk/images/hetbolwerklogo.svg" height="30" class="d-inline-block align-top" alt="Poppodium Het Bolwerk">
-                </a>
-            </nav>
-        </div>
-
-    <div class="container">
-      <form method="POST" action="${contextPath}/login"  class="needs-validation" novalidate="true">
-        <h2 class="form-heading">Log in</h2>
-
-        <div class="form-group ${error != null ? 'has-error' : ''}">
-            <span class = "alert-success">${message}</span>
-
-            <div class="my-2">
-            <input name="username" type="text" class="form-control" placeholder="Gebruikersnaam"
-                   autofocus="true" required="true">
-                <div class="invalid-feedback">
-                    Voer een gebruikersnaam in
+        <div class="container">
+            <div class="jumbotron">
+                <div class="container" id="loginscreenJumbotron" >
+                    <h1 class="display-2">ShowMaster</h1>
+                    <h1 class="display-4">We Plan, You Party</h1>
                 </div>
             </div>
-
-                <div class="my-2">
-            <input name="password" type="password" class="form-control" placeholder="Wachtwoord" required="true"/>
-                    <div class="invalid-feedback">
-                        Voer een wachtwoord in
+            <div class="row">
+                <div class="col-md-8">
+                    <h1 class="display-4"></h1>
+                </div>
+                <div class="col-6 col-md-4">
+                    <div class="container">
+                        <form method="POST" action="${contextPath}/login"  class="needs-validation" novalidate="true">
+                            <div class="form-group ${error != null ? 'has-error' : ''}">
+                                <span class = "alert-success">${message}</span>
+                                <div class="my-2">
+                                    <input name="username" type="text" class="form-control" placeholder="Gebruikersnaam"
+                                           autofocus="true" required="true">
+                                    <div class="invalid-feedback">
+                                        Voer een gebruikersnaam in
+                                    </div>
+                                </div>
+                                <div class="my-2">
+                                    <input name="password" type="password" class="form-control" placeholder="Wachtwoord" required="true"/>
+                                    <div class="invalid-feedback">
+                                        Voer een wachtwoord in
+                                    </div>
+                                </div>
+                                <div class="text-danger">
+                                    <small>${error}</small> </div>
+                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                                <div class="my-2">
+                                    <button class="btn btn-primary" type="submit">Log in</button>
+                                    <a href="${contextPath}/registreer"><button class="btn btn-primary" type="button" >Inschrijven</button></a>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-
                 </div>
-
-            <div class="text-danger">
-            <small>${error}</small> </div>
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-
-            <div class="my-2">
-                <button class="btn btn-primary" type="submit">Log in</button>
-                <a href="${contextPath}/registreer"> <button class="btn btn-primary" type="button" >Gebruiker aanmaken</button></a>
             </div>
-
-
-
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="container">
+                        <h1 class="display-4"></h1>
+                    </div>
+                </div>
+            </div>
         </div>
-      </form>
-    </div>
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
   </body>

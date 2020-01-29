@@ -16,7 +16,7 @@
         <jsp:include page="navbar.jsp" />
         <div class="jumbotron jumbotron-fluid">
             <div class="container">
-                <h1 id="voorstellingDisplay4">Overzicht voorstellingen</h1>
+                <h1 class="voorstellingDisplay4">Overzicht voorstellingen</h1>
             </div>
         </div>
 
@@ -28,7 +28,6 @@
                         <div class="card">
                             <div class="card-header"><h1><c:out value="${voorstelling.naam}"/></h1><c:out value="${voorstelling.datum}"/></div>
                             <div class="card-body">
-
                                 <p class="card-text">Hey, Luke! May the Force be with you. Still, she's got a lot of spirit. I don't know, what do you think?</p>
 
                             </div>
@@ -40,7 +39,7 @@
                                         </c:when>
                                         <c:when test="${voorstelling.status == 'Ongepubliceerd'}">
                                             <div>
-                                                <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#exampleModal" data-myvalue="${voorstelling.voorstellingId}">
+                                                <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#exampleModal" data-voorstelling="${voorstelling.voorstellingId}">
                                                     Publiceer
                                                 </button>
                                             </div>
@@ -56,7 +55,7 @@
                                             <!-- nothing yet  -->
                                         </c:when>
                                         <c:otherwise>
-                                            <a href="${contextPath}/planner/voorstelling/details/<c:out value="${voorstelling.voorstellingId}" />">
+                                            <a href="${contextPath}/planner/voorstelling/details/<c:out value='${voorstelling.voorstellingId}' />">
                                             <i class="fas fa-user-edit" title="Taakbeheer"></i>
                                             </a>
                                         </c:otherwise>
@@ -95,20 +94,20 @@
                             Medewerkers kunnen zicht nu inschrijven voor deze voorstelling. Weet je het zeker?
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>
                             <a class="btn btn-primary btn" id="publish" href="${contextPath}/planner/voorstelling/publiceren/ />">Publiceer</a>
                         </div>
                     </div>
                 </div>
             </div>
-            <script type="text/javascript">
-                $('#exampleModal').on('show.bs.modal', function (event) {
-                  var button = $(event.relatedTarget)
-                  var voorstellingId = button.data('myvalue')
-                  var modal = $(this)
-                  $('#publish').attr("href", "${contextPath}/planner/voorstelling/publiceren/" + voorstellingId);
-                })
-            </script>
+<script type="text/javascript">
+    $('#exampleModal').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget)
+      var voorstellingId = button.data('voorstelling')
+      var modal = $(this)
+      $('#publish').attr("href", "${contextPath}/planner/voorstelling/publiceren/" + voorstellingId);
+    })
+</script>
         </div>
     </body>
 </html>
