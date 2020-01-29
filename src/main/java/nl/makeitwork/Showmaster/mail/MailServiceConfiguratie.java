@@ -1,4 +1,5 @@
 package nl.makeitwork.Showmaster.mail;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -30,11 +31,11 @@ public class MailServiceConfiguratie {
 
     @Bean
     public SimpleMailMessage defaultMessage() {
-        SimpleMailMessage smm = new SimpleMailMessage();
-        smm.setTo("default@example.com");
-        smm.setFrom(SENDER_EMAIL);
-        smm.setSubject("Default subject");
-        smm.setText("Default text");
-        return smm;
+        SimpleMailMessage defaultBericht = new SimpleMailMessage();
+        defaultBericht.setTo("default@example.com");
+        defaultBericht.setFrom(SENDER_EMAIL);
+        defaultBericht.setSubject("Default subject");
+        defaultBericht.setText("Default text");
+        return defaultBericht;
     }
 }

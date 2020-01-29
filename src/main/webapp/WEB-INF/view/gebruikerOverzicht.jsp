@@ -15,7 +15,7 @@
     <body>
         <jsp:include page="navbar.jsp" />
         <div class="container">
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#uitnodigingModal" >Medewerker Uitnodigen</button>
+        <button id="medewerkerUitnodigenButton" type="button" class="btn btn-primary" data-toggle="modal" data-target="#uitnodigingModal" >Medewerker Uitnodigen</button>
             <h1>Gebruikersoverzicht</h1>
                 <table class="table table-hover">
                     <thead>
@@ -29,7 +29,7 @@
                             <tr>
                                 <td><c:out value="${gebruiker.gebruikersnaam}"/></td>
                                 <td>
-                                    <a href="${contextPath}/planner/gebruiker/verwijderen/<c:out value="${gebruiker.medewerkerId}"/>">
+                                    <a href="${contextPath}/planner/gebruiker/verwijderen/<c:out value='${gebruiker.medewerkerId}'/>">
                                         <i class="fas fa-trash" title="Verwijderen"></i>
                                     </a>
                                 </td>
@@ -49,7 +49,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form:form action="${contextPath}/planner/gebruiker/overzicht/uitnodigen" modelAttribute="uitnodigingMedewerker" method="post" class="was-validated needs-validation">
+                <form:form action="${contextPath}/planner/gebruiker/overzicht/uitnodigen" modelAttribute="uitnodigingMedewerker" method="post" class="was-validated needs-validation" id="uitnodigingsform">
                         <spring:bind path="emailadres">
                             <div class="form-group">
                                 <label class="col-form-label">E-mailadres:</label>
@@ -72,4 +72,13 @@
         </div>
     </div>
 </div>
+<!--<script>
+ $(document).ready(function()
+     {
+    $('#medewerkerUitnodigenButton').on('click', function () {
+  $('#uitnodigingsform').trigger("reset");
+ })
+  });
+</script>-->
+
 </html>
