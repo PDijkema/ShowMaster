@@ -23,7 +23,7 @@ header .nav-item {
 
 
 /* buttons in font als Bolwerk site */
-button,optgroup,select,textarea
+button,optgroup,select
 {margin:0;font-family:"Days One", sans-serif;font-size:inherit;line-height:inherit}
 
 .btn.btn-primary

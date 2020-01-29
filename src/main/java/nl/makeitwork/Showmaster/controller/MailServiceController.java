@@ -22,16 +22,15 @@ public class MailServiceController {
     protected String verstuurUitnodiging(@ModelAttribute("uitnodigingMedewerker") UitnodigingMedewerker uitnodiging, BindingResult result) {
 
         if (!result.hasErrors()) {
-            System.out.println(uitnodiging.getEmailAdres());
-            System.out.println(uitnodiging.getBericht());
+            String onderwerp = "Uitnodiging";
+            String emailBody = uitnodiging.getBericht() + "klik op deze link om je in te schrijven " + "http://localhost:8080/registreer";
+            // String emailBody = uitnodiging.getBericht() + "klik op deze link om je in te schrijven " + "192.168.1.126:8080/registreer";
 
             AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(MailServiceConfiguratie.class);
-		MailService bean = context.getBean(MailService.class);
-		bean.sendMail();
+		    MailService bean = context.getBean(MailService.class);
+		    bean.verstuurMail(uitnodiging.getEmailadres(), onderwerp, emailBody);
 
         }
         return "gebruikerOverzicht";
     }
-
-
 }

@@ -6,7 +6,7 @@ import org.springframework.mail.SimpleMailMessage;
 
 public class UitnodigingMedewerker {
 
-    private String emailAdres;
+    private String emailadres;
     private String bericht;
 
     private MailSender mailSender;
@@ -20,12 +20,12 @@ public class UitnodigingMedewerker {
         this.simpleMailMessage = simpleMailMessage;
     }
 
-    public String getEmailAdres() {
-        return emailAdres;
+    public String getEmailadres() {
+        return emailadres;
     }
 
-    public void setEmailAdres(String emailAdres) {
-        this.emailAdres = emailAdres;
+    public void setEmailadres(String emailadres) {
+        this.emailadres = emailadres;
     }
 
     public String getBericht() {

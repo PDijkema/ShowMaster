@@ -13,13 +13,11 @@ public class MailService {
     @Autowired
     private SimpleMailMessage mailMessage;
 
-    public void sendMail(){
-        System.out.println("sending mail");
+    public void verstuurMail(String emailAdres, String onderwerp, String bericht){
         SimpleMailMessage msg = new SimpleMailMessage(mailMessage);
-        msg.setTo("pieter_dijkema@hotmail.com");
-        msg.setSubject("test subject");
-        msg.setText("spring email integration test");
+        msg.setTo(emailAdres);
+        msg.setSubject(onderwerp);
+        msg.setText(bericht);
         mailSender.send(msg);
-        System.out.println("done");
     }
 }

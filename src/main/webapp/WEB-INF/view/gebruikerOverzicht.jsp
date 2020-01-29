@@ -15,8 +15,7 @@
     <body>
         <jsp:include page="navbar.jsp" />
         <div class="container">
-        <h1>Medewerker uitnodigen</h1>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" >Stuur uitnodiging</button>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#uitnodigingModal" >Medewerker Uitnodigen</button>
             <h1>Gebruikersoverzicht</h1>
                 <table class="table table-hover">
                     <thead>
@@ -40,7 +39,7 @@
                 </table>
             </div>
     </body>
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="uitnodigingModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -50,14 +49,19 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form:form action="${contextPath}/planner/gebruiker/overzicht/uitnodigen" modelAttribute="uitnodigingMedewerker" method="post">
+                <form:form action="${contextPath}/planner/gebruiker/overzicht/uitnodigen" modelAttribute="uitnodigingMedewerker" method="post" class="was-validated needs-validation">
+                        <spring:bind path="emailadres">
+                            <div class="form-group">
+                                <label class="col-form-label">E-mailadres:</label>
+                                <form:input type="email" path="emailadres" class="form-control" placeholder="Emailadres" required="true" />
+                                <div class="invalid-feedback">
+                                    Voer het e-mailadres van de ontvanger in
+                                </div>
+                            </div>
+                        </spring:bind>
                     <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">E-mailadres Ontvanger:</label>
-                        <form:input class="form-control" id="recipient-name" path="emailAdres"/>
-                    </div>
-                    <div class="form-group">
-                        <label for="message-text" class="col-form-label">Bericht:</label>
-                        <form:input class="form-control" id="message-text" path="bericht"/>
+                        <label class="col-form-label">Bericht:</label>
+                        <form:textarea type="email" class="form-control" path="bericht" placeholder="Typ hier je bericht, de inschrijflink wordt automatisch meegestuurd" required="true"/>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>
@@ -68,17 +72,4 @@
         </div>
     </div>
 </div>
-
-<!--<script>
-$('#exampleModal').on('show.bs.modal', function (event) {
-  //var button = $(event.relatedTarget) // Button that triggered the modal
-  //var recipient = button.data('whatever') // Extract info from data-* attributes
-  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-  var modal = $(this)
-  modal.find('.modal-title').text('New message to ' + recipient)
-  modal.find('.modal-body input').val(recipient)
-})
-</script>-->
-
 </html>
