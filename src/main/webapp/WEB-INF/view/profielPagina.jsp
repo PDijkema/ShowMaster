@@ -14,13 +14,16 @@
 
     <body>
         <jsp:include page="navbar.jsp" />
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h1 class="voorstellingDisplay4">Profielpagina</h1>
+            </div>
+        </div>
         <div class="container">
-
             <form:form modelAttribute="medewerkerProfielGegevens" class="form-signin">
-                <h1>Profielpagina</h1>
                 <h2 class="form-signin-heading">Persoonlijke gegevens</h2>
 
-                <form:hidden path="profielId" />
+                <form:hidden path="profielId"></form:hidden>
 
                 <table>
                     <tr>

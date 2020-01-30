@@ -21,33 +21,29 @@
             </div>
         </div>
 
-        <div class="container-fluid">
-            <div class="row flex-xl-nowrap">
-                <main class="col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
-                    <c:url value="/planner/uploadExcelFile" var="uploadFileUrl" />
-                    <c:url value="/planner/excelProcessing" var="resetUrl" />
-                    <c:url value="/planner/excel/voorstelling/toevoegen" var="excelVoorstellingToevoegen" />
+        <div class="container">
+            <c:url value="/planner/uploadExcelFile" var="uploadFileUrl" />
+            <c:url value="/planner/excelProcessing" var="resetUrl" />
+            <c:url value="/planner/excel/voorstelling/toevoegen" var="excelVoorstellingToevoegen" />
 
-                    <form method="post" enctype="multipart/form-data" action="${uploadFileUrl}?${_csrf.parameterName}=${_csrf.token}">
-                        <input id="gekozenBestand" type="file" name="file" accept=".xls,.xlsx" />
-                        <input id="uploaden" type="submit" class='btn btn-primary' disabled="disabled" value="Uploaden" />
-                    </form>
-                    <br />
-                    <form method="GET" action="${resetUrl}">
-                        <button class="btn btn-primary" type="submit">Herstel</button>
-                    </form>
-                    <br /> ${message }
-                    <br />
-                    <br />
+            <form method="post" enctype="multipart/form-data" action="${uploadFileUrl}?${_csrf.parameterName}=${_csrf.token}">
+                <input id="gekozenBestand" type="file" name="file" accept=".xls,.xlsx" />
+                <input id="uploaden" type="submit" class='btn btn-primary' disabled="disabled" value="Uploaden" />
+            </form>
+            <br />
+            <form method="GET" action="${resetUrl}">
+                <button class="btn btn-primary" type="submit">Herstel</button>
+            </form>
+            <br /> ${message }
+            <br />
+            <br />
 
-                    <form action="${excelVoorstellingToevoegen }">
-                        <button class="btn btn-primary" type="submit">Voorstelling(en) toevoegen</button>
-                    </form>
-                    <br />
-                    <br />
-                    <script src="${contextPath}\resources\js\jqueryExcelUpload.js" type='text/javascript'></script>
-                </main>
-            </div>
+            <form action="${excelVoorstellingToevoegen }">
+                <button class="btn btn-primary" type="submit">Voorstelling(en) toevoegen</button>
+            </form>
+            <br />
+            <br />
+            <script src="${contextPath}\resources\js\jqueryExcelUpload.js" type='text/javascript'></script>
         </div>
     </body>
 
