@@ -1,4 +1,5 @@
 package nl.makeitwork.Showmaster.controller;
+
 import nl.makeitwork.Showmaster.model.Taak;
 import nl.makeitwork.Showmaster.model.Voorstelling;
 import nl.makeitwork.Showmaster.model.VoorstellingsTaak;
@@ -35,6 +36,8 @@ public class VoorstellingController {
     private TaakRepository taakRepository;
     @Autowired
     private VoorstellingsTaakRepository voorstellingsTaakRepository;
+    @Autowired
+    private VoorstellingController voorstellingController;
 
 
     @GetMapping("/planner/voorstellingen")
@@ -64,17 +67,17 @@ public class VoorstellingController {
     }
 
     @GetMapping("/voorstelling/rooster/{voorstellingId}")
-    protected String roosterVoorstelling(@PathVariable Integer voorstellingId, Model model){
+    protected String roosterVoorstelling(@PathVariable Integer voorstellingId, Model model) {
 
         List<VoorstellingsTaak> voorstellingOverzicht = voorstellingsTaakRepository.findByVoorstellingVoorstellingId(voorstellingId);
-        voorstellingOverzicht.removeIf(r->r.getMedewerker()== null);
+        voorstellingOverzicht.removeIf(r -> r.getMedewerker() == null);
 
         Voorstelling voorstelling = voorstellingRepository.findByVoorstellingId(voorstellingId);
 
-        model.addAttribute("voorstellingOverzicht",voorstellingOverzicht);
+        model.addAttribute("voorstellingOverzicht", voorstellingOverzicht);
         model.addAttribute("voorstelling", voorstelling);
 
-    return "roosterVoorstelling";
+        return "roosterVoorstelling";
     }
 
     @GetMapping("/planner/voorstelling/details/{voorstellingId}")
@@ -121,19 +124,7 @@ public class VoorstellingController {
     protected String saveVoorstelling(@ModelAttribute("voorstelling") Voorstelling voorstelling, BindingResult result) {
 
         if (!result.hasErrors()) {
-            voorstelling.setStatus("Ongepubliceerd");
-
-            DateTimeFormatter aFormatter = DateTimeFormatter.ofPattern("dd MMMM yyyy HH:mm");
-            LocalDateTime localDateTime = voorstelling.getLocalDateTime();
-            String formattedString = localDateTime.format(aFormatter);
-
-            voorstelling.setDatum(formattedString);
-
-            voorstellingRepository.save(voorstelling);
-            for (Taak taak : taakRepository.findAll()) {
-                standaardTakenOpslaanBijVoorstelling(taak.getStandaardBezetting(), voorstelling, taak);
-            }
-
+           voorstellingOpslaanInclTaken(voorstelling);
         } else {
             return "toevoegenVoorstelling";
         }
@@ -144,15 +135,9 @@ public class VoorstellingController {
     protected String UpdateVoorstelling(@ModelAttribute("voorstelling") Voorstelling voorstelling, BindingResult result) {
 
         if (!result.hasErrors()) {
-
-            DateTimeFormatter aFormatter = DateTimeFormatter.ofPattern("dd MMMM yyyy HH:mm");
-            LocalDateTime localDateTime = voorstelling.getLocalDateTime();
-            String formattedString = localDateTime.format(aFormatter);
-
-            voorstelling.setDatum(formattedString);
+            voorstelling.localDateTimeFormatterenNaarString();
 
             voorstellingRepository.save(voorstelling);
-
         } else {
             return "wijzigVoorstelling";
         }
@@ -175,28 +160,76 @@ public class VoorstellingController {
         return "redirect:/planner/voorstellingen";
     }
 
+    public void voorstellingOpslaanInclTaken(Voorstelling voorstelling) {
+        voorstelling.setStatus("Ongepubliceerd");
+
+       voorstelling.localDateTimeFormatterenNaarString();
+
+        voorstellingRepository.save(voorstelling);
+        for (Taak taak : taakRepository.findAll()) {
+            standaardTakenOpslaanBijVoorstelling(taak.getStandaardBezetting(), voorstelling, taak);
+        }
+    }
+
+
     @GetMapping("/voorstellingen/setup")
     protected String setupTakenInDatabase() {
 
         Voorstelling voorstelling1 = new Voorstelling();
-        
+
         voorstelling1.setNaam("Lion King");
         voorstelling1.setLocalDateTime(LocalDateTime.of(2020, Month.JANUARY, 18, 20, 30));
         voorstelling1.setStatus("Gepubliceerd");
+
+        DateTimeFormatter aFormatter = DateTimeFormatter.ofPattern("dd MMMM yyyy HH:mm");
+        LocalDateTime localDateTime = voorstelling1.getLocalDateTime();
+        String formattedString = localDateTime.format(aFormatter);
+
+        voorstelling1.setDatum(formattedString);
+
         voorstellingRepository.save(voorstelling1);
 
+
+        for (Taak taak : taakRepository.findAll()) {
+            standaardTakenOpslaanBijVoorstelling(taak.getStandaardBezetting(), voorstelling1, taak);
+        }
+
         Voorstelling voorstelling2 = new Voorstelling();
+
         voorstelling2.setNaam("Soldaat van Oranje");
-        voorstelling2.setLocalDateTime(LocalDateTime.of(2020, Month.JANUARY, 16, 20, 00));
+        voorstelling2.setLocalDateTime(LocalDateTime.of(2020, Month.JANUARY, 16, 20, 0));
         voorstelling2.setStatus("Gepubliceerd");
+
+        LocalDateTime localDateTime2 = voorstelling2.getLocalDateTime();
+        String formattedString2 = localDateTime2.format(aFormatter);
+
+        voorstelling2.setDatum(formattedString2);
+
         voorstellingRepository.save(voorstelling2);
 
+
+        for (Taak taak : taakRepository.findAll()) {
+            standaardTakenOpslaanBijVoorstelling(taak.getStandaardBezetting(), voorstelling2, taak);
+        }
+
+
         Voorstelling voorstelling3 = new Voorstelling();
+
         voorstelling3.setNaam("Assepoester");
-        voorstelling3.setLocalDateTime(LocalDateTime.of(2020, Month.FEBRUARY, 5, 16, 00));
+        voorstelling3.setLocalDateTime(LocalDateTime.of(2020, Month.FEBRUARY, 8, 21, 0));
         voorstelling3.setStatus("Ongepubliceerd");
+
+        LocalDateTime localDateTime3 = voorstelling3.getLocalDateTime();
+        String formattedString3 = localDateTime3.format(aFormatter);
+
+        voorstelling3.setDatum(formattedString3);
+
         voorstellingRepository.save(voorstelling3);
 
+
+        for (Taak taak : taakRepository.findAll()) {
+            standaardTakenOpslaanBijVoorstelling(taak.getStandaardBezetting(), voorstelling2, taak);
+        }
         return "redirect:/planner/voorstellingen";
     }
 }
