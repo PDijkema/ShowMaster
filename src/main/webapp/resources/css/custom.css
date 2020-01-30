@@ -83,3 +83,12 @@ height: 80px;
 #loginscreenJumbotron {
 color: #fff;
 }
+
+.voorstellingsTaak {
+  float: left;
+  width: 150px;
+  height: 75px;
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid black;
+}

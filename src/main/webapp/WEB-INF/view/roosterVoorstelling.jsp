@@ -16,7 +16,7 @@
     <script src="${contextPath}\resources\js\ajax.js"></script>
     <script src="https://kit.fontawesome.com/1eeb88da0f.js" crossorigin="anonymous"></script>
 
-    <title>Details voorstelling</title>
+    <title>Rooster</title>
 </head>
 
 <body>
@@ -28,7 +28,44 @@
     </div>
 </div>
 
-<div class="container-fluid">
+<div class="container">
+    <a class="btn btn-primary" href="${contextPath}/planner/voorstellingen">Overzicht Voorstellingen</a>
+    <h1>Rooster</h1>
+    <div class="row">
+        <div class="col-sm">
+            <h2>In te vullen taken</h2>
+
+            <c:forEach items="${takenBijVoorstelling}" var="takenBijVoorstelling">
+                <div class="voorstellingsTaak">
+                    <c:out value="${takenBijVoorstelling.getTaak().getTaakNaam()}"/>
+                </div>
+            </c:forEach>
+
+
+        </div>
+        <div class="col-sm">
+            <!--nothing yet-->
+        </div>
+        <div class="col-sm">
+            <h2>Beschikbare medewerkers</h2>
+            <c:forEach items="${beschikbareMedewerkers}" var="medewerkerInschrijvingVoorstelling">
+                <div class="voorstellingsTaak" draggable="true">
+                    <c:out value="${medewerkerInschrijvingVoorstelling.medewerker.gebruikersnaam}"/>
+                </div>
+            </c:forEach>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+
+
+
+
+<!--<div class="container-fluid">
     <div class="row flex-xl-nowrap">
         <div class="col-md-3 col-xl-2 py-md-3 pl-md-5 bd-sidebar">
             <h2>Dienst toevoegen</h2>
@@ -108,46 +145,7 @@
             </div>
         </div>
     </div>
-</div>
-
-<h1>Rooster</h1>
-
-<div class="container">
-    <h1>Rooster</h1>
-    <div class="row">
-        <div class="col-sm">
-            One of three columns
-        </div>
-        <div class="col-sm">
-            One of three columns
-        </div>
-        <div class="col-sm">
-            One of three columns
-        </div>
-    </div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</div>-->
 
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"

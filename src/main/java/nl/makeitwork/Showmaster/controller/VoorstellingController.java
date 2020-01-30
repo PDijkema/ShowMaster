@@ -1,8 +1,10 @@
 package nl.makeitwork.Showmaster.controller;
 
+import nl.makeitwork.Showmaster.model.MedewerkerInschrijvingVoorstelling;
 import nl.makeitwork.Showmaster.model.Taak;
 import nl.makeitwork.Showmaster.model.Voorstelling;
 import nl.makeitwork.Showmaster.model.VoorstellingsTaak;
+import nl.makeitwork.Showmaster.repository.MedewerkerInschrijvingVoorstellingRepository;
 import nl.makeitwork.Showmaster.repository.TaakRepository;
 import nl.makeitwork.Showmaster.repository.VoorstellingRepository;
 import nl.makeitwork.Showmaster.repository.VoorstellingsTaakRepository;
@@ -38,6 +40,8 @@ public class VoorstellingController {
     private VoorstellingsTaakRepository voorstellingsTaakRepository;
     @Autowired
     private VoorstellingController voorstellingController;
+    @Autowired
+    private MedewerkerInschrijvingVoorstellingRepository medewerkerInschrijvingVoorstellingRepository;
 
 
     @GetMapping("/planner/voorstellingen")
@@ -98,11 +102,14 @@ public class VoorstellingController {
         }
     }
 
+    //TODO work in progress
     @GetMapping("/planner/voorstelling/rooster/{voorstellingId}")
     protected String roosterVoorstelling(@PathVariable Integer voorstellingId, Model model, HttpServletRequest request) {
 
         model.addAttribute("alleTaken", taakRepository.findAll());
         Optional<Voorstelling> voorstelling = voorstellingRepository.findById(voorstellingId);
+        List<MedewerkerInschrijvingVoorstelling> inschrijvingenBijVoorstellingId =
+            medewerkerInschrijvingVoorstellingRepository.findInschrijvingByVoorstellingId(voorstellingId);
 
         List<VoorstellingsTaak> voorstellingsTaken = voorstellingsTaakRepository.findByVoorstellingVoorstellingIdOrderByTaakTaakNaam(voorstellingId);
 
@@ -112,6 +119,7 @@ public class VoorstellingController {
             request.getSession().setAttribute("voorstellingId", voorstellingId);
             model.addAttribute("takenBijVoorstelling", voorstellingsTaken);
             model.addAttribute("voorstelling", voorstelling.get());
+            model.addAttribute("beschikbareMedewerkers", inschrijvingenBijVoorstellingId);
             return "roosterVoorstelling";
         }
     }
