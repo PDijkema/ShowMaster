@@ -35,7 +35,7 @@
                     <ul class="nav flex-column">
                         <c:forEach items="${alleTaken}" var="taak">
                             <li class="nav-item"><a href="${contextPath}/planner/voorstellingsTaak/toevoegen/${voorstelling.voorstellingId}/
-                    <c:out value=" ${taak.taakId}" />">
+                    <c:out value='${taak.taakId}' />">
                                 <c:out value="${taak.taakNaam}"/>
                                 </a>
                             </li>
