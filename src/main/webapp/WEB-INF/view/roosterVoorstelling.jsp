@@ -37,27 +37,28 @@
 
             <c:forEach items="${takenBijVoorstelling}" var="takenBijVoorstelling">
                 <div class="voorstellingsTaak">
-                    <c:out value="${takenBijVoorstelling.getTaak().getTaakNaam()}"/>
+                    <b><c:out value="${takenBijVoorstelling.getTaak().getTaakNaam()}"/></b>
+                    <p><c:out value="${takenBijVoorstelling.medewerker.gebruikersnaam}" /></p>
                 </div>
             </c:forEach>
-
-
         </div>
+
         <div class="col-sm">
-            <!--nothing yet-->
+            <h2>Ingevulde taken?</h2>
         </div>
+
         <div class="col-sm">
             <h2>Beschikbare medewerkers</h2>
             <c:forEach items="${beschikbareMedewerkers}" var="medewerkerInschrijvingVoorstelling">
-                <div class="voorstellingsTaak" draggable="true">
+                <div class="beschikbareMedewerker" draggable="true">
                     <c:out value="${medewerkerInschrijvingVoorstelling.medewerker.gebruikersnaam}"/>
                 </div>
             </c:forEach>
         </div>
     </div>
-
-
 </div>
+
+
 
 
 

@@ -111,6 +111,7 @@ public class VoorstellingController {
         List<MedewerkerInschrijvingVoorstelling> inschrijvingenBijVoorstellingId =
             medewerkerInschrijvingVoorstellingRepository.findInschrijvingByVoorstellingId(voorstellingId);
 
+
         List<VoorstellingsTaak> voorstellingsTaken = voorstellingsTaakRepository.findByVoorstellingVoorstellingIdOrderByTaakTaakNaam(voorstellingId);
 
         if (!voorstelling.isPresent() || voorstelling.get().getStatus().equals("Geannuleerd")) {
