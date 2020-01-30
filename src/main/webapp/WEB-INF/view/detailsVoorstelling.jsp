@@ -27,7 +27,6 @@
                 <h3 id="voorstellingDatumDisplay4" class="display-4"> ${voorstelling.datum}</h3>
             </div>
         </div>
-
         <div class="container-fluid">
             <div class="row flex-xl-nowrap">
                 <div class="col-md-3 col-xl-2 py-md-3 pl-md-5 bd-sidebar">
