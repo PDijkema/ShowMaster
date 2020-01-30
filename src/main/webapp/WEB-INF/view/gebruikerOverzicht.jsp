@@ -11,11 +11,12 @@
     <script src="https://kit.fontawesome.com/1eeb88da0f.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="${contextPath}\resources\css\custom.css" type="text/css" rel="stylesheet">
+
 </head>
     <body>
         <jsp:include page="navbar.jsp" />
         <div class="container">
-        <button id="medewerkerUitnodigenButton" type="button" class="btn btn-primary" data-toggle="modal" data-target="#uitnodigingModal" >Medewerker Uitnodigen</button>
+        <button id="medewerkerUitnodigenButton" type="button" class="btn btn-primary" data-toggle="modal" data-target="#uitnodigingModal" onClick="clearModal();" >Medewerker Uitnodigen</button>
             <h1>Gebruikersoverzicht</h1>
                 <table class="table table-hover">
                     <thead>
@@ -49,11 +50,11 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form:form action="${contextPath}/planner/gebruiker/overzicht/uitnodigen" modelAttribute="uitnodigingMedewerker" method="post" class="was-validated needs-validation" id="uitnodigingsform">
+                <form:form action="${contextPath}/planner/gebruiker/overzicht/uitnodigen" modelAttribute="uitnodigingMedewerker" method="post" class="was-validated needs-validation" id="uitnodigingsForm" >
                         <spring:bind path="emailadres">
                             <div class="form-group">
                                 <label class="col-form-label">E-mailadres:</label>
-                                <form:input type="email" path="emailadres" class="form-control" placeholder="Emailadres" required="true" />
+                                <form:input type="email" path="emailadres" class="form-control" placeholder="Emailadres" required="true" id="emailveld" />
                                 <div class="invalid-feedback">
                                     Voer het e-mailadres van de ontvanger in
                                 </div>
@@ -61,7 +62,7 @@
                         </spring:bind>
                     <div class="form-group">
                         <label class="col-form-label">Bericht:</label>
-                        <form:textarea type="email" class="form-control" path="bericht" placeholder="Typ hier je bericht, de inschrijflink wordt automatisch meegestuurd" required="true"/>
+                        <form:textarea type="email" class="form-control" path="bericht" placeholder="Typ hier je bericht, de inschrijflink wordt automatisch meegestuurd" required="true" id="tekstVeld" />
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>
@@ -72,13 +73,11 @@
         </div>
     </div>
 </div>
-<!--<script>
- $(document).ready(function()
-     {
-    $('#medewerkerUitnodigenButton').on('click', function () {
-  $('#uitnodigingsform').trigger("reset");
- })
-  });
-</script>-->
+<script>
+    function clearModal() {
+        $("#emailveld")[0].value = "";
+        $("#tekstVeld")[0].value = "";
+    }
+</script>
 
 </html>

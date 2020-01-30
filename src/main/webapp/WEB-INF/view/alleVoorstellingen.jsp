@@ -24,7 +24,7 @@
             <a id="voegVoorstellingToeButton" class="btn btn-primary" href="${contextPath}/planner/voorstelling/toevoegen">Voeg voorstelling toe</a>
                 <div class="card-columns">
                     <c:forEach items="${alleVoorstellingen}" var="voorstelling">
-                        <div class="card">
+                        <div class="card" draggable="true">
                             <div class="card-header"><h1><c:out value="${voorstelling.naam}"/></h1><c:out value="${voorstelling.datum}"/></div>
                             <div class="card-body">
                                 <p class="card-text">Hey, Luke! May the Force be with you. Still, she's got a lot of spirit. I don't know, what do you think?</p>
