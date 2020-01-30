@@ -58,7 +58,7 @@
                             <form:input type="email" path="emailadres" class="form-control"
                             placeholder="Emailadres" required="true"></form:input>
                             <div class="invalid-feedback">
-                                Voer hier je e-mailadres is
+                                Voer hier je e-mailadres in
                             </div>
                         </div>
                     </spring:bind>

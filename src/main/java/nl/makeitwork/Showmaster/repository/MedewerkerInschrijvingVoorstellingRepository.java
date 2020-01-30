@@ -4,11 +4,15 @@ import nl.makeitwork.Showmaster.model.MedewerkerInschrijvingVoorstelling;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
 import java.util.List;
 
 /**
  * @author Gert Postma
  */
+
+@Repository
 public interface MedewerkerInschrijvingVoorstellingRepository extends JpaRepository <MedewerkerInschrijvingVoorstelling, Integer> {
 
     @Query(value= "select * from medewerker_inschrijving_voorstelling where medewerker_id = :medewerkerId", nativeQuery = true)
