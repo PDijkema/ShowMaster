@@ -48,11 +48,11 @@
                         <td><h1><c:out value="${voorstelling.getNaam()}"/></h1></td>
                         <td><c:out value="${voorstelling.getDatum()}"/></td>
 
-                            <td><a class="btn btn-secondary btn-lg my-2"  role="button" onclick="buttonClassveranderen3('btn-secondary','btn-success', this, ${voorstelling.getVoorstellingId()}, '${misschien}', '${nietBeschikbaar}', '${beschikbaar}', '${contextPath}', 3, 4,2, 'btn-warning', 'btn-danger'); beschikbaarheidStatusDoorgeven(${voorstelling.getVoorstellingId()}, '${beschikbaar}','${contextPath}') ">Beschikbaar</a></td>
+                            <td><a class="btn btn-secondary btn-lg my-2"  role="button" onclick="buttonClassveranderen('btn-secondary','btn-success', this, ${voorstelling.getVoorstellingId()}, '${misschien}', '${nietBeschikbaar}', '${beschikbaar}', '${contextPath}', 3, 4,2, 'btn-warning', 'btn-danger'); beschikbaarheidStatusDoorgeven(${voorstelling.getVoorstellingId()}, '${beschikbaar}','${contextPath}') ">${beschikbaar}</a></td>
 
-                            <td><a class="btn btn-secondary btn-lg my-2" role="button" onclick="buttonClassveranderen3('btn-secondary','btn-warning', this, ${voorstelling.getVoorstellingId()}, '${beschikbaar}', '${nietBeschikbaar}','${misschien}', '${contextPath}',2,4,3, 'btn-success', 'btn-danger'); beschikbaarheidStatusDoorgeven(${voorstelling.getVoorstellingId()}, '${misschien}','${contextPath}')">Misschien</a></td>
+                            <td><a class="btn btn-secondary btn-lg my-2" role="button" onclick="buttonClassveranderen('btn-secondary','btn-warning', this, ${voorstelling.getVoorstellingId()}, '${beschikbaar}', '${nietBeschikbaar}','${misschien}', '${contextPath}',2,4,3, 'btn-success', 'btn-danger'); beschikbaarheidStatusDoorgeven(${voorstelling.getVoorstellingId()}, '${misschien}','${contextPath}')">${misschien}</a></td>
 
-                            <td><a class="btn btn-secondary btn-lg my-2" role="button" onclick="buttonClassveranderen3('btn-secondary','btn-danger', this, ${voorstelling.getVoorstellingId()}, '${beschikbaar}', '${misschien}', '${nietBeschikbaar}', '${contextPath}',2,3,4, 'btn-success', 'btn-warning'); beschikbaarheidStatusDoorgeven(${voorstelling.getVoorstellingId()}, '${nietBeschikbaar}','${contextPath}')">Niet Beschikbaar</a></td>
+                            <td><a class="btn btn-secondary btn-lg my-2" role="button" onclick="buttonClassveranderen('btn-secondary','btn-danger', this, ${voorstelling.getVoorstellingId()}, '${beschikbaar}', '${misschien}', '${nietBeschikbaar}', '${contextPath}',2,3,4, 'btn-success', 'btn-warning'); beschikbaarheidStatusDoorgeven(${voorstelling.getVoorstellingId()}, '${nietBeschikbaar}','${contextPath}')">${nietBeschikbaar}</a></td>
 
                         </tr>
                     </c:if>
@@ -64,25 +64,25 @@
                                 <td><c:out  value="${inschrijving.getVoorstelling().getDatum()}"/></td>
                                 <c:choose>
                                 <c:when test="${inschrijving.getInschrijvingStatus() == 'Beschikbaar'}">
-                                    <td><a class="btn btn-success btn-lg my-2"  role="button" onclick="buttonClassveranderenSuccess('btn-secondary','btn-success', this, ${inschrijving.getVoorstelling().getVoorstellingId()}, '${misschien}', '${nietBeschikbaar}', '${contextPath}'); beschikbaarheidStatusDoorgeven(${inschrijving.getVoorstelling().getVoorstellingId()}, '${beschikbaar}','${contextPath}') ">Beschikbaar</a></td>
+                                    <td><a class="btn btn-success btn-lg my-2"  role="button" onclick="buttonClassveranderen('btn-secondary','btn-success', this, ${inschrijving.getVoorstelling().getVoorstellingId()}, '${misschien}', '${nietBeschikbaar}', '${beschikbaar}', '${contextPath}', 3, 4,2, 'btn-warning', 'btn-danger'); beschikbaarheidStatusDoorgeven(${inschrijving.getVoorstelling().getVoorstellingId()}, '${beschikbaar}','${contextPath}') ">${beschikbaar}</a></td>
 
-                                    <td><a class="btn btn-secondary btn-lg my-2" role="button" onclick="buttonClassveranderen2('btn-secondary','btn-warning', this, ${inschrijving.getVoorstelling().getVoorstellingId()}, '${beschikbaar}', '${nietBeschikbaar}', '${contextPath}'); beschikbaarheidStatusDoorgeven(${inschrijving.getVoorstelling().getVoorstellingId()}, '${misschien}','${contextPath}')">Misschien</a></td>
+                                    <td><a class="btn btn-secondary btn-lg my-2" role="button" onclick="buttonClassveranderen('btn-secondary','btn-warning', this, ${inschrijving.getVoorstelling().getVoorstellingId()}, '${beschikbaar}', '${nietBeschikbaar}','${misschien}', '${contextPath}',2,4,3, 'btn-success', 'btn-danger'); beschikbaarheidStatusDoorgeven(${inschrijving.getVoorstelling().getVoorstellingId()}, '${misschien}','${contextPath}')">${misschien}</a></td>
 
-                                    <td><a class="btn btn-secondary btn-lg my-2" role="button" onclick="buttonClassveranderen3('btn-secondary','btn-danger', this, ${inschrijving.getVoorstelling().getVoorstellingId()}, '${beschikbaar}', '${misschien}', '${contextPath}'); beschikbaarheidStatusDoorgeven(${inschrijving.getVoorstelling().getVoorstellingId()}, '${nietBeschikbaar}','${contextPath}')">Niet Beschikbaar</a></td>
+                                    <td><a class="btn btn-secondary btn-lg my-2" role="button" onclick="buttonClassveranderen('btn-secondary','btn-danger', this, ${inschrijving.getVoorstelling().getVoorstellingId()}, '${beschikbaar}', '${misschien}', '${nietBeschikbaar}', '${contextPath}',2,3,4, 'btn-success', 'btn-warning'); beschikbaarheidStatusDoorgeven(${inschrijving.getVoorstelling().getVoorstellingId()}, '${nietBeschikbaar}','${contextPath}')">${nietBeschikbaar}</a></td>
                                 </c:when>
                                 <c:when test="${inschrijving.getInschrijvingStatus() == 'Misschien'}">
-                                    <td><a class="btn btn-secondary btn-lg my-2"  role="button" onclick="buttonClassveranderenSuccess('btn-secondary','btn-success', this, ${inschrijving.getVoorstelling().getVoorstellingId()}, '${misschien}', '${nietBeschikbaar}', '${contextPath}'); beschikbaarheidStatusDoorgeven(${inschrijving.getVoorstelling().getVoorstellingId()}, '${beschikbaar}','${contextPath}') ">Beschikbaar</a></td>
+                                    <td><a class="btn btn-secondary btn-lg my-2"  role="button" onclick="buttonClassveranderen('btn-secondary','btn-success', this, ${inschrijving.getVoorstelling().getVoorstellingId()}, '${misschien}', '${nietBeschikbaar}', '${beschikbaar}', '${contextPath}', 3, 4,2, 'btn-warning', 'btn-danger'); beschikbaarheidStatusDoorgeven(${inschrijving.getVoorstelling().getVoorstellingId()}, '${beschikbaar}','${contextPath}') ">${beschikbaar}</a></td>
 
-                                    <td><a class="btn btn-warning btn-lg my-2" role="button" onclick="buttonClassveranderen2('btn-secondary','btn-warning', this, ${inschrijving.getVoorstelling().getVoorstellingId()}, '${beschikbaar}', '${nietBeschikbaar}', '${contextPath}'); beschikbaarheidStatusDoorgeven(${inschrijving.getVoorstelling().getVoorstellingId()}, '${misschien}','${contextPath}')">Misschien</a></td>
+                                    <td><a class="btn btn-warning btn-lg my-2" role="button" onclick="buttonClassveranderen('btn-secondary','btn-warning', this, ${inschrijving.getVoorstelling().getVoorstellingId()}, '${beschikbaar}', '${nietBeschikbaar}','${misschien}', '${contextPath}',2,4,3, 'btn-success', 'btn-danger'); beschikbaarheidStatusDoorgeven(${inschrijving.getVoorstelling().getVoorstellingId()}, '${misschien}','${contextPath}')">${misschien}</a></td>
 
-                                    <td><a class="btn btn-secondary btn-lg my-2" role="button" onclick="buttonClassveranderen3('btn-secondary','btn-danger', this, ${inschrijving.getVoorstelling().getVoorstellingId()}, '${beschikbaar}', '${misschien}', '${contextPath}'); beschikbaarheidStatusDoorgeven(${inschrijving.getVoorstelling().getVoorstellingId()}, '${nietBeschikbaar}','${contextPath}')">Niet Beschikbaar</a></td>
+                                    <td><a class="btn btn-secondary btn-lg my-2" role="button" onclick="buttonClassveranderen('btn-secondary','btn-danger', this, ${inschrijving.getVoorstelling().getVoorstellingId()}, '${beschikbaar}', '${misschien}', '${nietBeschikbaar}', '${contextPath}',2,3,4, 'btn-success', 'btn-warning'); beschikbaarheidStatusDoorgeven(${inschrijving.getVoorstelling().getVoorstellingId()}, '${nietBeschikbaar}','${contextPath}')">${nietBeschikbaar}</a></td>
                                 </c:when>
                                 <c:when test="${inschrijving.getInschrijvingStatus() == 'Niet Beschikbaar'}">
-                                    <td><a class="btn btn-secondary btn-lg my-2"  role="button" onclick="buttonClassveranderenSuccess('btn-secondary','btn-success', this, ${inschrijving.getVoorstelling().getVoorstellingId()}, '${misschien}', '${nietBeschikbaar}', '${contextPath}'); beschikbaarheidStatusDoorgeven(${inschrijving.getVoorstelling().getVoorstellingId()}, '${beschikbaar}','${contextPath}') ">Beschikbaar</a></td>
+                                    <td><a class="btn btn-secondary btn-lg my-2"  role="button" onclick="buttonClassveranderen('btn-secondary','btn-success', this, ${inschrijving.getVoorstelling().getVoorstellingId()}, '${misschien}', '${nietBeschikbaar}', '${beschikbaar}', '${contextPath}', 3, 4,2, 'btn-warning', 'btn-danger'); beschikbaarheidStatusDoorgeven(${inschrijving.getVoorstelling().getVoorstellingId()}, '${beschikbaar}','${contextPath}') ">${beschikbaar}</a></td>
 
-                                    <td><a class="btn btn-secondary btn-lg my-2" role="button" onclick="buttonClassveranderen2('btn-secondary','btn-warning', this, ${inschrijving.getVoorstelling().getVoorstellingId()}, '${beschikbaar}', '${nietBeschikbaar}', '${contextPath}'); beschikbaarheidStatusDoorgeven(${inschrijving.getVoorstelling().getVoorstellingId()}, '${misschien}','${contextPath}')">Misschien</a></td>
+                                    <td><a class="btn btn-secondary btn-lg my-2" role="button" onclick="buttonClassveranderen('btn-secondary','btn-warning', this, ${inschrijving.getVoorstelling().getVoorstellingId()}, '${beschikbaar}', '${nietBeschikbaar}','${misschien}', '${contextPath}',2,4,3, 'btn-success', 'btn-danger'); beschikbaarheidStatusDoorgeven(${inschrijving.getVoorstelling().getVoorstellingId()}, '${misschien}','${contextPath}')">${misschien}</a></td>
 
-                                    <td><a class="btn btn-danger btn-lg my-2" role="button" onclick="buttonClassveranderen3('btn-secondary','btn-danger', this, ${inschrijving.getVoorstelling().getVoorstellingId()}, '${beschikbaar}', '${misschien}', '${contextPath}'); beschikbaarheidStatusDoorgeven(${inschrijving.getVoorstelling().getVoorstellingId()}, '${nietBeschikbaar}','${contextPath}')">Niet Beschikbaar</a></td>
+                                    <td><a class="btn btn-danger btn-lg my-2" role="button" onclick="buttonClassveranderen('btn-secondary','btn-danger', this, ${inschrijving.getVoorstelling().getVoorstellingId()}, '${beschikbaar}', '${misschien}', '${nietBeschikbaar}', '${contextPath}',2,3,4, 'btn-success', 'btn-warning'); beschikbaarheidStatusDoorgeven(${inschrijving.getVoorstelling().getVoorstellingId()}, '${nietBeschikbaar}','${contextPath}')">${nietBeschikbaar}</a></td>
                                 </c:when>
                                 </c:choose>
                             </tr>
@@ -97,52 +97,16 @@
 
 
 <script>
-
-
-
-
-
-
-
-
-
-    function buttonClassveranderenSuccess(teVerwijderenKlasse, gewensteKlasse, thisParameter, voorstellingId, misschien, nietBeschikbaar, contextPath) {
+    function buttonClassveranderen(teVerwijderenKlasse, gewensteKlasse, thisParameter, voorstellingId, vreemdeStatus1, vreemdeStatus2, eigenStatus, contextPath, yCoordinaat1, yCoordinaat2, eigenYcoordinaat, status1, status2) {
         var myTable = document.getElementById('myTable');
         var x =  ($(thisParameter).closest('tr').index());
         x++;
-        myTable.rows[x].cells[3].innerHTML = '<td><a class="btn btn-secondary btn-lg my-2" role="button"  onclick="buttonClassveranderen2(\'btn-secondary\',\'btn-warning\', this, '+ voorstellingId + ',' +'\'Beschikbaar\'' + ',' + '\'Niet Beschikbaar\'' + ',' + '\''+ contextPath +'\''+ '); beschikbaarheidStatusDoorgeven(' + voorstellingId + ',' + '\'' + misschien + '\'' + ',' + '\'' + contextPath + '\''+ ')">Misschien</a>';
-        myTable.rows[x].cells[4].innerHTML = '<td><a class="btn btn-secondary btn-lg my-2" role="button" onclick="buttonClassveranderen3(\'btn-secondary\',\'btn-danger\', this, '+ voorstellingId +',' +'\'Beschikbaar\'' + ',' + '\'Misschien\'' + ',' + '\''+ contextPath +'\''+ '); beschikbaarheidStatusDoorgeven(' + voorstellingId + ',' + '\'' + nietBeschikbaar + '\'' + ',' + '\'' +contextPath + '\'' + ')">Niet Beschikbaar</a>';
-        $(thisParameter).removeClass(teVerwijderenKlasse).addClass(gewensteKlasse);
-
-
-    }
-
-    function buttonClassveranderen2(teVerwijderenKlasse, gewensteKlasse, thisParameter, voorstellingId, beschikbaar, nietBeschikbaar, contextPath) {
-        var elem = $('a[id="buttonBeschikbaar"]');
-        var myTable = document.getElementById('myTable');
-        var x =  ($(thisParameter).closest('tr').index());
-        x++;
-
-        myTable.rows[x].cells[2].innerHTML = '<td><a class="btn btn-secondary btn-lg my-2" role="button" onclick="buttonClassveranderenSuccess(\'btn-secondary\',\'btn-success\', this, '+ voorstellingId + ',' + '\'Misschien\'' + ',' + '\'Niet Beschikbaar\'' + ',' + '\''+ contextPath +'\''+ '); beschikbaarheidStatusDoorgeven(' + voorstellingId + ',' + '\'' + beschikbaar + '\'' + ',' + '\'' + contextPath + '\''+ ')"> Beschikbaar </a>';
-        myTable.rows[x].cells[4].innerHTML = '<td><a class="btn btn-secondary btn-lg my-2" role="button" onclick="buttonClassveranderen3(\'btn-secondary\',\'btn-danger\', this, '+ voorstellingId  + ',' + '\'Beschikbaar\'' + ',' + '\'Misschien\'' + ',' + '\''+ contextPath +'\''+ '); beschikbaarheidStatusDoorgeven(' + voorstellingId + ',' + '\'' + nietBeschikbaar + '\'' + ',' + '\'' +contextPath + '\'' + ')">Niet Beschikbaar</a>';
-
-
-
-        $(thisParameter).removeClass(teVerwijderenKlasse).addClass(gewensteKlasse);
-
-
-
-    }
-    function buttonClassveranderen3(teVerwijderenKlasse, gewensteKlasse, thisParameter, voorstellingId, vreemdeStatus1, vreemdeStatus2, eigenStatus, contextPath, yCoordinaat1, yCoordinaat2, eigenYcoordinaat, status1, status2) {
-        var myTable = document.getElementById('myTable');
-        var x =  ($(thisParameter).closest('tr').index());
-        x++;
-        myTable.rows[x].cells[yCoordinaat1].innerHTML = '<td><a class="btn btn-secondary btn-lg my-2" role="button" onclick="buttonClassveranderen3(\'btn-secondary\',' + '\'' + status1 + '\'' +', this, '
+        myTable.rows[x].cells[yCoordinaat1].innerHTML = '<td><a class="btn btn-secondary btn-lg my-2" role="button" onclick="buttonClassveranderen(\'btn-secondary\',' + '\'' + status1 + '\'' +', this, '
             + voorstellingId + ','+ '\''+ eigenStatus +'\'' + ',' + '\''+ vreemdeStatus2 + '\'' + ',' + '\''+ vreemdeStatus1 + '\'' + ',' + '\''+ contextPath +'\''+ ',' + eigenYcoordinaat + ','
             + yCoordinaat2 + ',' + yCoordinaat1 + ',\'' + gewensteKlasse + '\'' + ',\'' + status2 + '\'' +');beschikbaarheidStatusDoorgeven(' + voorstellingId + ',' + '\'' + vreemdeStatus1 + '\'' + ',' + '\'' + contextPath + '\''+ ')">'+ vreemdeStatus1 + '</a>';
 
 
-        myTable.rows[x].cells[yCoordinaat2].innerHTML = '<td><a class="btn btn-secondary btn-lg my-2" role="button" onclick="buttonClassveranderen3(\'btn-secondary\',' + '\'' + status2 + '\'' +',  this, '
+        myTable.rows[x].cells[yCoordinaat2].innerHTML = '<td><a class="btn btn-secondary btn-lg my-2" role="button" onclick="buttonClassveranderen(\'btn-secondary\',' + '\'' + status2 + '\'' +',  this, '
             + voorstellingId + ',' +'\''+ eigenStatus +'\'' + ',' + '\''+ vreemdeStatus1 + '\'' + ',' + '\''+ vreemdeStatus2 + '\'' + ',' + '\''+ contextPath +'\''+ ',' + eigenYcoordinaat + ','
             + yCoordinaat1 + ',' + yCoordinaat2 + ',\''+ gewensteKlasse +'\'' + ',\'' + status1 + '\'' +  '); beschikbaarheidStatusDoorgeven(' + voorstellingId + ',' + '\'' + vreemdeStatus2 + '\'' + ',' + '\'' + contextPath + '\''+ ')">' + vreemdeStatus2 + '</a>';
 
