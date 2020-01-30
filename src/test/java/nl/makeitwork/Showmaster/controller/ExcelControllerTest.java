@@ -3,7 +3,7 @@ package nl.makeitwork.Showmaster.controller;
 import io.github.millij.poi.SpreadsheetReadException;
 import nl.makeitwork.Showmaster.model.Voorstelling;
 import nl.makeitwork.Showmaster.repository.VoorstellingRepository;
-import org.junit.Assert;
+import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,7 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.File;
-
+import java.util.List;
 
 
 /**
@@ -44,10 +44,15 @@ class ExcelControllerTest {
         excelController.readExcelXlsx(testBestand2.getAbsolutePath());
 
         Voorstelling opgehaaldeVoorstelling = voorstellingRepository.findByNaam("Lordi - + Almanac + Flesh Roxon");
-        Voorstelling tweedeOpgehaaldeVoorstelling = voorstellingRepository.findByNaam("Hit The North/ Diamond Head");
+
+        List<Voorstelling> voorstellingen = voorstellingRepository.findAll();
+        Integer aantalVoorstellingen = 0;
+        for (Voorstelling voorstelling: voorstellingen) {
+            aantalVoorstellingen ++;
+        }
 
         //assert
-        Assert.assertNotNull(opgehaaldeVoorstelling);
-
+        assertNotNull(opgehaaldeVoorstelling);
+        assertEquals(3, aantalVoorstellingen);
     }
 }
