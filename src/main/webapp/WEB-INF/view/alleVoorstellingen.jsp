@@ -98,7 +98,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>
-                            <a class="btn btn-primary btn" id="publish" href="${contextPath}/planner/voorstelling/publiceren/ />">Publiceer</a>
+                            <a class="btn btn-primary btn" id="publish" href='${contextPath}/planner/voorstelling/publiceren/ />'>Publiceer</a>
                         </div>
                     </div>
                 </div>

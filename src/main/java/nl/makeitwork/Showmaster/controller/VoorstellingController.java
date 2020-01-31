@@ -108,9 +108,18 @@ public class VoorstellingController {
 
         model.addAttribute("alleTaken", taakRepository.findAll());
         Optional<Voorstelling> voorstelling = voorstellingRepository.findById(voorstellingId);
-        List<MedewerkerInschrijvingVoorstelling> inschrijvingenBijVoorstellingId =
-            medewerkerInschrijvingVoorstellingRepository.findInschrijvingByVoorstellingId(voorstellingId);
 
+        // Lijst alle inschrijvingen op één voorstelling
+        List<MedewerkerInschrijvingVoorstelling> inschrijvingenBijVoorstellingId =
+                medewerkerInschrijvingVoorstellingRepository.findInschrijvingByVoorstellingId(voorstellingId);
+
+        // Lijst alle taken bij één voorstelling
+        List<VoorstellingsTaak> alleVoorstellingsTakenBijVoorstellingId =
+                voorstellingsTaakRepository.findByVoorstellingVoorstellingIdOrderByTaakTaakNaam(voorstellingId);
+
+        // Reeds ingevulde taken filteren om alle nog beschikbare medewerkers te kunnen laten zien
+        alleVoorstellingsTakenBijVoorstellingId.forEach
+                (d-> inschrijvingenBijVoorstellingId.removeIf(r-> r.getMedewerker() == d.getMedewerker()));
 
         List<VoorstellingsTaak> voorstellingsTaken = voorstellingsTaakRepository.findByVoorstellingVoorstellingIdOrderByTaakTaakNaam(voorstellingId);
 
