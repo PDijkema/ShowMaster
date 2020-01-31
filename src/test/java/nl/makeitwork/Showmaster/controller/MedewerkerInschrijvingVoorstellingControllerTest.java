@@ -113,18 +113,18 @@ class MedewerkerInschrijvingVoorstellingControllerTest {
         medewerkerInschrijvingVoorstelling.setVoorstelling(voorstelling1);
 
 
-        /*//Activate
+        //Activate
         //Er wordt met dezelfde voorstellingId en medewerker een inschrijving gedaan, dit zou maar 1x mogen gebeuren.
-        medewerkerInschrijvingVoorstellingController.inschrijvenVoorstelling(voorstelling1.getVoorstellingId(),medewerker);
-        medewerkerInschrijvingVoorstellingController.inschrijvenVoorstelling(voorstelling1.getVoorstellingId(),medewerker);
+        medewerkerInschrijvingVoorstellingController.inschrijvenVoorstelling(voorstelling1.getVoorstellingId(),"Beschikbaar",medewerker);
+        medewerkerInschrijvingVoorstellingController.inschrijvenVoorstelling(voorstelling1.getVoorstellingId(),"Misschien",medewerker);
 
 
         //Assert
-        Assert.assertEquals(medewerkerInschrijvingVoorstellingController.inschrijvenVoorstelling(voorstelling2.getVoorstellingId(),medewerker),
+        Assert.assertEquals(medewerkerInschrijvingVoorstellingController.inschrijvenVoorstelling(voorstelling2.getVoorstellingId(),"Beschikbaar",medewerker),
                "redirect:/voorstelling/weergeven/openvoorstelling");
 
 
-        Assert.assertEquals(medewerkerInschrijvingVoorstellingRepository.findAll().size(),2);*/
+        Assert.assertEquals(medewerkerInschrijvingVoorstellingRepository.findAll().size(),2);
 
     }
 }
