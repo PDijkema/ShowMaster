@@ -52,7 +52,7 @@
 
                 <spring:bind path="planner">
                     <!-- CHECKBOX VERBORGEN IVM DEMO-->
-                    <div hidden class="form-group ${status.error ? 'has-error' : ''}">
+                    <div> <!-- hidden class="form-group ${status.error ? 'has-error' : ''}" -->
                         <form:checkbox path="planner" value="Planner" /> Planner
                     </div>
                 </spring:bind>

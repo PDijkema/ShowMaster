@@ -75,11 +75,11 @@
                 </div>
             </spring:bind>
         </div>
-         <div class="col-md-2 mb-3">
-            <spring:bind path="geboortedatum">
+         <div class="col-md-3 mb-3">
+            <spring:bind path="localDate">
                 <div>
-                    <label for="geboortedatum" class="col-sm-3 control-label">Geboortedatum</label>
-                    <form:input type="date" path="geboortedatum" class="form-control"
+                    <label for="localDate" class="col-sm-3 control-label">Geboortedatum</label>
+                    <form:input type="date" path="localDate" class="form-control"
                                 placeholder="yyyy-mm-dd"></form:input>
                 </div>
             </spring:bind>

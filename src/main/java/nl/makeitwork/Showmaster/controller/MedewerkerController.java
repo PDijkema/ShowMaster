@@ -129,6 +129,7 @@ public class MedewerkerController {
         if (result.hasErrors()) {
             return "profielWijzigen";
         } else {
+            medewerkerProfielGegevens.localDateFormatterenNaarString();
             medewerkerProfielGegevensRepository.save(medewerkerProfielGegevens);
             return "redirect:/profielpagina";
         }
