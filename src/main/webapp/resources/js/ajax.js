@@ -1,3 +1,12 @@
+function beschikbaarheidStatusDoorgeven(voorstellingId, beschikbaarheidStatus, contextPath) {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+    }
+  };
+  xhttp.open("GET", contextPath + "/voorstelling/weergeven/openvoorstelling/inschrijven/" + voorstellingId + "/" + beschikbaarheidStatus, true);
+  xhttp.send();
+}
 
 
 function roosterLaden(voorstellingId, contextPath) {

@@ -95,9 +95,23 @@ public class VoorstellingsTaakController {
         if (voorstellingsTaak.isPresent() && medewerker.isPresent()) {
             voorstellingsTaak.get().setMedewerker(medewerker.get());
             voorstellingsTaakRepository.save(voorstellingsTaak.get());
-        } else {
-            return "redirect:/planner/voorstelling/details/" + voorstellingId;
         }
         return "redirect:/planner/voorstelling/details/" + voorstellingId;
     }
+
+    @GetMapping("/planner/voorstellingsTaak/taakVrijGeven/{voorstellingId}/{voorstellingsTaakId}")
+    protected String taakBijVoorstellingenVrijgeven(@PathVariable("voorstellingId") Integer voorstellingId,
+                                                           @PathVariable("voorstellingsTaakId") Integer voorstellingsTaakId) {
+
+        VoorstellingsTaak voorstellingsTaak = voorstellingsTaakRepository.findByVoorstellingsTaakId(voorstellingsTaakId);
+
+
+
+        if (voorstellingsTaak.getMedewerker() != null) {
+            voorstellingsTaak.setMedewerker(null);
+            voorstellingsTaakRepository.save(voorstellingsTaak);
+        }
+        return "redirect:/planner/voorstelling/details/" + voorstellingId;
+    }
+
 }

@@ -23,7 +23,7 @@ header .nav-item {
 
 
 /* buttons in font als Bolwerk site */
-button,optgroup,select,textarea
+button,optgroup,select
 {margin:0;font-family:"Days One", sans-serif;font-size:inherit;line-height:inherit}
 
 .btn.btn-primary
@@ -68,7 +68,9 @@ color: #fff; font-size:1.5rem}
 #voorstellingDatumDisplay4 {
 color: #fff; font-size:1rem}
 
-#voegVoorstellingToeButton{margin-bottom: 15px}
+#voegVoorstellingToeButton, #voorstellingenImporterenExcelButton{margin-bottom: 15px}
+
+#medewerkerUitnodigenButton{margin-top: 15px; margin-bottom: 15px}
 
 .list-group-item{
 height: 55px;

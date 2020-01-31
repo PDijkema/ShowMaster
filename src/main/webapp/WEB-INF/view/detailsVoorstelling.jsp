@@ -71,7 +71,7 @@
                                     <c:otherwise>
                                         <c:out value="${takenBijVoorstelling.getMedewerker().getGebruikersnaam()}"/>
                                         <td>
-                                            <i onclick="taakInvullen(${voorstelling.voorstellingId}, ${takenBijVoorstelling.voorstellingsTaakId}, '${contextPath}')" class="far fa-edit" title="Wijzigen" data-toggle="modal" data-target="#exampleModal" ></i>
+                                            <i onclick="taakInvullen(${voorstelling.voorstellingId}, ${takenBijVoorstelling.voorstellingsTaakId}, '${contextPath}'); infoMeegeven(${takenBijVoorstelling.voorstellingsTaakId},${voorstelling.voorstellingId}, '${contextPath}')" class="far fa-edit" title="Wijzigen" data-toggle="modal" data-target="#exampleModal"  ></i>
                                         </td>
                                     </c:otherwise>
                                     </c:choose>
@@ -94,7 +94,7 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h2 class="modal-title" id="exampleModalLabel">Taak beheren</h2>
+                            <h2 class="modal-title" id="exampleModalLabel">Taak Beheren</h2>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -103,7 +103,9 @@
                             <p id="taakInvullen"></p>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">sluiten</button>
+
+                            <a style="visibility:hidden;" type="button" class="btn btn-primary btn" id="taakVrijgeven" href="${contextPath}/planner/voorstellingsTaak/taakVrijGeven/ / /">Taak Vrijgeven</a>
+                            <button type="button"  class="btn btn-secondary" data-dismiss="modal">Sluiten</button>
                         </div>
                     </div>
                 </div>
@@ -117,6 +119,9 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
                 integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
                 crossorigin="anonymous"></script>
+    <script src="${contextPath}\resources\js\javascript.functies.js"></script>
+
+
 
 
 
