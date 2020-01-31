@@ -2,6 +2,7 @@ package nl.makeitwork.Showmaster.controller;
 
 import nl.makeitwork.Showmaster.model.Medewerker;
 import nl.makeitwork.Showmaster.model.MedewerkerProfielGegevens;
+import nl.makeitwork.Showmaster.model.UitnodigingMedewerker;
 import nl.makeitwork.Showmaster.model.VoorstellingsTaak;
 import nl.makeitwork.Showmaster.repository.*;
 import nl.makeitwork.Showmaster.service.MedewerkerService;
@@ -138,6 +139,7 @@ public class MedewerkerController {
         List<Medewerker> alleGebruikers = medewerkerRepository.findAll();
         alleGebruikers.removeIf(medewerker -> medewerker.getMedewerkerId().equals(ingelogdeMedwerker.getMedewerkerId()));
         model.addAttribute("alleGebruikers",alleGebruikers);
+        model.addAttribute("uitnodigingMedewerker", new UitnodigingMedewerker());
         return "gebruikerOverzicht";
     }
 

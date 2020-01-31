@@ -1,15 +1,20 @@
 package nl.makeitwork.Showmaster.model;
 
+import io.github.millij.poi.ss.model.annotations.Sheet;
+import io.github.millij.poi.ss.model.annotations.SheetColumn;
 import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * @author Pieter Dijkema
  * aanmaken van een show/voorstelling
  */
 
+@Sheet
 @Entity
 @Table(name = "voorstelling")
 public class Voorstelling {
@@ -19,15 +24,33 @@ public class Voorstelling {
     private Integer voorstellingId;
     @NotNull
     private String naam;
+
     @NotNull
     @DateTimeFormat(pattern = "dd-MM-yyyy HH:mm")
     private LocalDateTime localDateTime;
 
-
+    @SheetColumn(value = "Datum")
     private String datum;
 
+    public void datumStringFormatterenNaarLocalDateTime() {
+        DateTimeFormatter aFormatter = DateTimeFormatter.ofPattern("dd/MM/yy HH:mm");
+        String datum = getDatum();
+        LocalDateTime localDateTime = LocalDateTime.parse(datum, aFormatter);
+
+        setLocalDateTime(localDateTime);
+    }
+
+    public void localDateTimeFormatterenNaarString() {
+        DateTimeFormatter aFormatter = DateTimeFormatter.ofPattern("dd MMMM yyyy HH:mm");
+        LocalDateTime localDateTime = getLocalDateTime();
+        String formattedString = localDateTime.format(aFormatter);
+
+        setDatum(formattedString);
+    }
+
+
     public String getDatum() {
-        return datum;
+       return datum;
     }
 
     public void setDatum(String datum) {
@@ -52,6 +75,7 @@ public class Voorstelling {
         this.voorstellingId = voorstellingId;
     }
 
+    @SheetColumn("Voorstelling")
     public String getNaam() {
         return naam;
     }
@@ -61,7 +85,7 @@ public class Voorstelling {
     }
 
     public LocalDateTime getLocalDateTime() {
-        return localDateTime;
+       return localDateTime;
     }
 
     public void setLocalDateTime(LocalDateTime localDateTime) {
@@ -71,11 +95,11 @@ public class Voorstelling {
     @Override
     public String toString() {
         return "Voorstelling{" +
-            "voorstellingId=" + voorstellingId +
-            ", naam='" + naam + '\'' +
-            ", localDateTime=" + localDateTime +
-            ", datum='" + datum + '\'' +
-            ", status='" + status + '\'' +
-            '}';
+                "voorstellingId=" + voorstellingId +
+                ", naam='" + naam + '\'' +
+                ", localDateTime=" + localDateTime +
+                ", datum='" + datum + '\'' +
+                ", status='" + status + '\'' +
+                '}';
     }
 }
