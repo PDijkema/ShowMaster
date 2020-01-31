@@ -1,5 +1,7 @@
 package nl.makeitwork.Showmaster.model;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -37,6 +39,11 @@ public class MedewerkerProfielGegevens {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "medewerker_id")
     private Medewerker medewerker;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "voorkeurstaakId", referencedColumnName = "taakId")
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
+    private Taak voorkeurstaak;
 
     public Integer getProfielId() {
         return profielId;
@@ -140,5 +147,13 @@ public class MedewerkerProfielGegevens {
 
     public void setTelefoonnummer(String telefoonnummer) {
         this.telefoonnummer = telefoonnummer;
+    }
+
+    public Taak getVoorkeurstaak() {
+        return voorkeurstaak;
+    }
+
+    public void setVoorkeurstaak(Taak voorkeurstaak) {
+        this.voorkeurstaak = voorkeurstaak;
     }
 }

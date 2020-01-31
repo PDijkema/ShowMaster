@@ -149,6 +149,20 @@
             </spring:bind>
         </div>
     </div>
+    <h2 class="form-signin-heading">Welke taak heeft je voorkeur?</h2>
+    <div class="form-row">
+        <div class="col-md-4 mb-3">
+            <spring:bind path="voorkeurstaak">
+                <div>
+                    <label for="voorkeurstaak" class="col-sm-3 control-label"></label>
+                    <form:select path="voorkeurstaak">
+                        <form:option value="0" label="Maak een keuze"/>
+                        <form:options items="${takenLijst}" itemValue="taakId" itemLabel="taakNaam" />
+                    </form:select>
+                </div>
+            </spring:bind>
+        </div>
+    </div>
         <p>*Verplichte velden</p>
 
         <button class="btn btn-primary" type="submit">Opslaan</button>
