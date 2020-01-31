@@ -24,6 +24,17 @@ public class MedewerkerInschrijvingVoorstelling {
 
     private String inschrijvingStatus;
 
+    public MedewerkerInschrijvingVoorstelling() {
+    }
+
+    public MedewerkerInschrijvingVoorstelling(Medewerker ingelogdeMedewerker, Voorstelling voorstelling, String inschrijvingStatus) {
+        this.medewerker = ingelogdeMedewerker;
+        this.voorstelling = voorstelling;
+        this.inschrijvingStatus = inschrijvingStatus;
+    }
+
+
+
     public Integer getMedewerkerInschrijvingTaakId() {
         return medewerkerInschrijvingTaakId;
     }

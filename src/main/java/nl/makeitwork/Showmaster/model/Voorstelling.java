@@ -23,6 +23,7 @@ public class Voorstelling {
     @DateTimeFormat(pattern = "dd-MM-yyyy HH:mm")
     private LocalDateTime localDateTime;
 
+
     private String datum;
 
     public String getDatum() {
