@@ -29,12 +29,12 @@ public class ExcelController {
 
     private String fileLocation;
 
-    @GetMapping("/planner/voorstelling/excel")
+    @GetMapping("/planner/voorstellingen/excel")
     public String getExcelProcessingPage() {
         return "excel";
     }
 
-    @PostMapping("/planner/voorstelling/excel/upload")
+    @PostMapping("/planner/voorstellingen/excel/upload")
     public String uploadFile(Model model, MultipartFile file) throws IOException {
         InputStream in = file.getInputStream();
         File currDir = new File(".");
@@ -52,7 +52,7 @@ public class ExcelController {
         return "excel";
     }
 
-    @GetMapping("/planner/voorstelling/excel/toevoegen")
+    @GetMapping("/planner/voorstellingen/excel/toevoegen")
     public String excelVoorstellingToevoegen(Model model) throws SpreadsheetReadException {
 
         if (fileLocation != null) {
@@ -66,7 +66,7 @@ public class ExcelController {
         } else {
             model.addAttribute("message", "Geen bestand beschikbaar! A.u.b. een Excelbestand uploaden.");
         }
-        return "redirect:/planner/voorstelling/alle";
+        return "redirect:/planner/voorstellingen";
     }
 
     public void readExcelXlsx(String fileLocation) throws SpreadsheetReadException {

@@ -25,7 +25,7 @@
                 </div>
             </div>
         <div class="container">
-        <form:form action="${contextPath}/planner/voorstelling/toevoegen" modelAttribute="voorstelling" method="post">
+        <form:form action="${contextPath}/planner/voorstellingen/voorstelling/toevoegen" modelAttribute="voorstelling" method="post">
             <form:hidden path="voorstellingId"/>
             <table>
                 <div>
@@ -49,7 +49,7 @@
                 </tr>
             </table>
         </form:form>
-        <a class="btn btn-primary" href="${contextPath}/planner/voorstelling/alle">Overzicht voorstellingen</a>
+        <a class="btn btn-primary" href="${contextPath}/planner/voorstellingen">Overzicht voorstellingen</a>
         </div>
         <script>
             $(document).ready(function(){

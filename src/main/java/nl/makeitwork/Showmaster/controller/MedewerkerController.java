@@ -146,7 +146,7 @@ public class MedewerkerController {
         return "gebruikerOverzicht";
     }
 
-    @GetMapping("/planner/gebruiker/verwijderen/{medewerkerId}")
+    @GetMapping("/planner/gebruiker/overzicht/verwijderen/{medewerkerId}")
     public String verwijderGebruiker(@PathVariable Integer medewerkerId) {
         medewerkerRepository.deleteById(medewerkerId);
         return "redirect:/planner/gebruiker/overzicht";

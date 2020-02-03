@@ -27,20 +27,31 @@
                     <img src="https://hetbolwerk.nl/wp-content/themes/hetbolwerk/images/hetbolwerklogo.svg" height="30" class="d-inline-block align-top" alt="Poppodium Het Bolwerk">
                     </a>
                     <div class="container">
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
-                        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                            <div class="navbar-nav">
-                                <a class="nav-item nav-link active" href="${contextPath}/startpagina">ROOSTER <span class="sr-only">(current)</span></a>
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                            <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="${contextPath}/rooster">ROOSTER</a>
+                            </li>
                                 <sec:authorize access="hasRole('PLANNER')">
-                                    <a class="nav-item nav-link" href="${contextPath}/planner/voorstellingen">VOORSTELLINGEN</a>
-                                    <a class="nav-item nav-link" href="${contextPath}/planner/taak/aanmaken">TAAK AANMAKEN</a>
-                                    <a class="nav-item nav-link" href="${contextPath}/planner/gebruiker/overzicht">GEBRUIKERS</a>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="${contextPath}/planner/voorstellingen">VOORSTELLINGEN</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="${contextPath}/planner/taak/aanmaken">TAAK AANMAKEN</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="${contextPath}/planner/gebruiker/overzicht">GEBRUIKERS</a>
+                                    </li>
                                 </sec:authorize>
-                                <a class="nav-item nav-link" href="${contextPath}/profielpagina">MIJN PROFIEL</a>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="${contextPath}/profiel">MIJN PROFIEL</a>
+                                </li>
+
                                 <c:if test="${pageContext.request.userPrincipal.name != null}">
-                                    <form id="logoutform" action="${contextPath}/logout" method="post">
+                                    <form class="form-inline" id="logoutform" action="${contextPath}/logout" method="post">
                                         <input name="utf8" type="hidden" value="✓">
                                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                 </c:if>
@@ -54,5 +65,6 @@
                 </nav>
             </div>
         </header>
+        <script src="${contextPath}\resources\js\jquery.js" type='text/javascript'></script>
     </body>
 </html>

@@ -24,8 +24,8 @@
         <div class="container">
 
             <h2>Voorstelling toevoegen</h2>
-            <a id="voegVoorstellingToeButton" class="btn btn-primary" href="${contextPath}/planner/voorstelling/toevoegen">Handmatig</a>
-            <a id="voorstellingenImporterenExcelButton" class="btn btn-primary" href="${contextPath}/planner/voorstelling/excel">Excel import</a>
+            <a id="voegVoorstellingToeButton" class="btn btn-primary" href="${contextPath}/planner/voorstellingen/voorstelling/toevoegen">Handmatig</a>
+            <a id="voorstellingenImporterenExcelButton" class="btn btn-primary" href="${contextPath}/planner/voorstellingen/excel">Excel import</a>
             <div class="card-columns">
                 <c:forEach items="${alleVoorstellingen}" var="voorstelling">
                     <div class="card">
@@ -61,7 +61,7 @@
                                         <!-- nothing yet  -->
                                     </c:when>
                                     <c:otherwise>
-                                        <a href="${contextPath}/planner/voorstelling/details/<c:out value='${voorstelling.voorstellingId}' />">
+                                        <a href="${contextPath}/planner/voorstellingen/voorstelling/details/<c:out value='${voorstelling.voorstellingId}' />">
                                             <i class="fas fa-user-edit" title="Taakbeheer"></i>
                                         </a>
                                     </c:otherwise>
@@ -71,12 +71,12 @@
                                         <!-- nothing yet -->
                                     </c:when>
                                     <c:otherwise>
-                                        <a href="${contextPath}/planner/voorstelling/wijzigen/<c:out value='${voorstelling.voorstellingId}' />">
+                                        <a href="${contextPath}/planner/voorstellingen/voorstelling/wijzigen/<c:out value='${voorstelling.voorstellingId}' />">
                                             <i class="far fa-edit" title="Wijzigen"></i>
                                         </a>
                                     </c:otherwise>
                                 </c:choose>
-                                <a href="${contextPath}/planner/voorstelling/verwijderen/<c:out value='${voorstelling.voorstellingId}' />">
+                                <a href="${contextPath}/planner/voorstellingen/voorstelling/verwijderen/<c:out value='${voorstelling.voorstellingId}' />">
                                     <i class="fas fa-trash" title="Verwijderen"></i>
                                 </a>
                             </li>
@@ -101,7 +101,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>
-                            <a class="btn btn-primary btn" id="publish" href="${contextPath}/planner/voorstelling/publiceren/ />">Publiceer</a>
+                            <a class="btn btn-primary btn" id="publish" href="${contextPath}/planner/voorstellingen/voorstelling/publiceren/ />">Publiceer</a>
                         </div>
                     </div>
                 </div>

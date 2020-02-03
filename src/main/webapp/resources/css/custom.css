@@ -10,10 +10,6 @@ header .nav-item {
 #headerNavbar .navbar-light .navbar-nav .nav-link:hover
 {color:rgba(11, 114, 169, 1)}
 
-#headerNavbar .navbar-light .navbar-nav li.active > a {
-    color:rgba(11, 114, 169, 1)
-}
-
 body
 {font-family:"PT Sans",sans-serif}
 

@@ -34,7 +34,7 @@
                     <ul class="nav flex-column">
                         <c:forEach items="${alleTaken}" var="taak">
                             <li class="nav-item">
-                                <a href="${contextPath}/planner/voorstelling/voorstellingsTaak/toevoegen/${voorstelling.voorstellingId}/
+                                <a href="${contextPath}/planner/voorstellingen/voorstellingsTaak/toevoegen/${voorstelling.voorstellingId}/
                                 <c:out value=" ${taak.taakId} " />">
                                 <c:out value="${taak.taakNaam}" />
                                 </a>
@@ -77,7 +77,7 @@
                                 </c:choose>
                                 </td>
                                 <td>
-                                    <a href="${contextPath}/planner/voorstellingsTaak/verwijderen/${voorstelling.voorstellingId}/<c:out value='${takenBijVoorstelling.voorstellingsTaakId}' />">
+                                    <a href="${contextPath}/planner/voorstellingen/voorstellingsTaak/verwijderen/${voorstelling.voorstellingId}/<c:out value='${takenBijVoorstelling.voorstellingsTaakId}' />">
                                         <i class="fas fa-trash" title="Verwijderen"></i>
                                     </a>
                                 </td>
@@ -85,7 +85,7 @@
                         </c:forEach>
                         </tbody>
                     </table>
-                    <a class="btn btn-primary" href="${contextPath}/planner/voorstelling/alle">Overzicht Voorstellingen</a>
+                    <a class="btn btn-primary" href="${contextPath}/planner/voorstellingen">Overzicht Voorstellingen</a>
                 </main>
             </div>
         </div>
@@ -104,7 +104,7 @@
                     </div>
                     <div class="modal-footer">
 
-                        <a style="visibility:hidden;" type="button" class="btn btn-primary btn" id="taakVrijgeven" href="${contextPath}/planner/voorstelling/voorstellingsTaak/taakVrijGeven/ / /">Taak Vrijgeven</a>
+                        <a style="visibility:hidden;" type="button" class="btn btn-primary btn" id="taakVrijgeven" href="${contextPath}/planner/voorstellingen/voorstellingsTaak/taakVrijGeven/ / /">Taak Vrijgeven</a>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>
                     </div>
                 </div>
