@@ -5,22 +5,24 @@
 
 <!doctype html>
 <html lang="en" xmlns:form="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="${contextPath}\resources\js\validation.js"></script>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link href="${contextPath}\resources\css\custom.css" type="text/css" rel="stylesheet">
-
-
-
-</head>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script src="${contextPath}\resources\js\validation.js"></script>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link href="${contextPath}\resources\css\custom.css" type="text/css" rel="stylesheet">
+    </head>
     <body>
         <jsp:include page="navbar.jsp" />
-        <h1>Wijzigen voorstelling</h1>
+            <div class="jumbotron jumbotron-fluid">
+                <div class="container">
+                    <h1 class="voorstellingDisplay4">Wijzigen voorstelling</h1>
+                </div>
+            </div>
+        <div class="container">
         <form:form action="${contextPath}/planner/voorstelling/wijzigen" modelAttribute="voorstelling" method="post">
             <form:hidden path="voorstellingId"/>
             <form:hidden path="status"/>
@@ -76,19 +78,18 @@
                 </tr>
             </table>
         </form:form>
-                <a class="btn btn-primary" href="${contextPath}/planner/voorstellingen">Overzicht voorstellingen</a>
+            <a class="btn btn-primary" href="${contextPath}/planner/voorstellingen">Overzicht voorstellingen</a>
+        </div>
 
-
-<link rel="stylesheet" href="${contextPath}\resources\js\jquery.datetimepicker.min.css">
-<script src="${contextPath}\resources\js\jquery.js"></script>
-<script src="${contextPath}\resources\js\jquery.datetimepicker.full.js"></script>
-<script>
-    $(document).ready(function(){
-    $("#kalender").datetimepicker({
-    format: "d-m-Y H:i",
-    });
-    });
-</script>
+        <link rel="stylesheet" href="${contextPath}\resources\js\jquery.datetimepicker.min.css">
+        <script src="${contextPath}\resources\js\jquery.js"></script>
+        <script src="${contextPath}\resources\js\jquery.datetimepicker.full.js"></script>
+        <script>
+            $(document).ready(function(){
+            $("#kalender").datetimepicker({
+            format: "d-m-Y H:i",
+            });
+            });
+        </script>
     </body>
-
 </html>

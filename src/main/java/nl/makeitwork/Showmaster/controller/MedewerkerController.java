@@ -98,12 +98,12 @@ public class MedewerkerController {
         model.addAttribute("allePersoonlijkeVoorstellingsTaken", voorstellingsTaken);
 
         return "welkomMedewerker";
-        }
+    }
 
     @GetMapping("/")
-    public String doorverwijzenStartpagina (@AuthenticationPrincipal Medewerker medewerker){
+    public String doorverwijzenStartpagina(@AuthenticationPrincipal Medewerker medewerker) {
         return "redirect:/startpagina";
-}
+    }
 
     @GetMapping("/profielpagina")
     protected String showProfielPagina(Model model, @AuthenticationPrincipal Medewerker ingelogdeMedewerker) {
@@ -125,21 +125,23 @@ public class MedewerkerController {
 
     @PostMapping("/profiel/wijzigen")
     public String updateMedewerker(@ModelAttribute("medewerkerProfielGegevens") MedewerkerProfielGegevens medewerkerProfielGegevens,
-                                   BindingResult result ) {
+                                   BindingResult result) {
         if (result.hasErrors()) {
             return "profielWijzigen";
+        } if (medewerkerProfielGegevens.getLocalDate() == null) {
+          medewerkerProfielGegevens.setGeboortedatum("");
         } else {
             medewerkerProfielGegevens.localDateFormatterenNaarString();
             medewerkerProfielGegevensRepository.save(medewerkerProfielGegevens);
-            return "redirect:/profielpagina";
         }
+        return "redirect:/profielpagina";
     }
 
     @GetMapping("/planner/gebruiker/overzicht")
-    public String gebruikerOverzicht (Model model,@AuthenticationPrincipal Medewerker ingelogdeMedwerker) {
+    public String gebruikerOverzicht(Model model, @AuthenticationPrincipal Medewerker ingelogdeMedwerker) {
         List<Medewerker> alleGebruikers = medewerkerRepository.findAll();
         alleGebruikers.removeIf(medewerker -> medewerker.getMedewerkerId().equals(ingelogdeMedwerker.getMedewerkerId()));
-        model.addAttribute("alleGebruikers",alleGebruikers);
+        model.addAttribute("alleGebruikers", alleGebruikers);
         model.addAttribute("uitnodigingMedewerker", new UitnodigingMedewerker());
         return "gebruikerOverzicht";
     }
