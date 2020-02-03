@@ -98,7 +98,7 @@ color: #fff;
 }
 
 #dropzoneBeschikbareMedewerkers {
-  background-color: rgba(99,103,95, 0.1);
+  background-color: #e9ecef;
   border-radius: 15px;
   width: 200px;
 }
@@ -109,7 +109,7 @@ color: #fff;
   height: 30px;
   margin: 1px;
   padding: 1px;
-  background-color: rgba(99,103,95, 0.2);
+  background-color: #e9ecef;
   border: 2px solid gray;
   border-radius: 15px;
   text-align: center;

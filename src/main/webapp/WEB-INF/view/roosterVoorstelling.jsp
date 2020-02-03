@@ -30,18 +30,6 @@
 
     <div class="container">
         <div class="row flex-xl-nowrap">
-                <div class="col-md-3 col-xl-2 py-md-3 pl-md-5 bd-sidebar">
-                    <h2>Dienst toevoegen</h2>
-                    <ul class="nav flex-column">
-                        <c:forEach items="${alleTaken}" var="taak">
-                            <li class="nav-item"><a href="${contextPath}/planner/voorstellingsTaak/toevoegen/${voorstelling.voorstellingId}/
-                        <c:out value='${taak.taakId}' />">
-                                <c:out value="${taak.taakNaam}"/>
-                            </a>
-                            </li>
-                        </c:forEach>
-                    </ul>
-                </div>
             <div class="col-8" role="main">
                 <h1>Diensten bij voorstelling</h1>
                 <table class="table table-hover">
@@ -49,7 +37,6 @@
                     <tr>
                         <th scope="col">Taak</th>
                         <th scope="col">Medewerker</th>
-                        <th scope="col">Taak vrijgeven</th>
                         <th scope="col">Taak Verwijderen</th>
                     </tr>
                     </thead>
@@ -64,24 +51,19 @@
                                 <c:choose>
                                 <c:when test="${empty takenBijVoorstelling.getMedewerker().getGebruikersnaam()}">
                                 <div class="voorstellingsTaak" id="${takenBijVoorstelling.voorstellingsTaakId}"
-                                     ondrop="drop(event, ${takenBijVoorstelling.voorstellingsTaakId}, ${takenBijVoorstelling.voorstelling.voorstellingId}, '${contextPath}')"
-                                     ondragover="allowDrop(event, ${takenBijVoorstelling.voorstellingsTaakId})"
+                                     ondrop="dropBeschikbareMedewerker(event, ${takenBijVoorstelling.voorstellingsTaakId}, ${takenBijVoorstelling.voorstelling.voorstellingId}, '${contextPath}')"
+                                     ondragover="allowDrop(event)"
                                      ondragenter="enterDrag(event)"
                                      ondragleave="leaveDrag(event)">
                                 Openstaand
                                 </div>
-                                <td>
-                                <i class="fas fa-user-plus" title="Invullen" data-toggle="modal" data-target="#exampleModal"
-                                   onclick="taakInvullen(${voorstelling.voorstellingId}, ${takenBijVoorstelling.voorstellingsTaakId}, '${contextPath}')"/></i>
-                                </td>
                                 </c:when>
                                 <c:otherwise>
-                                    <div class="beschikbareMedewerker" draggable="true">
+                                    <div class="beschikbareMedewerker" draggable="true" id="${takenBijVoorstelling.voorstellingsTaakId}"
+                                         ondragstart="dragStartIngeplandeMedewerker(event, ${takenBijVoorstelling.voorstelling.voorstellingId}, ${takenBijVoorstelling.voorstellingsTaakId}, '${contextPath}')"
+                                         ondrag="dragging(event)">
                                     <c:out value="${takenBijVoorstelling.getMedewerker().getGebruikersnaam()}"/>
                                     </div>
-                                    <td>
-                                        <i onclick="taakInvullen(${voorstelling.voorstellingId}, ${takenBijVoorstelling.voorstellingsTaakId}, '${contextPath}'); infoMeegeven(${takenBijVoorstelling.voorstellingsTaakId},${voorstelling.voorstellingId}, '${contextPath}')" class="far fa-edit" title="Wijzigen" data-toggle="modal" data-target="#exampleModal"  ></i>
-                                    </td>
                                 </c:otherwise>
                                 </c:choose>
                                 </td>
@@ -96,18 +78,34 @@
                 </table>
                 <a class="btn btn-primary" href="${contextPath}/planner/voorstellingen">Overzicht Voorstellingen</a>
             </div>
-            <div class="col-4" id="dropzoneBeschikbareMedewerkers">
+            <div class="col-4" id="dropzoneBeschikbareMedewerkers"
+                 ondragenter="enterDrag(event)"
+                 ondragleave="leaveDrag(event)"
+                 ondragover="allowDrop(event)"
+                 ondrop="vrijgevenIngeplandeMedewerker(event, '${contextPath}')">
                 <h1 id="beschikbareMedewerkers">Beschikbare medewerkers</h1>
                 <p id="sleepinstructie">sleep naar openstaande dienst</p>
                 <c:forEach items="${beschikbareMedewerkers}" var="medewerkerInschrijvingVoorstelling">
                     <!-- ONDRAGDIV-->
                     <div class="beschikbareMedewerker" draggable="true" id="${medewerkerInschrijvingVoorstelling.medewerker.medewerkerId}"
-                         ondragstart="dragStart(event, ${medewerkerInschrijvingVoorstelling.medewerker.medewerkerId})"
+                         ondragstart="dragStartBeschikbareMedewerker(event, ${medewerkerInschrijvingVoorstelling.medewerker.medewerkerId})"
                          ondrag="dragging(event)">
                         <p><c:out value="${medewerkerInschrijvingVoorstelling.medewerker.gebruikersnaam}"/></p>
                     </div>
                     <!-- ONDRAGDIV-->
                 </c:forEach>
+            </div>
+            <div class="col-md-3 col-xl-2 py-md-3 pl-md-5 bd-sidebar">
+                <h2>Dienst toevoegen</h2>
+                <ul class="nav flex-column">
+                    <c:forEach items="${alleTaken}" var="taak">
+                        <li class="nav-item"><a href="${contextPath}/planner/voorstellingsTaak/toevoegen/${voorstelling.voorstellingId}/
+                        <c:out value='${taak.taakId}' />">
+                            <c:out value="${taak.taakNaam}"/>
+                        </a>
+                        </li>
+                    </c:forEach>
+                </ul>
             </div>
         </div>
     </div>

@@ -1,45 +1,62 @@
 
-function dragStart(event, medewerkerId) {
-    console.log(medewerkerId)
+function dragStartBeschikbareMedewerker(event, medewerkerId) {
     event.dataTransfer.setData("medewerkerId", medewerkerId)
 }
 
+function dragStartIngeplandeMedewerker(event, voorstellingId, voorstellingsTaakId) {
+    event.dataTransfer.setData("voorstellingId", voorstellingId);
+    event.dataTransfer.setData("voorstellingsTaakId", voorstellingsTaakId);
+}
+
 function dragging(event) {
-    console.log("dragging")
 }
 
 function allowDrop(event) {
     event.preventDefault();
 }
+
 function enterDrag(event) {
-    console.log("dragging over");
-    if (event.target.className == "voorstellingsTaak") {
-        event.target.style.background = "darkgray";
+    if (event.target.className === "voorstellingsTaak" || "col-4" ) {
+        event.target.style.background = "lightgray";
     }
 }
+
 function leaveDrag(event) {
-    if (event.target.className == "voorstellingsTaak") {
+    if (event.target.className === "voorstellingsTaak" || "col-4") {
         event.target.style.background = "";
     }
 }
 
-
-function drop(event, voorstellingsTaakId, voorstellingId, contextPath) {
+function dropBeschikbareMedewerker(event, voorstellingsTaakId, voorstellingId, contextPath) {
     event.preventDefault();
     var medewerkerId = event.dataTransfer.getData("medewerkerId");
-    console.log(voorstellingsTaakId + " is the taak voor de medewerker");
-    console.log(voorstellingId + " is de voorstelling");
-    console.log(medewerkerId + " is de medewerkerId");
-    event.target.appendChild(document.getElementById(medewerkerId));
-
+    console.log("voorstellingstaakId" + voorstellingsTaakId);
     var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            //document.getElementById("taakInvullen").innerHTML = this.responseText;
-        }
-    };
-    xhttp.open("GET", contextPath +  "/planner/voorstellingsTaak/medewerkerKoppelen/" + voorstellingId + "/" + voorstellingsTaakId + "/" + medewerkerId, true);
+
+    xhttp.open("GET", contextPath + "/planner/voorstellingsTaak/medewerkerKoppelen/" + voorstellingId + "/" + voorstellingsTaakId + "/" + medewerkerId, true);
     xhttp.send();
+    setTimeout(function () {
+        location.reload(true);
+    }, 25);
+
 }
+
+function vrijgevenIngeplandeMedewerker(event, contextPath) {
+    event.preventDefault();
+    var voorstellingId = event.dataTransfer.getData("voorstellingId");
+    var voorstellingsTaakId = event.dataTransfer.getData("voorstellingsTaakId");
+    event.target.style.background = "";
+
+    if (voorstellingsTaakId || voorstellingId) {
+        var xhttp = new XMLHttpRequest();
+
+        xhttp.open("GET", contextPath + "/planner/voorstellingsTaak/taakVrijGeven/" + voorstellingId + "/" + voorstellingsTaakId, true);
+        xhttp.send();
+        setTimeout(function () {
+            location.reload(true);
+        }, 25);
+    }
+}
+
 
 
