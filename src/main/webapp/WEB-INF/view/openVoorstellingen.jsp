@@ -30,7 +30,7 @@
                                 <h1><c:out value="${voorstelling.getNaam()}"/></h1><c:out value="${voorstelling.getDatum()}"/>
                             </div>
                         <div class="card-body">
-                            <a class="btn btn-primary" href="${contextPath}/voorstelling/weergeven/openvoorstelling/inschrijven/<c:out value='${voorstelling.voorstellingId}'/>" role="button">Inschrijven</a>
+                            <a class="btn btn-primary" href="${contextPath}/rooster/openvoorstelling/inschrijven/<c:out value='${voorstelling.voorstellingId}'/>" role="button">Inschrijven</a>
                         </div>
                         </div>
                     </c:if>
