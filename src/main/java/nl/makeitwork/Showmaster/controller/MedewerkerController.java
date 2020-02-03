@@ -88,7 +88,7 @@ public class MedewerkerController {
         return "login";
     }
 
-    @GetMapping("/startpagina")
+    @GetMapping("/rooster")
     public String welkomMedewerker(Model model, @AuthenticationPrincipal Medewerker ingelogdeMedewerker) {
         model.addAttribute("medewerker", medewerkerRepository.findByGebruikersnaam(ingelogdeMedewerker.getGebruikersnaam()));
         model.addAttribute("medewerkerProfielGegevens", medewerkerProfielGegevensRepository.findByMedewerker(ingelogdeMedewerker));
@@ -102,16 +102,16 @@ public class MedewerkerController {
 
     @GetMapping("/")
     public String doorverwijzenStartpagina(@AuthenticationPrincipal Medewerker medewerker) {
-        return "redirect:/startpagina";
+        return "redirect:/rooster";
     }
 
-    @GetMapping("/profielpagina")
+    @GetMapping("/profiel")
     protected String showProfielPagina(Model model, @AuthenticationPrincipal Medewerker ingelogdeMedewerker) {
         model.addAttribute("medewerkerProfielGegevens", medewerkerProfielGegevensRepository.findByMedewerker(ingelogdeMedewerker));
         return "profielPagina";
     }
 
-    @PostMapping("/profielpagina")
+    @PostMapping("/profiel")
     protected String goToProfielWijzigen(Model model, @AuthenticationPrincipal Medewerker ingelogdeMedewerker) {
         return "redirect:/profiel/wijzigen";
     }
@@ -134,7 +134,7 @@ public class MedewerkerController {
             medewerkerProfielGegevens.localDateFormatterenNaarString();
             medewerkerProfielGegevensRepository.save(medewerkerProfielGegevens);
         }
-        return "redirect:/profielpagina";
+        return "redirect:/profiel";
     }
 
     @GetMapping("/planner/gebruiker/overzicht")
