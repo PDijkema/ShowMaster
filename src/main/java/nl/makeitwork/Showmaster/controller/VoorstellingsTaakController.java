@@ -28,7 +28,7 @@ public class VoorstellingsTaakController {
     @Autowired
     private MedewerkerRepository medewerkerRepository;
 
-    @GetMapping("/planner/voorstellingsTaak/verwijderen/{voorstellingId}/{voorstellingsTaakId}")
+    @GetMapping("/planner/voorstelling/voorstellingsTaak/verwijderen/{voorstellingId}/{voorstellingsTaakId}")
     protected String verwijderenTaakBijVoorstelling(@PathVariable("voorstellingsTaakId") Integer voorstellingsTaakId,
                                                     @PathVariable("voorstellingId") Integer voorstellingId) {
 
@@ -38,7 +38,7 @@ public class VoorstellingsTaakController {
         return "redirect:/planner/voorstelling/details/" + voorstellingId;
     }
 
-    @GetMapping("/planner/voorstellingsTaak/toevoegen/{voorstellingId}/{taakId}")
+    @GetMapping("/planner/voorstelling/voorstellingsTaak/toevoegen/{voorstellingId}/{taakId}")
     protected String toevoegenTaakAanVoorstelling(@PathVariable("taakId") Integer taakId,
                                                   @PathVariable("voorstellingId") Integer voorstellingId) {
 
@@ -55,7 +55,7 @@ public class VoorstellingsTaakController {
         return "redirect:/planner/voorstelling/details/" + voorstellingId;
     }
 
-    @GetMapping("/planner/voorstellingsTaak/medewerkerKoppelen/{voorstellingId}/{voorstellingsTaakId}")
+    @GetMapping("/planner/voorstelling/voorstellingsTaak/medewerkerKoppelen/{voorstellingId}/{voorstellingsTaakId}")
     protected String koppelenMedewerkerAanVoorstellingsTaak(@PathVariable("voorstellingId") Integer voorstellingId,
                                                             @PathVariable("voorstellingsTaakId") Integer voorstellingsTaakId,
                                                             Model model) {
@@ -84,7 +84,7 @@ public class VoorstellingsTaakController {
         return "medewerkerKoppelenAanVoorstellingsTaak";
     }
 
-    @GetMapping("/planner/voorstellingsTaak/medewerkerKoppelen/{voorstellingId}/{voorstellingsTaakId}/{medewerkerId}")
+    @GetMapping("/planner/voorstelling/voorstellingsTaak/medewerkerKoppelen/{voorstellingId}/{voorstellingsTaakId}/{medewerkerId}")
     protected String opslaanMedewerkerBijVoorstellingstaak(@PathVariable("voorstellingId") Integer voorstellingId,
                                                            @PathVariable("voorstellingsTaakId") Integer voorstellingsTaakId,
                                                            @PathVariable("medewerkerId") Integer medewerkerId) {
@@ -99,7 +99,7 @@ public class VoorstellingsTaakController {
         return "redirect:/planner/voorstelling/details/" + voorstellingId;
     }
 
-    @GetMapping("/planner/voorstellingsTaak/taakVrijGeven/{voorstellingId}/{voorstellingsTaakId}")
+    @GetMapping("/planner/voorstelling/voorstellingsTaak/taakVrijGeven/{voorstellingId}/{voorstellingsTaakId}")
     protected String taakBijVoorstellingenVrijgeven(@PathVariable("voorstellingId") Integer voorstellingId,
                                                            @PathVariable("voorstellingsTaakId") Integer voorstellingsTaakId) {
 
