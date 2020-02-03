@@ -23,7 +23,7 @@
         <header>
             <div id="headerNavbar">
                 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                    <a class="navbar-brand" href="${contextPath}/startpagina">
+                    <a class="navbar-brand" href="${contextPath}/rooster">
                     <img src="https://hetbolwerk.nl/wp-content/themes/hetbolwerk/images/hetbolwerklogo.svg" height="30" class="d-inline-block align-top" alt="Poppodium Het Bolwerk">
                     </a>
                     <div class="container">
@@ -32,14 +32,13 @@
                         </button>
                         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                             <div class="navbar-nav">
-                                <a class="nav-item nav-link active" href="${contextPath}/startpagina">STARTPAGINA <span class="sr-only">(current)</span></a>
+                                <a class="nav-item nav-link active" href="${contextPath}/startpagina">ROOSTER <span class="sr-only">(current)</span></a>
                                 <sec:authorize access="hasRole('PLANNER')">
                                     <a class="nav-item nav-link" href="${contextPath}/planner/voorstellingen">VOORSTELLINGEN</a>
                                     <a class="nav-item nav-link" href="${contextPath}/planner/taak/aanmaken">TAAK AANMAKEN</a>
-                                    <a class="nav-item nav-link" href="${contextPath}/planner/gebruiker/overzicht">GEBRUIKERSOVERZICHT</a>
-                                    <a class="nav-item nav-link" href="${contextPath}/registreer">GEBRUIKER AANMAKEN</a>
+                                    <a class="nav-item nav-link" href="${contextPath}/planner/gebruiker/overzicht">GEBRUIKERS</a>
                                 </sec:authorize>
-                                <a class="nav-item nav-link" href="${contextPath}/profielpagina">PROFIELGEGEVENS</a>
+                                <a class="nav-item nav-link" href="${contextPath}/profielpagina">MIJN PROFIEL</a>
                                 <c:if test="${pageContext.request.userPrincipal.name != null}">
                                     <form id="logoutform" action="${contextPath}/logout" method="post">
                                         <input name="utf8" type="hidden" value="✓">
