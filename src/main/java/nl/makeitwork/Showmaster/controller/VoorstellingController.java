@@ -40,7 +40,7 @@ public class VoorstellingController {
     private VoorstellingController voorstellingController;
 
 
-    @GetMapping("/planner/voorstellingen")
+    @GetMapping("/planner/voorstelling/alle")
     protected String alleVoorstellingen(Model model) {
         model.addAttribute("alleVoorstellingen", voorstellingRepository.findAll());
         return "alleVoorstellingen";
@@ -58,7 +58,7 @@ public class VoorstellingController {
         Optional<Voorstelling> voorstelling = voorstellingRepository.findById(voorstellingId);
         model.addAttribute("alleTaken", taakRepository.findAll());
         if (!voorstelling.isPresent() || voorstelling.get().getStatus().equals("Geannuleerd")) {
-            return "redirect:/planner/voorstellingen";
+            return "redirect:/planner/voorstelling/alle";
         } else {
             request.getSession().setAttribute("voorstellingId", voorstellingId);
             model.addAttribute("voorstelling", voorstelling.get());
@@ -66,7 +66,7 @@ public class VoorstellingController {
         }
     }
 
-    @GetMapping("/voorstelling/rooster/{voorstellingId}")
+    @GetMapping("/rooster/voorstelling/{voorstellingId}")
     protected String roosterVoorstelling(@PathVariable Integer voorstellingId, Model model) {
 
         List<VoorstellingsTaak> voorstellingOverzicht = voorstellingsTaakRepository.findByVoorstellingVoorstellingId(voorstellingId);
@@ -89,7 +89,7 @@ public class VoorstellingController {
         List<VoorstellingsTaak> voorstellingsTaken = voorstellingsTaakRepository.findByVoorstellingVoorstellingIdOrderByTaakTaakNaam(voorstellingId);
 
         if (!voorstelling.isPresent() || voorstelling.get().getStatus().equals("Geannuleerd")) {
-            return "redirect:/planner/voorstellingen";
+            return "redirect:/planner/voorstelling/alle";
         } else {
             request.getSession().setAttribute("voorstellingId", voorstellingId);
             model.addAttribute("takenBijVoorstelling", voorstellingsTaken);
@@ -105,7 +105,7 @@ public class VoorstellingController {
         voorstelling.ifPresent(value -> value.setStatus("Gepubliceerd"));
         voorstelling.ifPresent(value -> voorstellingRepository.save(value));
 
-        return "redirect:/planner/voorstellingen";
+        return "redirect:/planner/voorstelling/alle";
     }
 
 
@@ -116,7 +116,7 @@ public class VoorstellingController {
         voorstelling.ifPresent(value -> value.setStatus("Geannuleerd"));
         voorstelling.ifPresent(value -> voorstellingRepository.save(value));
 
-        return "redirect:/planner/voorstellingen";
+        return "redirect:/planner/voorstelling/alle";
     }
 
 
@@ -128,7 +128,7 @@ public class VoorstellingController {
         } else {
             return "toevoegenVoorstelling";
         }
-        return "redirect:/planner/voorstellingen";
+        return "redirect:/planner/voorstelling/alle";
     }
 
     @PostMapping("/planner/voorstelling/wijzigen")
@@ -141,7 +141,7 @@ public class VoorstellingController {
         } else {
             return "wijzigVoorstelling";
         }
-        return "redirect:/planner/voorstellingen";
+        return "redirect:/planner/voorstelling/alle";
     }
 
     protected void standaardTakenOpslaanBijVoorstelling(int taakAantal, Voorstelling voorstelling, Taak taak) {
@@ -157,7 +157,7 @@ public class VoorstellingController {
     @GetMapping("/planner/voorstelling/verwijderen/{voorstellingId}")
     protected String verwijderVoorstelling(@PathVariable Integer voorstellingId) {
         voorstellingRepository.deleteById(voorstellingId);
-        return "redirect:/planner/voorstellingen";
+        return "redirect:/planner/voorstelling/alle";
     }
 
     public void voorstellingOpslaanInclTaken(Voorstelling voorstelling) {
@@ -230,6 +230,6 @@ public class VoorstellingController {
         for (Taak taak : taakRepository.findAll()) {
             standaardTakenOpslaanBijVoorstelling(taak.getStandaardBezetting(), voorstelling2, taak);
         }
-        return "redirect:/planner/voorstellingen";
+        return "redirect:/planner/voorstelling/alle";
     }
 }

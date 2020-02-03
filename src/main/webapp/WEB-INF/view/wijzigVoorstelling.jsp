@@ -78,7 +78,7 @@
                 </tr>
             </table>
         </form:form>
-            <a class="btn btn-primary" href="${contextPath}/planner/voorstellingen">Overzicht voorstellingen</a>
+            <a class="btn btn-primary" href="${contextPath}/planner/voorstelling/alle">Overzicht voorstellingen</a>
         </div>
 
         <link rel="stylesheet" href="${contextPath}\resources\js\jquery.datetimepicker.min.css">

@@ -49,7 +49,7 @@
                 </tr>
             </table>
         </form:form>
-        <a class="btn btn-primary" href="${contextPath}/planner/voorstellingen">Overzicht voorstellingen</a>
+        <a class="btn btn-primary" href="${contextPath}/planner/voorstelling/alle">Overzicht voorstellingen</a>
         </div>
         <script>
             $(document).ready(function(){
