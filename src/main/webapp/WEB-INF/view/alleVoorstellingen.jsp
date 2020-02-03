@@ -61,6 +61,9 @@
                                         <!-- nothing yet  -->
                                     </c:when>
                                     <c:otherwise>
+                                        <a href="${contextPath}/planner/voorstelling/rooster/<c:out value='${voorstelling.voorstellingId}' />">
+                                            <i class="fas fa-user-edit" title="Taakbeheer">Rooster</i>
+                                        </a>
                                         <a href="${contextPath}/planner/voorstelling/details/<c:out value='${voorstelling.voorstellingId}' />">
                                             <i class="fas fa-user-edit" title="Taakbeheer"></i>
                                         </a>

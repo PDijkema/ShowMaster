@@ -76,7 +76,7 @@
                                 </td>
                                 </c:when>
                                 <c:otherwise>
-                                    <div class="beschikbareMedewerker">
+                                    <div class="beschikbareMedewerker" draggable="true">
                                     <c:out value="${takenBijVoorstelling.getMedewerker().getGebruikersnaam()}"/>
                                     </div>
                                     <td>
@@ -98,9 +98,10 @@
             </div>
             <div class="col-4" id="dropzoneBeschikbareMedewerkers">
                 <h1 id="beschikbareMedewerkers">Beschikbare medewerkers</h1>
+                <p id="sleepinstructie">sleep naar openstaande dienst</p>
                 <c:forEach items="${beschikbareMedewerkers}" var="medewerkerInschrijvingVoorstelling">
                     <!-- ONDRAGDIV-->
-                    <div class="beschikbareMedewerker" draggable="true" id="<c:out value='${medewerkerInschrijvingVoorstelling.medewerker.medewerkerId}'/>"
+                    <div class="beschikbareMedewerker" draggable="true" id="${medewerkerInschrijvingVoorstelling.medewerker.medewerkerId}"
                          ondragstart="dragStart(event, ${medewerkerInschrijvingVoorstelling.medewerker.medewerkerId})"
                          ondrag="dragging(event)">
                         <p><c:out value="${medewerkerInschrijvingVoorstelling.medewerker.gebruikersnaam}"/></p>
