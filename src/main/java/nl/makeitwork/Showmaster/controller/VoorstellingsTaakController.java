@@ -92,6 +92,16 @@ public class VoorstellingsTaakController {
         Optional<VoorstellingsTaak> voorstellingsTaak = voorstellingsTaakRepository.findById(voorstellingsTaakId);
         Optional<Medewerker> medewerker = medewerkerRepository.findById(medewerkerId);
 
+        List<VoorstellingsTaak> takenBijVoorstelling = voorstellingsTaakRepository.findByVoorstellingVoorstellingId(voorstellingId);
+        for (VoorstellingsTaak taak: takenBijVoorstelling) {
+            if (taak.getMedewerker() != null) {
+                if (taak.getMedewerker().getMedewerkerId().equals(medewerkerId)) {
+                    taak.setMedewerker(null);
+                }
+            }
+        }
+        //takenBijVoorstelling.forEach(taak -> taak.setMedewerker(null));
+
         if (voorstellingsTaak.isPresent() && medewerker.isPresent()) {
             voorstellingsTaak.get().setMedewerker(medewerker.get());
             voorstellingsTaakRepository.save(voorstellingsTaak.get());
