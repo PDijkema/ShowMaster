@@ -60,7 +60,7 @@
                                 </c:when>
                                 <c:otherwise>
                                     <div class="beschikbareMedewerker" draggable="true" id="${takenBijVoorstelling.voorstellingsTaakId}"
-                                         ondragstart="dragStartIngeplandeMedewerker(event, ${takenBijVoorstelling.voorstelling.voorstellingId}, ${takenBijVoorstelling.voorstellingsTaakId}, '${contextPath}')"
+                                         ondragstart="dragStartIngeplandeMedewerker(event, ${takenBijVoorstelling.voorstelling.voorstellingId}, ${takenBijVoorstelling.voorstellingsTaakId}, ${takenBijVoorstelling.medewerker.medewerkerId})"
                                          ondrag="dragging(event)">
                                     <c:out value="${takenBijVoorstelling.getMedewerker().getGebruikersnaam()}"/>
                                     </div>

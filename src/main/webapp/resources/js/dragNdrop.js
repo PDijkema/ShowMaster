@@ -3,7 +3,8 @@ function dragStartBeschikbareMedewerker(event, medewerkerId) {
     event.dataTransfer.setData("medewerkerId", medewerkerId)
 }
 
-function dragStartIngeplandeMedewerker(event, voorstellingId, voorstellingsTaakId) {
+function dragStartIngeplandeMedewerker(event, voorstellingId, voorstellingsTaakId, medewerkerId) {
+    event.dataTransfer.setData("medewerkerId", medewerkerId)
     event.dataTransfer.setData("voorstellingId", voorstellingId);
     event.dataTransfer.setData("voorstellingsTaakId", voorstellingsTaakId);
 }
