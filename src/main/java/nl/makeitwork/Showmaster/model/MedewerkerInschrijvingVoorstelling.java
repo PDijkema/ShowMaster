@@ -22,12 +22,33 @@ public class MedewerkerInschrijvingVoorstelling {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Voorstelling voorstelling;
 
+    private String inschrijvingStatus;
+
+    public MedewerkerInschrijvingVoorstelling() {
+    }
+
+    public MedewerkerInschrijvingVoorstelling(Medewerker ingelogdeMedewerker, Voorstelling voorstelling, String inschrijvingStatus) {
+        this.medewerker = ingelogdeMedewerker;
+        this.voorstelling = voorstelling;
+        this.inschrijvingStatus = inschrijvingStatus;
+    }
+
+
+
     public Integer getMedewerkerInschrijvingTaakId() {
         return medewerkerInschrijvingTaakId;
     }
 
     public void setMedewerkerInschrijvingTaakId(Integer medewerkerInschrijvingTaakId) {
         this.medewerkerInschrijvingTaakId = medewerkerInschrijvingTaakId;
+    }
+
+    public String getInschrijvingStatus() {
+        return inschrijvingStatus;
+    }
+
+    public void setInschrijvingStatus(String inschrijvingStatus) {
+        this.inschrijvingStatus = inschrijvingStatus;
     }
 
     public Medewerker getMedewerker() {

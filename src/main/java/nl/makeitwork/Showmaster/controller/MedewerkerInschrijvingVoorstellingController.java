@@ -44,25 +44,24 @@ public class MedewerkerInschrijvingVoorstellingController {
         return "openVoorstellingen";
     }
 
-    @GetMapping("/voorstelling/weergeven/openvoorstelling/inschrijven/{voorstellingId}")
-    public String inschrijvenVoorstelling(@PathVariable Integer voorstellingId, @AuthenticationPrincipal Medewerker ingelogdeMedewerker) {
+    @GetMapping("/voorstelling/weergeven/openvoorstelling/inschrijven/{voorstellingId}/{inschrijvingStatus}")
+    public String inschrijvenVoorstelling(@PathVariable Integer voorstellingId, @PathVariable String inschrijvingStatus, @AuthenticationPrincipal Medewerker ingelogdeMedewerker) {
 
-        List<MedewerkerInschrijvingVoorstelling> medewerkerInschrijvingVoorstellingList = medewerkerInschrijvingVoorstellingRepository.findAll();
 
-        if (!medewerkerInschrijvingVoorstellingList.isEmpty()) {
-            if (medewerkerInschrijvingVoorstellingList.stream().anyMatch(r ->
-                    r.getVoorstelling().getVoorstellingId().equals(voorstellingId) &&
-                            r.getMedewerker().getMedewerkerId().equals(ingelogdeMedewerker.getMedewerkerId()))) {
-                return "redirect:/voorstelling/weergeven/openvoorstelling";
+        MedewerkerInschrijvingVoorstelling alIngeschrevenMedewerker = medewerkerInschrijvingVoorstellingRepository.findByVoorstellingVoorstellingIdAndMedewerkerMedewerkerId(voorstellingId,ingelogdeMedewerker.getMedewerkerId());
+
+
+        if (inschrijvingStatus.matches("Beschikbaar|Misschien|Niet Beschikbaar")) {
+            if (alIngeschrevenMedewerker != null) {
+                alIngeschrevenMedewerker.setInschrijvingStatus(inschrijvingStatus);
+                medewerkerInschrijvingVoorstellingRepository.save(alIngeschrevenMedewerker);
+            } else {
+                Voorstelling voorstelling = voorstellingRepository.findByVoorstellingId(voorstellingId);
+                MedewerkerInschrijvingVoorstelling medewerkerInschrijvingVoorstelling =
+                        new MedewerkerInschrijvingVoorstelling(ingelogdeMedewerker,voorstelling,inschrijvingStatus);
+                medewerkerInschrijvingVoorstellingRepository.save(medewerkerInschrijvingVoorstelling);
             }
         }
-
-        Voorstelling voorstelling = voorstellingRepository.findByVoorstellingId(voorstellingId);
-        MedewerkerInschrijvingVoorstelling medewerkerInschrijvingVoorstelling = new MedewerkerInschrijvingVoorstelling();
-        medewerkerInschrijvingVoorstelling.setMedewerker(ingelogdeMedewerker);
-        medewerkerInschrijvingVoorstelling.setVoorstelling(voorstelling);
-
-        medewerkerInschrijvingVoorstellingRepository.save(medewerkerInschrijvingVoorstelling);
         return "redirect:/voorstelling/weergeven/openvoorstelling";
     }
 }
