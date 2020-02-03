@@ -63,11 +63,16 @@
                                 <!-- DROPDIV-->
                                 <c:choose>
                                 <c:when test="${empty takenBijVoorstelling.getMedewerker().getGebruikersnaam()}">
-                                <div class="voorstellingsTaak" id="${takenBijVoorstelling.voorstellingsTaakId}" ondrop="drop(event, ${takenBijVoorstelling.voorstellingsTaakId}, ${takenBijVoorstelling.voorstelling.voorstellingId}, '${contextPath}')", ondragover="allowDrop(event)" ondragenter="enterDrag(event)">
+                                <div class="voorstellingsTaak" id="${takenBijVoorstelling.voorstellingsTaakId}"
+                                     ondrop="drop(event, ${takenBijVoorstelling.voorstellingsTaakId}, ${takenBijVoorstelling.voorstelling.voorstellingId}, '${contextPath}')"
+                                     ondragover="allowDrop(event, ${takenBijVoorstelling.voorstellingsTaakId})"
+                                     ondragenter="enterDrag(event)"
+                                     ondragleave="leaveDrag(event)">
                                 Openstaand
                                 </div>
                                 <td>
-                                <i class="fas fa-user-plus" title="Invullen" data-toggle="modal" data-target="#exampleModal" onclick="taakInvullen(${voorstelling.voorstellingId}, ${takenBijVoorstelling.voorstellingsTaakId}, '${contextPath}')"/></i>
+                                <i class="fas fa-user-plus" title="Invullen" data-toggle="modal" data-target="#exampleModal"
+                                   onclick="taakInvullen(${voorstelling.voorstellingId}, ${takenBijVoorstelling.voorstellingsTaakId}, '${contextPath}')"/></i>
                                 </td>
                                 </c:when>
                                 <c:otherwise>
@@ -95,7 +100,9 @@
                 <h1 id="beschikbareMedewerkers">Beschikbare medewerkers</h1>
                 <c:forEach items="${beschikbareMedewerkers}" var="medewerkerInschrijvingVoorstelling">
                     <!-- ONDRAGDIV-->
-                    <div class="beschikbareMedewerker" draggable="true" id="<c:out value='${medewerkerInschrijvingVoorstelling.medewerker.medewerkerId}'/>" ondragstart="dragStart(event, ${medewerkerInschrijvingVoorstelling.medewerker.medewerkerId})" ondrag="dragging(event)">
+                    <div class="beschikbareMedewerker" draggable="true" id="<c:out value='${medewerkerInschrijvingVoorstelling.medewerker.medewerkerId}'/>"
+                         ondragstart="dragStart(event, ${medewerkerInschrijvingVoorstelling.medewerker.medewerkerId})"
+                         ondrag="dragging(event)">
                         <p><c:out value="${medewerkerInschrijvingVoorstelling.medewerker.gebruikersnaam}"/></p>
                     </div>
                     <!-- ONDRAGDIV-->
