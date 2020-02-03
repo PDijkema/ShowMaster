@@ -1,4 +1,3 @@
-
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
@@ -15,64 +14,68 @@
 </head>
     <body>
         <jsp:include page="navbar.jsp" />
-        <div class="container">
-        <button id="medewerkerUitnodigenButton" type="button" class="btn btn-primary" data-toggle="modal" data-target="#uitnodigingModal" onClick="clearModal();" >Medewerker Uitnodigen</button>
-            <h1>Gebruikersoverzicht</h1>
-                <table class="table table-hover">
-                    <thead>
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h1 class="voorstellingDisplay4">Gebruikersoverzicht</h1>
+            </div>
+        </div>
+        <div class=container>
+            <button id="medewerkerUitnodigenButton" type="button" class="btn btn-primary" data-toggle="modal" data-target="#uitnodigingModal" onClick="clearModal();" >Nieuwe medewerker uitnodigen</button>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope ="col">Naam</th>
+                        <th scope ="col">Verwijderen</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach items="${alleGebruikers}" var="gebruiker">
                         <tr>
-                            <th scope ="col">Naam</th>
-                            <th scope ="col">Verwijderen</th>
+                            <td><c:out value="${gebruiker.gebruikersnaam}"/></td>
+                            <td>
+                                <a href="${contextPath}/planner/gebruiker/verwijderen/<c:out value='${gebruiker.medewerkerId}'/>">
+                                    <i class="fas fa-trash" title="Verwijderen"></i>
+                                </a>
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        <c:forEach items="${alleGebruikers}" var="gebruiker">
-                            <tr>
-                                <td><c:out value="${gebruiker.gebruikersnaam}"/></td>
-                                <td>
-                                    <a href="${contextPath}/planner/gebruiker/verwijderen/<c:out value='${gebruiker.medewerkerId}'/>">
-                                        <i class="fas fa-trash" title="Verwijderen"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                        </c:forEach>
-                    </tbody>
-                </table>
-            </div>
+                    </c:forEach>
+                </tbody>
+            </table>
+        </div>
     </body>
-<div class="modal fade" id="uitnodigingModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title" id="exampleModalLabel">Medewerker uitnodigen</h3>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form:form action="${contextPath}/planner/gebruiker/overzicht/uitnodigen" modelAttribute="uitnodigingMedewerker" method="post" class="was-validated needs-validation" id="uitnodigingsForm" >
-                        <spring:bind path="emailadres">
-                            <div class="form-group">
-                                <label class="col-form-label">E-mailadres:</label>
-                                <form:input type="email" path="emailadres" class="form-control" placeholder="Emailadres" required="true" id="emailveld" />
-                                <div class="invalid-feedback">
-                                    Voer het e-mailadres van de ontvanger in
+    <div class="modal fade" id="uitnodigingModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="exampleModalLabel">Medewerker uitnodigen</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form:form action="${contextPath}/planner/gebruiker/overzicht/uitnodigen" modelAttribute="uitnodigingMedewerker" method="post" class="was-validated needs-validation" id="uitnodigingsForm" >
+                            <spring:bind path="emailadres">
+                                <div class="form-group">
+                                    <label class="col-form-label">E-mailadres:</label>
+                                    <form:input type="email" path="emailadres" class="form-control" placeholder="Emailadres" required="true" id="emailveld" />
+                                    <div class="invalid-feedback">
+                                        Voer het e-mailadres van de ontvanger in
+                                    </div>
                                 </div>
-                            </div>
-                        </spring:bind>
-                    <div class="form-group">
-                        <label class="col-form-label">Bericht:</label>
-                        <form:textarea type="email" class="form-control" path="bericht" placeholder="Typ hier je bericht, de inschrijflink wordt automatisch meegestuurd" required="true" id="tekstVeld" />
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>
-                        <input type="submit" class="btn btn-primary" value="Verstuur"/>
-                    </div>
-                </form:form>
+                            </spring:bind>
+                        <div class="form-group">
+                            <label class="col-form-label">Bericht:</label>
+                            <form:textarea type="email" class="form-control" path="bericht" placeholder="Typ hier je bericht, de inschrijflink wordt automatisch meegestuurd" required="true" id="tekstVeld" />
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>
+                            <input type="submit" class="btn btn-primary" value="Verstuur"/>
+                        </div>
+                    </form:form>
+                </div>
             </div>
         </div>
     </div>
-</div>
 <script>
     function clearModal() {
         $("#emailveld")[0].value = "";
