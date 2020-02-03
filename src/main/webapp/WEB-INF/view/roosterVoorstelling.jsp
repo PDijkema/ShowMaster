@@ -49,8 +49,8 @@
                     <tr>
                         <th scope="col">Taak</th>
                         <th scope="col">Medewerker</th>
-                        <th scope="col">Toewijzen/wijzigen</th>
-                        <th scope="col">Verwijderen</th>
+                        <th scope="col">Taak vrijgeven</th>
+                        <th scope="col">Taak Verwijderen</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -91,13 +91,12 @@
                 </table>
                 <a class="btn btn-primary" href="${contextPath}/planner/voorstellingen">Overzicht Voorstellingen</a>
             </div>
-            <div class="col-4">
+            <div class="col-4" id="dropzoneBeschikbareMedewerkers">
                 <h1 id="beschikbareMedewerkers">Beschikbare medewerkers</h1>
                 <c:forEach items="${beschikbareMedewerkers}" var="medewerkerInschrijvingVoorstelling">
                     <!-- ONDRAGDIV-->
                     <div class="beschikbareMedewerker" draggable="true" id="<c:out value='${medewerkerInschrijvingVoorstelling.medewerker.medewerkerId}'/>" ondragstart="dragStart(event, ${medewerkerInschrijvingVoorstelling.medewerker.medewerkerId})" ondrag="dragging(event)">
                         <p><c:out value="${medewerkerInschrijvingVoorstelling.medewerker.gebruikersnaam}"/></p>
-                        <p>ID<c:out value="${medewerkerInschrijvingVoorstelling.medewerker.medewerkerId}"/></p>
                     </div>
                     <!-- ONDRAGDIV-->
                 </c:forEach>
@@ -105,3 +104,4 @@
         </div>
     </div>
     </body>
+</html>

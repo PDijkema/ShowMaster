@@ -24,9 +24,9 @@ function enterDrag(event) {
 function drop(event, voorstellingsTaakId, voorstellingId, contextPath) {
     event.preventDefault();
     var medewerkerId = event.dataTransfer.getData("medewerkerId");
-    console.log(voorstellingsTaakId + " is the taak which medewerker has to do");
+    console.log(voorstellingsTaakId + " is the taak voor de medewerker");
     console.log(voorstellingId + " is de voorstelling");
-    console.log(medewerkerId + " is dropped data");
+    console.log(medewerkerId + " is de medewerkerId");
     event.target.appendChild(document.getElementById(medewerkerId));
 
     var xhttp = new XMLHttpRequest();
@@ -37,7 +37,6 @@ function drop(event, voorstellingsTaakId, voorstellingId, contextPath) {
     };
     xhttp.open("GET", contextPath +  "/planner/voorstellingsTaak/medewerkerKoppelen/" + voorstellingId + "/" + voorstellingsTaakId + "/" + medewerkerId, true);
     xhttp.send();
-
 }
 
 
