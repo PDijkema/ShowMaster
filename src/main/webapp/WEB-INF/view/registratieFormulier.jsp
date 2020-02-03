@@ -17,10 +17,14 @@
     </head>
 
     <body>
-    <jsp:include page="navbar.jsp" />
+        <jsp:include page="navbar.jsp" />
+                <div class="jumbotron jumbotron-fluid">
+                    <div class="container">
+                        <h1 class="voorstellingDisplay4">Nieuwe gebruiker aanmaken</h1>
+                    </div>
+                </div>
         <div class="container">
             <form:form method="POST" modelAttribute="registratieFormulier" class="needs-validation" novalidate="true">
-            <h1>Gebruiker aanmaken</h1>
 
                 <spring:bind path="gebruikersnaam">
                     <div class="form-group ${status.error ? 'has-error' : ''}">
@@ -52,7 +56,7 @@
 
                 <spring:bind path="planner">
                     <!-- CHECKBOX VERBORGEN IVM DEMO-->
-                    <div hidden class="form-group ${status.error ? 'has-error' : ''}">
+                    <div> <!-- hidden class="form-group ${status.error ? 'has-error' : ''}" -->
                         <form:checkbox path="planner" value="Planner" /> Planner
                     </div>
                 </spring:bind>

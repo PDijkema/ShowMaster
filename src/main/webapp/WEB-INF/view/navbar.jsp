@@ -17,8 +17,8 @@
 	</head>
 
 	<body class="home page-template-default page page-id-70">
-        <form:hidden path="medewerkerId" />
-        <form:hidden path="planner" />
+        <form:hidden path="medewerkerId"></form:hidden>
+        <form:hidden path="planner"></form:hidden>
 
         <header>
             <div id="headerNavbar">

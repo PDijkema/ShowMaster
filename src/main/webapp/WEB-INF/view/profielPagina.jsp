@@ -10,120 +10,60 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="${contextPath}\resources\css\custom.css" type="text/css" rel="stylesheet">
+    <link href="${contextPath}\resources\css\all.css" type="text/css" rel="stylesheet">
 </head>
 
     <body>
         <jsp:include page="navbar.jsp" />
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h1 class="voorstellingDisplay4">Profielpagina</h1>
+            </div>
+        </div>
         <div class="container">
-
-            <form:form modelAttribute="medewerkerProfielGegevens" class="form-signin">
-                <h1>Profielpagina</h1>
-                <h2 class="form-signin-heading">Persoonlijke gegevens</h2>
-
-                <form:hidden path="profielId" />
-
-                <table>
-                    <tr>
-                        <th>Gebruikersnaam</th>
-                    </tr>
-                    <tr>
-                        <td>${medewerkerProfielGegevens.getMedewerker().getGebruikersnaam()}</td>
-                    </tr>
-                    <tr></tr>
-                    <tr>
-                        <th>Voornaam</th>
-                    </tr>
-                    <tr>
-                        <td>${medewerkerProfielGegevens.voornaam} &nbsp;</td>
-                    </tr>
-                    <tr></tr>
-                    <tr>
-                        <th>Tussenvoegsel</th>
-                    </tr>
-                    <tr>
-                        <td>${medewerkerProfielGegevens.tussenvoegsel} &nbsp;</td>
-                    </tr>
-                    <tr></tr>
-                    <tr>
-                        <th>Achternaam</th>
-                    </tr>
-                    <tr>
-                        <td>${medewerkerProfielGegevens.achternaam} &nbsp;</td>
-                    </tr>
-                    <tr></tr>
-                    <tr>
-                        <th>Emailadres</th>
-                    </tr>
-                    <tr>
-                        <td>${medewerkerProfielGegevens.emailadres} &nbsp;</td>
-                    </tr>
-                    <tr></tr>
-                    <tr>
-                        <th>Geboortedatum</th>
-                    </tr>
-                    <tr>
-                        <td>${medewerkerProfielGegevens.geboortedatum} &nbsp;</td>
-                    </tr>
-                    <tr></tr>
-                    <tr>
-                        <th>Telefoonnummer</th>
-                    </tr>
-                    <tr>
-                        <td>${medewerkerProfielGegevens.telefoonnummer} &nbsp;</td>
-                    </tr>
-                    <tr></tr>
-                    <tr>
-                        <th>Voorkeurstaak</th>
-                    </tr>
-                    <tr>
-                        <td>${medewerkerProfielGegevens.getMedewerker().voorkeurstaak.taakNaam} &nbsp;</td>
-                    </tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    </table>
-
-                    <h2>Adresgegevens</h2>
-                    <table>
-                    <tr>
-                        <th>Straatnaam</th>
-                    </tr>
-                    <tr>
-                        <td>${medewerkerProfielGegevens.straatnaam} &nbsp;</td>
-                    </tr>
-                    <tr></tr>
-                    <tr>
-                        <th>Huisnummer</th>
-                    </tr>
-                    <tr>
-                        <td>${medewerkerProfielGegevens.huisnummer} &nbsp;</td>
-                    </tr>
-                    <tr></tr>
-                    <tr>
-                        <th>Toevoeging</th>
-                    </tr>
-                    <tr>
-                        <td>${medewerkerProfielGegevens.toevoeging} &nbsp;</td>
-                    </tr>
-                    <tr></tr>
-                    <tr>
-                        <th>Postcode</th>
-                    </tr>
-                    <tr>
-                        <td>${medewerkerProfielGegevens.postcode} &nbsp;</td>
-                    </tr>
-                    <tr></tr>
-                    <tr>
-                        <th>Woonplaats</th>
-                    </tr>
-                    <tr>
-                        <td>${medewerkerProfielGegevens.woonplaats} &nbsp;</td>
-                    </tr>
-                    <tr></tr>
-                </table>
-
-                <button class="btn btn-primary" type="submit">Gegevens wijzigen</button>
-            </form:form>
+            <form:form modelAttribute="medewerkerProfielGegevens">
+                <form:hidden path="profielId"></form:hidden>
+                <div class="jumbotron">
+                    <div class="col-md-5 col-sm-5 col-xs-12">
+                        <ul style = "list-style: none;"">
+                            <li><i class="fas fa-id-card" style="width:50px"></i><strong>
+                                ${medewerkerProfielGegevens.voornaam}
+                            <c:if test="${empty medewerkerProfielGegevens.tussenvoegsel}"></c:if>
+                            <c:if test="${not empty medewerkerProfielGegevens.tussenvoegsel}">
+                                ${medewerkerProfielGegevens.tussenvoegsel}</c:if>
+                                ${medewerkerProfielGegevens.achternaam}</strong></li>
+                            <li><i class="fas fa-home" style="width:50px;"></i>
+                                <c:if test="${empty medewerkerProfielGegevens.straatnaam}">nog in/aan te vullen</c:if>
+                                    <c:if test="${not empty medewerkerProfielGegevens.straatnaam}">
+                                        ${medewerkerProfielGegevens.straatnaam} ${medewerkerProfielGegevens.huisnummer}
+                                    <c:if test="${empty medewerkerProfielGegevens.toevoeging}">, </c:if>
+                                        <c:if test="${not empty medewerkerProfielGegevens.toevoeging}">
+                                        ${medewerkerProfielGegevens.toevoeging}, </c:if>
+                                        ${medewerkerProfielGegevens.postcode}
+                                         ${medewerkerProfielGegevens.woonplaats}
+                                    </c:if>
+                            </li>
+                            <li placeholder="nog in te vullen"><i class="fas fa-mobile-alt" style="width:50px;"></i>
+                            ${medewerkerProfielGegevens.telefoonnummer}</li>
+                            <li><i class="fas fa-envelope" style="width:50px;"></i>
+                            ${medewerkerProfielGegevens.emailadres}</li>
+                            <li><i class="fas fa-birthday-cake" style="width:50px;"></i>
+                            ${medewerkerProfielGegevens.geboortedatum}</li>
+                            <li><i class="fas fa-user-tag" style="width:50px;"></i>
+                            ${medewerkerProfielGegevens.getMedewerker().getGebruikersnaam()}</li>
+                            <br>
+                            <br>
+                            <li><strong>Voorkeurstaak: </strong>
+                                <c:if test="${empty medewerkerProfielGegevens.voorkeurstaak}">
+                                    Geen voorkeur
+                                </c:if>
+                                <c:if test="${not empty medewerkerProfielGegevens.voorkeurstaak}">
+                                ${medewerkerProfielGegevens.voorkeurstaak.taakNaam}</c:if>
+                            </li>
+                        </ul>
+                    <button class="btn btn-primary" type="submit">Gegevens wijzigen</button>
+                </form:form>
+            </div>
         </div>
     </body>
 </html>
