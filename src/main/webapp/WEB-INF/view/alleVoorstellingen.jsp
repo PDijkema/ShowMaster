@@ -97,10 +97,8 @@
                             </td>
                 </tbody>
                 </c:forEach>
-
-
-
-            </div>
+            </table>
+        </div>
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -125,10 +123,9 @@
                     var button = $(event.relatedTarget)
                     var voorstellingId = button.data('voorstelling')
                     var modal = $(this)
-                    $('#publish').attr("href", "${contextPath}/planner/voorstelling/publiceren/" + voorstellingId);
+                    $('#publish').attr("href", "${contextPath}/planner/voorstellingen/voorstelling/publiceren/" + voorstellingId);
                 })
             </script>
-        </div>
     </body>
 
 </html>
