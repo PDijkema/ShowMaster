@@ -166,7 +166,7 @@
         <p>*Verplichte velden</p>
 
         <button class="btn btn-primary" type="submit">Opslaan</button>
-        <a class="btn btn-primary" href="${contextPath}/profielpagina">Annuleren</a>
+        <a class="btn btn-primary" href="${contextPath}/profiel">Annuleren</a>
     </form:form>
 </div>
 
