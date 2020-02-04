@@ -3,6 +3,7 @@ package nl.makeitwork.Showmaster.controller;
 import nl.makeitwork.Showmaster.model.*;
 import nl.makeitwork.Showmaster.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.converter.json.GsonBuilderUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -52,7 +53,7 @@ public class VoorstellingsTaakController {
 
         voorstellingsTaakRepository.save(voorstellingsTaak);
 
-        return "redirect:/planner/voorstelling/details/" + voorstellingId;
+        return "redirect:/planner/voorstelling/rooster/" + voorstellingId;
     }
 
     @GetMapping("/planner/voorstellingsTaak/medewerkerKoppelen/{voorstellingId}/{voorstellingsTaakId}")
@@ -97,16 +98,16 @@ public class VoorstellingsTaakController {
             if (taak.getMedewerker() != null) {
                 if (taak.getMedewerker().getMedewerkerId().equals(medewerkerId)) {
                     taak.setMedewerker(null);
+                    voorstellingsTaakRepository.save(taak);
                 }
             }
         }
-        //takenBijVoorstelling.forEach(taak -> taak.setMedewerker(null));
 
         if (voorstellingsTaak.isPresent() && medewerker.isPresent()) {
             voorstellingsTaak.get().setMedewerker(medewerker.get());
             voorstellingsTaakRepository.save(voorstellingsTaak.get());
         }
-        return "redirect:/planner/voorstelling/details/" + voorstellingId;
+        return "redirect:/planner/voorstelling/rooster/" + voorstellingId;
     }
 
     @GetMapping("/planner/voorstellingsTaak/taakVrijGeven/{voorstellingId}/{voorstellingsTaakId}")
@@ -121,7 +122,7 @@ public class VoorstellingsTaakController {
             voorstellingsTaak.setMedewerker(null);
             voorstellingsTaakRepository.save(voorstellingsTaak);
         }
-        return "redirect:/planner/voorstelling/details/" + voorstellingId;
+        return "redirect:/planner/voorstelling/rooster/" + voorstellingId;
     }
 
 }

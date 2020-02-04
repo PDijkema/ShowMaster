@@ -81,10 +81,10 @@ public class VoorstellingController {
         model.addAttribute("voorstellingOverzicht", voorstellingOverzicht);
         model.addAttribute("voorstelling", voorstelling);
 
-        return "roosterVoorstelling";
+        return "persoonlijkRoosterVoorstelling";
     }
 
-    @GetMapping("/planner/voorstelling/details/{voorstellingId}")
+/*    @GetMapping("/planner/voorstelling/rooster/{voorstellingId}")
     protected String detailsVoorstelling(@PathVariable Integer voorstellingId, Model model, HttpServletRequest request) {
 
         model.addAttribute("alleTaken", taakRepository.findAll());
@@ -98,9 +98,9 @@ public class VoorstellingController {
             request.getSession().setAttribute("voorstellingId", voorstellingId);
             model.addAttribute("takenBijVoorstelling", voorstellingsTaken);
             model.addAttribute("voorstelling", voorstelling.get());
-            return "detailsVoorstelling";
+            return "roosterVoorstelling";
         }
-    }
+    }*/
 
     //TODO work in progress
     @GetMapping("/planner/voorstelling/rooster/{voorstellingId}")
