@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * @author Pieter Dijkema
@@ -14,6 +15,8 @@ import java.time.LocalDateTime;
 
 @Repository
 public interface VoorstellingRepository extends JpaRepository<Voorstelling, Integer> {
+    List<Voorstelling> findAllByOrderByLocalDateTimeAsc();
+
     Voorstelling findByVoorstellingId(Integer voorstellingId);
 
     Voorstelling findByNaam(String naam);
