@@ -1,8 +1,10 @@
 package nl.makeitwork.Showmaster.controller;
 
+import nl.makeitwork.Showmaster.model.MedewerkerInschrijvingVoorstelling;
 import nl.makeitwork.Showmaster.model.Taak;
 import nl.makeitwork.Showmaster.model.Voorstelling;
 import nl.makeitwork.Showmaster.model.VoorstellingsTaak;
+import nl.makeitwork.Showmaster.repository.MedewerkerInschrijvingVoorstellingRepository;
 import nl.makeitwork.Showmaster.repository.TaakRepository;
 import nl.makeitwork.Showmaster.repository.VoorstellingRepository;
 import nl.makeitwork.Showmaster.repository.VoorstellingsTaakRepository;
@@ -38,6 +40,8 @@ public class VoorstellingController {
     private VoorstellingsTaakRepository voorstellingsTaakRepository;
     @Autowired
     private VoorstellingController voorstellingController;
+    @Autowired
+    private MedewerkerInschrijvingVoorstellingRepository medewerkerInschrijvingVoorstellingRepository;
 
 
     @GetMapping("/planner/voorstellingen")
@@ -78,10 +82,10 @@ public class VoorstellingController {
         model.addAttribute("voorstellingOverzicht", voorstellingOverzicht);
         model.addAttribute("voorstelling", voorstelling);
 
-        return "roosterVoorstelling";
+        return "persoonlijkRoosterVoorstelling";
     }
 
-    @GetMapping("/planner/voorstellingen/voorstelling/details/{voorstellingId}")
+/*    @GetMapping("/planner/voorstelling/rooster/{voorstellingId}")
     protected String detailsVoorstelling(@PathVariable Integer voorstellingId, Model model, HttpServletRequest request) {
 
         model.addAttribute("alleTaken", taakRepository.findAll());
@@ -95,7 +99,39 @@ public class VoorstellingController {
             request.getSession().setAttribute("voorstellingId", voorstellingId);
             model.addAttribute("takenBijVoorstelling", voorstellingsTaken);
             model.addAttribute("voorstelling", voorstelling.get());
-            return "detailsVoorstelling";
+            return "roosterVoorstelling";
+        }
+    }*/
+
+    //TODO work in progress
+    @GetMapping("/planner/voorstelling/rooster/{voorstellingId}")
+    protected String roosterVoorstelling(@PathVariable Integer voorstellingId, Model model, HttpServletRequest request) {
+
+        model.addAttribute("alleTaken", taakRepository.findAll());
+        Optional<Voorstelling> voorstelling = voorstellingRepository.findById(voorstellingId);
+
+        // Lijst alle inschrijvingen op één voorstelling
+        List<MedewerkerInschrijvingVoorstelling> inschrijvingenBijVoorstellingId =
+                medewerkerInschrijvingVoorstellingRepository.findInschrijvingByVoorstellingId(voorstellingId);
+
+        // Lijst alle taken bij één voorstelling
+        List<VoorstellingsTaak> alleVoorstellingsTakenBijVoorstellingId =
+                voorstellingsTaakRepository.findByVoorstellingVoorstellingIdOrderByTaakTaakNaam(voorstellingId);
+
+        // Reeds ingevulde taken filteren om alle nog beschikbare medewerkers te kunnen laten zien
+        alleVoorstellingsTakenBijVoorstellingId.forEach
+                (d-> inschrijvingenBijVoorstellingId.removeIf(r-> r.getMedewerker() == d.getMedewerker()));
+
+        List<VoorstellingsTaak> voorstellingsTaken = voorstellingsTaakRepository.findByVoorstellingVoorstellingIdOrderByTaakTaakNaam(voorstellingId);
+
+        if (!voorstelling.isPresent() || voorstelling.get().getStatus().equals("Geannuleerd")) {
+            return "redirect:/planner/voorstellingen";
+        } else {
+            request.getSession().setAttribute("voorstellingId", voorstellingId);
+            model.addAttribute("takenBijVoorstelling", voorstellingsTaken);
+            model.addAttribute("voorstelling", voorstelling.get());
+            model.addAttribute("beschikbareMedewerkers", inschrijvingenBijVoorstellingId);
+            return "roosterVoorstelling";
         }
     }
 

@@ -20,7 +20,6 @@ public interface VoorstellingsTaakRepository extends JpaRepository<Voorstellings
 
     VoorstellingsTaak findByVoorstellingsTaakId(Integer voorstellingId);
 
-
     List<VoorstellingsTaak> findByVoorstellingVoorstellingIdOrderByTaakTaakNaam(Integer voorstellingId);
 
     CopyOnWriteArrayList<VoorstellingsTaak> findByVoorstellingVoorstellingId(Integer voorstellingId);
