@@ -45,7 +45,7 @@
                 <c:forEach items="${alleVoorstellingen}" var="voorstelling">
                 <tbody>
 
-                <td><h1><c:out value="${voorstelling.getNaam()}"/></h1></td>
+                <td><h3><c:out value="${voorstelling.getNaam()}"/></h3></td>
                 <td> <c:out value="${voorstelling.getDatum()}"/></td>
                 <td hidden><c:out value="${voorstelling.getLocalDateTime()}"/></td>
                     <td>  <c:choose>
