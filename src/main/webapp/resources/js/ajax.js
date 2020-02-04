@@ -4,7 +4,7 @@ function beschikbaarheidStatusDoorgeven(voorstellingId, beschikbaarheidStatus, c
     if (this.readyState == 4 && this.status == 200) {
     }
   };
-  xhttp.open("GET", contextPath + "/voorstelling/weergeven/openvoorstelling/inschrijven/" + voorstellingId + "/" + beschikbaarheidStatus, true);
+  xhttp.open("GET", contextPath + "/rooster/openvoorstelling/inschrijven/" + voorstellingId + "/" + beschikbaarheidStatus, true);
   xhttp.send();
 }
 
@@ -16,7 +16,7 @@ function roosterLaden(voorstellingId, contextPath) {
       document.getElementById("rooster").innerHTML = this.responseText;
     }
   };
-  xhttp.open("GET",  contextPath + "/voorstelling/rooster/" + voorstellingId, true);
+  xhttp.open("GET",  contextPath + "/rooster/voorstelling/" + voorstellingId, true);
   xhttp.send();
 }
 
@@ -27,7 +27,7 @@ function taakInvullen(voorstellingId, taakId, contextPath) {
       document.getElementById("taakInvullen").innerHTML = this.responseText;
     }
   };
-  xhttp.open("GET", contextPath +  "/planner/voorstellingsTaak/medewerkerKoppelen/" + voorstellingId + "/"+ taakId, true);
+  xhttp.open("GET", contextPath +  "/planner/voorstellingen/voorstellingsTaak/medewerkerKoppelen/" + voorstellingId + "/"+ taakId, true);
   xhttp.send();
 }
 
@@ -38,6 +38,6 @@ function opslaanVoorstelling(voorstellingId, taakId, contextPath) {
       document.getElementById("taakInvullen").innerHTML = this.responseText;
     }
   };
-  xhttp.open("GET", contextPath +  "/planner/voorstellingsTaak/medewerkerKoppelen/" + voorstellingId + "/"+ taakId, true);
+  xhttp.open("GET", contextPath +  "/planner/voorstellingen/voorstellingsTaak/medewerkerKoppelen/" + voorstellingId + "/"+ taakId, true);
   xhttp.send();
 }

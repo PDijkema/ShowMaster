@@ -22,7 +22,7 @@
                 </div>
             </div>
         <div class="container">
-        <form:form action="${contextPath}/planner/voorstelling/toevoegen" modelAttribute="voorstelling" method="post">
+        <form:form action="${contextPath}/planner/voorstellingen/voorstelling/toevoegen" modelAttribute="voorstelling" method="post">
             <form:hidden path="voorstellingId"/>
             <table>
                 <div>

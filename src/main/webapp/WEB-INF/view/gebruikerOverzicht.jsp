@@ -33,7 +33,7 @@
                         <tr>
                             <td><c:out value="${gebruiker.gebruikersnaam}"/></td>
                             <td>
-                                <a href="${contextPath}/planner/gebruiker/verwijderen/<c:out value='${gebruiker.medewerkerId}'/>">
+                                <a href="${contextPath}/planner/gebruiker/overzicht/verwijderen/<c:out value='${gebruiker.medewerkerId}'/>">
                                     <i class="fas fa-trash" title="Verwijderen"></i>
                                 </a>
                             </td>

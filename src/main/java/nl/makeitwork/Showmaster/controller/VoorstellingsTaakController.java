@@ -29,17 +29,17 @@ public class VoorstellingsTaakController {
     @Autowired
     private MedewerkerRepository medewerkerRepository;
 
-    @GetMapping("/planner/voorstellingsTaak/verwijderen/{voorstellingId}/{voorstellingsTaakId}")
+    @GetMapping("/planner/voorstellingen/voorstellingsTaak/verwijderen/{voorstellingId}/{voorstellingsTaakId}")
     protected String verwijderenTaakBijVoorstelling(@PathVariable("voorstellingsTaakId") Integer voorstellingsTaakId,
                                                     @PathVariable("voorstellingId") Integer voorstellingId) {
 
         Optional<VoorstellingsTaak> voorstellingsTaak = voorstellingsTaakRepository.findById(voorstellingsTaakId);
         voorstellingsTaakRepository.deleteById(voorstellingsTaakId);
 
-        return "redirect:/planner/voorstelling/details/" + voorstellingId;
+        return "redirect:/planner/voorstellingen/voorstelling/details/" + voorstellingId;
     }
 
-    @GetMapping("/planner/voorstellingsTaak/toevoegen/{voorstellingId}/{taakId}")
+    @GetMapping("/planner/voorstellingen/voorstellingsTaak/toevoegen/{voorstellingId}/{taakId}")
     protected String toevoegenTaakAanVoorstelling(@PathVariable("taakId") Integer taakId,
                                                   @PathVariable("voorstellingId") Integer voorstellingId) {
 
@@ -53,10 +53,10 @@ public class VoorstellingsTaakController {
 
         voorstellingsTaakRepository.save(voorstellingsTaak);
 
-        return "redirect:/planner/voorstelling/rooster/" + voorstellingId;
+        return "redirect:/planner/voorstellingen/voorstelling/rooster/" + voorstellingId;
     }
 
-    @GetMapping("/planner/voorstellingsTaak/medewerkerKoppelen/{voorstellingId}/{voorstellingsTaakId}")
+    @GetMapping("/planner/voorstellingen/voorstellingsTaak/medewerkerKoppelen/{voorstellingId}/{voorstellingsTaakId}")
     protected String koppelenMedewerkerAanVoorstellingsTaak(@PathVariable("voorstellingId") Integer voorstellingId,
                                                             @PathVariable("voorstellingsTaakId") Integer voorstellingsTaakId,
                                                             Model model) {
@@ -85,7 +85,7 @@ public class VoorstellingsTaakController {
         return "medewerkerKoppelenAanVoorstellingsTaak";
     }
 
-    @GetMapping("/planner/voorstellingsTaak/medewerkerKoppelen/{voorstellingId}/{voorstellingsTaakId}/{medewerkerId}")
+    @GetMapping("/planner/voorstellingen/voorstellingsTaak/medewerkerKoppelen/{voorstellingId}/{voorstellingsTaakId}/{medewerkerId}")
     protected String opslaanMedewerkerBijVoorstellingstaak(@PathVariable("voorstellingId") Integer voorstellingId,
                                                            @PathVariable("voorstellingsTaakId") Integer voorstellingsTaakId,
                                                            @PathVariable("medewerkerId") Integer medewerkerId) {
@@ -107,10 +107,10 @@ public class VoorstellingsTaakController {
             voorstellingsTaak.get().setMedewerker(medewerker.get());
             voorstellingsTaakRepository.save(voorstellingsTaak.get());
         }
-        return "redirect:/planner/voorstelling/rooster/" + voorstellingId;
+        return "redirect:/planner/voorstellingen/voorstelling/rooster/" + voorstellingId;
     }
 
-    @GetMapping("/planner/voorstellingsTaak/taakVrijGeven/{voorstellingId}/{voorstellingsTaakId}")
+    @GetMapping("/planner/voorstellingen/voorstellingsTaak/taakVrijGeven/{voorstellingId}/{voorstellingsTaakId}")
     protected String taakBijVoorstellingenVrijgeven(@PathVariable("voorstellingId") Integer voorstellingId,
                                                            @PathVariable("voorstellingsTaakId") Integer voorstellingsTaakId) {
 
@@ -122,7 +122,7 @@ public class VoorstellingsTaakController {
             voorstellingsTaak.setMedewerker(null);
             voorstellingsTaakRepository.save(voorstellingsTaak);
         }
-        return "redirect:/planner/voorstelling/rooster/" + voorstellingId;
+        return "redirect:/planner/voorstellingen/voorstelling/rooster/" + voorstellingId;
     }
 
 }
