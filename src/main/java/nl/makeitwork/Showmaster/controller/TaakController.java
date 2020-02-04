@@ -42,7 +42,7 @@ public class TaakController {
         if (taak.getTaakNaam() != null && !taak.getTaakNaam().isEmpty() &&
                 taak.getStandaardBezetting() != null) {
             taakRepository.save(taak);
-            return "redirect:/planner/takenlijst";
+            return "redirect:/rooster";
         } else {
             return "taakAanmaken";
         }
@@ -107,13 +107,13 @@ public class TaakController {
         taak8.setStandaardBezetting(0);
         taakRepository.save(taak8);
 
-        return "redirect:/startpagina";
+        return "redirect:/rooster";
     }
 
     @GetMapping("/planner/taak/verwijderen/{taakId}")
     public String verwijderStandaardTaak(@PathVariable Integer taakId) {
         taakRepository.deleteById(taakId);
-        return "redirect:/planner/takenlijst";
+        return "redirect:/rooster";
     }
 
 }
