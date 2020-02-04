@@ -10,7 +10,6 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link href="${contextPath}\resources\css\custom.css" type="text/css" rel="stylesheet">
         <script src="${contextPath}\resources\js\ajax.js"></script>
-        <script src="${contextPath}\resources\js\javascript.functies.js"></script>
 
     </head>
 
@@ -27,44 +26,36 @@
             <h2>Voorstelling toevoegen</h2>
             <a id="voegVoorstellingToeButton" class="btn btn-primary" href="${contextPath}/planner/voorstelling/toevoegen">Handmatig</a>
             <a id="voorstellingenImporterenExcelButton" class="btn btn-primary" href="${contextPath}/planner/excelProcessing">Excel import</a>
-
-            <table class="table table-hover" id="myTable" >
-
-                <thead>
-                <tr>
-                    <th scope="col" onclick="sortTable(0)">Voorstelling</th>
-                    <th scope="col" onclick="sortTable(2)">Datum</th>
-                    <th hidden scope="col" onclick="sortTable(2)">Datum2</th>
-                    <th scope="col" onclick="sortTable(3)">Status</th>
-                    <th scope="col" >Roosterbeheer</th>
-                    <th scope="col" >Wijzigen</th>
-                    <th scope="col" >Verwijderen</th>
-                </tr>
-                </thead>
-
+            <div class="card-columns">
                 <c:forEach items="${alleVoorstellingen}" var="voorstelling">
-                <tbody>
+                    <div class="card">
+                        <div class="card-header">
+                            <h1><c:out value="${voorstelling.naam}"/></h1>
+                            <c:out value="${voorstelling.datum}" />
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">Hey, Luke! May the Force be with you. Still, she's got a lot of spirit. I don't know, what do you think?</p>
 
-                <td><h1><c:out value="${voorstelling.getNaam()}"/></h1></td>
-                <td> <c:out value="${voorstelling.getDatum()}"/></td>
-                <td hidden><c:out value="${voorstelling.getLocalDateTime()}"/></td>
-                    <td>  <c:choose>
-                        <c:when test="${voorstelling.status == 'Geannuleerd'}">
-                            <span class="badge badge-danger">Voorstelling geannuleerd</span>
-                        </c:when>
-                        <c:when test="${voorstelling.status == 'Ongepubliceerd'}">
-                            <div>
-                                <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#exampleModal" data-voorstelling="${voorstelling.voorstellingId}">
-                                    Publiceer
-                                </button>
-                            </div>
-                        </c:when>
-                        <c:otherwise>
-                            <span class="badge badge-success"><c:out value="${voorstelling.status}"/></span>
-                        </c:otherwise>
-                    </c:choose> </td>
-
-                            <td>
+                        </div>
+                        <ul class="list-group list-group-flush" style="text-align:center">
+                            <li class="list-group-item">
+                                <c:choose>
+                                    <c:when test="${voorstelling.status == 'Geannuleerd'}">
+                                        <span class="badge badge-danger">Voorstelling geannuleerd</span>
+                                    </c:when>
+                                    <c:when test="${voorstelling.status == 'Ongepubliceerd'}">
+                                        <div>
+                                            <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#exampleModal" data-voorstelling="${voorstelling.voorstellingId}">
+                                                Publiceer
+                                            </button>
+                                        </div>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <span class="badge badge-success"><c:out value="${voorstelling.status}"/></span>
+                                    </c:otherwise>
+                                </c:choose>
+                            </li>
+                            <li class="list-group-item">
                                 <c:choose>
                                     <c:when test="${voorstelling.status == 'Geannuleerd'}">
                                         <!-- nothing yet  -->
@@ -80,26 +71,21 @@
                                         <!-- nothing yet -->
                                     </c:when>
                                     <c:otherwise>
-
-                                    <td> <a href="${contextPath}/planner/voorstelling/wijzigen/<c:out value='${voorstelling.voorstellingId}' />">
-                                          <i class="far fa-edit" title="Wijzigen"></i></a>
-                                    </td>
-
+                                        <a href="${contextPath}/planner/voorstelling/wijzigen/<c:out value='${voorstelling.voorstellingId}' />">
+                                            <i class="far fa-edit" title="Wijzigen"></i>
+                                        </a>
                                     </c:otherwise>
                                 </c:choose>
-
-                                <td>
                                 <a href="${contextPath}/planner/voorstelling/verwijderen/<c:out value='${voorstelling.voorstellingId}' />">
                                     <i class="fas fa-trash" title="Verwijderen"></i>
                                 </a>
-                                </td>
-
-                            </td>
-                </tbody>
+                            </li>
+                        </ul>
+                        <div class="card-footer">
+                            <small class="text-muted"></small>
+                        </div>
+                    </div>
                 </c:forEach>
-
-
-
             </div>
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
