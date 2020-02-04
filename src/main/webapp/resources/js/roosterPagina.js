@@ -31,17 +31,16 @@ function leaveDrag(event) {
 function dropBeschikbareMedewerker(event, voorstellingsTaakId, voorstellingId, contextPath) {
     event.preventDefault();
     var medewerkerId = event.dataTransfer.getData("medewerkerId");
-    console.log("voorstellingstaakId" + voorstellingsTaakId);
     var xhttp = new XMLHttpRequest();
 
-    xhttp.open("GET", contextPath + "/planner/voorstellingen/voorstellingsTaak/medewerkerKoppelen/" + voorstellingId + "/" + voorstellingsTaakId + "/" + medewerkerId, true);
     xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            location.reload(true);
+        if (this.readyState === 4 && this.status === 200) {
+            location.reload();
         }
     };
 
-    xhttp.open("GET", contextPath + "/planner/voorstellingsTaak/medewerkerKoppelen/" + voorstellingId + "/" + voorstellingsTaakId + "/" + medewerkerId, true);
+    xhttp.open("GET", contextPath + "/planner/voorstellingen/voorstellingsTaak/medewerkerKoppelen/"
+        + voorstellingId + "/" + voorstellingsTaakId + "/" + medewerkerId, true);
     xhttp.send();
 
 }
@@ -54,14 +53,13 @@ function vrijgevenIngeplandeMedewerker(event, contextPath) {
 
     if (voorstellingsTaakId || voorstellingId) {
         var xhttp = new XMLHttpRequest();
-
-        xhttp.open("GET", contextPath + "/planner/voorstellingen/voorstellingsTaak/taakVrijGeven/" + voorstellingId + "/" + voorstellingsTaakId, true);
         xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                location.reload(true);
+            if (this.readyState === 4 && this.status === 200) {
+                location.reload();
             }
         };
-        xhttp.open("GET", contextPath + "/planner/voorstellingsTaak/taakVrijGeven/" + voorstellingId + "/" + voorstellingsTaakId, true);
+        xhttp.open("GET", contextPath + "/planner/voorstellingen/voorstellingsTaak/taakVrijGeven/"
+            + voorstellingId + "/" + voorstellingsTaakId, true);
         xhttp.send();
     }
 }

@@ -20,24 +20,15 @@ function roosterLaden(voorstellingId, contextPath) {
   xhttp.send();
 }
 
-function taakInvullen(voorstellingId, taakId, contextPath) {
-  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-      document.getElementById("taakInvullen").innerHTML = this.responseText;
-    }
-  };
-  xhttp.open("GET", contextPath +  "/planner/voorstellingen/voorstellingsTaak/medewerkerKoppelen/" + voorstellingId + "/"+ taakId, true);
-  xhttp.send();
-}
 
-function opslaanVoorstelling(voorstellingId, taakId, contextPath) {
+function nieuweVoorstelling(contextPath) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-      document.getElementById("taakInvullen").innerHTML = this.responseText;
+    if (this.readyState === 4 && this.status === 200) {
+      document.getElementById("nieuweVoorstellingToevoegen").innerHTML = this.responseText;
+      console.log(this.responseText);
     }
   };
-  xhttp.open("GET", contextPath +  "/planner/voorstellingen/voorstellingsTaak/medewerkerKoppelen/" + voorstellingId + "/"+ taakId, true);
+  xhttp.open("GET", contextPath + "/planner/voorstellingen/voorstelling/toevoegen/", true);
   xhttp.send();
 }

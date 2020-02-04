@@ -8,20 +8,13 @@
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <meta charset="utf-8">
-        <!-- <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link href="${contextPath}\resources\css\custom.css" type="text/css" rel="stylesheet">
 
         <title>Nieuwe voorstelling</title>
     </head>
     <body>
-        <jsp:include page="navbar.jsp" />
-            <div class="jumbotron jumbotron-fluid">
-                <div class="container">
-                    <h1 class="voorstellingDisplay4">Nieuwe voorstelling</h1>
-                </div>
-            </div>
-        <div class="container">
+
         <form:form action="${contextPath}/planner/voorstellingen/voorstelling/toevoegen" modelAttribute="voorstelling" method="post">
             <form:hidden path="voorstellingId"/>
             <table>
@@ -46,8 +39,6 @@
                 </tr>
             </table>
         </form:form>
-        <a class="btn btn-primary" href="${contextPath}/planner/voorstellingen">Overzicht voorstellingen</a>
-        </div>
 
         <link rel="stylesheet" href="${contextPath}\resources\css\jquery.datetimepicker.min.css">
         <script src="${contextPath}\resources\js\jquery.js"></script>
