@@ -13,7 +13,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>
-                <a class="btn btn-primary btn" id="publish" href="${contextPath}/planner/voorstellingen/voorstelling/publiceren/ />">Publiceer</a>
+                <a class="btn btn-primary btn" id="publish" href="${contextPath} />">Publiceer</a>
             </div>
         </div>
     </div>
@@ -33,7 +33,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>
-                <a class="btn btn-primary btn" id="delete" href="${contextPath}/planner/voorstellingen/voorstelling/verwijderen/<c:out value='${voorstelling.voorstellingId}' />">Verwijderen</a>
+                <a class="btn btn-primary btn" id="delete" href="${contextPath} />">Verwijderen</a>
             </div>
         </div>
     </div>
