@@ -23,7 +23,6 @@
         </div>
 
         <div class="container">
-
             <h2>Voorstelling toevoegen</h2>
             <a id="voegVoorstellingToeButton" class="btn btn-primary" href="${contextPath}/planner/voorstelling/toevoegen">Handmatig</a>
             <a id="voorstellingenImporterenExcelButton" class="btn btn-primary" href="${contextPath}/planner/excelProcessing">Excel import</a>
