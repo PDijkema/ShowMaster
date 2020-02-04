@@ -37,7 +37,7 @@
                     <tr>
                         <th scope="col">Taak</th>
                         <th scope="col">Medewerker</th>
-                        <th scope="col">Taak Verwijderen</th>
+                        <th scope="col">Verwijderen</th>
                     </tr>
                     </thead>
                     <tbody>
