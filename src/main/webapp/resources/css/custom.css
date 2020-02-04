@@ -74,7 +74,7 @@ color: #fff; font-size:1.5rem; font-weight:700}
 #voorstellingDatumDisplay4 {
 color: #fff; font-size:1rem}
 
-#voegVoorstellingToeButton, #voorstellingenImporterenExcelButton{margin-bottom: 15px}
+#voegVoorstellingToeButton, #nieuweVoorstellingModalButton, #voorstellingenImporterenExcelButton{margin-bottom: 15px}
 
 #medewerkerUitnodigenButton{margin-top: 15px; margin-bottom: 15px}
 

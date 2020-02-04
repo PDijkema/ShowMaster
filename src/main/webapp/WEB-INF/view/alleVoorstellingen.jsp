@@ -26,6 +26,7 @@
             <h2>Voorstelling toevoegen</h2>
             <a id="voegVoorstellingToeButton" class="btn btn-primary" href="${contextPath}/planner/voorstelling/toevoegen">Handmatig</a>
             <a id="voorstellingenImporterenExcelButton" class="btn btn-primary" href="${contextPath}/planner/excelProcessing">Excel import</a>
+            <a id="nieuweVoorstellingModalButton" type="button" class="btn btn-primary" data-toggle="modal" data-target="#nieuweVoorstellingModal">Voorstelling Toevoegen</a>
 
             <table class="table table-hover" id="myTable" >
 
@@ -119,6 +120,33 @@
                     </div>
                 </div>
             </div>
+
+            <div class="modal fade" id="nieuweVoorstellingModal" tabindex="-1" role="dialog" aria-labelledby="nieuweVoorstellingModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2 class="modal-title" id="nieuweVoorstellingModalLabel">Voorstelling Toevoegen</h2>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">x</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+
+
+
+
+
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>
+                            <button type="button" class="btn btn-primary">Opslaan</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <script type="text/javascript">
                 $('#exampleModal').on('show.bs.modal', function(event) {
                     var button = $(event.relatedTarget)
