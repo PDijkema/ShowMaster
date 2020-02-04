@@ -85,25 +85,6 @@ public class VoorstellingController {
         return "persoonlijkRoosterVoorstelling";
     }
 
-/*    @GetMapping("/planner/voorstelling/rooster/{voorstellingId}")
-    protected String detailsVoorstelling(@PathVariable Integer voorstellingId, Model model, HttpServletRequest request) {
-
-        model.addAttribute("alleTaken", taakRepository.findAll());
-        Optional<Voorstelling> voorstelling = voorstellingRepository.findById(voorstellingId);
-
-        List<VoorstellingsTaak> voorstellingsTaken = voorstellingsTaakRepository.findByVoorstellingVoorstellingIdOrderByTaakTaakNaam(voorstellingId);
-
-        if (!voorstelling.isPresent() || voorstelling.get().getStatus().equals("Geannuleerd")) {
-            return "redirect:/planner/voorstellingen";
-        } else {
-            request.getSession().setAttribute("voorstellingId", voorstellingId);
-            model.addAttribute("takenBijVoorstelling", voorstellingsTaken);
-            model.addAttribute("voorstelling", voorstelling.get());
-            return "roosterVoorstelling";
-        }
-    }*/
-
-    //TODO work in progress
     @GetMapping("/planner/voorstelling/rooster/{voorstellingId}")
     protected String roosterVoorstelling(@PathVariable Integer voorstellingId, Model model, HttpServletRequest request) {
 
@@ -145,7 +126,6 @@ public class VoorstellingController {
         return "redirect:/planner/voorstellingen";
     }
 
-
     @GetMapping("/planner/voorstellingen/voorstelling/annuleren/{voorstellingId}")
     protected String annuleerVoorstelling(@PathVariable Integer voorstellingId) {
         Optional<Voorstelling> voorstelling = voorstellingRepository.findById(voorstellingId);
@@ -155,7 +135,6 @@ public class VoorstellingController {
 
         return "redirect:/planner/voorstellingen";
     }
-
 
     @PostMapping("/planner/voorstellingen/voorstelling/toevoegen")
     protected String saveVoorstelling(@ModelAttribute("voorstelling") Voorstelling voorstelling, BindingResult result) {
