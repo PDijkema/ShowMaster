@@ -71,7 +71,7 @@ public class VoorstellingController {
         }
     }
 
-    @GetMapping("/planner/voorstellingen/voorstelling/rooster/{voorstellingId}")
+    @GetMapping("/rooster/voorstelling/{voorstellingId}")
     protected String roosterVoorstelling(@PathVariable Integer voorstellingId, Model model) {
 
         List<VoorstellingsTaak> voorstellingOverzicht = voorstellingsTaakRepository.findByVoorstellingVoorstellingId(voorstellingId);
@@ -85,7 +85,7 @@ public class VoorstellingController {
         return "persoonlijkRoosterVoorstelling";
     }
 
-    @GetMapping("/planner/voorstelling/rooster/{voorstellingId}")
+    @GetMapping("/planner/voorstellingen/voorstelling/rooster/{voorstellingId}")
     protected String roosterVoorstelling(@PathVariable Integer voorstellingId, Model model, HttpServletRequest request) {
 
         model.addAttribute("alleTaken", taakRepository.findAll());

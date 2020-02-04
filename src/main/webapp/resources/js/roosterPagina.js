@@ -34,7 +34,7 @@ function dropBeschikbareMedewerker(event, voorstellingsTaakId, voorstellingId, c
     console.log("voorstellingstaakId" + voorstellingsTaakId);
     var xhttp = new XMLHttpRequest();
 
-    xhttp.open("GET", contextPath + "/planner/voorstellingsTaak/medewerkerKoppelen/" + voorstellingId + "/" + voorstellingsTaakId + "/" + medewerkerId, true);
+    xhttp.open("GET", contextPath + "/planner/voorstellingen/voorstellingsTaak/medewerkerKoppelen/" + voorstellingId + "/" + voorstellingsTaakId + "/" + medewerkerId, true);
     xhttp.send();
     setTimeout(function () {
         location.reload(true);
@@ -50,7 +50,7 @@ function vrijgevenIngeplandeMedewerker(event, contextPath) {
     if (voorstellingsTaakId || voorstellingId) {
         var xhttp = new XMLHttpRequest();
 
-        xhttp.open("GET", contextPath + "/planner/voorstellingsTaak/taakVrijGeven/" + voorstellingId + "/" + voorstellingsTaakId, true);
+        xhttp.open("GET", contextPath + "/planner/voorstellingen/voorstellingsTaak/taakVrijGeven/" + voorstellingId + "/" + voorstellingsTaakId, true);
         xhttp.send();
         setTimeout(function () {
             location.reload(true);
