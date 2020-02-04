@@ -33,15 +33,15 @@
                         <tr>
                             <td><c:out value="${gebruiker.gebruikersnaam}"/></td>
                             <td>
-                                <a href="${contextPath}/planner/gebruiker/overzicht/verwijderen/<c:out value='${gebruiker.medewerkerId}'/>">
-                                    <i class="fas fa-trash" title="Verwijderen"></i>
-                                </a>
+                                <i class="fas fa-trash" title="Verwijderen" data-toggle="modal" data-target="#verwijderModal" onclick="gebruikerVerwijderen(${gebruiker.medewerkerId})"></i>
                             </td>
                         </tr>
                     </c:forEach>
                 </tbody>
             </table>
         </div>
+        <jsp:include page="waarschuwingsPopups.jsp" />
+        <script type="text/javascript" src="${contextPath}\resources\js\modal.functies.js"></script>
     </body>
     <div class="modal fade" id="uitnodigingModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
