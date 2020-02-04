@@ -38,8 +38,7 @@ function dropBeschikbareMedewerker(event, voorstellingsTaakId, voorstellingId, c
     xhttp.send();
     setTimeout(function () {
         location.reload(true);
-    }, 25);
-
+    }, 40);
 }
 
 function vrijgevenIngeplandeMedewerker(event, contextPath) {
@@ -55,9 +54,10 @@ function vrijgevenIngeplandeMedewerker(event, contextPath) {
         xhttp.send();
         setTimeout(function () {
             location.reload(true);
-        }, 25);
+        }, 40);
     }
 }
+
 
 
 
