@@ -24,9 +24,9 @@
 
         <div class="container">
             <h2>Voorstelling toevoegen</h2>
-            <a id="voegVoorstellingToeButton" class="btn btn-primary" href="${contextPath}/planner/voorstelling/toevoegen">Handmatig</a>
-            <a id="voorstellingenImporterenExcelButton" class="btn btn-primary" href="${contextPath}/planner/excelProcessing">Excel import</a>
             <a id="nieuweVoorstellingModalButton" type="button" class="btn btn-primary" data-toggle="modal" data-target="#nieuweVoorstellingModal">Voorstelling Toevoegen</a>
+            <a id="voegVoorstellingToeButton" class="btn btn-primary" href="${contextPath}/planner/voorstellingen/voorstelling/toevoegen">Handmatig</a>
+            <a id="voorstellingenImporterenExcelButton" class="btn btn-primary" href="${contextPath}/planner/voorstellingen/excel">Excel import</a>
 
             <table class="table table-hover" id="myTable" >
 
@@ -54,7 +54,7 @@
                         </c:when>
                         <c:when test="${voorstelling.status == 'Ongepubliceerd'}">
                             <div>
-                                <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#exampleModal" data-voorstelling="${voorstelling.voorstellingId}">
+                                <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#exampleModal" onclick="voorstellingIdMeegeven(${voorstelling.voorstellingId})">
                                     Publiceer
                                 </button>
                             </div>
@@ -70,7 +70,7 @@
                                         <!-- nothing yet  -->
                                     </c:when>
                                     <c:otherwise>
-                                        <a href="${contextPath}/planner/voorstelling/rooster/<c:out value='${voorstelling.voorstellingId}' />">
+                                        <a href="${contextPath}/planner/voorstellingen/voorstelling/rooster/<c:out value='${voorstelling.voorstellingId}' />">
                                             <i class="fas fa-user-edit" title="Planning"></i>
                                         </a>
                                     </c:otherwise>
@@ -81,7 +81,7 @@
                                     </c:when>
                                     <c:otherwise>
 
-                                    <td> <a href="${contextPath}/planner/voorstelling/wijzigen/<c:out value='${voorstelling.voorstellingId}' />">
+                                    <td> <a href="${contextPath}/planner/voorstellingen/voorstelling/wijzigen/<c:out value='${voorstelling.voorstellingId}' />">
                                           <i class="far fa-edit" title="Wijzigen"></i></a>
                                     </td>
 
@@ -89,7 +89,7 @@
                                 </c:choose>
 
                                 <td>
-                                <a href="${contextPath}/planner/voorstelling/verwijderen/<c:out value='${voorstelling.voorstellingId}' />">
+                                <a href="${contextPath}/planner/voorstellingen/voorstelling/verwijderen/<c:out value='${voorstelling.voorstellingId}' />">
                                     <i class="fas fa-trash" title="Verwijderen"></i>
                                 </a>
                                 </td>
@@ -97,10 +97,8 @@
                             </td>
                 </tbody>
                 </c:forEach>
-
-
-
-            </div>
+            </table>
+        </div>
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -115,7 +113,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>
-                            <a class="btn btn-primary btn" id="publish" href="${contextPath}/planner/voorstelling/publiceren/ />">Publiceer</a>
+                            <a class="btn btn-primary btn" id="publish" href="${contextPath}/planner/voorstellingen/voorstelling/publiceren/ />">Publiceer</a>
                         </div>
                     </div>
                 </div>
@@ -148,14 +146,9 @@
             </div>
 
             <script type="text/javascript">
-                $('#exampleModal').on('show.bs.modal', function(event) {
-                    var button = $(event.relatedTarget)
-                    var voorstellingId = button.data('voorstelling')
-                    var modal = $(this)
-                    $('#publish').attr("href", "${contextPath}/planner/voorstelling/publiceren/" + voorstellingId);
-                })
+                function voorstellingIdMeegeven (voorstellingId) {
+                        $('#publish').attr("href", "${contextPath}/planner/voorstellingen/voorstelling/publiceren/" + voorstellingId);
+                }
             </script>
-        </div>
     </body>
 </html>
-

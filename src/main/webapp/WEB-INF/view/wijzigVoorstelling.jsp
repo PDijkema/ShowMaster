@@ -23,7 +23,7 @@
                 </div>
             </div>
         <div class="container">
-        <form:form action="${contextPath}/planner/voorstelling/wijzigen" modelAttribute="voorstelling" method="post">
+        <form:form action="${contextPath}/planner/voorstellingen/voorstelling/wijzigen" modelAttribute="voorstelling" method="post">
             <form:hidden path="voorstellingId"/>
             <form:hidden path="status"/>
             <table>
@@ -63,7 +63,7 @@
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <a class="btn btn-danger" href="${contextPath}/planner/voorstelling/annuleren/${voorstelling.voorstellingId}">Voorstelling annuleren</a>
+                                            <a class="btn btn-danger" href="${contextPath}/planner/voorstellingen/voorstelling/annuleren/${voorstelling.voorstellingId}">Voorstelling annuleren</a>
                                         </div>
                                     </div>
                                 </div>
