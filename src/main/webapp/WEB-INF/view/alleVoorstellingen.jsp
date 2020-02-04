@@ -9,6 +9,7 @@
         <script src="https://kit.fontawesome.com/1eeb88da0f.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link href="${contextPath}\resources\css\custom.css" type="text/css" rel="stylesheet">
+        <link href="${contextPath}\resources\css\all.css" type="text/css" rel="stylesheet">
         <script src="${contextPath}\resources\js\ajax.js"></script>
         <script src="${contextPath}\resources\js\javascript.functies.js"></script>
 
@@ -53,7 +54,7 @@
                         </c:when>
                         <c:when test="${voorstelling.status == 'Ongepubliceerd'}">
                             <div>
-                                <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#exampleModal" onclick="voorstellingIdMeegeven(${voorstelling.voorstellingId})">
+                                <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#publicatieModal" onclick="voorstellingIdMeegevenPublicatie(${voorstelling.voorstellingId})">
                                     Publiceer
                                 </button>
                             </div>
@@ -88,8 +89,7 @@
                                 </c:choose>
 
                                 <td>
-                                <a href="${contextPath}/planner/voorstellingen/voorstelling/verwijderen/<c:out value='${voorstelling.voorstellingId}' />">
-                                    <i class="fas fa-trash" title="Verwijderen"></i>
+                                    <i class="fas fa-trash" title="Verwijderen" data-toggle="modal" data-target="#verwijderModal" onclick="voorstellingIdMeegevenVerwijderen(${voorstelling.voorstellingId})"></i>
                                 </a>
                                 </td>
 
@@ -98,29 +98,7 @@
                 </c:forEach>
             </table>
         </div>
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h2 class="modal-title" id="exampleModalLabel">Voorstelling publiceren</h2>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            Medewerkers kunnen zicht nu inschrijven voor deze voorstelling. Weet je het zeker?
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>
-                            <a class="btn btn-primary btn" id="publish" href="${contextPath}/planner/voorstellingen/voorstelling/publiceren/ />">Publiceer</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <script type="text/javascript">
-                function voorstellingIdMeegeven (voorstellingId) {
-                        $('#publish').attr("href", "${contextPath}/planner/voorstellingen/voorstelling/publiceren/" + voorstellingId);
-                }
-            </script>
+            <jsp:include page="waarschuwingsPopups.jsp" />
+            <script type="text/javascript" src="${contextPath}\resources\js\modal.functies.js"></script>
     </body>
 </html>
