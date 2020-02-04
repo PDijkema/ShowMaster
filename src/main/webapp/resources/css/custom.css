@@ -89,3 +89,40 @@ height: 80px;
 #loginscreenJumbotron {
 color: #fff;
 }
+
+#beschikbareMedewerkers {
+  margin-top: 10px;
+}
+#sleepinstructie {
+  color: darkgray;
+}
+
+#dropzoneBeschikbareMedewerkers {
+  background-color: #e9ecef;
+  border-radius: 15px;
+  width: 200px;
+}
+
+.voorstellingsTaak {
+  float: left;
+  width: 250px;
+  height: 30px;
+  margin: 1px;
+  padding: 1px;
+  background-color: #e9ecef;
+  border: 2px solid gray;
+  border-radius: 15px;
+  text-align: center;
+}
+
+.beschikbareMedewerker {
+  float: left;
+  width: 250px;
+  height: 30px;
+  margin: 1px;
+  padding: 1px;
+  background-color: rgba(99,153,45, 0.2);
+  border: 2px solid green;
+  border-radius: 15px;
+  text-align: center;
+}

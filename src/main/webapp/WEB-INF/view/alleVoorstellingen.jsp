@@ -23,7 +23,6 @@
         </div>
 
         <div class="container">
-
             <h2>Voorstelling toevoegen</h2>
             <a id="voegVoorstellingToeButton" class="btn btn-primary" href="${contextPath}/planner/voorstelling/toevoegen">Handmatig</a>
             <a id="voorstellingenImporterenExcelButton" class="btn btn-primary" href="${contextPath}/planner/excelProcessing">Excel import</a>
@@ -70,8 +69,8 @@
                                         <!-- nothing yet  -->
                                     </c:when>
                                     <c:otherwise>
-                                        <a href="${contextPath}/planner/voorstelling/details/<c:out value='${voorstelling.voorstellingId}' />">
-                                            <i class="fas fa-user-edit" title="Taakbeheer"></i>
+                                        <a href="${contextPath}/planner/voorstelling/rooster/<c:out value='${voorstelling.voorstellingId}' />">
+                                            <i class="fas fa-user-edit" title="Planning"></i>
                                         </a>
                                     </c:otherwise>
                                 </c:choose>
@@ -130,5 +129,5 @@
             </script>
         </div>
     </body>
-
 </html>
+
