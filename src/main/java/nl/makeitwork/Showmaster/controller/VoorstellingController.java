@@ -42,7 +42,8 @@ public class VoorstellingController {
 
     @GetMapping("/planner/voorstellingen")
     protected String alleVoorstellingen(Model model) {
-        model.addAttribute("alleVoorstellingen", voorstellingRepository.findAll());
+        model.addAttribute("alleVoorstellingen", voorstellingRepository.findAllByOrderByLocalDateTimeAsc());
+
         return "alleVoorstellingen";
     }
 
