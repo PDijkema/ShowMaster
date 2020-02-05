@@ -54,7 +54,7 @@
                         </c:when>
                         <c:when test="${voorstelling.status == 'Ongepubliceerd'}">
                             <div>
-                                <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#publicatieModal" onclick="voorstellingPubliceren(${voorstelling.voorstellingId})">
+                                <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#waarschuwingsModal" onclick="voorstellingPubliceren(${voorstelling.voorstellingId})">
                                     Publiceer
                                 </button>
                             </div>
@@ -89,7 +89,7 @@
                                 </c:choose>
 
                                 <td>
-                                    <i class="fas fa-trash" title="Verwijderen" data-toggle="modal" data-target="#verwijderModal" onclick="voorstellingVerwijderen(${voorstelling.voorstellingId})"></i>
+                                    <i class="fas fa-trash" title="Verwijderen" data-toggle="modal" data-target="#waarschuwingsModal" onclick="voorstellingVerwijderen(${voorstelling.voorstellingId})"></i>
                                 </a>
                                 </td>
 
