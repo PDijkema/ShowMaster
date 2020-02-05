@@ -1,9 +1,6 @@
 package nl.makeitwork.Showmaster.controller;
 
-import nl.makeitwork.Showmaster.model.Medewerker;
-import nl.makeitwork.Showmaster.model.MedewerkerProfielGegevens;
-import nl.makeitwork.Showmaster.model.UitnodigingMedewerker;
-import nl.makeitwork.Showmaster.model.VoorstellingsTaak;
+import nl.makeitwork.Showmaster.model.*;
 import nl.makeitwork.Showmaster.repository.*;
 import nl.makeitwork.Showmaster.service.MedewerkerService;
 import nl.makeitwork.Showmaster.service.MedewerkerServiceImplementatie;
@@ -61,14 +58,30 @@ public class MedewerkerController {
     @Autowired
     VoorstellingRepository voorstellingRepository;
 
-    @GetMapping("/registreer")
-    protected String showRegistratieFormulier(Model model) {
-        model.addAttribute("registratieFormulier", new Medewerker());
-        return "registratieFormulier";
+    @Autowired
+    VerificatieTokenRepository verificatieTokenRepository;
+
+    @GetMapping("/registreer/{token}")
+    protected String showRegistratieFormulier(Model model, @PathVariable String token) {
+
+        VerificatieToken verificatieToken = verificatieTokenRepository.findByToken(token);
+
+        System.out.println(verificatieToken);
+
+
+        System.out.println(token);
+
+        if (verificatieToken != null){
+            model.addAttribute("registratieFormulier", new Medewerker());
+            return "registratieFormulier";
+        } else {
+            return "redirect:/";
+        }
+
     }
 
-    @PostMapping("/registreer")
-    public String saveGebruiker(@ModelAttribute("registratieFormulier") Medewerker registratieFormulier, BindingResult bindingResult) {
+    @PostMapping("/registreer/{token}")
+    public String saveGebruiker(@PathVariable String token, Medewerker registratieFormulier, BindingResult bindingResult) {
         medewerkerValidator.validate(registratieFormulier, bindingResult);
         if (bindingResult.hasErrors()) {
             return "registratieFormulier";

@@ -30,6 +30,9 @@ public class Medewerker implements UserDetails {
 
     private Boolean planner;
 
+    @Column(name = "enabled")
+    private boolean enabled;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "vasteTaakId", referencedColumnName = "taakId")
     @OnDelete(action = OnDeleteAction.NO_ACTION)
