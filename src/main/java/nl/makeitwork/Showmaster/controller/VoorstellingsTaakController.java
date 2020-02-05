@@ -126,6 +126,14 @@ public class VoorstellingsTaakController {
     @GetMapping("/planner/voorstellingen/voorstelling/rooster/genereer/{voorstellingId}")
     protected void genereerRooster(@PathVariable("voorstellingId") Integer voorstellingId) {
 
+        List<MedewerkerInschrijvingVoorstelling> inschrijvingVoorstelling = medewerkerInschrijvingVoorstellingRepository.
+                findByVoorstellingVoorstellingIdAndInschrijvingStatus(voorstellingId, "Beschikbaar");
+
+        for (MedewerkerInschrijvingVoorstelling inschrijving: inschrijvingVoorstelling) {
+            System.out.println(inschrijving.getMedewerker().getGebruikersnaam());
+
+        }
+
 
     }
 }
