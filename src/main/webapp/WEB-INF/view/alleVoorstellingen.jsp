@@ -70,6 +70,7 @@
                                 <c:choose>
                                     <c:when test="${voorstelling.status == 'Geannuleerd'}">
                                         <!-- nothing yet  -->
+                                        <td></td>
                                     </c:when>
                                     <c:otherwise>
                                         <a href="${contextPath}/planner/voorstellingen/voorstelling/rooster/<c:out value='${voorstelling.voorstellingId}' />">

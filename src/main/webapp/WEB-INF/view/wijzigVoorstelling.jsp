@@ -33,7 +33,7 @@
                             'Weet je zeker dat je deze voorstelling wilt annuleren?',
                             'Voorstelling annuleren',
                             '/planner/voorstellingen/voorstelling/annuleren/<c:out value= '${voorstelling.voorstellingId}'/>','btn btn-danger')">
-                            Voorstelling annuleren
+                            Annuleren
                             </button>
                         </td>
                     </tr>
