@@ -1,7 +1,7 @@
 function beschikbaarheidStatusDoorgeven(voorstellingId, beschikbaarheidStatus, contextPath) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
-    if (this.readyState == 4 && this.status == 200) {
+    if (this.readyState === 4 && this.status === 200) {
     }
   };
   xhttp.open("GET", contextPath + "/rooster/openvoorstelling/inschrijven/" + voorstellingId + "/" + beschikbaarheidStatus, true);
@@ -12,7 +12,7 @@ function beschikbaarheidStatusDoorgeven(voorstellingId, beschikbaarheidStatus, c
 function roosterLaden(voorstellingId, contextPath) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
+    if (this.readyState === 4 && this.status === 200) {
       document.getElementById("rooster").innerHTML = this.responseText;
     }
   };
@@ -26,7 +26,9 @@ function nieuweVoorstelling(contextPath) {
   xhttp.onreadystatechange = function() {
     if (this.readyState === 4 && this.status === 200) {
       document.getElementById("nieuweVoorstellingToevoegen").innerHTML = this.responseText;
-      console.log(this.responseText);
+        $("#kalender").datetimepicker({
+          format: "d-m-Y H:i",
+        });
     }
   };
   xhttp.open("GET", contextPath + "/planner/voorstellingen/voorstelling/toevoegen/", true);

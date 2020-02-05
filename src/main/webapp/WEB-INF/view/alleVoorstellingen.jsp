@@ -1,8 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-    <c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
+
 
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:form="http://www.w3.org/1999/xhtml">
 
     <head>
         <title>Voorstellingen</title>
@@ -21,15 +23,11 @@
                 <h1 class="voorstellingDisplay4">Overzicht voorstellingen</h1>
             </div>
         </div>
-
         <div class="container">
-            <h2>Voorstelling toevoegen</h2>
-            <a id="nieuweVoorstellingModalButton" class="btn btn-primary" <%--onclick="nieuweVoorstelling('${contextPath}')"--%> data-toggle="modal" data-target="#nieuweVoorstellingModal">Voorstelling Toevoegen</a>
-            <a id="voegVoorstellingToeButton" class="btn btn-primary" href="${contextPath}/planner/voorstellingen/voorstelling/toevoegen">Handmatig</a>
+            <a id="nieuweVoorstellingModalButton" class="btn btn-primary" onclick="nieuweVoorstelling('${contextPath}')" data-toggle="modal" data-target="#nieuweVoorstellingModal">Toevoegen</a>
             <a id="voorstellingenImporterenExcelButton" class="btn btn-primary" href="${contextPath}/planner/voorstellingen/excel">Excel import</a>
 
             <table class="table table-hover" id="myTable" >
-
                 <thead>
                 <tr>
                     <th scope="col" onclick="sortTable(0)">Voorstelling</th>
@@ -127,45 +125,18 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <%--<p id="nieuweVoorstellingToevoegen"></p>--%>
-
-                            <tr>
-                                <td>Naam voorstelling:</td>
-                                <td>
-                                    <input class="form-control mb-2 mr-sm-2" path="naam" required="required" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Datum en tijdstip:</td>
-                                <td>
-                                    <input id="kalender" class="form-control mb-2 mr-sm-2" path="localDateTime" value="${dateString}" required="required" />
-                                </td>
-                            </tr>
-                        </div>
-                        <div class="modal-footer">
-                            <a type="button" class="btn btn-primary btn" id="opslaanVoorstelling" href="${contextPath}/planner/voorstellingen/voorstelling/toevoegen">Opslaan</a>
-                            <button type="button"  class="btn btn-secondary" data-dismiss="modal">Sluiten</button>
+                            <p id="nieuweVoorstellingToevoegen"></p>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <script type="text/javascript">
+            <script>
                 function voorstellingIdMeegeven (voorstellingId) {
                         $('#publish').attr("href", "${contextPath}/planner/voorstellingen/voorstelling/publiceren/" + voorstellingId);
                 }
             </script>
-
             <link rel="stylesheet" href="${contextPath}\resources\css\jquery.datetimepicker.min.css">
             <script src="${contextPath}\resources\js\jquery.js"></script>
             <script src="${contextPath}\resources\js\jquery.datetimepicker.full.js"></script>
-
-            <script>
-                $(document).ready(function(){
-                    $("#kalender").datetimepicker({
-                        format: "d-m-Y H:i",
-                    });
-                });
-            </script>
     </body>
 </html>
