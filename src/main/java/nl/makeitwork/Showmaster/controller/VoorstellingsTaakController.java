@@ -8,7 +8,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.w3c.dom.ls.LSOutput;
+
 import java.util.*;
+import java.util.stream.Stream;
 
 /**
  * @author Pieter Dijkema
@@ -126,14 +129,40 @@ public class VoorstellingsTaakController {
     @GetMapping("/planner/voorstellingen/voorstelling/rooster/genereer/{voorstellingId}")
     protected void genereerRooster(@PathVariable("voorstellingId") Integer voorstellingId) {
 
+
         List<MedewerkerInschrijvingVoorstelling> inschrijvingVoorstelling = medewerkerInschrijvingVoorstellingRepository.
                 findByVoorstellingVoorstellingIdAndInschrijvingStatus(voorstellingId, "Beschikbaar");
 
-        for (MedewerkerInschrijvingVoorstelling inschrijving: inschrijvingVoorstelling) {
-            System.out.println(inschrijving.getMedewerker().getGebruikersnaam());
+        List<VoorstellingsTaak> voorstellingsTaken = voorstellingsTaakRepository.findByVoorstellingVoorstellingId(voorstellingId);
 
+        //shuffled numbers
+        List<Integer> integerArray = new ArrayList<>();
+        System.out.println("aantal taken " + voorstellingsTaken.size());
+
+        for (int i = 0; i < voorstellingsTaken.size(); i ++) {
+            integerArray.add(i);
+        }
+        Collections.shuffle(integerArray);
+        for (Integer j: integerArray) {
+            System.out.println("shufflednummer " + j);
         }
 
 
+
+
+/*        for (MedewerkerInschrijvingVoorstelling inschrijving : inschrijvingVoorstelling) {
+            System.out.println("inschrijving " + inschrijving.getMedewerker().getGebruikersnaam());
+        }
+        for (VoorstellingsTaak voorstellingsTaak : voorstellingsTaken) {
+            System.out.println("taak " + voorstellingsTaak.getTaak().getTaakNaam());
+        }*/
+
+
+        //TODO for each inschrijving bij de voorstelling de medewerker op een willekeurige positie setten in de lijst
+        //TODO voorstellingsTaken
+
+        //TODO in een stream zetten
+/*        Stream<VoorstellingsTaak> voorstellingsTaakStream = voorstellingsTaken.stream().filter(element -> element.getMedewerker().getMedewerkerId() == null);
+        voorstellingsTaakStream.forEach(element -> System.out.println(element.getTaak().getTaakNaam()));*/
     }
 }
