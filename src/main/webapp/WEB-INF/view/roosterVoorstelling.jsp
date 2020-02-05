@@ -28,86 +28,93 @@
             </div>
         </div>
 
-    <div class="container">
-        <div class="row flex-xl-nowrap">
-            <div class="col-8" role="main">
-                <h1>Diensten bij voorstelling</h1>
-                <table class="table table-hover">
-                    <thead>
-                    <tr>
-                        <th scope="col">Taak</th>
-                        <th scope="col">Medewerker</th>
-                        <th scope="col">Taak Verwijderen</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <c:forEach items="${takenBijVoorstelling}" var="takenBijVoorstelling">
+        <div class="container">
+            <div class="row flex-xl-nowrap">
+                <div class="col-8" role="main">
+                    <h1>Diensten bij voorstelling</h1>
+                    <table class="table table-hover">
+                        <thead>
                         <tr>
-                            <td>
-                                <c:out value="${takenBijVoorstelling.getTaak().getTaakNaam()}"/>
-                            </td>
-                            <td>
-                                <!-- DROPDIV-->
-                                <c:choose>
-                                <c:when test="${empty takenBijVoorstelling.getMedewerker().getGebruikersnaam()}">
-                                <div class="voorstellingsTaak" id="${takenBijVoorstelling.voorstellingsTaakId}"
-                                     ondrop="dropBeschikbareMedewerker(event, ${takenBijVoorstelling.voorstellingsTaakId}, ${takenBijVoorstelling.voorstelling.voorstellingId}, '${contextPath}')"
-                                     ondragover="allowDrop(event)"
-                                     ondragenter="enterDrag(event)"
-                                     ondragleave="leaveDrag(event)">
-                                Openstaand
-                                </div>
-                                </c:when>
-                                <c:otherwise>
-                                    <div class="beschikbareMedewerker" draggable="true" id="${takenBijVoorstelling.voorstellingsTaakId}"
-                                         ondragstart="dragStartIngeplandeMedewerker(event, ${takenBijVoorstelling.voorstelling.voorstellingId}, ${takenBijVoorstelling.voorstellingsTaakId}, ${takenBijVoorstelling.medewerker.medewerkerId})"
-                                         ondrag="dragging(event)">
-                                    <c:out value="${takenBijVoorstelling.getMedewerker().getGebruikersnaam()}"/>
-                                    </div>
-                                </c:otherwise>
-                                </c:choose>
+                            <th scope="col">Taak</th>
+                            <th scope="col">Medewerker</th>
+                            <th scope="col">Verwijderen</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <c:forEach items="${takenBijVoorstelling}" var="takenBijVoorstelling">
+                            <tr>
+                                <td>
+                                    <c:out value="${takenBijVoorstelling.getTaak().getTaakNaam()}"/>
                                 </td>
                                 <td>
-                                <a href="${contextPath}/planner/voorstellingen/voorstellingsTaak/verwijderen/${voorstelling.voorstellingId}/<c:out value='${takenBijVoorstelling.voorstellingsTaakId}' />">
-                                    <i class="fas fa-trash" title="Verwijderen"></i>
-                                </a>
-                            </td>
-                        </tr>
+                                    <!-- DROPDIV-->
+                                    <c:choose>
+                                    <c:when test="${empty takenBijVoorstelling.getMedewerker().getGebruikersnaam()}">
+                                    <div class="voorstellingsTaak" id="${takenBijVoorstelling.voorstellingsTaakId}"
+                                         ondrop="dropBeschikbareMedewerker(event, ${takenBijVoorstelling.voorstellingsTaakId}, ${takenBijVoorstelling.voorstelling.voorstellingId}, '${contextPath}')"
+                                         ondragover="allowDrop(event)"
+                                         ondragenter="enterDrag(event)"
+                                         ondragleave="leaveDrag(event)">
+                                    Openstaand
+                                    </div>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <div class="beschikbareMedewerker" draggable="true" id="${takenBijVoorstelling.voorstellingsTaakId}"
+                                             ondragstart="dragStartIngeplandeMedewerker(event, ${takenBijVoorstelling.voorstelling.voorstellingId}, ${takenBijVoorstelling.voorstellingsTaakId}, ${takenBijVoorstelling.medewerker.medewerkerId})"
+                                             ondrag="dragging(event)">
+                                        <c:out value="${takenBijVoorstelling.getMedewerker().getGebruikersnaam()}"/>
+                                        </div>
+                                    </c:otherwise>
+                                    </c:choose>
+                                    </td>
+                                    <td>
+                                        <i class="fas fa-trash" title="Verwijderen" data-toggle="modal"
+                                        data-target="#waarschuwingsModal"
+                                        onclick="vullenModal(
+                                        'Taak verwijderen',
+                                        'Weet je zeker dat je deze taak wilt verwijderen?',
+                                        'Verwijderen',
+                                        '/planner/voorstellingen/voorstellingsTaak/verwijderen/<c:out value= '${takenBijVoorstelling.voorstelling.voorstellingId}'/>/<c:out value= '${takenBijVoorstelling.voorstellingsTaakId}'/>')">
+                                        </i>
+                                    </td>
+                                </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+                    <a class="btn btn-primary" href="${contextPath}/planner/voorstellingen">Overzicht voorstellingen</a>
+                </div>
+                <div class="col-4" id="dropzoneBeschikbareMedewerkers"
+                     ondragenter="enterDrag(event)"
+                     ondragleave="leaveDrag(event)"
+                     ondragover="allowDrop(event)"
+                     ondrop="vrijgevenIngeplandeMedewerker(event, '${contextPath}')">
+                    <h1 id="beschikbareMedewerkers">Beschikbare medewerkers</h1>
+                    <p id="sleepinstructie">sleep naar openstaande dienst</p>
+                    <c:forEach items="${beschikbareMedewerkers}" var="medewerkerInschrijvingVoorstelling">
+                        <!-- ONDRAGDIV-->
+                        <div class="beschikbareMedewerker" draggable="true" id="${medewerkerInschrijvingVoorstelling.medewerker.medewerkerId}"
+                             ondragstart="dragStartBeschikbareMedewerker(event, ${medewerkerInschrijvingVoorstelling.medewerker.medewerkerId})"
+                             ondrag="dragging(event)">
+                            <p><c:out value="${medewerkerInschrijvingVoorstelling.medewerker.gebruikersnaam}"/></p>
+                        </div>
+                        <!-- ONDRAGDIV-->
                     </c:forEach>
-                    </tbody>
-                </table>
-                <a class="btn btn-primary" href="${contextPath}/planner/voorstellingen">Overzicht Voorstellingen</a>
-            </div>
-            <div class="col-4" id="dropzoneBeschikbareMedewerkers"
-                 ondragenter="enterDrag(event)"
-                 ondragleave="leaveDrag(event)"
-                 ondragover="allowDrop(event)"
-                 ondrop="vrijgevenIngeplandeMedewerker(event, '${contextPath}')">
-                <h1 id="beschikbareMedewerkers">Beschikbare medewerkers</h1>
-                <p id="sleepinstructie">sleep naar openstaande dienst</p>
-                <c:forEach items="${beschikbareMedewerkers}" var="medewerkerInschrijvingVoorstelling">
-                    <!-- ONDRAGDIV-->
-                    <div class="beschikbareMedewerker" draggable="true" id="${medewerkerInschrijvingVoorstelling.medewerker.medewerkerId}"
-                         ondragstart="dragStartBeschikbareMedewerker(event, ${medewerkerInschrijvingVoorstelling.medewerker.medewerkerId})"
-                         ondrag="dragging(event)">
-                        <p><c:out value="${medewerkerInschrijvingVoorstelling.medewerker.gebruikersnaam}"/></p>
-                    </div>
-                    <!-- ONDRAGDIV-->
-                </c:forEach>
-            </div>
-            <div class="col-md-3 col-xl-2 py-md-3 pl-md-5 bd-sidebar">
-                <h2>Dienst toevoegen</h2>
-                <ul class="nav flex-column">
-                    <c:forEach items="${alleTaken}" var="taak">
-                        <li class="nav-item"><a href="${contextPath}/planner/voorstellingen/voorstellingsTaak/toevoegen/${voorstelling.voorstellingId}/
-                        <c:out value='${taak.taakId}' />">
-                            <c:out value="${taak.taakNaam}"/>
-                        </a>
-                        </li>
-                    </c:forEach>
-                </ul>
+                </div>
+                <div class="col-md-3 col-xl-2 py-md-3 pl-md-5 bd-sidebar">
+                    <h2>Dienst toevoegen</h2>
+                    <ul class="nav flex-column">
+                        <c:forEach items="${alleTaken}" var="taak">
+                            <li class="nav-item"><a href="${contextPath}/planner/voorstellingen/voorstellingsTaak/toevoegen/${voorstelling.voorstellingId}/
+                            <c:out value='${taak.taakId}' />">
+                                <c:out value="${taak.taakNaam}"/>
+                            </a>
+                            </li>
+                        </c:forEach>
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
+        <jsp:include page="waarschuwingsPopups.jsp" />
+        <script type="text/javascript" src="${contextPath}\resources\js\modal.functies.js"></script>
     </body>
 </html>

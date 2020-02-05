@@ -2,15 +2,14 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
-
 <!doctype html>
 <html lang="en" xmlns:form="http://www.w3.org/1999/xhtml">
 
     <head>
         <title>Voorstellingen</title>
-        <script src="https://kit.fontawesome.com/1eeb88da0f.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link href="${contextPath}\resources\css\custom.css" type="text/css" rel="stylesheet">
+        <link href="${contextPath}\resources\css\all.css" type="text/css" rel="stylesheet">
         <script src="${contextPath}\resources\js\ajax.js"></script>
         <script src="${contextPath}\resources\js\javascript.functies.js"></script>
 
@@ -43,7 +42,7 @@
                 <c:forEach items="${alleVoorstellingen}" var="voorstelling">
                 <tbody>
 
-                <td><h1><c:out value="${voorstelling.getNaam()}"/></h1></td>
+                <td><h2><c:out value="${voorstelling.getNaam()}"/></h2></td>
                 <td> <c:out value="${voorstelling.getDatum()}"/></td>
                 <td hidden><c:out value="${voorstelling.getLocalDateTime()}"/></td>
                     <td>  <c:choose>
@@ -52,8 +51,14 @@
                         </c:when>
                         <c:when test="${voorstelling.status == 'Ongepubliceerd'}">
                             <div>
-                                <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#exampleModal" onclick="voorstellingIdMeegeven(${voorstelling.voorstellingId})">
-                                    Publiceer
+                                <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal"
+                                data-target="#waarschuwingsModal"
+                                onclick="vullenModal(
+                                'Voorstelling publiceren',
+                                'Medewerkers kunnen zicht nu inschrijven voor deze voorstelling. Weet je het zeker?',
+                                'Publiceer',
+                                '/planner/voorstellingen/voorstelling/publiceren/<c:out value= '${voorstelling.voorstellingId}'/>')">
+                                Publiceer
                                 </button>
                             </div>
                         </c:when>
@@ -86,55 +91,37 @@
                                 </c:choose>
 
                                 <td>
-                                <a href="${contextPath}/planner/voorstellingen/voorstelling/verwijderen/<c:out value='${voorstelling.voorstellingId}' />">
-                                    <i class="fas fa-trash" title="Verwijderen"></i>
-                                </a>
+                                    <i class="fas fa-trash" title="Verwijderen" data-toggle="modal"
+                                    data-target="#waarschuwingsModal"
+                                    onclick="vullenModal(
+                                    'Voorstelling verwijderen',
+                                    'Weet je zeker dat je deze voorstelling wilt verwijderen?',
+                                    'Verwijderen',
+                                    '/planner/voorstellingen/voorstelling/verwijderen/<c:out value= '${voorstelling.voorstellingId}'/>')">
+                                    </i>
                                 </td>
                             </td>
                 </tbody>
                 </c:forEach>
             </table>
         </div>
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h2 class="modal-title" id="exampleModalLabel">Voorstelling publiceren</h2>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            Medewerkers kunnen zicht nu inschrijven voor deze voorstelling. Weet je het zeker?
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>
-                            <a class="btn btn-primary btn" id="publish" href="${contextPath}/planner/voorstellingen/voorstelling/publiceren/ />">Publiceer</a>
+        <div class="modal fade" id="nieuweVoorstellingModal" tabindex="-1" role="dialog" aria-labelledby="nieuweVoorstellingModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h2 class="modal-title" id="nieuweVoorstellingModalLabel">Voorstelling Toevoegen</h2>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p id="nieuweVoorstellingToevoegen"></p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <div class="modal fade" id="nieuweVoorstellingModal" tabindex="-1" role="dialog" aria-labelledby="nieuweVoorstellingModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h2 class="modal-title" id="nieuweVoorstellingModalLabel">Voorstelling Toevoegen</h2>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <p id="nieuweVoorstellingToevoegen"></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <script>
-                function voorstellingIdMeegeven (voorstellingId) {
-                        $('#publish').attr("href", "${contextPath}/planner/voorstellingen/voorstelling/publiceren/" + voorstellingId);
-                }
-            </script>
+            <jsp:include page="waarschuwingsPopups.jsp" />
+            <script type="text/javascript" src="${contextPath}\resources\js\modal.functies.js"></script>
             <link rel="stylesheet" href="${contextPath}\resources\css\jquery.datetimepicker.min.css">
             <script src="${contextPath}\resources\js\jquery.js"></script>
             <script src="${contextPath}\resources\js\jquery.datetimepicker.full.js"></script>
