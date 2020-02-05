@@ -81,7 +81,7 @@
             <a class="btn btn-primary" href="${contextPath}/planner/voorstellingen">Overzicht voorstellingen</a>
         </div>
 
-        <link rel="stylesheet" href="${contextPath}\resources\js\jquery.datetimepicker.min.css">
+        <link rel="stylesheet" href="${contextPath}\resources\css\jquery.datetimepicker.min.css">
         <script src="${contextPath}\resources\js\jquery.js"></script>
         <script src="${contextPath}\resources\js\jquery.datetimepicker.full.js"></script>
         <script>

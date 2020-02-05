@@ -1,8 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-    <c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
+
 
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:form="http://www.w3.org/1999/xhtml">
 
     <head>
         <title>Voorstellingen</title>
@@ -21,14 +23,11 @@
                 <h1 class="voorstellingDisplay4">Overzicht voorstellingen</h1>
             </div>
         </div>
-
         <div class="container">
-            <h2>Voorstelling toevoegen</h2>
-            <a id="voegVoorstellingToeButton" class="btn btn-primary" href="${contextPath}/planner/voorstellingen/voorstelling/toevoegen">Handmatig</a>
+            <a id="nieuweVoorstellingModalButton" class="btn btn-primary" onclick="nieuweVoorstelling('${contextPath}')" data-toggle="modal" data-target="#nieuweVoorstellingModal">Toevoegen</a>
             <a id="voorstellingenImporterenExcelButton" class="btn btn-primary" href="${contextPath}/planner/voorstellingen/excel">Excel import</a>
 
             <table class="table table-hover" id="myTable" >
-
                 <thead>
                 <tr>
                     <th scope="col" onclick="sortTable(0)">Voorstelling</th>
@@ -62,7 +61,6 @@
                             <span class="badge badge-success"><c:out value="${voorstelling.status}"/></span>
                         </c:otherwise>
                     </c:choose> </td>
-
                             <td>
                                 <c:choose>
                                     <c:when test="${voorstelling.status == 'Geannuleerd'}">
@@ -92,7 +90,6 @@
                                     <i class="fas fa-trash" title="Verwijderen"></i>
                                 </a>
                                 </td>
-
                             </td>
                 </tbody>
                 </c:forEach>
@@ -117,10 +114,29 @@
                     </div>
                 </div>
             </div>
-            <script type="text/javascript">
+
+            <div class="modal fade" id="nieuweVoorstellingModal" tabindex="-1" role="dialog" aria-labelledby="nieuweVoorstellingModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2 class="modal-title" id="nieuweVoorstellingModalLabel">Voorstelling Toevoegen</h2>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p id="nieuweVoorstellingToevoegen"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script>
                 function voorstellingIdMeegeven (voorstellingId) {
                         $('#publish').attr("href", "${contextPath}/planner/voorstellingen/voorstelling/publiceren/" + voorstellingId);
                 }
             </script>
+            <link rel="stylesheet" href="${contextPath}\resources\css\jquery.datetimepicker.min.css">
+            <script src="${contextPath}\resources\js\jquery.js"></script>
+            <script src="${contextPath}\resources\js\jquery.datetimepicker.full.js"></script>
     </body>
 </html>
