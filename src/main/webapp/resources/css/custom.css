@@ -37,6 +37,9 @@ button,optgroup,select
 .btn-outline-primary:hover
 {color:#fff;background-color:#0B72A9;border-color:#0B72A9}
 
+.btn.btn-danger
+{font-family:"Days One", sans-serif}
+
 
 /* kleur van de link, zelfde als button kleur */
 a

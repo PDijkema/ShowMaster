@@ -3,29 +3,9 @@
 <%@ page import = "jared.simpledatabase.*" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
-<!doctype html>
-<html lang="en" xmlns:form="http://www.w3.org/1999/xhtml">
-    <head>
-        <meta charset="utf-8">
-        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-        <script src="${contextPath}\resources\js\validation.js"></script>
-        <meta charset="utf-8">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <link href="${contextPath}\resources\css\custom.css" type="text/css" rel="stylesheet">
-    </head>
-    <body>
-        <jsp:include page="navbar.jsp" />
-            <div class="jumbotron jumbotron-fluid">
-                <div class="container">
-                    <h1 class="voorstellingDisplay4">Wijzigen voorstelling</h1>
-                </div>
-            </div>
-        <div class="container">
         <form:form action="${contextPath}/planner/voorstellingen/voorstelling/wijzigen" modelAttribute="voorstelling" method="post">
-            <form:hidden path="voorstellingId"/>
-            <form:hidden path="status"/>
+            <form:hidden path="voorstellingId"></form:hidden>
+            <form:hidden path="status"></form:hidden>
             <table>
                 <div>
                     <tr>
@@ -46,28 +26,15 @@
                             <input class="form-control" type="text" placeholder="${voorstelling.status}" readonly>
                         </td>
                         <td>
-                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
-                                Voorstelling annuleren
+                            <button type="button" class="btn btn-danger" data-dismiss="modal" data-toggle="modal" data-target="#waarschuwingsModal"
+                            data-target="#waarschuwingsModal"
+                            onclick="vullenModal(
+                            'Voorstelling annuleren',
+                            'Weet je zeker dat je deze voorstelling wilt annuleren?',
+                            'Voorstelling annuleren',
+                            '/planner/voorstellingen/voorstelling/annuleren/<c:out value= '${voorstelling.voorstellingId}'/>','btn btn-danger')">
+                            Voorstelling annuleren
                             </button>
-                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h1 class="modal-title" id="exampleModalLabel">Voorstelling annuleren</h1>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            Weet je het zeker?
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <a class="btn btn-danger" href="${contextPath}/planner/voorstellingen/voorstelling/annuleren/${voorstelling.voorstellingId}">Voorstelling annuleren</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </td>
                     </tr>
                 </div>
@@ -77,19 +44,6 @@
                     </td>
                 </tr>
             </table>
+            <jsp:include page="waarschuwingsPopups.jsp" />
+            <script type="text/javascript" src="${contextPath}\resources\js\modal.functies.js"></script>
         </form:form>
-            <a class="btn btn-primary" href="${contextPath}/planner/voorstellingen">Overzicht voorstellingen</a>
-        </div>
-
-        <link rel="stylesheet" href="${contextPath}\resources\css\jquery.datetimepicker.min.css">
-        <script src="${contextPath}\resources\js\jquery.js"></script>
-        <script src="${contextPath}\resources\js\jquery.datetimepicker.full.js"></script>
-        <script>
-            $(document).ready(function(){
-            $("#kalender").datetimepicker({
-            format: "d-m-Y H:i",
-            });
-            });
-        </script>
-    </body>
-</html>

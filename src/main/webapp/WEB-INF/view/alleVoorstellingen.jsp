@@ -83,8 +83,11 @@
                                     </c:when>
                                     <c:otherwise>
 
-                                    <td> <a href="${contextPath}/planner/voorstellingen/voorstelling/wijzigen/<c:out value='${voorstelling.voorstellingId}' />">
-                                          <i class="far fa-edit" title="Wijzigen"></i></a>
+                                    <td>
+                                        <i class="far fa-edit" title="Wijzigen" data-toggle="modal"
+                                         data-target="#wijzigVoorstellingModal"
+                                         onclick="wijzigVoorstelling('${contextPath}','${voorstelling.voorstellingId}')">
+                                         </i>
                                     </td>
 
                                     </c:otherwise>
@@ -106,20 +109,35 @@
             </table>
         </div>
         <div class="modal fade" id="nieuweVoorstellingModal" tabindex="-1" role="dialog" aria-labelledby="nieuweVoorstellingModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h2 class="modal-title" id="nieuweVoorstellingModalLabel">Voorstelling Toevoegen</h2>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <p id="nieuweVoorstellingToevoegen"></p>
-                                </div>
-                            </div>
-                        </div>
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title" id="nieuweVoorstellingModalLabel">Voorstelling toevoegen</h2>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
+                    <div class="modal-body">
+                        <p id="nieuweVoorstellingToevoegen"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="wijzigVoorstellingModal" tabindex="-1" role="dialog" aria-labelledby="wijzigVoorstellingModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title" id="wijzigVoorstellingModalLabel">Voorstelling wijzigen</h2>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p id="voorstellingWijzigen"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
             <jsp:include page="waarschuwingsPopups.jsp" />
             <script type="text/javascript" src="${contextPath}\resources\js\modal.functies.js"></script>
             <link rel="stylesheet" href="${contextPath}\resources\css\jquery.datetimepicker.min.css">
