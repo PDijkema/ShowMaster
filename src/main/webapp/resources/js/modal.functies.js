@@ -18,3 +18,10 @@ function gebruikerVerwijderen (medewerkerId) {
     $('#doorgaan').text('Verwijderen')
     $('#doorgaan').attr("href", "/planner/gebruiker/overzicht/verwijderen/" + medewerkerId);
 }
+
+function voorstellingsTaakVerwijderen (voorstellingId, voorstellingsTaakId) {
+    $("#waarschuwingsModalLabel").text("Voorstellingstaak verwijderen")
+    $("#waarschuwingsModalBody").text('Weet je zeker dat je deze taak wilt verwijderen?')
+    $('#doorgaan').text('Verwijderen')
+    $('#doorgaan').attr("href", "/planner/voorstellingen/voorstellingsTaak/verwijderen/" + voorstellingId + "/" + voorstellingsTaakId);
+}

@@ -36,7 +36,7 @@ public class VoorstellingsTaakController {
         Optional<VoorstellingsTaak> voorstellingsTaak = voorstellingsTaakRepository.findById(voorstellingsTaakId);
         voorstellingsTaakRepository.deleteById(voorstellingsTaakId);
 
-        return "redirect:/planner/voorstellingen/voorstelling/details/" + voorstellingId;
+        return "redirect:/planner/voorstellingen/voorstelling/rooster/" + voorstellingId;
     }
 
     @GetMapping("/planner/voorstellingen/voorstellingsTaak/toevoegen/{voorstellingId}/{taakId}")
