@@ -1,7 +1,7 @@
 function beschikbaarheidStatusDoorgeven(voorstellingId, beschikbaarheidStatus, contextPath) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
-    if (this.readyState == 4 && this.status == 200) {
+    if (this.readyState === 4 && this.status === 200) {
     }
   };
   xhttp.open("GET", contextPath + "/rooster/openvoorstelling/inschrijven/" + voorstellingId + "/" + beschikbaarheidStatus, true);
@@ -12,7 +12,7 @@ function beschikbaarheidStatusDoorgeven(voorstellingId, beschikbaarheidStatus, c
 function roosterLaden(voorstellingId, contextPath) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
+    if (this.readyState === 4 && this.status === 200) {
       document.getElementById("rooster").innerHTML = this.responseText;
     }
   };
@@ -20,24 +20,17 @@ function roosterLaden(voorstellingId, contextPath) {
   xhttp.send();
 }
 
-function taakInvullen(voorstellingId, taakId, contextPath) {
-  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-      document.getElementById("taakInvullen").innerHTML = this.responseText;
-    }
-  };
-  xhttp.open("GET", contextPath +  "/planner/voorstellingen/voorstellingsTaak/medewerkerKoppelen/" + voorstellingId + "/"+ taakId, true);
-  xhttp.send();
-}
 
-function opslaanVoorstelling(voorstellingId, taakId, contextPath) {
+function nieuweVoorstelling(contextPath) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-      document.getElementById("taakInvullen").innerHTML = this.responseText;
+    if (this.readyState === 4 && this.status === 200) {
+      document.getElementById("nieuweVoorstellingToevoegen").innerHTML = this.responseText;
+        $("#kalender").datetimepicker({
+          format: "d-m-Y H:i",
+        });
     }
   };
-  xhttp.open("GET", contextPath +  "/planner/voorstellingen/voorstellingsTaak/medewerkerKoppelen/" + voorstellingId + "/"+ taakId, true);
+  xhttp.open("GET", contextPath + "/planner/voorstellingen/voorstelling/toevoegen/", true);
   xhttp.send();
 }
