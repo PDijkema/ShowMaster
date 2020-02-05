@@ -53,8 +53,14 @@
                         </c:when>
                         <c:when test="${voorstelling.status == 'Ongepubliceerd'}">
                             <div>
-                                <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#waarschuwingsModal" onclick="voorstellingPubliceren(${voorstelling.voorstellingId})">
-                                    Publiceer
+                                <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal"
+                                data-target="#waarschuwingsModal"
+                                onclick="vullenModal(
+                                'Voorstelling publiceren',
+                                'Medewerkers kunnen zicht nu inschrijven voor deze voorstelling. Weet je het zeker?',
+                                'Publiceer',
+                                '/planner/voorstellingen/voorstelling/publiceren/<c:out value= '${voorstelling.voorstellingId}'/>')">
+                                Publiceer
                                 </button>
                             </div>
                         </c:when>
@@ -88,7 +94,14 @@
                                 </c:choose>
 
                                 <td>
-                                    <i class="fas fa-trash" title="Verwijderen" data-toggle="modal" data-target="#waarschuwingsModal" onclick="voorstellingVerwijderen(${voorstelling.voorstellingId})"></i>
+                                    <i class="fas fa-trash" title="Verwijderen" data-toggle="modal"
+                                    data-target="#waarschuwingsModal"
+                                    onclick="vullenModal(
+                                    'Voorstelling verwijderen',
+                                    'Weet je zeker dat je deze voorstelling wilt verwijderen?',
+                                    'Verwijderen',
+                                    '/planner/voorstellingen/voorstelling/verwijderen/<c:out value= '${voorstelling.voorstellingId}'/>')">
+                                    </i>
                                 </a>
                                 </td>
 

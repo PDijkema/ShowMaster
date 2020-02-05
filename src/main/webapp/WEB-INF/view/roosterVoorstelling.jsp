@@ -68,7 +68,14 @@
                                     </c:choose>
                                     </td>
                                     <td>
-                                    <i class="fas fa-trash" title="Verwijderen" data-toggle="modal" data-target="#waarschuwingsModal" onclick="voorstellingsTaakVerwijderen(${takenBijVoorstelling.voorstelling.voorstellingId}, ${takenBijVoorstelling.voorstellingsTaakId})"></i>
+                                        <i class="fas fa-trash" title="Verwijderen" data-toggle="modal"
+                                        data-target="#waarschuwingsModal"
+                                        onclick="vullenModal(
+                                        'Taak verwijderen',
+                                        'Weet je zeker dat je deze taak wilt verwijderen?',
+                                        'Verwijderen',
+                                        '/planner/voorstellingen/voorstellingsTaak/verwijderen/<c:out value= '${takenBijVoorstelling.voorstelling.voorstellingId}'/>/<c:out value= '${takenBijVoorstelling.voorstellingsTaakId}'/>')">
+                                        </i>
                                     </td>
                                 </tr>
                         </c:forEach>

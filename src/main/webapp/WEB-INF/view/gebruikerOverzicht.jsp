@@ -33,7 +33,14 @@
                         <tr>
                             <td><c:out value="${gebruiker.gebruikersnaam}"/></td>
                             <td>
-                                <i class="fas fa-trash" title="Verwijderen" data-toggle="modal" data-target="#waarschuwingsModal" onclick="gebruikerVerwijderen(${gebruiker.medewerkerId})"></i>
+                                <i class="fas fa-trash" title="Verwijderen" data-toggle="modal"
+                                data-target="#waarschuwingsModal"
+                                onclick="vullenModal(
+                                'Gebruiker verwijderen',
+                                'Weet je zeker dat je deze gebruiker wilt verwijderen?',
+                                'Verwijderen',
+                                '/planner/gebruiker/overzicht/verwijderen/<c:out value= '${gebruiker.medewerkerId}'/>')">
+                                </i>
                             </td>
                         </tr>
                     </c:forEach>
