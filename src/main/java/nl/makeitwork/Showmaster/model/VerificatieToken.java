@@ -18,6 +18,8 @@ public class VerificatieToken {
 
     private Date expiryDate;
 
+    private Boolean tokenGebruikt;
+
     private Date calculateExpiryDate(int expiryTimeInMinutes) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(new Timestamp(cal.getTime().getTime()));
@@ -28,6 +30,14 @@ public class VerificatieToken {
     public VerificatieToken() {
         this.token = UUID.randomUUID().toString();
         this.expiryDate = calculateExpiryDate(EXPIRATION);
+    }
+
+    public Boolean getTokenGebruikt() {
+        return tokenGebruikt;
+    }
+
+    public void setTokenGebruikt(Boolean tokenGebruikt) {
+        this.tokenGebruikt = tokenGebruikt;
     }
 
     public static int getEXPIRATION() {

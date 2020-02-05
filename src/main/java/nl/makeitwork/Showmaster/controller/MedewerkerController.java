@@ -61,18 +61,26 @@ public class MedewerkerController {
     @Autowired
     VerificatieTokenRepository verificatieTokenRepository;
 
+    @Autowired
+    UitnodigingMedewerkerRepository uitnodigingMedewerkerRepository;
+
+    @GetMapping("/registreer")
+    protected String omleidenNaarLogin(){
+        return "redirect:/";
+    }
+
     @GetMapping("/registreer/{token}")
     protected String showRegistratieFormulier(Model model, @PathVariable String token) {
 
         VerificatieToken verificatieToken = verificatieTokenRepository.findByToken(token);
 
-        System.out.println(verificatieToken);
-
-
-        System.out.println(token);
 
         if (verificatieToken != null){
+
+            UitnodigingMedewerker uitnodigingMedewerker = uitnodigingMedewerkerRepository.findByVerificatieToken(verificatieToken);
+
             model.addAttribute("registratieFormulier", new Medewerker());
+            model.addAttribute("gebruikersnaam", uitnodigingMedewerker.getEmailadres());
             return "registratieFormulier";
         } else {
             return "redirect:/";
@@ -82,6 +90,13 @@ public class MedewerkerController {
 
     @PostMapping("/registreer/{token}")
     public String saveGebruiker(@PathVariable String token, Medewerker registratieFormulier, BindingResult bindingResult) {
+
+
+        VerificatieToken verificatieToken = verificatieTokenRepository.findByToken(token);
+        UitnodigingMedewerker uitnodigingMedewerker = uitnodigingMedewerkerRepository.findByVerificatieToken(verificatieToken);
+        registratieFormulier.setGebruikersnaam(uitnodigingMedewerker.getEmailadres());
+        System.out.println(registratieFormulier.getGebruikersnaam());
+
         medewerkerValidator.validate(registratieFormulier, bindingResult);
         if (bindingResult.hasErrors()) {
             return "registratieFormulier";
@@ -89,6 +104,11 @@ public class MedewerkerController {
         medewerkerService.save(registratieFormulier);
         securityService.autoLogin(registratieFormulier.getGebruikersnaam(), registratieFormulier.getWachtwoordBevestigen());
         registratieFormulier.setWachtwoordBevestigen("");
+
+
+        verificatieToken.setTokenGebruikt(true);
+        verificatieTokenRepository.save(verificatieToken);
+
         return "redirect:/";
     }
 
