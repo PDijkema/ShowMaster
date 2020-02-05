@@ -34,3 +34,9 @@ function nieuweVoorstelling(contextPath) {
   xhttp.open("GET", contextPath + "/planner/voorstellingen/voorstelling/toevoegen/", true);
   xhttp.send();
 }
+
+function genereerRooster(voorstellingId, contextPath) {
+  console.log("voorstellingId is " + voorstellingId);
+
+
+}

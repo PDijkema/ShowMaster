@@ -36,7 +36,7 @@ public class VoorstellingsTaakController {
         Optional<VoorstellingsTaak> voorstellingsTaak = voorstellingsTaakRepository.findById(voorstellingsTaakId);
         voorstellingsTaakRepository.deleteById(voorstellingsTaakId);
 
-        return "redirect:/planner/voorstellingen/voorstelling/details/" + voorstellingId;
+        return "redirect:/planner/voorstellingen/voorstelling/rooster/" + voorstellingId;
     }
 
     @GetMapping("/planner/voorstellingen/voorstellingsTaak/toevoegen/{voorstellingId}/{taakId}")
@@ -112,11 +112,9 @@ public class VoorstellingsTaakController {
 
     @GetMapping("/planner/voorstellingen/voorstellingsTaak/taakVrijGeven/{voorstellingId}/{voorstellingsTaakId}")
     protected String taakBijVoorstellingenVrijgeven(@PathVariable("voorstellingId") Integer voorstellingId,
-                                                           @PathVariable("voorstellingsTaakId") Integer voorstellingsTaakId) {
+                                                    @PathVariable("voorstellingsTaakId") Integer voorstellingsTaakId) {
 
         VoorstellingsTaak voorstellingsTaak = voorstellingsTaakRepository.findByVoorstellingsTaakId(voorstellingsTaakId);
-
-
 
         if (voorstellingsTaak.getMedewerker() != null) {
             voorstellingsTaak.setMedewerker(null);
@@ -125,4 +123,9 @@ public class VoorstellingsTaakController {
         return "redirect:/planner/voorstellingen/voorstelling/rooster/" + voorstellingId;
     }
 
+    @GetMapping("/planner/voorstellingen/voorstelling/rooster/genereer/{voorstellingId}")
+    protected void genereerRooster(@PathVariable("voorstellingId") Integer voorstellingId) {
+
+
+    }
 }

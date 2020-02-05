@@ -47,7 +47,6 @@
                                 <c:out value="${takenBijVoorstelling.getTaak().getTaakNaam()}"/>
                             </td>
                             <td>
-                                <!-- DROPDIV-->
                                 <c:choose>
                                 <c:when test="${empty takenBijVoorstelling.getMedewerker().getGebruikersnaam()}">
                                 <div class="voorstellingsTaak" id="${takenBijVoorstelling.voorstellingsTaakId}"
@@ -76,7 +75,6 @@
                     </c:forEach>
                     </tbody>
                 </table>
-                <a class="btn btn-primary" href="${contextPath}/planner/voorstellingen">Overzicht Voorstellingen</a>
             </div>
             <div class="col-4" id="dropzoneBeschikbareMedewerkers"
                  ondragenter="enterDrag(event)"
@@ -86,13 +84,11 @@
                 <h1 id="beschikbareMedewerkers">Beschikbare medewerkers</h1>
                 <p id="sleepinstructie">sleep naar openstaande dienst</p>
                 <c:forEach items="${beschikbareMedewerkers}" var="medewerkerInschrijvingVoorstelling">
-                    <!-- ONDRAGDIV-->
                     <div class="beschikbareMedewerker" draggable="true" id="${medewerkerInschrijvingVoorstelling.medewerker.medewerkerId}"
                          ondragstart="dragStartBeschikbareMedewerker(event, ${medewerkerInschrijvingVoorstelling.medewerker.medewerkerId})"
                          ondrag="dragging(event)">
                         <p><c:out value="${medewerkerInschrijvingVoorstelling.medewerker.gebruikersnaam}"/></p>
                     </div>
-                    <!-- ONDRAGDIV-->
                 </c:forEach>
             </div>
             <div class="col-md-3 col-xl-2 py-md-3 pl-md-5 bd-sidebar">
@@ -107,6 +103,12 @@
                     </c:forEach>
                 </ul>
             </div>
+        </div>
+    </div>
+    <div class="container">
+        <div>
+            <a class="btn btn-primary" href="${contextPath}/planner/voorstellingen">Overzicht Voorstellingen</a>
+            <a class="btn btn-primary" id="genereerRooster" onclick="genereerRooster(${voorstelling.voorstellingId}, '${contextPath}')">Genereer Rooster</a>
         </div>
     </div>
     </body>
