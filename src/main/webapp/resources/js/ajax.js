@@ -34,3 +34,19 @@ function nieuweVoorstelling(contextPath) {
   xhttp.open("GET", contextPath + "/planner/voorstellingen/voorstelling/toevoegen/", true);
   xhttp.send();
 }
+
+
+function wijzigVoorstelling(contextPath, voorstellingId) {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState === 4 && this.status === 200) {
+      document.getElementById("voorstellingWijzigen").innerHTML = this.responseText;
+        $("#kalender").datetimepicker({
+          format: "d-m-Y H:i",
+        });
+    }
+  };
+  xhttp.open("GET", contextPath + "/planner/voorstellingen/voorstelling/wijzigen/" + voorstellingId, true);
+  xhttp.send();
+}
+
