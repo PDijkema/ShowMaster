@@ -49,22 +49,17 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="${contextPath}/profiel">MIJN PROFIEL</a>
                                 </li>
-
-                                <c:if test="${pageContext.request.userPrincipal.name != null}">
-                                    <form class="form-inline" id="logoutform" action="${contextPath}/logout" method="post">
-                                        <input name="utf8" type="hidden" value="✓">
-                                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                                </c:if>
-                                        <button class="btn btn-outline-primary" type="submit">
-                                        Uitloggen
-                                        </button>
-                                    </form>
+                                <button class="btn btn-outline-primary" type="button" data-toggle="modal"
+                                  data-target="#logoutModal">
+                                Uitloggen
+                                </button>
                             </div>
                         </div>
                     </div>
                 </nav>
             </div>
         </header>
-        <script src="${contextPath}\resources\js\jquery.js" type='text/javascript'></script>
+        <jsp:include page="waarschuwingsPopups.jsp" />
+        <script type="text/javascript" src="${contextPath}\resources\js\modal.functies.js"></script>
     </body>
 </html>
