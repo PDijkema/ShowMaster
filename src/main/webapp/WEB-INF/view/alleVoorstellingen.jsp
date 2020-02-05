@@ -120,11 +120,6 @@
                             </div>
                         </div>
                     </div>
-                    <script>
-                        function voorstellingIdMeegeven (voorstellingId) {
-                                $('#publish').attr("href", "${contextPath}/planner/voorstellingen/voorstelling/publiceren/" + voorstellingId);
-                        }
-                    </script>
             <jsp:include page="waarschuwingsPopups.jsp" />
             <script type="text/javascript" src="${contextPath}\resources\js\modal.functies.js"></script>
             <link rel="stylesheet" href="${contextPath}\resources\css\jquery.datetimepicker.min.css">
