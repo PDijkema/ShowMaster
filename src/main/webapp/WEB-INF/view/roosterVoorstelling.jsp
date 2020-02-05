@@ -95,7 +95,7 @@
                         <div class="beschikbareMedewerker" draggable="true" id="${medewerkerInschrijvingVoorstelling.medewerker.medewerkerId}"
                              ondragstart="dragStartBeschikbareMedewerker(event, ${medewerkerInschrijvingVoorstelling.medewerker.medewerkerId})"
                              ondrag="dragging(event)">
-                            <p><c:out value="${medewerkerInschrijvingVoorstelling.medewerker.gebruikersnaam}"/></p>
+                            <p><c:out value="${medewerkerInschrijvingVoorstelling.medewerker.medewerkerProfielGegevens.voornaam}-${medewerkerInschrijvingVoorstelling.medewerker.medewerkerProfielGegevens.voorkeurstaak.taakNaam}"/></p>
                         </div>
                         <!-- ONDRAGDIV-->
                     </c:forEach>
