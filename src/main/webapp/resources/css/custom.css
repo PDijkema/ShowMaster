@@ -46,17 +46,8 @@ a
 {color:#0B72A9;text-decoration:none;background-color:transparent}
 a:hover{text-decoration:underline}
 
-@namespace svg url(http://www.w3.org/2000/svg);
-/* Necessary to select only SVG <a> elemnents, and not also HTML’s.
-   See warning below */
-
-svg.a:link, svg.a:visited {
-  cursor: pointer;
-}
-
-svg.a:hover, svg.a:active {
-  outline: dotted 1px blue;
-}
+.form-control::placeholder
+{opacity:0.5}
 
 i.fas, i.far {
     color: #0B72A9;
@@ -128,3 +119,4 @@ color: #fff;
   border-radius: 15px;
   text-align: center;
 }
+
