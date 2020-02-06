@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.*;
-import java.util.stream.Stream;
 
 /**
  * @author Pieter Dijkema
@@ -131,6 +130,10 @@ public class VoorstellingsTaakController {
 
         List<Taak> alleTaken = taakRepository.findAll();
 
+        List<MedewerkerInschrijvingVoorstelling> inschrijvingVoorstelling = medewerkerInschrijvingVoorstellingRepository.
+                findByVoorstellingVoorstellingIdAndInschrijvingStatus(voorstellingId, "Beschikbaar");
+        Collections.shuffle(inschrijvingVoorstelling);
+
         List<VoorstellingsTaak> voorstellingsTaken = voorstellingsTaakRepository.findByVoorstellingVoorstellingId(voorstellingId);
         Collections.shuffle(voorstellingsTaken);
 
@@ -140,20 +143,15 @@ public class VoorstellingsTaakController {
                 .forEach(x -> x.setMedewerker(null));
 
         for (Taak taak : alleTaken) {
-            voorstellingsTaakController.genereerRoosterMetVoorkeursTaak(voorstellingId, taak.getTaakNaam());
+            voorstellingsTaakController.genereerRoosterMetVoorkeursTaak(taak.getTaakNaam(), inschrijvingVoorstelling, voorstellingsTaken);
         }
-        System.out.println("openstaande taken" + voorstellingsTaakRepository.findAantalOpenstaandeTaken(voorstellingId));
+
         return "redirect:/planner/voorstellingen/voorstelling/rooster/" + voorstellingId;
     }
 
-    protected void genereerRoosterMetVoorkeursTaak(Integer voorstellingId, String voorkeursTaak) {
-
-        List<MedewerkerInschrijvingVoorstelling> inschrijvingVoorstelling = medewerkerInschrijvingVoorstellingRepository.
-                findByVoorstellingVoorstellingIdAndInschrijvingStatus(voorstellingId, "Beschikbaar");
-        Collections.shuffle(inschrijvingVoorstelling);
-
-        List<VoorstellingsTaak> voorstellingsTaken = voorstellingsTaakRepository.findByVoorstellingVoorstellingId(voorstellingId);
-        Collections.shuffle(voorstellingsTaken);
+    protected void genereerRoosterMetVoorkeursTaak(String voorkeursTaak,
+                                                   List<MedewerkerInschrijvingVoorstelling> inschrijvingVoorstelling,
+                                                   List<VoorstellingsTaak> voorstellingsTaken) {
 
         List<MedewerkerInschrijvingVoorstelling> inschrijvingVoorstellingVoorkeur = new ArrayList<MedewerkerInschrijvingVoorstelling>() {};
         List<VoorstellingsTaak> voorstellingsTaakVoorkeur = new ArrayList<VoorstellingsTaak>() {};
