@@ -142,9 +142,14 @@ public class VoorstellingsTaakController {
                 .forEach(x -> x.setMedewerker(null));
 
         for(int i = 0; i <inschrijvingVoorstelling.size(); i++) {
-            if (voorstellingsTaken.get(i) != null) {
-                voorstellingsTaken.get(i).setMedewerker(inschrijvingVoorstelling.get(i).getMedewerker());
-                voorstellingsTaakRepository.save(voorstellingsTaken.get(i));
+            if( i < voorstellingsTaken.size()) {
+                if (voorstellingsTaken.get(i) != null) {
+                    System.out.println("positie2 " + i);
+                    voorstellingsTaken.get(i).setMedewerker(inschrijvingVoorstelling.get(i).getMedewerker());
+                    voorstellingsTaakRepository.save(voorstellingsTaken.get(i));
+                }
+            } else {
+                break;
             }
         }
         return "redirect:/planner/voorstellingen/voorstelling/rooster/" + voorstellingId;

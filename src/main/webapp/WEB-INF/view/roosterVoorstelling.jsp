@@ -48,7 +48,7 @@
                                 </td>
                                 <td>
                                     <c:choose>
-                                    <c:when test="${empty takenBijVoorstelling.medewerker}">
+                                    <c:when test="${empty takenBijVoorstelling.getMedewerker().getGebruikersnaam()}">
                                     <div class="voorstellingsTaak" id="${takenBijVoorstelling.voorstellingsTaakId}"
                                          ondrop="dropBeschikbareMedewerker(event, ${takenBijVoorstelling.voorstellingsTaakId}, ${takenBijVoorstelling.voorstelling.voorstellingId}, '${contextPath}')"
                                          ondragover="allowDrop(event)"
@@ -61,7 +61,7 @@
                                         <div class="beschikbareMedewerker" draggable="true" id="${takenBijVoorstelling.voorstellingsTaakId}"
                                              ondragstart="dragStartIngeplandeMedewerker(event, ${takenBijVoorstelling.voorstelling.voorstellingId}, ${takenBijVoorstelling.voorstellingsTaakId}, ${takenBijVoorstelling.medewerker.medewerkerId})"
                                              ondrag="dragging(event)">
-                                        <c:out value="${takenBijVoorstelling.medewerker.medewerkerProfielGegevens.voornaam}   |   ${takenBijVoorstelling.medewerker.medewerkerProfielGegevens.voorkeurstaak.taakNaam}"/>
+                                            <c:out value="${takenBijVoorstelling.medewerker.medewerkerProfielGegevens.voornaam}   |   ${takenBijVoorstelling.medewerker.medewerkerProfielGegevens.voorkeurstaak.taakNaam}"/>
                                         </div>
                                     </c:otherwise>
                                     </c:choose>
