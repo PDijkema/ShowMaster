@@ -131,9 +131,18 @@ public class VoorstellingsTaakController {
 
         List<Taak> alleTaken = taakRepository.findAll();
 
+        List<VoorstellingsTaak> voorstellingsTaken = voorstellingsTaakRepository.findByVoorstellingVoorstellingId(voorstellingId);
+        Collections.shuffle(voorstellingsTaken);
+
+        voorstellingsTaken
+                .stream()
+                .filter(x -> x.getMedewerker() != null)
+                .forEach(x -> x.setMedewerker(null));
+
         for (Taak taak : alleTaken) {
             voorstellingsTaakController.genereerRoosterMetVoorkeursTaak(voorstellingId, taak.getTaakNaam());
         }
+        System.out.println("openstaande taken" + voorstellingsTaakRepository.findAantalOpenstaandeTaken(voorstellingId));
         return "redirect:/planner/voorstellingen/voorstelling/rooster/" + voorstellingId;
     }
 
@@ -146,19 +155,18 @@ public class VoorstellingsTaakController {
         List<VoorstellingsTaak> voorstellingsTaken = voorstellingsTaakRepository.findByVoorstellingVoorstellingId(voorstellingId);
         Collections.shuffle(voorstellingsTaken);
 
-        List<MedewerkerInschrijvingVoorstelling> inschrijvingVoorstellingVoorkeur = new ArrayList<MedewerkerInschrijvingVoorstelling>() {
-        };
+        List<MedewerkerInschrijvingVoorstelling> inschrijvingVoorstellingVoorkeur = new ArrayList<MedewerkerInschrijvingVoorstelling>() {};
         List<VoorstellingsTaak> voorstellingsTaakVoorkeur = new ArrayList<VoorstellingsTaak>() {};
 
         voorstellingsTaken
                 .stream()
                 .filter(x -> x.getTaak().getTaakNaam().equals(voorkeursTaak))
-                .forEach(x -> voorstellingsTaakVoorkeur.add(x));
+                .forEach(voorstellingsTaakVoorkeur::add);
 
         inschrijvingVoorstelling
                 .stream()
                 .filter(y -> y.getMedewerker().getMedewerkerProfielGegevens().getVoorkeurstaak().getTaakNaam().equals(voorkeursTaak))
-                .forEach(z -> inschrijvingVoorstellingVoorkeur.add(z));
+                .forEach(inschrijvingVoorstellingVoorkeur::add);
 
         for(int i = 0; i <inschrijvingVoorstellingVoorkeur.size(); i++) {
             if( i < voorstellingsTaakVoorkeur.size()) {
