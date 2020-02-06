@@ -1,6 +1,5 @@
 package nl.makeitwork.Showmaster.controller;
 
-import jdk.nashorn.internal.parser.Token;
 import nl.makeitwork.Showmaster.mail.MailService;
 import nl.makeitwork.Showmaster.mail.MailServiceConfiguratie;
 import nl.makeitwork.Showmaster.model.UitnodigingMedewerker;
