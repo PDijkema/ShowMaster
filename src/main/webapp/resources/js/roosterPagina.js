@@ -38,11 +38,9 @@ function dropBeschikbareMedewerker(event, voorstellingsTaakId, voorstellingId, c
             location.reload();
         }
     };
-
     xhttp.open("GET", contextPath + "/planner/voorstellingen/voorstellingsTaak/medewerkerKoppelen/"
         + voorstellingId + "/" + voorstellingsTaakId + "/" + medewerkerId, true);
     xhttp.send();
-
 }
 
 function vrijgevenIngeplandeMedewerker(event, contextPath) {

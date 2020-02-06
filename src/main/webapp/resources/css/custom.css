@@ -96,6 +96,23 @@ color: #fff;
   width: 200px;
 }
 
+#genereerRooster {
+  color: #fff;
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+
+.voorkeursTaakInRooster {
+  position: relative;
+  left: 2px;
+  text-align: right;
+  color: gray;
+}
+.naamBeschikbareMedewerker {
+  position: relative;
+  left: 2px;
+}
+
 .voorstellingsTaak {
   float: left;
   width: 250px;
