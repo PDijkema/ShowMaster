@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.*;
+import java.util.stream.Stream;
 
 /**
  * @author Pieter Dijkema
@@ -28,6 +29,8 @@ public class VoorstellingsTaakController {
     private MedewerkerInschrijvingVoorstellingRepository medewerkerInschrijvingVoorstellingRepository;
     @Autowired
     private MedewerkerRepository medewerkerRepository;
+    @Autowired
+    private VoorstellingsTaakController voorstellingsTaakController;
 
     @GetMapping("/planner/voorstellingen/voorstellingsTaak/verwijderen/{voorstellingId}/{voorstellingsTaakId}")
     protected String verwijderenTaakBijVoorstelling(@PathVariable("voorstellingsTaakId") Integer voorstellingsTaakId,
@@ -126,6 +129,16 @@ public class VoorstellingsTaakController {
     @GetMapping("/planner/voorstellingen/voorstelling/rooster/genereer/{voorstellingId}")
     protected String genereerRooster(@PathVariable("voorstellingId") Integer voorstellingId) {
 
+        List<Taak> alleTaken = taakRepository.findAll();
+
+        for (Taak taak : alleTaken) {
+            voorstellingsTaakController.genereerRoosterMetVoorkeursTaak(voorstellingId, taak.getTaakNaam());
+        }
+        return "redirect:/planner/voorstellingen/voorstelling/rooster/" + voorstellingId;
+    }
+
+    protected void genereerRoosterMetVoorkeursTaak(Integer voorstellingId, String voorkeursTaak) {
+
         List<MedewerkerInschrijvingVoorstelling> inschrijvingVoorstelling = medewerkerInschrijvingVoorstellingRepository.
                 findByVoorstellingVoorstellingIdAndInschrijvingStatus(voorstellingId, "Beschikbaar");
         Collections.shuffle(inschrijvingVoorstelling);
@@ -133,21 +146,29 @@ public class VoorstellingsTaakController {
         List<VoorstellingsTaak> voorstellingsTaken = voorstellingsTaakRepository.findByVoorstellingVoorstellingId(voorstellingId);
         Collections.shuffle(voorstellingsTaken);
 
+        List<MedewerkerInschrijvingVoorstelling> inschrijvingVoorstellingVoorkeur = new ArrayList<MedewerkerInschrijvingVoorstelling>() {
+        };
+        List<VoorstellingsTaak> voorstellingsTaakVoorkeur = new ArrayList<VoorstellingsTaak>() {};
+
         voorstellingsTaken
                 .stream()
-                .filter(x -> x.getMedewerker() != null)
-                .forEach(x -> x.setMedewerker(null));
+                .filter(x -> x.getTaak().getTaakNaam().equals(voorkeursTaak))
+                .forEach(x -> voorstellingsTaakVoorkeur.add(x));
 
-        for(int i = 0; i <inschrijvingVoorstelling.size(); i++) {
-            if( i < voorstellingsTaken.size()) {
-                if (voorstellingsTaken.get(i) != null) {
-                    voorstellingsTaken.get(i).setMedewerker(inschrijvingVoorstelling.get(i).getMedewerker());
+        inschrijvingVoorstelling
+                .stream()
+                .filter(y -> y.getMedewerker().getMedewerkerProfielGegevens().getVoorkeurstaak().getTaakNaam().equals(voorkeursTaak))
+                .forEach(z -> inschrijvingVoorstellingVoorkeur.add(z));
+
+        for(int i = 0; i <inschrijvingVoorstellingVoorkeur.size(); i++) {
+            if( i < voorstellingsTaakVoorkeur.size()) {
+                if (voorstellingsTaakVoorkeur.get(i) != null) {
+                    voorstellingsTaakVoorkeur.get(i).setMedewerker(inschrijvingVoorstellingVoorkeur.get(i).getMedewerker());
                     voorstellingsTaakRepository.save(voorstellingsTaken.get(i));
                 }
             } else {
                 break;
             }
         }
-        return "redirect:/planner/voorstellingen/voorstelling/rooster/" + voorstellingId;
     }
 }
