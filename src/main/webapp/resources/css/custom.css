@@ -111,6 +111,17 @@ color: #fff;
   border-color: #dc3545;
 }
 
+.voorkeursTaakInRooster {
+  position: relative;
+  left: 2px;
+  text-align: right;
+  color: gray;
+}
+.naamBeschikbareMedewerker {
+  position: relative;
+  left: 2px;
+}
+
 .voorstellingsTaak {
   float: left;
   width: 250px;
