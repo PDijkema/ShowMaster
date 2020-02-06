@@ -71,7 +71,7 @@
                     </td>
                     <td>
                         <c:set var="voorstellingId" value="${voorstelling.voorstellingId}" />
-                        <c:out value="${openstaandeTaken.voorstellingId}"/>
+                        <c:out value="${openstaandeTaken[voorstellingId]}"/>
                     </td>
                     <td>
                         <c:choose>
