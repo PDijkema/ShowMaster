@@ -49,7 +49,7 @@
                                 <td>
                                     <!-- DROPDIV-->
                                     <c:choose>
-                                    <c:when test="${empty takenBijVoorstelling.getMedewerker().getGebruikersnaam()}">
+                                    <c:when test="${empty takenBijVoorstelling.medewerker}">
                                     <div class="voorstellingsTaak" id="${takenBijVoorstelling.voorstellingsTaakId}"
                                          ondrop="dropBeschikbareMedewerker(event, ${takenBijVoorstelling.voorstellingsTaakId}, ${takenBijVoorstelling.voorstelling.voorstellingId}, '${contextPath}')"
                                          ondragover="allowDrop(event)"
@@ -62,7 +62,7 @@
                                         <div class="beschikbareMedewerker" draggable="true" id="${takenBijVoorstelling.voorstellingsTaakId}"
                                              ondragstart="dragStartIngeplandeMedewerker(event, ${takenBijVoorstelling.voorstelling.voorstellingId}, ${takenBijVoorstelling.voorstellingsTaakId}, ${takenBijVoorstelling.medewerker.medewerkerId})"
                                              ondrag="dragging(event)">
-                                        <c:out value="${takenBijVoorstelling.getMedewerker().getGebruikersnaam()}"/>
+                                        <c:out value="${takenBijVoorstelling.medewerker.medewerkerProfielGegevens.voornaam}   |   ${takenBijVoorstelling.medewerker.medewerkerProfielGegevens.voorkeurstaak.taakNaam}"/>
                                         </div>
                                     </c:otherwise>
                                     </c:choose>
@@ -95,7 +95,7 @@
                         <div class="beschikbareMedewerker" draggable="true" id="${medewerkerInschrijvingVoorstelling.medewerker.medewerkerId}"
                              ondragstart="dragStartBeschikbareMedewerker(event, ${medewerkerInschrijvingVoorstelling.medewerker.medewerkerId})"
                              ondrag="dragging(event)">
-                            <p><c:out value="${medewerkerInschrijvingVoorstelling.medewerker.medewerkerProfielGegevens.voornaam}-${medewerkerInschrijvingVoorstelling.medewerker.medewerkerProfielGegevens.voorkeurstaak.taakNaam}"/></p>
+                            <p><c:out value="${medewerkerInschrijvingVoorstelling.medewerker.medewerkerProfielGegevens.voornaam}    |   ${medewerkerInschrijvingVoorstelling.medewerker.medewerkerProfielGegevens.voorkeurstaak.taakNaam}"/></p>
                         </div>
                         <!-- ONDRAGDIV-->
                     </c:forEach>
