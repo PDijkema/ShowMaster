@@ -23,12 +23,9 @@ public class MedewerkerValidator implements Validator {
         public void validateEmail(Object object, Errors errors){
             UitnodigingMedewerker uitnodigingMedewerker = (UitnodigingMedewerker) object;
 
-
-
-            ValidationUtils.rejectIfEmptyOrWhitespace(errors, "emailadres","notEmpty");
-            if (uitnodigingMedewerker.getEmailadres().length() <10){
-                errors.rejectValue("emailadres", "Size.registratieFormulier.username");
-                System.out.println(errors);
+            ValidationUtils.rejectIfEmptyOrWhitespace(errors, "emailadres","NotEmpty");
+            if (uitnodigingMedewerker.getEmailadres().length() <3){
+                errors.rejectValue("emailadres", "uitnodigingFormulierGebruiker.emailadres");
             }
 
         }

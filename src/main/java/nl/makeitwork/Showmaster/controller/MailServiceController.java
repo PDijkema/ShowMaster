@@ -10,6 +10,7 @@ import nl.makeitwork.Showmaster.validator.MedewerkerValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,7 +34,7 @@ public class MailServiceController {
 
 
     @PostMapping("/planner/gebruiker/overzicht/uitnodigen")
-    protected String verstuurUitnodiging(@ModelAttribute("uitnodigingMedewerker") UitnodigingMedewerker uitnodiging, BindingResult result) {
+    protected String verstuurUitnodiging(@ModelAttribute("uitnodigingMedewerker") UitnodigingMedewerker uitnodiging, BindingResult result, Model model) {
 
         medewerkerValidator.validateEmail(uitnodiging, result);
         System.out.println(result);
@@ -41,6 +42,8 @@ public class MailServiceController {
         System.out.println(result);
         if (result.hasErrors()){
             System.out.println(result);
+
+            model.addAttribute("error", result);
             return "gebruikerOverzicht";
         }
 
