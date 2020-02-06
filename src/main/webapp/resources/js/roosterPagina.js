@@ -59,9 +59,6 @@ function vrijgevenIngeplandeMedewerker(event, contextPath) {
         xhttp.open("GET", contextPath + "/planner/voorstellingen/voorstellingsTaak/taakVrijGeven/"
             + voorstellingId + "/" + voorstellingsTaakId, true);
         xhttp.send();
-        setTimeout(function () {
-            location.reload(true);
-        }, 40);
     }
 }
 
