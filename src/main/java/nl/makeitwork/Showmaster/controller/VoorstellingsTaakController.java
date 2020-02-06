@@ -165,7 +165,8 @@ public class VoorstellingsTaakController {
 
         inschrijvingVoorstelling
                 .stream()
-                .filter(y -> y.getMedewerker().getMedewerkerProfielGegevens().getVoorkeurstaak().getTaakNaam().equals(voorkeursTaak))
+                .filter(y -> y.getMedewerker().getMedewerkerProfielGegevens().getVoorkeurstaak() != null)
+                .filter(z -> z.getMedewerker().getMedewerkerProfielGegevens().getVoorkeurstaak().getTaakNaam().equals(voorkeursTaak))
                 .forEach(inschrijvingVoorstellingVoorkeur::add);
 
         for(int i = 0; i <inschrijvingVoorstellingVoorkeur.size(); i++) {
