@@ -100,9 +100,9 @@ public class VoorstellingController {
         model.addAttribute("alleTaken", taakRepository.findAll());
         Optional<Voorstelling> voorstelling = voorstellingRepository.findById(voorstellingId);
 
-        // Lijst alle inschrijvingen op één voorstelling
+        // Lijst alle inschrijvingen op één voorstelling met status beschikbaar
         List<MedewerkerInschrijvingVoorstelling> inschrijvingenBijVoorstellingId =
-                medewerkerInschrijvingVoorstellingRepository.findInschrijvingByVoorstellingId(voorstellingId);
+                medewerkerInschrijvingVoorstellingRepository.findByVoorstellingVoorstellingIdAndInschrijvingStatus(voorstellingId, "Beschikbaar");
 
         // Lijst alle taken bij één voorstelling
         List<VoorstellingsTaak> alleVoorstellingsTakenBijVoorstellingId =
