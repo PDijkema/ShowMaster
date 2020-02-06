@@ -5,7 +5,7 @@ function beschikbaarheidStatusDoorgeven(voorstellingId, beschikbaarheidStatus, c
       buttonClassveranderen(teVerwijderenKlasse, gewensteKlasse, thisObject, yCoordinaat1, yCoordinaat2)
     }
   };
-  xhttp.open("GET", contextPath + "/voorstelling/weergeven/openvoorstelling/inschrijven/" + voorstellingId + "/" + beschikbaarheidStatus, true);
+  xhttp.open("GET", contextPath + "/rooster/openvoorstelling/inschrijven/" + voorstellingId + "/" + beschikbaarheidStatus, true);
   xhttp.send();
 }
 
@@ -13,32 +13,41 @@ function beschikbaarheidStatusDoorgeven(voorstellingId, beschikbaarheidStatus, c
 function roosterLaden(voorstellingId, contextPath) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
+    if (this.readyState === 4 && this.status === 200) {
       document.getElementById("rooster").innerHTML = this.responseText;
     }
   };
-  xhttp.open("GET",  contextPath + "/voorstelling/rooster/" + voorstellingId, true);
+  xhttp.open("GET",  contextPath + "/rooster/voorstelling/" + voorstellingId, true);
   xhttp.send();
 }
 
-function taakInvullen(voorstellingId, taakId, contextPath) {
+
+function nieuweVoorstelling(contextPath) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-      document.getElementById("taakInvullen").innerHTML = this.responseText;
+    if (this.readyState === 4 && this.status === 200) {
+      document.getElementById("nieuweVoorstellingToevoegen").innerHTML = this.responseText;
+        $("#kalender").datetimepicker({
+          format: "d-m-Y H:i",
+        });
     }
   };
-  xhttp.open("GET", contextPath +  "/planner/voorstellingsTaak/medewerkerKoppelen/" + voorstellingId + "/"+ taakId, true);
+  xhttp.open("GET", contextPath + "/planner/voorstellingen/voorstelling/toevoegen/", true);
   xhttp.send();
 }
 
-function opslaanVoorstelling(voorstellingId, taakId, contextPath) {
+
+function wijzigVoorstelling(contextPath, voorstellingId) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-      document.getElementById("taakInvullen").innerHTML = this.responseText;
+    if (this.readyState === 4 && this.status === 200) {
+      document.getElementById("voorstellingWijzigen").innerHTML = this.responseText;
+        $("#kalender").datetimepicker({
+          format: "d-m-Y H:i",
+        });
     }
   };
-  xhttp.open("GET", contextPath +  "/planner/voorstellingsTaak/medewerkerKoppelen/" + voorstellingId + "/"+ taakId, true);
+  xhttp.open("GET", contextPath + "/planner/voorstellingen/voorstelling/wijzigen/" + voorstellingId, true);
   xhttp.send();
 }
+
