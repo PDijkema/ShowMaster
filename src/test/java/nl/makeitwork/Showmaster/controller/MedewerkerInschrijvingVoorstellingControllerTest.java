@@ -121,7 +121,7 @@ class MedewerkerInschrijvingVoorstellingControllerTest {
 
         //Assert
         Assert.assertEquals(medewerkerInschrijvingVoorstellingController.inschrijvenVoorstelling(voorstelling2.getVoorstellingId(),"Beschikbaar",medewerker),
-               "redirect:/voorstelling/weergeven/openvoorstelling");
+               "redirect:/rooster/openvoorstelling");
 
 
         Assert.assertEquals(medewerkerInschrijvingVoorstellingRepository.findAll().size(),2);

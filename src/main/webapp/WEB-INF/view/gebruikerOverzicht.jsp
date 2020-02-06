@@ -7,11 +7,11 @@
 <html lang="en">
 <head>
     <title>Gebruikersoverzicht</title>
-    <script src="https://kit.fontawesome.com/1eeb88da0f.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="${contextPath}\resources\css\custom.css" type="text/css" rel="stylesheet">
-
+    <link href="${contextPath}\resources\css\all.css" type="text/css" rel="stylesheet">
 </head>
+
     <body>
         <jsp:include page="navbar.jsp" />
         <div class="jumbotron jumbotron-fluid">
@@ -33,15 +33,22 @@
                         <tr>
                             <td><c:out value="${gebruiker.gebruikersnaam}"/></td>
                             <td>
-                                <a href="${contextPath}/planner/gebruiker/verwijderen/<c:out value='${gebruiker.medewerkerId}'/>">
-                                    <i class="fas fa-trash" title="Verwijderen"></i>
-                                </a>
+                                <i class="fas fa-trash" title="Verwijderen" data-toggle="modal"
+                                data-target="#waarschuwingsModal"
+                                onclick="vullenModal(
+                                'Gebruiker verwijderen',
+                                'Weet je zeker dat je deze gebruiker wilt verwijderen?',
+                                'Verwijderen',
+                                '/planner/gebruiker/overzicht/verwijderen/<c:out value= '${gebruiker.medewerkerId}'/>')">
+                                </i>
                             </td>
                         </tr>
                     </c:forEach>
                 </tbody>
             </table>
         </div>
+        <jsp:include page="waarschuwingsPopups.jsp" />
+        <script type="text/javascript" src="${contextPath}\resources\js\modal.functies.js"></script>
     </body>
     <div class="modal fade" id="uitnodigingModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">

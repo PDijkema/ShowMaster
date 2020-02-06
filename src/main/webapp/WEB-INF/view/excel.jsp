@@ -22,9 +22,9 @@
         </div>
 
         <div class="container">
-            <c:url value="/planner/uploadExcelFile" var="uploadFileUrl" />
-            <c:url value="/planner/excelProcessing" var="resetUrl" />
-            <c:url value="/planner/excel/voorstelling/toevoegen" var="excelVoorstellingToevoegen" />
+            <c:url value="/planner/voorstellingen/excel/upload" var="uploadFileUrl" />
+            <c:url value="/planner/voorstellingen/excel" var="resetUrl" />
+            <c:url value="/planner/voorstellingen/excel/toevoegen" var="excelVoorstellingToevoegen" />
 
             <form method="post" enctype="multipart/form-data" action="${uploadFileUrl}?${_csrf.parameterName}=${_csrf.token}">
                 <input id="gekozenBestand" type="file" name="file" accept=".xls,.xlsx" />
@@ -43,7 +43,7 @@
             </form>
             <br />
             <br />
-            <script src="${contextPath}\resources\js\jqueryExcelUpload.js" type='text/javascript'></script>
+            <script src="${contextPath}\resources\js\jquery.js" type='text/javascript'></script>
         </div>
     </body>
 

@@ -51,13 +51,13 @@ public class VoorstellingController {
         return "alleVoorstellingen";
     }
 
-    @GetMapping("/planner/voorstelling/toevoegen")
+    @GetMapping("/planner/voorstellingen/voorstelling/toevoegen")
     protected String toevoegenVoorstellingen(Voorstelling voorstelling, Model model) {
         model.addAttribute("alleTaken", taakRepository.findAll());
         return "toevoegenVoorstelling";
     }
 
-    @GetMapping("/planner/voorstelling/wijzigen/{voorstellingId}")
+    @GetMapping("/planner/voorstellingen/voorstelling/wijzigen/{voorstellingId}")
     protected String wijzigenVoorstellingen(@PathVariable Integer voorstellingId, Model model, HttpServletRequest request) {
 
         Optional<Voorstelling> voorstelling = voorstellingRepository.findById(voorstellingId);
@@ -71,7 +71,7 @@ public class VoorstellingController {
         }
     }
 
-    @GetMapping("/voorstelling/rooster/{voorstellingId}")
+    @GetMapping("/rooster/voorstelling/{voorstellingId}")
     protected String roosterVoorstelling(@PathVariable Integer voorstellingId, Model model) {
 
         List<VoorstellingsTaak> voorstellingOverzicht = voorstellingsTaakRepository.findByVoorstellingVoorstellingId(voorstellingId);
@@ -85,26 +85,7 @@ public class VoorstellingController {
         return "persoonlijkRoosterVoorstelling";
     }
 
-/*    @GetMapping("/planner/voorstelling/rooster/{voorstellingId}")
-    protected String detailsVoorstelling(@PathVariable Integer voorstellingId, Model model, HttpServletRequest request) {
-
-        model.addAttribute("alleTaken", taakRepository.findAll());
-        Optional<Voorstelling> voorstelling = voorstellingRepository.findById(voorstellingId);
-
-        List<VoorstellingsTaak> voorstellingsTaken = voorstellingsTaakRepository.findByVoorstellingVoorstellingIdOrderByTaakTaakNaam(voorstellingId);
-
-        if (!voorstelling.isPresent() || voorstelling.get().getStatus().equals("Geannuleerd")) {
-            return "redirect:/planner/voorstellingen";
-        } else {
-            request.getSession().setAttribute("voorstellingId", voorstellingId);
-            model.addAttribute("takenBijVoorstelling", voorstellingsTaken);
-            model.addAttribute("voorstelling", voorstelling.get());
-            return "roosterVoorstelling";
-        }
-    }*/
-
-    //TODO work in progress
-    @GetMapping("/planner/voorstelling/rooster/{voorstellingId}")
+    @GetMapping("/planner/voorstellingen/voorstelling/rooster/{voorstellingId}")
     protected String roosterVoorstelling(@PathVariable Integer voorstellingId, Model model, HttpServletRequest request) {
 
         model.addAttribute("alleTaken", taakRepository.findAll());
@@ -135,7 +116,7 @@ public class VoorstellingController {
         }
     }
 
-    @GetMapping("/planner/voorstelling/publiceren/{voorstellingId}")
+    @GetMapping("/planner/voorstellingen/voorstelling/publiceren/{voorstellingId}")
     protected String publiceerVoorstelling(@PathVariable Integer voorstellingId) {
         Optional<Voorstelling> voorstelling = voorstellingRepository.findById(voorstellingId);
 
@@ -145,8 +126,7 @@ public class VoorstellingController {
         return "redirect:/planner/voorstellingen";
     }
 
-
-    @GetMapping("/planner/voorstelling/annuleren/{voorstellingId}")
+    @GetMapping("/planner/voorstellingen/voorstelling/annuleren/{voorstellingId}")
     protected String annuleerVoorstelling(@PathVariable Integer voorstellingId) {
         Optional<Voorstelling> voorstelling = voorstellingRepository.findById(voorstellingId);
 
@@ -156,8 +136,7 @@ public class VoorstellingController {
         return "redirect:/planner/voorstellingen";
     }
 
-
-    @PostMapping("/planner/voorstelling/toevoegen")
+    @PostMapping("/planner/voorstellingen/voorstelling/toevoegen")
     protected String saveVoorstelling(@ModelAttribute("voorstelling") Voorstelling voorstelling, BindingResult result) {
 
         if (!result.hasErrors()) {
@@ -168,7 +147,7 @@ public class VoorstellingController {
         return "redirect:/planner/voorstellingen";
     }
 
-    @PostMapping("/planner/voorstelling/wijzigen")
+    @PostMapping("/planner/voorstellingen/voorstelling/wijzigen")
     protected String UpdateVoorstelling(@ModelAttribute("voorstelling") Voorstelling voorstelling, BindingResult result) {
 
         if (!result.hasErrors()) {
@@ -191,7 +170,7 @@ public class VoorstellingController {
         }
     }
 
-    @GetMapping("/planner/voorstelling/verwijderen/{voorstellingId}")
+    @GetMapping("/planner/voorstellingen/voorstelling/verwijderen/{voorstellingId}")
     protected String verwijderVoorstelling(@PathVariable Integer voorstellingId) {
         voorstellingRepository.deleteById(voorstellingId);
         return "redirect:/planner/voorstellingen";
