@@ -143,9 +143,10 @@ public class VoorstellingsTaakController {
                 .forEach(x -> x.setMedewerker(null));
 
         for (Taak taak : alleTaken) {
-            voorstellingsTaakController.genereerRoosterMetVoorkeursTaak(taak.getTaakNaam(), inschrijvingVoorstelling, voorstellingsTaken);
+            voorstellingsTaakController.genereerRoosterMetVoorkeursTaak(taak.getTaakNaam(),
+                    inschrijvingVoorstelling,
+                    voorstellingsTaken);
         }
-
         return "redirect:/planner/voorstellingen/voorstelling/rooster/" + voorstellingId;
     }
 
