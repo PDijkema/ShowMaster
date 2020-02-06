@@ -1,6 +1,7 @@
 package nl.makeitwork.Showmaster.validator;
 
 import nl.makeitwork.Showmaster.model.Medewerker;
+import nl.makeitwork.Showmaster.model.UitnodigingMedewerker;
 import nl.makeitwork.Showmaster.service.MedewerkerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -17,6 +18,19 @@ public class MedewerkerValidator implements Validator {
         @Override
         public boolean supports(Class<?> aClass) {
             return Medewerker.class.equals(aClass);
+        }
+
+        public void validateEmail(Object object, Errors errors){
+            UitnodigingMedewerker uitnodigingMedewerker = (UitnodigingMedewerker) object;
+
+
+
+            ValidationUtils.rejectIfEmptyOrWhitespace(errors, "emailadres","notEmpty");
+            if (uitnodigingMedewerker.getEmailadres().length() <10){
+                errors.rejectValue("emailadres", "Size.registratieFormulier.username");
+                System.out.println(errors);
+            }
+
         }
 
         @Override

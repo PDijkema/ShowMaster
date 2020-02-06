@@ -51,3 +51,5 @@ function wijzigVoorstelling(contextPath, voorstellingId) {
   xhttp.send();
 }
 
+
+

@@ -28,4 +28,5 @@ public interface VoorstellingsTaakRepository extends JpaRepository<Voorstellings
 
     @Query(value = "select * from voorstelling_heeft_taak where medewerker_id is not null and voorstelling_id = :voorstellingId", nativeQuery = true)
     List<VoorstellingsTaak> findIngeplandeVoorstellingsTakenByVoorstellingId(@Param("voorstellingId") Integer voorstellingId);
+
 }
