@@ -141,7 +141,6 @@ public class VoorstellingsTaakController {
         for(int i = 0; i <inschrijvingVoorstelling.size(); i++) {
             if( i < voorstellingsTaken.size()) {
                 if (voorstellingsTaken.get(i) != null) {
-                    System.out.println("positie2 " + i);
                     voorstellingsTaken.get(i).setMedewerker(inschrijvingVoorstelling.get(i).getMedewerker());
                     voorstellingsTaakRepository.save(voorstellingsTaken.get(i));
                 }
