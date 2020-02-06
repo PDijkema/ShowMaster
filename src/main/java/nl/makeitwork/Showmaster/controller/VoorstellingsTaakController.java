@@ -3,15 +3,12 @@ package nl.makeitwork.Showmaster.controller;
 import nl.makeitwork.Showmaster.model.*;
 import nl.makeitwork.Showmaster.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.converter.json.GsonBuilderUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.w3c.dom.ls.LSOutput;
 
 import java.util.*;
-import java.util.stream.Stream;
 
 /**
  * @author Pieter Dijkema
@@ -153,9 +150,5 @@ public class VoorstellingsTaakController {
             }
         }
         return "redirect:/planner/voorstellingen/voorstelling/rooster/" + voorstellingId;
-
-        //TODO for each inschrijving bij de voorstelling de medewerker op een willekeurige positie setten in de lijst
-        //TODO voorstellingsTaken
-        //TODO in een stream zetten
     }
 }

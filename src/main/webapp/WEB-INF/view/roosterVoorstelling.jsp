@@ -119,7 +119,6 @@
         </div>
     </div>
 
-
         <jsp:include page="waarschuwingsPopups.jsp" />
         <script type="text/javascript" src="${contextPath}\resources\js\modal.functies.js"></script>
     </body>
