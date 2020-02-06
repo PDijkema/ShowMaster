@@ -127,42 +127,30 @@ public class VoorstellingsTaakController {
     }
 
     @GetMapping("/planner/voorstellingen/voorstelling/rooster/genereer/{voorstellingId}")
-    protected void genereerRooster(@PathVariable("voorstellingId") Integer voorstellingId) {
-
+    protected String genereerRooster(@PathVariable("voorstellingId") Integer voorstellingId) {
 
         List<MedewerkerInschrijvingVoorstelling> inschrijvingVoorstelling = medewerkerInschrijvingVoorstellingRepository.
                 findByVoorstellingVoorstellingIdAndInschrijvingStatus(voorstellingId, "Beschikbaar");
+        Collections.shuffle(inschrijvingVoorstelling);
 
         List<VoorstellingsTaak> voorstellingsTaken = voorstellingsTaakRepository.findByVoorstellingVoorstellingId(voorstellingId);
+        Collections.shuffle(voorstellingsTaken);
 
-        //shuffled numbers
-        List<Integer> integerArray = new ArrayList<>();
-        System.out.println("aantal taken " + voorstellingsTaken.size());
+        voorstellingsTaken
+                .stream()
+                .filter(x -> x.getMedewerker() != null)
+                .forEach(x -> x.setMedewerker(null));
 
-        for (int i = 0; i < voorstellingsTaken.size(); i ++) {
-            integerArray.add(i);
+        for(int i = 0; i <inschrijvingVoorstelling.size(); i++) {
+            if (voorstellingsTaken.get(i) != null) {
+                voorstellingsTaken.get(i).setMedewerker(inschrijvingVoorstelling.get(i).getMedewerker());
+                voorstellingsTaakRepository.save(voorstellingsTaken.get(i));
+            }
         }
-        Collections.shuffle(integerArray);
-        for (Integer j: integerArray) {
-            System.out.println("shufflednummer " + j);
-        }
-
-
-
-
-/*        for (MedewerkerInschrijvingVoorstelling inschrijving : inschrijvingVoorstelling) {
-            System.out.println("inschrijving " + inschrijving.getMedewerker().getGebruikersnaam());
-        }
-        for (VoorstellingsTaak voorstellingsTaak : voorstellingsTaken) {
-            System.out.println("taak " + voorstellingsTaak.getTaak().getTaakNaam());
-        }*/
-
+        return "redirect:/planner/voorstellingen/voorstelling/rooster/" + voorstellingId;
 
         //TODO for each inschrijving bij de voorstelling de medewerker op een willekeurige positie setten in de lijst
         //TODO voorstellingsTaken
-
         //TODO in een stream zetten
-/*        Stream<VoorstellingsTaak> voorstellingsTaakStream = voorstellingsTaken.stream().filter(element -> element.getMedewerker().getMedewerkerId() == null);
-        voorstellingsTaakStream.forEach(element -> System.out.println(element.getTaak().getTaakNaam()));*/
     }
 }

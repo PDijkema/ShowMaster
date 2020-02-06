@@ -80,7 +80,6 @@
                         </c:forEach>
                         </tbody>
                     </table>
-                    <a class="btn btn-primary" href="${contextPath}/planner/voorstellingen">Overzicht voorstellingen</a>
                 </div>
                 <div class="col-4" id="dropzoneBeschikbareMedewerkers"
                      ondragenter="enterDrag(event)"
