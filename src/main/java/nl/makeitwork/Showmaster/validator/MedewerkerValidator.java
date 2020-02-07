@@ -1,8 +1,8 @@
 package nl.makeitwork.Showmaster.validator;
 
 import nl.makeitwork.Showmaster.model.Medewerker;
-import nl.makeitwork.Showmaster.model.UitnodigingMedewerker;
-import nl.makeitwork.Showmaster.repository.UitnodigingMedewerkerRepository;
+import nl.makeitwork.Showmaster.model.EmailMetToken;
+import nl.makeitwork.Showmaster.repository.EmailMetTokenRepository;
 import nl.makeitwork.Showmaster.service.MedewerkerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -17,7 +17,7 @@ public class MedewerkerValidator implements Validator {
         private MedewerkerService medewerkerService;
 
         @Autowired
-        private UitnodigingMedewerkerRepository uitnodigingMedewerkerRepository;
+        private EmailMetTokenRepository emailMetTokenRepository;
 
         @Override
         public boolean supports(Class<?> aClass) {
@@ -25,13 +25,13 @@ public class MedewerkerValidator implements Validator {
         }
 
         public void validateEmail(Object object, Errors errors){
-            UitnodigingMedewerker uitnodigingMedewerker = (UitnodigingMedewerker) object;
+            EmailMetToken emailMetToken = (EmailMetToken) object;
 
             ValidationUtils.rejectIfEmptyOrWhitespace(errors, "emailadres","NotEmpty");
-            if (uitnodigingMedewerker.getEmailadres().length() <20){
+            if (emailMetToken.getEmailadres().length() <20){
                 errors.rejectValue("emailadres", "Size.uitnodigingFormulierGebruiker.emailadres");
             }
-            if (medewerkerService.findByUsername(uitnodigingMedewerker.getEmailadres()) != null) {
+            if (medewerkerService.findByUsername(emailMetToken.getEmailadres()) != null) {
                 errors.rejectValue("emailadres", "Duplicate.uitnodigingFormulierGebruiker.emailadres");
             }
 

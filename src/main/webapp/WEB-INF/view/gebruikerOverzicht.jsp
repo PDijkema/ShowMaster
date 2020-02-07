@@ -85,7 +85,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form:form action="${contextPath}/planner/gebruiker/overzicht/uitnodigen" novalidate="true" modelAttribute="uitnodigingMedewerker" method="post" class="was-validated needs-validation" id="uitnodigingsForm" >
+                    <form:form action="${contextPath}/planner/gebruiker/overzicht/uitnodigen" novalidate="true" modelAttribute="emailMetToken" method="post" class="was-validated needs-validation" id="uitnodigingsForm" >
                             <spring:bind path="emailadres">
                                 <div class="form-group ${status.error ? 'has-error' : ''}">
                                     <label class="col-form-label">E-mailadres:</label>

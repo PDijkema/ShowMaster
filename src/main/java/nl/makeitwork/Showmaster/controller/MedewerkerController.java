@@ -62,7 +62,7 @@ public class MedewerkerController {
     VerificatieTokenRepository verificatieTokenRepository;
 
     @Autowired
-    UitnodigingMedewerkerRepository uitnodigingMedewerkerRepository;
+    EmailMetTokenRepository emailMetTokenRepository;
 
     @GetMapping("/registreer")
     protected String omleidenNaarLogin(){
@@ -77,10 +77,10 @@ public class MedewerkerController {
 
         if (verificatieToken != null){
 
-            UitnodigingMedewerker uitnodigingMedewerker = uitnodigingMedewerkerRepository.findByVerificatieToken(verificatieToken);
+            EmailMetToken emailMetToken = emailMetTokenRepository.findByVerificatieToken(verificatieToken);
 
             model.addAttribute("registratieFormulier", new Medewerker());
-            model.addAttribute("gebruikersnaam", uitnodigingMedewerker.getEmailadres());
+            model.addAttribute("gebruikersnaam", emailMetToken.getEmailadres());
             return "registratieFormulier";
         } else {
             return "redirect:/";
@@ -92,14 +92,14 @@ public class MedewerkerController {
     public String saveGebruiker(@PathVariable String token, Medewerker registratieFormulier, BindingResult bindingResult) {
 
         VerificatieToken verificatieToken = verificatieTokenRepository.findByToken(token);
-        UitnodigingMedewerker uitnodigingMedewerker = uitnodigingMedewerkerRepository.findByVerificatieToken(verificatieToken);
+        EmailMetToken emailMetToken = emailMetTokenRepository.findByVerificatieToken(verificatieToken);
 
         if (verificatieToken.getTokenGebruikt()){
             return "errorTokenUitnodiging";
         }
 
 
-        registratieFormulier.setGebruikersnaam(uitnodigingMedewerker.getEmailadres());
+        registratieFormulier.setGebruikersnaam(emailMetToken.getEmailadres());
 
         medewerkerValidator.validate(registratieFormulier, bindingResult);
         if (bindingResult.hasErrors()) {
@@ -179,7 +179,7 @@ public class MedewerkerController {
         List<Medewerker> alleGebruikers = medewerkerRepository.findAll();
         alleGebruikers.removeIf(medewerker -> medewerker.getMedewerkerId().equals(ingelogdeMedwerker.getMedewerkerId()));
         model.addAttribute("alleGebruikers", alleGebruikers);
-        model.addAttribute("uitnodigingMedewerker", new UitnodigingMedewerker());
+        model.addAttribute("uitnodigingMedewerker", new EmailMetToken());
         return "gebruikerOverzicht";
     }
 

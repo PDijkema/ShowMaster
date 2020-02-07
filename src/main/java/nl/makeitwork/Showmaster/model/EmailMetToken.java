@@ -1,17 +1,16 @@
 package nl.makeitwork.Showmaster.model;
 
-import org.springframework.data.repository.cdi.Eager;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 
 import javax.persistence.*;
 
 @Entity
-public class UitnodigingMedewerker {
+public class EmailMetToken {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer uitnodigingId;
+    private Integer emailMetTokenId;
     private String emailadres;
     private String bericht;
 
@@ -33,12 +32,12 @@ public class UitnodigingMedewerker {
         this.verificatieToken = verificatieToken;
     }
 
-    public Integer getUitnodigingId() {
-        return uitnodigingId;
+    public Integer getEmailMetTokenId() {
+        return emailMetTokenId;
     }
 
-    public void setUitnodigingId(Integer uitnodigingId) {
-        this.uitnodigingId = uitnodigingId;
+    public void setEmailMetTokenId(Integer emailMetTokenId) {
+        this.emailMetTokenId = emailMetTokenId;
     }
 
     public MailSender getMailSender() {

@@ -2,11 +2,11 @@ package nl.makeitwork.Showmaster.controller;
 
 import nl.makeitwork.Showmaster.mail.MailService;
 import nl.makeitwork.Showmaster.mail.MailServiceConfiguratie;
+import nl.makeitwork.Showmaster.model.EmailMetToken;
 import nl.makeitwork.Showmaster.model.Medewerker;
-import nl.makeitwork.Showmaster.model.UitnodigingMedewerker;
 import nl.makeitwork.Showmaster.model.VerificatieToken;
 import nl.makeitwork.Showmaster.repository.MedewerkerRepository;
-import nl.makeitwork.Showmaster.repository.UitnodigingMedewerkerRepository;
+import nl.makeitwork.Showmaster.repository.EmailMetTokenRepository;
 import nl.makeitwork.Showmaster.repository.VerificatieTokenRepository;
 import nl.makeitwork.Showmaster.validator.MedewerkerValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +15,9 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.nio.file.attribute.UserPrincipal;
 import java.util.List;
 
 /**
@@ -30,7 +28,7 @@ import java.util.List;
 public class MailServiceController {
 
     @Autowired
-    UitnodigingMedewerkerRepository uitnodigingMedewerkerRepository;
+    EmailMetTokenRepository emailMetTokenRepository;
 
     @Autowired
     VerificatieTokenRepository verificatieTokenRepository;
@@ -43,7 +41,7 @@ public class MailServiceController {
 
 
     @PostMapping("/planner/gebruiker/overzicht/uitnodigen")
-    protected String verstuurUitnodiging(@ModelAttribute("uitnodigingMedewerker") UitnodigingMedewerker uitnodiging, BindingResult result, Model model, @AuthenticationPrincipal Medewerker ingelogdeMedewerker) {
+    protected String verstuurUitnodiging(@ModelAttribute("uitnodigingMedewerker") EmailMetToken uitnodiging, BindingResult result, Model model, @AuthenticationPrincipal Medewerker ingelogdeMedewerker) {
 
         medewerkerValidator.validateEmail(uitnodiging, result);
 
@@ -60,7 +58,7 @@ public class MailServiceController {
             verificatieTokenRepository.save(verificatieToken);
 
             uitnodiging.setVerificatieToken(verificatieToken);
-            uitnodigingMedewerkerRepository.save(uitnodiging);
+            emailMetTokenRepository.save(uitnodiging);
 
             String onderwerp = "Uitnodiging";
             String emailBody = uitnodiging.getBericht() + "\n\nKlik op deze link om je in te schrijven: http://localhost:8080/registreer/" + verificatieToken.getToken()
@@ -78,10 +76,16 @@ public class MailServiceController {
 
     @PostMapping("/wachtwoord/reset")
     protected String wachtwoordResetEmail(@ModelAttribute("emailadres") String emailadres){
-        VerificatieToken verificatieToken = new VerificatieToken();
-        verificatieTokenRepository.save(verificatieToken);
+
 
         if (medewerkerRepository.findByGebruikersnaam(emailadres) != null) {
+            VerificatieToken verificatieToken = new VerificatieToken();
+            verificatieTokenRepository.save(verificatieToken);
+
+            EmailMetToken emailMetToken = new EmailMetToken();
+            emailMetToken.setEmailadres(emailadres);
+            emailMetToken.setVerificatieToken(verificatieToken);
+
             String onderwerp = "Wachtwoord Reset";
             String emailBody = "\n\nKlik op deze link om je wachtwoord te resetten: http://localhost:8080/wachtwoord/reset/" + verificatieToken.getToken()
                     + "\n\nMet vriendelijke groet,\n\n Showmaster";
@@ -91,7 +95,7 @@ public class MailServiceController {
             MailService bean = context.getBean(MailService.class);
             bean.verstuurMail(emailadres, onderwerp, emailBody);
 
-            System.out.println("test");
+            emailMetTokenRepository.save(emailMetToken);
 
         }
 
