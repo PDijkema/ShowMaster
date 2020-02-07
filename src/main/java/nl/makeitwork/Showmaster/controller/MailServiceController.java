@@ -41,9 +41,10 @@ public class MailServiceController {
 
 
     @PostMapping("/planner/gebruiker/overzicht/uitnodigen")
-    protected String verstuurUitnodiging(@ModelAttribute("uitnodigingMedewerker") EmailMetToken uitnodiging, BindingResult result, Model model, @AuthenticationPrincipal Medewerker ingelogdeMedewerker) {
+    protected String verstuurUitnodiging(@ModelAttribute("emailMetToken") EmailMetToken uitnodiging, BindingResult result, Model model, @AuthenticationPrincipal Medewerker ingelogdeMedewerker) {
 
         medewerkerValidator.validateEmail(uitnodiging, result);
+
 
 
         if (result.hasErrors()) {
@@ -51,6 +52,7 @@ public class MailServiceController {
             alleGebruikers.removeIf(medewerker -> medewerker.getMedewerkerId().equals(ingelogdeMedewerker.getMedewerkerId()));
             model.addAttribute("alleGebruikers", alleGebruikers);
             model.addAttribute("error", result);
+
             return "gebruikerOverzicht";
         } else {
 

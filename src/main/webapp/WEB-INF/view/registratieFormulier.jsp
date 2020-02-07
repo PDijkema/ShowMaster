@@ -55,7 +55,7 @@
                         <form:checkbox path="planner" value="Planner" /> Planner
                     </div>
                 </spring:bind>
-            <button class="btn btn-primary" type="submit">Verstuur</button>
+            <button class="btn btn-primary" type="submit">Inloggen</button>
             </form:form>
         </div>
     </body>

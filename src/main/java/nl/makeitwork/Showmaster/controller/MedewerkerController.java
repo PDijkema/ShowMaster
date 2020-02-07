@@ -75,16 +75,19 @@ public class MedewerkerController {
         VerificatieToken verificatieToken = verificatieTokenRepository.findByToken(token);
 
 
-        if (verificatieToken != null){
+        if (verificatieToken != null) {
+            if (!verificatieToken.getTokenGebruikt()) {
+                EmailMetToken emailMetToken = emailMetTokenRepository.findByVerificatieToken(verificatieToken);
 
-            EmailMetToken emailMetToken = emailMetTokenRepository.findByVerificatieToken(verificatieToken);
-
-            model.addAttribute("registratieFormulier", new Medewerker());
-            model.addAttribute("gebruikersnaam", emailMetToken.getEmailadres());
-            return "registratieFormulier";
-        } else {
-            return "redirect:/";
+                model.addAttribute("registratieFormulier", new Medewerker());
+                model.addAttribute("gebruikersnaam", emailMetToken.getEmailadres());
+                return "registratieFormulier";
+            }
         }
+
+
+            return "errorTokenUitnodiging";
+
 
     }
 
@@ -179,7 +182,7 @@ public class MedewerkerController {
         List<Medewerker> alleGebruikers = medewerkerRepository.findAll();
         alleGebruikers.removeIf(medewerker -> medewerker.getMedewerkerId().equals(ingelogdeMedwerker.getMedewerkerId()));
         model.addAttribute("alleGebruikers", alleGebruikers);
-        model.addAttribute("uitnodigingMedewerker", new EmailMetToken());
+        model.addAttribute("emailMetToken", new EmailMetToken());
         return "gebruikerOverzicht";
     }
 
