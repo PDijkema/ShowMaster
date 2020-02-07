@@ -95,7 +95,7 @@ public class MedewerkerController {
         UitnodigingMedewerker uitnodigingMedewerker = uitnodigingMedewerkerRepository.findByVerificatieToken(verificatieToken);
 
         if (verificatieToken.getTokenGebruikt()){
-            return "errorToken";
+            return "errorTokenUitnodiging";
         }
 
 
@@ -188,6 +188,32 @@ public class MedewerkerController {
         medewerkerRepository.deleteById(medewerkerId);
         return "redirect:/planner/gebruiker/overzicht";
     }
+
+    @GetMapping("/wachtwoord/reset")
+    protected String wachtwoordResetPagina (Model model){
+        String emailadres = "";
+
+
+        model.addAttribute("emailadres" , emailadres);
+        return "wachtwoordReset";
+    }
+
+    @GetMapping("/wachtwoord/reset/{token}")
+    protected String wachtwoordResetPaginaToken (@PathVariable String token, Model model){
+        VerificatieToken verificatieToken = verificatieTokenRepository.findByToken(token);
+
+
+
+        if (verificatieToken.getTokenGebruikt()){
+            return "errorToken";
+        }
+
+
+        return "wachtwoordResetPagina";
+    }
+
+
+
 
 }
 

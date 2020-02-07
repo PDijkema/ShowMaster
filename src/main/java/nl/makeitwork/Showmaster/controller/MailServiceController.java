@@ -15,6 +15,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -46,7 +47,6 @@ public class MailServiceController {
 
         medewerkerValidator.validateEmail(uitnodiging, result);
 
-        System.out.println(result);
 
         if (result.hasErrors()) {
             List<Medewerker> alleGebruikers = medewerkerRepository.findAll();
@@ -72,6 +72,35 @@ public class MailServiceController {
             bean.verstuurMail(uitnodiging.getEmailadres(), onderwerp, emailBody);
             return "redirect:/planner/gebruiker/overzicht";
         }
+    }
+
+
+
+    @PostMapping("/wachtwoord/reset")
+    protected String wachtwoordResetEmail(@ModelAttribute("emailadres") String emailadres){
+        VerificatieToken verificatieToken = new VerificatieToken();
+        verificatieTokenRepository.save(verificatieToken);
+
+        if (medewerkerRepository.findByGebruikersnaam(emailadres) != null) {
+            String onderwerp = "Wachtwoord Reset";
+            String emailBody = "\n\nKlik op deze link om je wachtwoord te resetten: http://localhost:8080/wachtwoord/reset/" + verificatieToken.getToken()
+                    + "\n\nMet vriendelijke groet,\n\n Showmaster";
+            // String emailBody = uitnodiging.getBericht() + "klik op deze link om je in te schrijven " + "192.168.1.126:8080/registreer";
+
+            AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(MailServiceConfiguratie.class);
+            MailService bean = context.getBean(MailService.class);
+            bean.verstuurMail(emailadres, onderwerp, emailBody);
+
+            System.out.println("test");
+
+        }
+
+        return "login";
+
+
+
+
+
 
 
 

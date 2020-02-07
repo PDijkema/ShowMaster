@@ -53,6 +53,7 @@
                                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                 <div class="my-2">
                                     <button class="btn btn-primary" type="submit">Log in</button>
+                                    <a href="${contextPath}/wachtwoord/reset"><button class="btn btn-primary" type="button" >Wachtwoord Vergeten</button></a>
                                 </div>
                             </div>
                         </form>
@@ -69,5 +70,6 @@
         </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
+    </header>
   </body>
 </html>
