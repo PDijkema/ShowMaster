@@ -30,9 +30,8 @@
         <div class="col-md-4 mb-3">
             <spring:bind path="voornaam">
                 <div>
-                    <label for="voornaam" class="col-sm-3 control-label">Voornaam* </label>
                     <form:input type="text" path="voornaam" class="form-control"
-                                placeholder="Rocky" required="true" pattern="^([- \w\d\u00c0-\u024f]+)$"></form:input>
+                                placeholder="Voornaam" required="true" pattern="^([- \w\d\u00c0-\u024f]+)$"></form:input>
                     <div class="invalid-feedback">
                         Voer hier je voornaam in.
                     </div>
@@ -42,18 +41,16 @@
         <div class="col-md-2 mb-3">
         <spring:bind path="tussenvoegsel">
             <div>
-                <label for="tussenvoegsel" class="col-sm-3 control-label">Tussenvoegsel</label>
                 <form:input type="text" path="tussenvoegsel" class="form-control"
-                            placeholder="de"></form:input>
+                            placeholder="tussenvoegsel"></form:input>
             </div>
         </spring:bind>
         </div>
         <div class="col-md-4 mb-3">
         <spring:bind path="achternaam">
             <div>
-                <label for="achternaam" class="col-sm-3 control-label">Achternaam*</label>
                 <form:input type="text" path="achternaam" class="form-control"
-                            placeholder="Tapper" required="true" pattern="[^\s]+"></form:input>
+                            placeholder="Achternaam" required="true" pattern="[^\s]+"></form:input>
                 <div class="invalid-feedback">
                     Voer hier je achternaam in.
                 </div>
@@ -66,9 +63,8 @@
         <div class="col-md-4 mb-3">
             <spring:bind path="emailadres">
                 <div>
-                    <label for="emailadres" class="col-sm-3 control-label">Emailadres*</label>
                     <form:input type="email" path="emailadres" class="form-control"
-                                placeholder="rocky@showmaster.nl" required="true"></form:input>
+                                placeholder="e-mailadres" required="true"></form:input>
                     <div class="invalid-feedback">
                         Voer hier je e-mailadres in
                     </div>
@@ -78,16 +74,17 @@
          <div class="col-md-3 mb-3">
             <spring:bind path="localDate">
                 <div>
-                    <label for="localDate" class="col-sm-3 control-label">Geboortedatum</label>
                     <form:input type="date" path="localDate" class="form-control"
-                                placeholder="yyyy-mm-dd"></form:input>
+                                placeholder="yyyy-mm-dd" required="true"></form:input>
+                    <div class="invalid-feedback">
+                        Voer hier je geboortedatum in
+                    </div>
                 </div>
             </spring:bind>
         </div>
         <div class="col-md-2 mb-3">
             <spring:bind path="telefoonnummer">
                 <div>
-                    <label for="telefoonnumer" class="col-sm-3 control-label">Telefoonnummer*</label>
                     <form:input type="text" path="telefoonnummer" class="form-control"
                                 placeholder="0612345678" required="true" pattern="\d{1,16}"></form:input>
                     <div class="invalid-feedback">
@@ -103,27 +100,24 @@
         <div class="col-md-4 mb-3">
             <spring:bind path="straatnaam">
                 <div>
-                    <label for="straatnaam" class="col-sm-3 control-label">Straatnaam</label>
                     <form:input type="text" path="straatnaam" class="form-control"
-                                placeholder="Rockplein"></form:input>
+                                placeholder="Straatnaam"></form:input>
                 </div>
             </spring:bind>
         </div>
         <div class="col-md-2 mb-3">
             <spring:bind path="huisnummer">
                 <div>
-                    <label for="huisnummer" class="col-sm-3 control-label">Huisnummer</label>
                     <form:input type="number" path="huisnummer" class="form-control"
-                                placeholder="1" min="0"></form:input>
+                                placeholder="huisnummer" min="0"></form:input>
                 </div>
             </spring:bind>
         </div>
         <div class="col-md-2 mb-3">
             <spring:bind path="toevoeging">
                 <div>
-                    <label for="toevoeging" class="col-sm-3 control-label">Toevoeging</label>
                     <form:input type="text" path="toevoeging" class="form-control"
-                                placeholder="A"></form:input>
+                                placeholder="toevoeging"></form:input>
                 </div>
             </spring:bind>
         </div>
@@ -133,7 +127,6 @@
         <div class="col-md-2 mb-3">
             <spring:bind path="postcode">
                 <div>
-                    <label for="postcode" class="col-sm-3 control-label">Postcode</label>
                     <form:input type="text" path="postcode" class="form-control"
                                 placeholder="1234 AB"></form:input>
                 </div>
@@ -142,9 +135,8 @@
         <div class="col-md-4 mb-3">
             <spring:bind path="woonplaats">
                 <div>
-                    <label for="woonplaats" class="col-sm-3 control-label">Woonplaats</label>
                     <form:input type="text" path="woonplaats" class="form-control"
-                                placeholder="Groningen"></form:input>
+                                placeholder="Woonplaats"></form:input>
                 </div>
             </spring:bind>
         </div>
@@ -154,7 +146,6 @@
         <div class="col-md-4 mb-3">
             <spring:bind path="voorkeurstaak">
                 <div>
-                    <label for="voorkeurstaak" class="col-sm-3 control-label"></label>
                     <form:select path="voorkeurstaak">
                         <form:option value="0" label="Maak een keuze"/>
                         <form:options items="${takenLijst}" itemValue="taakId" itemLabel="taakNaam" />
@@ -163,7 +154,6 @@
             </spring:bind>
         </div>
     </div>
-        <p>*Verplichte velden</p>
 
         <button class="btn btn-primary" type="submit">Opslaan</button>
         <a class="btn btn-primary" href="${contextPath}/profiel">Annuleren</a>
