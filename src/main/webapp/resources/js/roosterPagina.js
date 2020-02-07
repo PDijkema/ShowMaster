@@ -4,7 +4,7 @@ function dragStartBeschikbareMedewerker(event, medewerkerId) {
 }
 
 function dragStartIngeplandeMedewerker(event, voorstellingId, voorstellingsTaakId, medewerkerId) {
-    event.dataTransfer.setData("medewerkerId", medewerkerId)
+    event.dataTransfer.setData("medewerkerId", medewerkerId);
     event.dataTransfer.setData("voorstellingId", voorstellingId);
     event.dataTransfer.setData("voorstellingsTaakId", voorstellingsTaakId);
 }
@@ -35,7 +35,7 @@ function dropBeschikbareMedewerker(event, voorstellingsTaakId, voorstellingId, c
 
     xhttp.onreadystatechange = function() {
         if (this.readyState === 4 && this.status === 200) {
-            location.reload();
+            location.reload()
         }
     };
     xhttp.open("GET", contextPath + "/planner/voorstellingen/voorstellingsTaak/medewerkerKoppelen/"
@@ -53,7 +53,7 @@ function vrijgevenIngeplandeMedewerker(event, contextPath) {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (this.readyState === 4 && this.status === 200) {
-                location.reload();
+                location.reload()
             }
         };
         xhttp.open("GET", contextPath + "/planner/voorstellingen/voorstellingsTaak/taakVrijGeven/"

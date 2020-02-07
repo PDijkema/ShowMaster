@@ -14,8 +14,8 @@ public class MailService {
     private MailSender mailSender;
     @Autowired
     private SimpleMailMessage mailMessage;
-    @Autowired
-    private ErrorsController errorsController;
+/*    @Autowired
+    private ErrorsController errorsController;*/
 
     public void verstuurMail(String emailAdres, String onderwerp, String bericht){
 
@@ -27,7 +27,7 @@ public class MailService {
             mailSender.send(uitnodiging);
         }
         catch (MailException exception) {
-            errorsController.getErrorPath();
+            //errorsController.getErrorPath();
         }
     }
 }

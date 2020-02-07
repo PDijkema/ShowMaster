@@ -74,7 +74,7 @@
                                         'Taak verwijderen',
                                         'Weet je zeker dat je deze taak wilt verwijderen?',
                                         'Verwijderen',
-                                        '/planner/voorstellingen/voorstellingsTaak/verwijderen/<c:out value= '${takenBijVoorstelling.voorstelling.voorstellingId}'/>/<c:out value= '${takenBijVoorstelling.voorstellingsTaakId}'/>')">
+                                        '/planner/voorstellingen/voorstellingsTaak/verwijderen/<c:out value= ';${takenBijVoorstelling.voorstelling.voorstellingId}'/>/<c:out value= ';${takenBijVoorstelling.voorstellingsTaakId}'/>';)">
                                         </i>
                                     </td>
                                 </tr>

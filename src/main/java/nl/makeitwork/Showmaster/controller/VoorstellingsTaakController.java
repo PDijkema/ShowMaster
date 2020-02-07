@@ -156,7 +156,7 @@ public class VoorstellingsTaakController {
 
         List<MedewerkerInschrijvingVoorstelling> inschrijvingVoorstellingVoorkeur = new ArrayList<MedewerkerInschrijvingVoorstelling>() {};
         List<VoorstellingsTaak> voorstellingsTaakVoorkeur = new ArrayList<VoorstellingsTaak>() {};
-
+        
         voorstellingsTaken
                 .stream()
                 .filter(x -> x.getTaak().getTaakNaam().equals(voorkeursTaak))
