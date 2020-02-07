@@ -22,7 +22,7 @@ public class EmailMetToken {
     @Transient
     private SimpleMailMessage simpleMailMessage;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(nullable = false, name = "verificatieTokenId")
     private VerificatieToken verificatieToken;
 
