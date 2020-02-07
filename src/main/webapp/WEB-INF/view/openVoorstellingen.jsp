@@ -5,8 +5,10 @@
 <c:set var="beschikbaar" value="Beschikbaar"/>
 <c:set var="misschien" value="Misschien"/>
 <c:set var="nietBeschikbaar" value="Niet Beschikbaar"/>
+
 <!doctype html>
 <html lang="en" xmlns:c="http://www.w3.org/1999/XSL/Transform">
+
     <head>
         <title></title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -58,6 +60,12 @@
                                         <a class="btn btn-secondary btn-lg my-2" role="button"
                                            onclick="
                                            beschikbaarheidStatusDoorgeven(${voorstelling.getVoorstellingId()}, '${nietBeschikbaar}','${contextPath}', this, 'btn-secondary','btn-danger', 2,3)">${nietBeschikbaar}</a>
+                                    </td>
+                                    <td>
+                                        <h2>5</h2>
+                                    </td>
+                                    <td>
+                                        <h2>4</h2>
                                     </td>
                                 </tr>
                             </c:if>
@@ -112,6 +120,12 @@
                                         </td>
                                     </c:when>
                                 </c:choose>
+                                <td>
+                                    <h2>5</h2>
+                                </td>
+                                <td>
+                                    <h2>4</h2>
+                                </td>
                             </tr>
                         </c:forEach>
                     </tbody>
