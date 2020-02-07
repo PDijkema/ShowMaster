@@ -66,6 +66,7 @@
                                         <c:out value="${aantalVoorstellingsTaken[voorstellingId]}"/>
                                     </td>
                                     <td>
+                                        <c:set var="voorstellingId" value="${voorstelling.voorstellingId}" />
                                         <c:out value="${aantalInschrijvingen[voorstellingId]}"/>
                                     </td>
                                 </tr>
@@ -123,9 +124,11 @@
                                     </c:when>
                                 </c:choose>
                                 <td>
+                                    <c:set var="voorstellingId" value="${voorstelling.voorstellingId}" />
                                     <c:out value="${aantalVoorstellingsTaken[voorstellingId]}"/>
                                 </td>
                                 <td>
+                                    <c:set var="voorstellingId" value="${voorstelling.voorstellingId}" />
                                     <c:out value="${aantalInschrijvingen[voorstellingId]}"/>
                                 </td>
                             </tr>
