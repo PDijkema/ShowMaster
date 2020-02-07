@@ -53,7 +53,6 @@
                                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                 <div class="my-2">
                                     <button class="btn btn-primary" type="submit">Log in</button>
-                                    <a href="${contextPath}/registreer"><button class="btn btn-primary" type="button" >Inschrijven</button></a>
                                 </div>
                             </div>
                         </form>
