@@ -28,7 +28,7 @@ public class MedewerkerValidator implements Validator {
             EmailMetToken emailMetToken = (EmailMetToken) object;
 
             ValidationUtils.rejectIfEmptyOrWhitespace(errors, "emailadres","NotEmpty");
-            if (emailMetToken.getEmailadres().length() <20){
+            if (emailMetToken.getEmailadres().length() <3){
                 errors.rejectValue("emailadres", "Size.uitnodigingFormulierGebruiker.emailadres");
             }
             if (medewerkerService.findByUsername(emailMetToken.getEmailadres()) != null) {
@@ -42,7 +42,7 @@ public class MedewerkerValidator implements Validator {
             Medewerker medewerker = (Medewerker) object;
 
             ValidationUtils.rejectIfEmptyOrWhitespace(errors, "gebruikersnaam", "NotEmpty");
-            if (medewerker.getGebruikersnaam().length() < 6 || medewerker.getGebruikersnaam().length() > 32) {
+            if (medewerker.getGebruikersnaam().length() < 3 || medewerker.getGebruikersnaam().length() > 32) {
                 errors.rejectValue("gebruikersnaam", "Size.registratieFormulier.username");
             }
             if (medewerkerService.findByUsername(medewerker.getGebruikersnaam()) != null) {

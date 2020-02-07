@@ -244,8 +244,6 @@ public class MedewerkerController {
         return "redirect:/";
     }
 
-
-
 }
 
 

@@ -1,10 +1,14 @@
 package nl.makeitwork.Showmaster.controller;
 
 
+import nl.makeitwork.Showmaster.model.EmailMetToken;
 import nl.makeitwork.Showmaster.model.Medewerker;
 import nl.makeitwork.Showmaster.model.MedewerkerProfielGegevens;
+import nl.makeitwork.Showmaster.model.VerificatieToken;
+import nl.makeitwork.Showmaster.repository.EmailMetTokenRepository;
 import nl.makeitwork.Showmaster.repository.MedewerkerProfielGegevensRepository;
 import nl.makeitwork.Showmaster.repository.MedewerkerRepository;
+import nl.makeitwork.Showmaster.repository.VerificatieTokenRepository;
 import nl.makeitwork.Showmaster.service.MedewerkerService;
 import org.junit.Assert;
 import org.junit.Before;
@@ -52,6 +56,12 @@ class MedewerkerControllerTest {
     @Autowired
     private MedewerkerProfielGegevensRepository medewerkerProfielGegevensRepository;
 
+    @Autowired
+    VerificatieTokenRepository verificatieTokenRepository;
+
+    @Autowired
+    EmailMetTokenRepository emailMetTokenRepository;
+
 
     @Before
     public void setup() throws Exception {
@@ -78,16 +88,24 @@ class MedewerkerControllerTest {
         when(bindingResult.hasErrors()).thenReturn(false);
         Medewerker medewerker1 = new Medewerker();
 
-        medewerker1.setGebruikersnaam("test1234");
+        medewerker1.setGebruikersnaam("test1234@test.com");
         medewerker1.setWachtwoord("test1234");
         medewerker1.setWachtwoordBevestigen("test1234");
         medewerker1.setPlanner(false);
+        VerificatieToken verificatieToken = new VerificatieToken();
+        verificatieTokenRepository.save(verificatieToken);
+
+        EmailMetToken emailMetToken = new EmailMetToken();
+        emailMetToken.setEmailadres("test1234@test.com");
+        emailMetToken.setVerificatieToken(verificatieToken);
+        emailMetTokenRepository.save(emailMetToken);
+
 
         //Activate
-        //medewerkerController.saveGebruiker(medewerker1, bindingResult);
+        medewerkerController.saveGebruiker(verificatieToken.getToken(),medewerker1, bindingResult);
 
         //Assert
-        Assert.assertNotNull(medewerkerRepository.findByGebruikersnaam("test1234"));
+        Assert.assertNotNull(medewerkerRepository.findByGebruikersnaam("test1234@test.com"));
     }
 
     @Test
@@ -122,20 +140,27 @@ class MedewerkerControllerTest {
             when(bindingResult.hasErrors()).thenReturn(false);
             Medewerker medewerker1 = new Medewerker();
 
-            medewerker1.setGebruikersnaam("test12345");
+            medewerker1.setGebruikersnaam("test1234@test.com");
             medewerker1.setWachtwoord("test12345");
             medewerker1.setWachtwoordBevestigen("test12345");
             medewerker1.setPlanner(false);
+            VerificatieToken verificatieToken = new VerificatieToken();
+            verificatieTokenRepository.save(verificatieToken);
+
+            EmailMetToken emailMetToken = new EmailMetToken();
+            emailMetToken.setEmailadres("test1234@test.com");
+            emailMetToken.setVerificatieToken(verificatieToken);
+            emailMetTokenRepository.save(emailMetToken);
 
             //Activate
-           // medewerkerController.saveGebruiker(medewerker1, bindingResult);
+            medewerkerController.saveGebruiker(verificatieToken.getToken(), medewerker1, bindingResult);
 
-            medewerker1 = medewerkerRepository.findByGebruikersnaam("test12345");
+            medewerker1 = medewerkerRepository.findByGebruikersnaam("test1234@test.com");
 
             medewerkerController.verwijderGebruiker(medewerker1.getMedewerkerId());
 
             //Assert
-            Assert.assertNull(medewerkerRepository.findByGebruikersnaam("test12345"));
+            Assert.assertNull(medewerkerRepository.findByGebruikersnaam("test1234@test.com"));
 
         }
 
