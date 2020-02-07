@@ -71,6 +71,7 @@
                                 </tr>
                             </c:if>
                         </c:forEach>
+
                         <c:forEach items="${inschrijvingen}" var="inschrijving">
                             <tr>
                                 <td><h1><c:out value="${inschrijving.voorstelling.naam}"/></h1></td>
