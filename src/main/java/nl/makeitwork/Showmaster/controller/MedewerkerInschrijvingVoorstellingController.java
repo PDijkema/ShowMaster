@@ -12,7 +12,10 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @Controller
@@ -34,11 +37,13 @@ public class MedewerkerInschrijvingVoorstellingController {
 
         List<MedewerkerInschrijvingVoorstelling> medewerkerInschrijvingVoorstellingList = medewerkerInschrijvingVoorstellingRepository.findInschrijvingByMedewerkerId(ingelogdeMedewerker.getMedewerkerId());
 
-        medewerkerInschrijvingVoorstellingList.forEach(r->voorstellingen.remove(r.getVoorstelling()));
+        medewerkerInschrijvingVoorstellingList.forEach(r -> voorstellingen.remove(r.getVoorstelling()));
 
-        medewerkerInschrijvingVoorstellingList.forEach(r->r.getVoorstelling().getNaam());
+        medewerkerInschrijvingVoorstellingList.forEach(r -> r.getVoorstelling().getNaam());
 
-        model.addAttribute("inschrijvingen",medewerkerInschrijvingVoorstellingList);
+        model.addAttribute("aantalVoorstellingsTaken", voorstellingenMetAantalVoorstellingsTaken());
+        model.addAttribute("aantalInschrijvingen", voorstellingenMetAantalInschrijvingen());
+        model.addAttribute("inschrijvingen", medewerkerInschrijvingVoorstellingList);
         model.addAttribute("voorstellingLijst", voorstellingen);
 
         return "openVoorstellingen";
@@ -47,7 +52,7 @@ public class MedewerkerInschrijvingVoorstellingController {
     @GetMapping("/rooster/openvoorstelling/inschrijven/{voorstellingId}/{inschrijvingStatus}")
     public String inschrijvenVoorstelling(@PathVariable Integer voorstellingId, @PathVariable String inschrijvingStatus, @AuthenticationPrincipal Medewerker ingelogdeMedewerker) {
 
-        MedewerkerInschrijvingVoorstelling alIngeschrevenMedewerker = medewerkerInschrijvingVoorstellingRepository.findByVoorstellingVoorstellingIdAndMedewerkerMedewerkerId(voorstellingId,ingelogdeMedewerker.getMedewerkerId());
+        MedewerkerInschrijvingVoorstelling alIngeschrevenMedewerker = medewerkerInschrijvingVoorstellingRepository.findByVoorstellingVoorstellingIdAndMedewerkerMedewerkerId(voorstellingId, ingelogdeMedewerker.getMedewerkerId());
 
         if (inschrijvingStatus.matches("Beschikbaar|Misschien|Niet Beschikbaar")) {
             if (alIngeschrevenMedewerker != null) {
@@ -56,11 +61,29 @@ public class MedewerkerInschrijvingVoorstellingController {
             } else {
                 Voorstelling voorstelling = voorstellingRepository.findByVoorstellingId(voorstellingId);
                 MedewerkerInschrijvingVoorstelling medewerkerInschrijvingVoorstelling =
-                        new MedewerkerInschrijvingVoorstelling(ingelogdeMedewerker,voorstelling,inschrijvingStatus);
+                        new MedewerkerInschrijvingVoorstelling(ingelogdeMedewerker, voorstelling, inschrijvingStatus);
                 medewerkerInschrijvingVoorstellingRepository.save(medewerkerInschrijvingVoorstelling);
             }
         }
         return "redirect:/rooster/openvoorstelling";
+    }
+
+    private Map<Integer, Integer> voorstellingenMetAantalVoorstellingsTaken() {
+        Map<Integer, Integer> aantalVoorstellingstaken = new HashMap<>();
+
+        for (Voorstelling voorstelling : voorstellingRepository.findAll()) {
+            aantalVoorstellingstaken.put(voorstelling.getVoorstellingId(), voorstellingsTaakRepository.countByVoorstellingVoorstellingId(voorstelling.getVoorstellingId()));
+        }
+        return aantalVoorstellingstaken;
+    }
+
+    private Map<Integer, Integer> voorstellingenMetAantalInschrijvingen() {
+        Map<Integer, Integer> aantalInschrijvingen = new HashMap<>();
+
+        for (Voorstelling voorstelling : voorstellingRepository.findAll()) {
+            aantalInschrijvingen.put(voorstelling.getVoorstellingId(), medewerkerInschrijvingVoorstellingRepository.countByVoorstellingVoorstellingId(voorstelling.getVoorstellingId()));
+        }
+        return aantalInschrijvingen;
     }
 }
 

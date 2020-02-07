@@ -44,87 +44,88 @@
                         <c:forEach items="${voorstellingLijst}" var="voorstelling">
                             <c:if test="${voorstelling.status == 'Gepubliceerd'}">
                                 <tr>
-                                    <td><h1><c:out value="${voorstelling.getNaam()}"/></h1></td>
-                                    <td><c:out value="${voorstelling.getDatum()}"/></td>
+                                    <td><h1><c:out value="${voorstelling.naam}"/></h1></td>
+                                    <td><c:out value="${voorstelling.datum}"/></td>
                                     <td>
                                         <a class="btn btn-secondary btn-lg my-2" role="button"
                                            onclick="
-                                           beschikbaarheidStatusDoorgeven(${voorstelling.getVoorstellingId()}, '${beschikbaar}','${contextPath}', this, 'btn-secondary', 'btn-success', 3, 4) ">${beschikbaar}</a>
-                                    </td>
-                                    <td>
-                                        <a class="btn btn-secondary btn-lg my-2" role="button"
-                                           onclick="
-                                           beschikbaarheidStatusDoorgeven(${voorstelling.getVoorstellingId()}, '${misschien}','${contextPath}', this, 'btn-secondary','btn-warning',2,4 )">${misschien}</a>
+                                           beschikbaarheidStatusDoorgeven(${voorstelling.voorstellingId}, '${beschikbaar}','${contextPath}', this, 'btn-secondary', 'btn-success', 3, 4) ">${beschikbaar}</a>
                                     </td>
                                     <td>
                                         <a class="btn btn-secondary btn-lg my-2" role="button"
                                            onclick="
-                                           beschikbaarheidStatusDoorgeven(${voorstelling.getVoorstellingId()}, '${nietBeschikbaar}','${contextPath}', this, 'btn-secondary','btn-danger', 2,3)">${nietBeschikbaar}</a>
+                                           beschikbaarheidStatusDoorgeven(${voorstelling.voorstellingId}, '${misschien}','${contextPath}', this, 'btn-secondary','btn-warning',2,4 )">${misschien}</a>
                                     </td>
                                     <td>
-                                        <h2>5</h2>
+                                        <a class="btn btn-secondary btn-lg my-2" role="button"
+                                           onclick="
+                                           beschikbaarheidStatusDoorgeven(${voorstelling.voorstellingId}, '${nietBeschikbaar}','${contextPath}', this, 'btn-secondary','btn-danger', 2,3)">${nietBeschikbaar}</a>
                                     </td>
                                     <td>
-                                        <h2>4</h2>
+                                        <c:set var="voorstellingId" value="${voorstelling.voorstellingId}" />
+                                        <c:out value="${aantalVoorstellingsTaken[voorstellingId]}"/>
+                                    </td>
+                                    <td>
+                                        <c:out value="${aantalInschrijvingen[voorstellingId]}"/>
                                     </td>
                                 </tr>
                             </c:if>
                         </c:forEach>
                         <c:forEach items="${inschrijvingen}" var="inschrijving">
                             <tr>
-                                <td><h1><c:out value="${inschrijving.getVoorstelling().getNaam()}"/></h1></td>
-                                <td><c:out value="${inschrijving.getVoorstelling().getDatum()}"/></td>
+                                <td><h1><c:out value="${inschrijving.voorstelling.naam}"/></h1></td>
+                                <td><c:out value="${inschrijving.voorstelling.datum}"/></td>
                                 <c:choose>
-                                    <c:when test="${inschrijving.getInschrijvingStatus() == beschikbaar}">
+                                    <c:when test="${inschrijving.inschrijvingStatus == beschikbaar}">
                                         <td>
                                             <a class="btn btn-success btn-lg my-2" role="button" id='test'
                                                onclick="
-                                                       beschikbaarheidStatusDoorgeven(${inschrijving.getVoorstelling().getVoorstellingId()}, '${beschikbaar}','${contextPath}', this, 'btn-secondary', 'btn-success', 3, 4) ">${beschikbaar}</a>
+                                                       beschikbaarheidStatusDoorgeven(${inschrijving.voorstelling.voorstellingId}, '${beschikbaar}','${contextPath}', this, 'btn-secondary', 'btn-success', 3, 4) ">${beschikbaar}</a>
                                         </td>
                                         <td><a id='test4' class="btn btn-secondary btn-lg my-2" role="button"
                                                onclick="
-                                                       beschikbaarheidStatusDoorgeven(${inschrijving.getVoorstelling().getVoorstellingId()}, '${misschien}','${contextPath}', this, 'btn-secondary','btn-warning',2,4 )">${misschien}</a>
+                                                       beschikbaarheidStatusDoorgeven(${inschrijving.voorstelling.voorstellingId}, '${misschien}','${contextPath}', this, 'btn-secondary','btn-warning',2,4 )">${misschien}</a>
                                         </td>
                                         <td><a class="btn btn-secondary btn-lg my-2" role="button"
                                                onclick="
-                                                       beschikbaarheidStatusDoorgeven(${inschrijving.getVoorstelling().getVoorstellingId()}, '${nietBeschikbaar}','${contextPath}', this, 'btn-secondary','btn-danger', 2,3)">${nietBeschikbaar}</a>
+                                                       beschikbaarheidStatusDoorgeven(${inschrijving.voorstelling.voorstellingId}, '${nietBeschikbaar}','${contextPath}', this, 'btn-secondary','btn-danger', 2,3)">${nietBeschikbaar}</a>
                                         </td>
                                     </c:when>
-                                    <c:when test="${inschrijving.getInschrijvingStatus() == misschien}">
+                                    <c:when test="${inschrijving.inschrijvingStatus == misschien}">
                                         <td>
                                             <a class="btn btn-secondary btn-lg my-2" role="button"
-                                               onclick=" beschikbaarheidStatusDoorgeven(${inschrijving.getVoorstelling().getVoorstellingId()}, '${beschikbaar}','${contextPath}', this, 'btn-secondary', 'btn-success', 3, 4)  ">${beschikbaar}</a>
+                                               onclick=" beschikbaarheidStatusDoorgeven(${inschrijving.voorstelling.voorstellingId}, '${beschikbaar}','${contextPath}', this, 'btn-secondary', 'btn-success', 3, 4)  ">${beschikbaar}</a>
                                         </td>
                                         <td>
                                             <a class="btn btn-warning btn-lg my-2" role="button"
                                                onclick="
-                                                       beschikbaarheidStatusDoorgeven(${inschrijving.getVoorstelling().getVoorstellingId()}, '${misschien}','${contextPath}', this, 'btn-secondary','btn-warning',2,4 )">${misschien}</a>
+                                                       beschikbaarheidStatusDoorgeven(${inschrijving.voorstelling.voorstellingId}, '${misschien}','${contextPath}', this, 'btn-secondary','btn-warning',2,4 )">${misschien}</a>
                                         </td>
                                         <td>
                                             <a class="btn btn-secondary btn-lg my-2" role="button"
                                                onclick="
-                                                       beschikbaarheidStatusDoorgeven(${inschrijving.getVoorstelling().getVoorstellingId()}, '${nietBeschikbaar}','${contextPath}', this, 'btn-secondary','btn-danger', 2,3)">${nietBeschikbaar}</a>
+                                                       beschikbaarheidStatusDoorgeven(${inschrijving.voorstelling.voorstellingId}, '${nietBeschikbaar}','${contextPath}', this, 'btn-secondary','btn-danger', 2,3)">${nietBeschikbaar}</a>
                                         </td>
                                     </c:when>
-                                    <c:when test="${inschrijving.getInschrijvingStatus() == nietBeschikbaar}">
+                                    <c:when test="${inschrijving.inschrijvingStatus == nietBeschikbaar}">
                                         <td>
                                             <a class="btn btn-secondary btn-lg my-2" role="button"
-                                               onclick="beschikbaarheidStatusDoorgeven(${inschrijving.getVoorstelling().getVoorstellingId()}, '${beschikbaar}','${contextPath}', this, 'btn-secondary', 'btn-success', 3, 4) ">${beschikbaar}</a>
+                                               onclick="beschikbaarheidStatusDoorgeven(${inschrijving.voorstelling.voorstellingId}, '${beschikbaar}','${contextPath}', this, 'btn-secondary', 'btn-success', 3, 4) ">${beschikbaar}</a>
                                         </td>
                                         <td><a class="btn btn-secondary btn-lg my-2" role="button"
-                                               onclick=" beschikbaarheidStatusDoorgeven(${inschrijving.getVoorstelling().getVoorstellingId()}, '${misschien}','${contextPath}', this, 'btn-secondary','btn-warning',2,4 )">${misschien}</a>
+                                               onclick=" beschikbaarheidStatusDoorgeven(${inschrijving.voorstelling.voorstellingId}, '${misschien}','${contextPath}', this, 'btn-secondary','btn-warning',2,4 )">${misschien}</a>
                                         </td>
                                         <td>
                                             <a class="btn btn-danger btn-lg my-2" role="button"
-                                               onclick="beschikbaarheidStatusDoorgeven(${inschrijving.getVoorstelling().getVoorstellingId()}, '${nietBeschikbaar}','${contextPath}', this, 'btn-secondary','btn-danger', 2,3)">${nietBeschikbaar}</a>
+                                               onclick="beschikbaarheidStatusDoorgeven(${inschrijving.voorstelling.voorstellingId}, '${nietBeschikbaar}','${contextPath}', this, 'btn-secondary','btn-danger', 2,3)">${nietBeschikbaar}</a>
                                         </td>
                                     </c:when>
                                 </c:choose>
                                 <td>
-                                    <h2>5</h2>
+                                    <c:out value="${aantalVoorstellingsTaken[voorstellingId]}"/>
                                 </td>
                                 <td>
-                                    <h2>4</h2>
+                                    <c:out value="${aantalInschrijvingen[voorstellingId]}"/>
                                 </td>
                             </tr>
                         </c:forEach>
