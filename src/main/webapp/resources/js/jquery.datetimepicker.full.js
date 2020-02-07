@@ -700,7 +700,7 @@ var datetimepickerFactory = function ($) {
 				},
 			}
 		}
-	};
+	}
 
 	// for locale settings
 	$.datetimepicker = {
@@ -735,11 +735,11 @@ var datetimepickerFactory = function ($) {
 		RFC_1123: 'D, d M Y H:i:s O',
 		RSS: 'D, d M Y H:i:s O',
 		W3C: 'Y-m-d\TH:i:sP'
-	};
+	}
 
 	var isFormatStandard = function(format){
 		return Object.values(standardFormats).indexOf(format) === -1 ? false : true;
-	};
+	}
 
 	$.extend($.datetimepicker, standardFormats);
 
@@ -1078,7 +1078,7 @@ var datetimepickerFactory = function ($) {
 				if(distance > options.touchMovedThreshold) {
 					this.touchMoved = true;
 				}
-			};
+			}
 
 			month_picker
 				.find('.xdsoft_select')
@@ -2402,7 +2402,7 @@ var datetimepickerFactory = function ($) {
 					    var clipboardData = event.clipboardData || event.originalEvent.clipboardData || window.clipboardData,
 						pastedData = clipboardData.getData('text'),
 						val = this.value,
-						pos = this.selectionStart;
+						pos = this.selectionStart
 
 					    var valueBeforeCursor = val.substr(0, pos);
 					    var valueAfterPaste = val.substr(pos + pastedData.length);
@@ -2455,7 +2455,7 @@ var datetimepickerFactory = function ($) {
 						  var posGreaterThanZero = pos > 0;
 						  var notNumberOrPlaceholder = /[^0-9_]/;
 						  var curPosOnSep = notNumberOrPlaceholder.test(maskValueAtCurPos);
-						  var continueMovingPosition = curPosOnSep && posShorterThanMaskLength && posGreaterThanZero;
+						  var continueMovingPosition = curPosOnSep && posShorterThanMaskLength && posGreaterThanZero
 
 						  // if we hit a real char, stay where we are
 						  if (!continueMovingPosition) break;
@@ -2472,12 +2472,12 @@ var datetimepickerFactory = function ($) {
 
 						if (hasSel) {
 						  // pos might have moved so re-calc length
-						  var selLength = selEnd - pos;
+						  var selLength = selEnd - pos
 
 						  // if we have a selection length we will wipe out entire selection and replace with default template for that range
 						  var defaultBlank = options.mask.replace(/[0-9]/g, '_');
 						  var defaultBlankSelectionReplacement = defaultBlank.substr(pos, selLength); 
-						  var selReplacementRemainder = defaultBlankSelectionReplacement.substr(1); // might be empty
+						  var selReplacementRemainder = defaultBlankSelectionReplacement.substr(1) // might be empty
 
 						  var valueBeforeSel = val.substr(0, pos);
 						  var insertChars = digit + selReplacementRemainder;
@@ -2680,7 +2680,7 @@ var datetimepickerFactory = function ($) {
 		define(['jquery', 'jquery-mousewheel'], factory);
 	} else if (typeof exports === 'object') {
 		// Node/CommonJS style for Browserify
-		module.exports = factory(require('jquery'));
+		module.exports = factory(require('jquery'));;
 	} else {
 		// Browser globals
 		factory(jQuery);
