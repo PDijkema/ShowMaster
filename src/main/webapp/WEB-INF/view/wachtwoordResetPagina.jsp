@@ -30,11 +30,11 @@
     </div>
 </div>
 <div class="container">
-    <form:form method="POST" modelAttribute="wachtwoordFormulier" class="needs-validation" novalidate="true">
+    <form:form method="POST" modelAttribute="medewerker" class="needs-validation" novalidate="true">
 
         <spring:bind path="wachtwoord">
             <div class="form-group ${status.error ? 'has-error' : ''}">
-                <form:input type="password" path="wachtwoord" class="form-control ${status.error ? 'is-invalid' : ''}" placeholder="Wachtwoord" autofocus="true" required="true" pattern="[^\s]+"></form:input>
+                <form:input type="password" path="wachtwoord" class="form-control ${status.error ? 'is-invalid' : ''}" placeholder="Nieuwe wachtwoord" autofocus="true" required="true" pattern="[^\s]+"></form:input>
                 <div class="invalid-feedback">
                     Voer een geldig wachtwoord in
                 </div>
@@ -50,12 +50,6 @@
             </div>
         </spring:bind>
 
-        <spring:bind path="planner">
-            <!-- CHECKBOX VERBORGEN IVM DEMO-->
-            <div> <!-- hidden class="form-group ${status.error ? 'has-error' : ''}" -->
-                <form:checkbox path="planner" value="Planner" /> Planner
-            </div>
-        </spring:bind>
         <button class="btn btn-primary" type="submit">Verstuur</button>
     </form:form>
 </div>

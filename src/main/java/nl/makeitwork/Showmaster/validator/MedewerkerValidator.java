@@ -59,6 +59,20 @@ public class MedewerkerValidator implements Validator {
                 errors.rejectValue("wachtwoordBevestigen", "Diff.registratieFormulier.wachtwoordBevestigen");
             }
         }
+
+        public void validateWachtwoord (Object object, Errors errors) {
+            Medewerker medewerker = (Medewerker) object;
+
+            ValidationUtils.rejectIfEmptyOrWhitespace(errors, "wachtwoord", "NotEmpty");
+            if (medewerker.getWachtwoord().length() < 8 || medewerker.getWachtwoord().length() > 32) {
+                errors.rejectValue("wachtwoord", "Size.registratieFormulier.wachtwoord");
+            }
+
+            if (!medewerker.getWachtwoordBevestigen().equals(medewerker.getWachtwoord())) {
+                errors.rejectValue("wachtwoordBevestigen", "Diff.registratieFormulier.wachtwoordBevestigen");
+            }
+
+        }
     }
 
 

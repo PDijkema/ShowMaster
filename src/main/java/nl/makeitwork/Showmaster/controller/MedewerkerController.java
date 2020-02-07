@@ -195,23 +195,54 @@ public class MedewerkerController {
 
 
         model.addAttribute("emailadres" , emailadres);
-        return "wachtwoordReset";
+        return "wachtwoordResetAanvragen";
     }
 
     @GetMapping("/wachtwoord/reset/{token}")
     protected String wachtwoordResetPaginaToken (@PathVariable String token, Model model){
         VerificatieToken verificatieToken = verificatieTokenRepository.findByToken(token);
 
-
+        model.addAttribute(new Medewerker());
 
         if (verificatieToken.getTokenGebruikt()){
-            return "errorToken";
+            return "errorTokenWachtwoordReset";
         }
 
 
         return "wachtwoordResetPagina";
     }
 
+    @PostMapping("/wachtwoord/reset/{token}")
+    public String wachtResetPaginaToken(@PathVariable String token, Medewerker medewerker , BindingResult bindingResult) {
+
+        VerificatieToken verificatieToken = verificatieTokenRepository.findByToken(token);
+        EmailMetToken emailMetToken = emailMetTokenRepository.findByVerificatieToken(verificatieToken);
+
+        Medewerker medewerkerNieuwWachtwoord = medewerkerRepository.findByGebruikersnaam(emailMetToken.getEmailadres());
+
+
+        medewerkerNieuwWachtwoord.setWachtwoord(medewerker.getWachtwoord());
+        medewerkerNieuwWachtwoord.setWachtwoordBevestigen(medewerker.getWachtwoordBevestigen());
+
+        if (verificatieToken.getTokenGebruikt()){
+            return "errorTokenUitnodiging";
+        }
+
+
+       medewerkerValidator.validateWachtwoord(medewerker, bindingResult);
+        if (bindingResult.hasErrors()) {
+            return "wachtwoordResetPagina";
+        }
+        medewerkerService.save(medewerkerNieuwWachtwoord);
+        securityService.autoLogin(medewerkerNieuwWachtwoord.getGebruikersnaam(), medewerkerNieuwWachtwoord.getWachtwoordBevestigen());
+        medewerkerNieuwWachtwoord.setWachtwoordBevestigen("");
+
+
+        verificatieToken.setTokenGebruikt(true);
+        verificatieTokenRepository.save(verificatieToken);
+
+        return "redirect:/";
+    }
 
 
 
