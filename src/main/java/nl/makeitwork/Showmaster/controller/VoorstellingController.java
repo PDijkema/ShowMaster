@@ -21,7 +21,9 @@ import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -49,6 +51,13 @@ public class VoorstellingController {
 
         model.addAttribute("alleVoorstellingen", voorstellingRepository
                 .findAllByOrderByLocalDateTimeAsc());
+
+        Map<Integer, Integer> openstaandeTaken = new HashMap<>();
+
+        for (Voorstelling voorstelling : voorstellingRepository.findAll()) {
+            openstaandeTaken.put(voorstelling.getVoorstellingId(), voorstellingsTaakRepository.countByVoorstellingVoorstellingIdAndMedewerkerIsNull(voorstelling.getVoorstellingId()));
+        }
+        model.addAttribute("openstaandeTaken", openstaandeTaken);
 
         return "alleVoorstellingen";
     }

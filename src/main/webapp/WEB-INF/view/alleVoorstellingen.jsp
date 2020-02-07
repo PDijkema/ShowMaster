@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ page import="java.util.*"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
 <!doctype html>
@@ -33,6 +34,7 @@
                     <th scope="col" onclick="sortTable(2)">Datum</th>
                     <th hidden scope="col" onclick="sortTable(2)">Datum2</th>
                     <th scope="col" onclick="sortTable(3)">Status</th>
+                    <th scope="col" onclick="sortTable(4)">Openstaande taken</th>
                     <th scope="col" >Roosterbeheer</th>
                     <th scope="col" >Wijzigen</th>
                     <th scope="col" >Verwijderen</th>
@@ -41,74 +43,76 @@
 
                 <c:forEach items="${alleVoorstellingen}" var="voorstelling">
                 <tbody>
-
-                <td><h2><c:out value="${voorstelling.getNaam()}"/></h2></td>
-                <td> <c:out value="${voorstelling.getDatum()}"/></td>
-                <td hidden><c:out value="${voorstelling.getLocalDateTime()}"/></td>
-                    <td>  <c:choose>
-                        <c:when test="${voorstelling.status == 'Geannuleerd'}">
-                            <span class="badge badge-danger">Voorstelling geannuleerd</span>
-                        </c:when>
-                        <c:when test="${voorstelling.status == 'Ongepubliceerd'}">
-                            <div>
-                                <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal"
-                                data-target="#waarschuwingsModal"
-                                onclick="vullenModal(
-                                'Voorstelling publiceren',
-                                'Medewerkers kunnen zicht nu inschrijven voor deze voorstelling. Weet je het zeker?',
-                                'Publiceer',
-                                '/planner/voorstellingen/voorstelling/publiceren/<c:out value= '${voorstelling.voorstellingId}'/>')">
-                                Publiceer
-                                </button>
-                            </div>
-                        </c:when>
-                        <c:otherwise>
-                            <span class="badge badge-success"><c:out value="${voorstelling.status}"/></span>
-                        </c:otherwise>
-                    </c:choose> </td>
-                            <td>
-                                <c:choose>
-                                    <c:when test="${voorstelling.status == 'Geannuleerd'}">
-                                        <!-- nothing yet  -->
-                                        <td></td>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <a href="${contextPath}/planner/voorstellingen/voorstelling/rooster/<c:out value='${voorstelling.voorstellingId}' />">
-                                            <i class="fas fa-user-edit" title="Planning"></i>
-                                        </a>
-                                    </c:otherwise>
-                                </c:choose>
-                                <c:choose>
-                                    <c:when test="${voorstelling.status == 'Geannuleerd'}">
-                                        <!-- nothing yet -->
-                                    </c:when>
-                                    <c:otherwise>
-
-                                    <td>
-                                        <i class="far fa-edit" title="Wijzigen" data-toggle="modal"
-                                         data-target="#wijzigVoorstellingModal"
-                                         onclick="wijzigVoorstelling('${contextPath}','${voorstelling.voorstellingId}')">
-                                         </i>
-                                    </td>
-
-                                    </c:otherwise>
-                                </c:choose>
-
-                                <td>
-                                    <i class="fas fa-trash" title="Verwijderen" data-toggle="modal"
+                    <td><h2><c:out value="${voorstelling.naam}"/></h2></td>
+                    <td> <c:out value="${voorstelling.datum}"/></td>
+                    <td hidden><c:out value="${voorstelling.localDateTime}"/></td>
+                    <td>
+                        <c:choose>
+                            <c:when test="${voorstelling.status == 'Geannuleerd'}">
+                                <span class="badge badge-danger">Voorstelling geannuleerd</span>
+                            </c:when>
+                            <c:when test="${voorstelling.status == 'Ongepubliceerd'}">
+                                <div>
+                                    <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal"
                                     data-target="#waarschuwingsModal"
                                     onclick="vullenModal(
-                                    'Voorstelling verwijderen',
-                                    'Weet je zeker dat je deze voorstelling wilt verwijderen?',
-                                    'Verwijderen',
-                                    '/planner/voorstellingen/voorstelling/verwijderen/<c:out value= '${voorstelling.voorstellingId}'/>')">
-                                    </i>
-                                </td>
+                                    'Voorstelling publiceren',
+                                    'Medewerkers kunnen zicht nu inschrijven voor deze voorstelling. Weet je het zeker?',
+                                    'Publiceer',
+                                    '/planner/voorstellingen/voorstelling/publiceren/<c:out value= '${voorstelling.voorstellingId}'/>')">
+                                    Publiceer
+                                    </button>
+                                </div>
+                            </c:when>
+                            <c:otherwise>
+                                <span class="badge badge-success"><c:out value="${voorstelling.status}"/></span>
+                            </c:otherwise>
+                        </c:choose>
+                    </td>
+                    <td>
+                        <c:set var="voorstellingId" value="${voorstelling.voorstellingId}" />
+                        <c:out value="${openstaandeTaken[voorstellingId]}"/>
+                    </td>
+                    <td>
+                        <c:choose>
+                            <c:when test="${voorstelling.status == 'Geannuleerd'}">
+                                <!-- nothing yet  -->
+                                <td></td>
+                            </c:when>
+                            <c:otherwise>
+                                <a href="${contextPath}/planner/voorstellingen/voorstelling/rooster/<c:out value='${voorstelling.voorstellingId}' />">
+                                    <i class="fas fa-user-edit" title="Planning"></i>
+                                </a>
+                            </c:otherwise>
+                        </c:choose>
+                        <c:choose>
+                            <c:when test="${voorstelling.status == 'Geannuleerd'}">
+                                <!-- nothing yet -->
+                            </c:when>
+                            <c:otherwise>
+                            <td>
+                                <i class="far fa-edit" title="Wijzigen" data-toggle="modal"
+                                 data-target="#wijzigVoorstellingModal"
+                                 onclick="wijzigVoorstelling('${contextPath}','${voorstelling.voorstellingId}')">
+                                 </i>
                             </td>
+                            </c:otherwise>
+                        </c:choose>
+                    </td>
+                    <td>
+                        <i class="fas fa-trash" title="Verwijderen" data-toggle="modal"
+                        data-target="#waarschuwingsModal"
+                        onclick="vullenModal(
+                        'Voorstelling verwijderen',
+                        'Weet je zeker dat je deze voorstelling wilt verwijderen?',
+                        'Verwijderen',
+                        '/planner/voorstellingen/voorstelling/verwijderen/<c:out value= '${voorstelling.voorstellingId}'/>')">
+                        </i>
+                    </td>
                 </tbody>
-                </c:forEach>
-            </table>
-        </div>
+            </c:forEach>
+        </table>
+    </div>
         <div class="modal fade" id="nieuweVoorstellingModal" tabindex="-1" role="dialog" aria-labelledby="nieuweVoorstellingModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
