@@ -26,7 +26,7 @@
 
 <div class="jumbotron jumbotron-fluid">
     <div class="container">
-        <h1 class="voorstellingDisplay4">Account aanmaken</h1>
+        <h1 class="voorstellingDisplay4">Nieuw Wachtwoord Aanmaken</h1>
     </div>
 </div>
 <div class="container">
@@ -50,7 +50,7 @@
             </div>
         </spring:bind>
 
-        <button class="btn btn-primary" type="submit">Verstuur</button>
+        <button class="btn btn-primary" type="submit">Inloggen</button>
     </form:form>
 </div>
 </body>
