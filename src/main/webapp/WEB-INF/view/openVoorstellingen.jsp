@@ -34,6 +34,8 @@
                             <th scope="col" onclick="sortTable(2)">Beschikbaar</th>
                             <th scope="col" onclick="sortTable(3)">Misschien</th>
                             <th scope="col" onclick="sortTable(4)">Niet Beschikbaar</th>
+                            <th>Aantal benodigd</th>
+                            <th>Aantal inschrijvingen</th>
                         </tr>
                     </thead>
                     <tbody>
