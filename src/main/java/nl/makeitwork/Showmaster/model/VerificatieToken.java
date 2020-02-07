@@ -30,6 +30,7 @@ public class VerificatieToken {
     public VerificatieToken() {
         this.token = UUID.randomUUID().toString();
         this.expiryDate = calculateExpiryDate(EXPIRATION);
+        this.tokenGebruikt = false;
     }
 
     public Boolean getTokenGebruikt() {

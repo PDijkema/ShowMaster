@@ -91,11 +91,15 @@ public class MedewerkerController {
     @PostMapping("/registreer/{token}")
     public String saveGebruiker(@PathVariable String token, Medewerker registratieFormulier, BindingResult bindingResult) {
 
-
         VerificatieToken verificatieToken = verificatieTokenRepository.findByToken(token);
         UitnodigingMedewerker uitnodigingMedewerker = uitnodigingMedewerkerRepository.findByVerificatieToken(verificatieToken);
+
+        if (verificatieToken.getTokenGebruikt()){
+            return "errorToken";
+        }
+
+
         registratieFormulier.setGebruikersnaam(uitnodigingMedewerker.getEmailadres());
-        System.out.println(registratieFormulier.getGebruikersnaam());
 
         medewerkerValidator.validate(registratieFormulier, bindingResult);
         if (bindingResult.hasErrors()) {

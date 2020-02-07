@@ -9,4 +9,5 @@ public interface UitnodigingMedewerkerRepository extends JpaRepository<Uitnodigi
     UitnodigingMedewerker findByVerificatieToken(VerificatieToken verificatieToken);
 
 
+
 }

@@ -2,6 +2,7 @@ package nl.makeitwork.Showmaster.validator;
 
 import nl.makeitwork.Showmaster.model.Medewerker;
 import nl.makeitwork.Showmaster.model.UitnodigingMedewerker;
+import nl.makeitwork.Showmaster.repository.UitnodigingMedewerkerRepository;
 import nl.makeitwork.Showmaster.service.MedewerkerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -15,6 +16,9 @@ public class MedewerkerValidator implements Validator {
         @Autowired
         private MedewerkerService medewerkerService;
 
+        @Autowired
+        private UitnodigingMedewerkerRepository uitnodigingMedewerkerRepository;
+
         @Override
         public boolean supports(Class<?> aClass) {
             return Medewerker.class.equals(aClass);
@@ -24,8 +28,11 @@ public class MedewerkerValidator implements Validator {
             UitnodigingMedewerker uitnodigingMedewerker = (UitnodigingMedewerker) object;
 
             ValidationUtils.rejectIfEmptyOrWhitespace(errors, "emailadres","NotEmpty");
-            if (uitnodigingMedewerker.getEmailadres().length() <3){
-                errors.rejectValue("emailadres", "uitnodigingFormulierGebruiker.emailadres");
+            if (uitnodigingMedewerker.getEmailadres().length() <20){
+                errors.rejectValue("emailadres", "Size.uitnodigingFormulierGebruiker.emailadres");
+            }
+            if (medewerkerService.findByUsername(uitnodigingMedewerker.getEmailadres()) != null) {
+                errors.rejectValue("emailadres", "Duplicate.uitnodigingFormulierGebruiker.emailadres");
             }
 
         }
