@@ -1,0 +1,109 @@
+/*styling icoontjes bovenin pagina*/
+
+#keuzeJa{
+    /*font-size:75%;*/
+    color: #63d481;
+}
+
+#keuzeMisschien{
+    font-size:75%;
+    color: #efa625;
+    margin-left:5em
+}
+#keuzeNee{
+    font-size:75%;
+    color: #de4846;
+    margin-left:5em
+}
+
+/*styling radiobuttons */
+input[type="radio"]{
+   -webkit-appearance: none;
+}
+
+label{
+  height: 3rem;
+  width: 3rem;
+  border:1px solid transparant;
+  margin: auto;
+  border-radius: .25rem;
+  position: relative;
+  transition: 0.5s;
+  padding:.375rem .75rem;
+  line-height:1.5;
+  background-color: #ddd;
+}
+
+#icoonJa, #icoonMisschien, #icoonNee {
+   color: #fff;
+ }
+
+.fas {
+   font-size: 2rem;
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+}
+
+.cc-selector input{
+    margin:0;padding:0;
+    -webkit-appearance:none;
+       -moz-appearance:none;
+            appearance:none;
+}
+
+.cc-selector input:active +.beschikbaarheid-cc
+{opacity: .9;}
+
+.cc-selector input:checked +.beschikbaarheid-cc.ja{
+    background-color: #63d481;
+}
+
+.cc-selector input:checked +.beschikbaarheid-cc.misschien{
+    background-color: #efa625;
+}
+
+.cc-selector input:checked +.beschikbaarheid-cc.nee{
+    background-color: #de4846;
+}
+
+.beschikbaarheid-cc{
+    cursor:pointer;
+    background-size:contain;
+    background-repeat:no-repeat;
+    display:inline-block;
+    -webkit-transition: all 100ms ease-in;
+       -moz-transition: all 100ms ease-in;
+            transition: all 100ms ease-in;
+
+}
+.beschikbaarheid-cc:hover{
+    -webkit-filter: brightness(1.2) grayscale(.5) opacity(.9);
+       -moz-filter: brightness(1.2) grayscale(.5) opacity(.9);
+            filter: brightness(1.2) grayscale(.5) opacity(.9);
+}
+
+.beschikbaarheid-cc.ja:hover{
+     background-color: #63d481;
+}
+
+.beschikbaarheid-cc.misschien:hover{
+    background-color: #efa625;
+}
+
+.beschikbaarheid-cc.nee:hover{
+    background-color: #de4846;
+}
+
+.ja{
+    background-color: #c0c0c0;
+}
+
+.misschien{
+    background-color: #c0c0c0;
+}
+
+.nee{
+    background-color: #c0c0c0;
+}

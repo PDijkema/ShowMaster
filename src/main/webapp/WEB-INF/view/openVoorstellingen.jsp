@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="${contextPath}\resources\css\custom.css" type="text/css" rel="stylesheet">
+    <link href="${contextPath}\resources\css\all.css" type="text/css" rel="stylesheet">
+    <link href="${contextPath}\resources\css\radioButton.css" type="text/css" rel="stylesheet">
     <script src="${contextPath}\resources\js\ajax.js"></script>
     <script src="${contextPath}\resources\js\javascript.functies.js"></script>
 
@@ -28,7 +30,38 @@
 <div class="container">
     <div class="container">
         <h1>Open voorstellingen</h1>
-        <table class="table table-hover" id="myTable" ,>
+           <p>Geef per voorstelling aan of je beschikbaar bent. Je kunt kiezen uit de volgende opties:</p>
+           <table>
+           <tr>
+                <td><i id="keuzeJa" class="fa fa-check"></i>
+                </td>
+                <td>Ja</td>
+                <td><i id="keuzeMisschien" class="fa fa-question"></i>
+                </td>
+                <td>Misschien</td>
+                <td><i id="keuzeNee" class="fa fa-times"></i>
+                </td>
+                <td>Nee</td>
+            </tr>
+           </table>
+
+
+        <div class="cc-selector">
+      <input type="radio" name="beschikbaarheid" id="ja">
+      <label class="beschikbaarheid-cc ja" for="ja">
+          <i id="icoonJa" class="fas fa-check" aria-hidden="true"></i>
+      </label>
+      <input type="radio" name="beschikbaarheid" id="misschien">
+      <label class="beschikbaarheid-cc misschien" for="misschien">
+          <i id="icoonMisschien" class="fas fa-question" aria-hidden="true"></i>
+      </label>
+      <input type="radio" name="beschikbaarheid" id="nee">
+        <label class="beschikbaarheid-cc nee" for="nee">
+            <i id="icoonNee" class="fas fa-times" aria-hidden="true"></i>
+        </label>
+        </div>
+
+        <table class="table table-hover" id="myTable">
             <thead>
             <tr>
                 <th scope="col" onclick="sortTable(0)">Voorstelling</th>
