@@ -1,19 +1,16 @@
 /*styling icoontjes bovenin pagina*/
 
 #keuzeJa{
-    /*font-size:75%;*/
     color: #63d481;
 }
 
 #keuzeMisschien{
-    font-size:75%;
     color: #efa625;
-    margin-left:5em
+    margin-left:5em;
 }
 #keuzeNee{
-    font-size:75%;
     color: #de4846;
-    margin-left:5em
+    margin-left:5em;
 }
 
 /*styling radiobuttons */
@@ -22,16 +19,13 @@ input[type="radio"]{
 }
 
 label{
-  height: 3rem;
-  width: 3rem;
-  border:1px solid transparant;
-  margin: auto;
-  border-radius: .25rem;
-  position: relative;
-  transition: 0.5s;
-  padding:.375rem .75rem;
-  line-height:1.5;
-  background-color: #ddd;
+    height: 3rem;
+    width: 3rem;
+    margin: auto;
+    border-radius: .25rem;
+    position: relative;
+    transition: 0.5s;
+    background-color: #ddd;
 }
 
 #icoonJa, #icoonMisschien, #icoonNee {
@@ -70,18 +64,9 @@ label{
 
 .beschikbaarheid-cc{
     cursor:pointer;
-    background-size:contain;
-    background-repeat:no-repeat;
-    display:inline-block;
     -webkit-transition: all 100ms ease-in;
        -moz-transition: all 100ms ease-in;
             transition: all 100ms ease-in;
-
-}
-.beschikbaarheid-cc:hover{
-    -webkit-filter: brightness(1.2) grayscale(.5) opacity(.9);
-       -moz-filter: brightness(1.2) grayscale(.5) opacity(.9);
-            filter: brightness(1.2) grayscale(.5) opacity(.9);
 }
 
 .beschikbaarheid-cc.ja:hover{
@@ -98,12 +83,15 @@ label{
 
 .ja{
     background-color: #c0c0c0;
+    display: inline-table;
 }
 
 .misschien{
     background-color: #c0c0c0;
+    display: inline-table;
 }
 
 .nee{
     background-color: #c0c0c0;
+    display: inline-table;
 }

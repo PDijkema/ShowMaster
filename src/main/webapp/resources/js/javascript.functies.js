@@ -3,20 +3,6 @@ function infoMeegeven (voorstellingsTaakId,voorstellingId, contextPath) {
     document.getElementById('taakVrijgeven').style.visibility = 'visible';
 }
 
-function buttonClassveranderen(teVerwijderenKlasse, gewensteKlasse, thisParameter, yCoordinaat1, yCoordinaat2) {
-    var myTable = document.getElementById('myTable');
-    var x = ($(thisParameter).closest('tr').index());
-    x++;
-
-    myTable.rows[x].cells[yCoordinaat1].getElementsByTagName("a")[0].setAttribute('class', "btn btn-secondary btn-lg my-2");
-
-
-    myTable.rows[x].cells[yCoordinaat2].getElementsByTagName("a")[0].setAttribute('class', "btn btn-secondary btn-lg my-2");
-
-
-    $(thisParameter).removeClass(teVerwijderenKlasse).addClass(gewensteKlasse);
-}
-
 function sortTable(n) {
     var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
     table = document.getElementById("myTable");
