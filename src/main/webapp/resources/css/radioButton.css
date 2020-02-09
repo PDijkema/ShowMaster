@@ -1,5 +1,15 @@
-/*styling icoontjes bovenin pagina*/
+/* opmaak tabel openVoorstellingen */
+#myTable {
+  table-layout: fixed;
+  width:100%
+}
 
+/* ruimte geven voor naam voorstelling */
+#voorstellingsnaam{
+    width:50%
+}
+
+/* styling icoontjes bovenin pagina */
 #keuzeJa{
     color: #63d481;
 }
@@ -13,7 +23,7 @@
     margin-left:5em;
 }
 
-/*styling radiobuttons */
+/* styling radiobuttons */
 input[type="radio"]{
    -webkit-appearance: none;
 }
@@ -23,9 +33,13 @@ label{
     width: 3rem;
     margin: auto;
     border-radius: .25rem;
-    position: relative;
+    position: absolute;
     transition: 0.5s;
     background-color: #ddd;
+    cursor:pointer;
+    -webkit-transition: all 100ms ease-in;
+           -moz-transition: all 100ms ease-in;
+                transition: all 100ms ease-in;
 }
 
 #icoonJa, #icoonMisschien, #icoonNee {
@@ -40,44 +54,18 @@ label{
    transform: translate(-50%, -50%);
 }
 
-.cc-selector input{
-    margin:0;padding:0;
-    -webkit-appearance:none;
-       -moz-appearance:none;
-            appearance:none;
-}
-
-.cc-selector input:active +.beschikbaarheid-cc
-{opacity: .9;}
-
-.cc-selector input:checked +.beschikbaarheid-cc.ja{
-    background-color: #63d481;
-}
-
-.cc-selector input:checked +.beschikbaarheid-cc.misschien{
-    background-color: #efa625;
-}
-
-.cc-selector input:checked +.beschikbaarheid-cc.nee{
-    background-color: #de4846;
-}
-
-.beschikbaarheid-cc{
-    cursor:pointer;
-    -webkit-transition: all 100ms ease-in;
-       -moz-transition: all 100ms ease-in;
-            transition: all 100ms ease-in;
-}
-
-.beschikbaarheid-cc.ja:hover{
+.labelJa:hover,
+input[type="radio"]#ja:checked +label{
      background-color: #63d481;
 }
 
-.beschikbaarheid-cc.misschien:hover{
+.labelMisschien:hover,
+input[type="radio"]#misschien:checked +label{
     background-color: #efa625;
 }
 
-.beschikbaarheid-cc.nee:hover{
+.labelNee:hover,
+input[type="radio"]:checked +label{
     background-color: #de4846;
 }
 

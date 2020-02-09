@@ -47,7 +47,7 @@
                 <table class="table table-hover" id="myTable">
                     <thead>
                     <tr>
-                        <th scope="col" onclick="sortTable(0)">Voorstelling</th>
+                        <th id="voorstellingsnaam" scope="col" onclick="sortTable(0)">Voorstelling</th>
                         <th scope="col" onclick="sortTable(1)">Datum</th>
                         <th scope="col" onclick="sortTable(2)">Ja</th>
                         <th scope="col" onclick="sortTable(3)">Misschien</th>
@@ -56,75 +56,70 @@
                     </thead>
 
                     <tbody>
+
+                    <input type="radio" name="fixed${indexValue}" value="Fixed"></td>
                         <c:forEach items="${voorstellingLijst}" var="voorstelling">
                             <c:if test="${voorstelling.status == 'Gepubliceerd'}">
                                 <tr>
-                                    <td><h1><c:out value="${voorstelling.getNaam()}"/></h1></td>
-                                    <td><c:out value="${voorstelling.getDatum()}"/></td>
-                                    <div class="cc-selector">
+                                    <td><h1><c:out value="${voorstelling.naam}"/></h1></td>
+                                    <td><c:out value="${voorstelling.datum}"/></td>
+
                                         <td>
-                                          <input type="radio" name="beschikbaarheid" id="ja">
-                                            <label class="beschikbaarheid-cc ja" for="ja">
-                                                <a href="${contextPath}/rooster/openvoorstelling/inschrijven/<c:out value='${voorstelling.voorstellingId}' />/beschikbaar">
-                                                    <i id="icoonJa" class="fas fa-check" aria-hidden="true"></i>
-                                                </a>
+                                          <input class="ja" type="radio" name="beschikbaarheid" id="ja${voorstelling.voorstellingId}">
+                                            <label class="labelJa" for="ja"
+                                            onclick="beschikbaarheidStatusDoorgeven(${voorstelling.voorstellingId}, '${beschikbaar}','${contextPath}') ">
+                                                <i id="icoonJa" class="fas fa-check" aria-hidden="true"></i>
                                             </label>
                                         </td>
                                         <td>
-                                          <input type="radio" name="beschikbaarheid" id="misschien">
-                                            <label class="beschikbaarheid-cc misschien" for="misschien">
-                                                <a href="${contextPath}/rooster/openvoorstelling/inschrijven/<c:out value='${voorstelling.voorstellingId}' />/misschien">
-                                                    <i id="icoonMisschien" class="fas fa-question" aria-hidden="true"></i>
-                                                </a>
+                                          <input class="misschien" type="radio" name="beschikbaarheid" id="misschien${voorstelling.voorstellingId}">
+                                            <label class="labelMisschien" for="misschien"
+                                            onclick="beschikbaarheidStatusDoorgeven(${voorstelling.voorstellingId}, '${misschien}','${contextPath}') ">
+                                                <i id="icoonMisschien" class="fas fa-question" aria-hidden="true"></i>
                                             </label>
                                         </td>
                                         <td>
-                                          <input type="radio" name="beschikbaarheid" id="nee">
-                                            <label class="beschikbaarheid-cc nee" for="nee">
-                                                <a href="${contextPath}/rooster/openvoorstelling/inschrijven/<c:out value='${voorstelling.voorstellingId}' />/nietBeschikbaar">
-                                                    <i id="icoonNee" class="fas fa-times" aria-hidden="true"></i>
-                                                </a>
+                                          <input class="nee" type="radio" name="beschikbaarheid" id="nee${voorstelling.voorstellingId}">
+                                            <label class="labelNee" for="nee"
+                                            onclick="beschikbaarheidStatusDoorgeven(${voorstelling.voorstellingId}, '${nietBeschikbaar}','${contextPath}') ">
+                                                <i id="icoonNee" class="fas fa-times" aria-hidden="true"></i>
                                             </label>
                                         </td>
-                                    </div>
-                                    </td>
+
+
                                 </tr>
                             </c:if>
                         </c:forEach>
-                        <c:forEach items="${voorstellingLijst}" var="voorstelling">
-                            <c:if test="${voorstelling.status =! 'Gepubliceerd'}">
-                                <tr>
-                                    <td><h1><c:out value="${voorstelling.getNaam()}"/></h1></td>
-                                    <td><c:out value="${voorstelling.getDatum()}"/></td>
-                                    <div class="cc-selector">
-                                        <td>
-                                          <input type="radio" name="beschikbaarheid" id="ja">
-                                            <label class="beschikbaarheid-cc ja" for="ja">
-                                                <a href="${contextPath}/rooster/openvoorstelling/inschrijven/<c:out value='${voorstelling.voorstellingId}' />/beschikbaar">
-                                                    <i id="icoonJa" class="fas fa-check" aria-hidden="true"></i>
-                                                </a>
-                                            </label>
-                                        </td>
-                                        <td>
-                                          <input type="radio" name="beschikbaarheid" id="misschien">
-                                            <label class="beschikbaarheid-cc misschien" for="misschien">
-                                                <a href="${contextPath}/rooster/openvoorstelling/inschrijven/<c:out value='${voorstelling.voorstellingId}' />/misschien">
-                                                    <i id="icoonMisschien" class="fas fa-question" aria-hidden="true"></i>
-                                                </a>
-                                            </label>
-                                        </td>
-                                        <td>
-                                          <input type="radio" name="beschikbaarheid" id="nee">
-                                            <label class="beschikbaarheid-cc nee" for="nee">
-                                                <a href="${contextPath}/rooster/openvoorstelling/inschrijven/<c:out value='${voorstelling.voorstellingId}' />/nietBeschikbaar">
-                                                    <i id="icoonNee" class="fas fa-times" aria-hidden="true"></i>
-                                                </a>
-                                            </label>
-                                        </td>
-                                    </div>
+                        <c:forEach items="${inschrijvingen}" var="inschrijving">
+                            <tr>
+                                <td><h1><c:out value="${inschrijving.voorstelling.naam}"/></h1></td>
+                                <td><c:out value="${inschrijving.voorstelling.datum}"/></td>
+
+                                    <td>
+                                      <input class="ja" type="radio" name="beschikbaarheid" id="ja${inschrijving.voorstelling.voorstellingId}"
+                                        <c:if test="${inschrijving.inschrijvingStatus == beschikbaar}"> checked</c:if>>
+                                        <label class="labelJa" for="ja"
+                                             onclick="beschikbaarheidStatusDoorgeven(${inschrijving.voorstelling.voorstellingId}, '${beschikbaar}','${contextPath}') ">
+                                            <i id="icoonJa" class="fas fa-check" aria-hidden="true"></i>
+                                        </label>
+                                    </td>
+                                    <td>
+                                      <input class="misschien" type="radio" name="beschikbaarheid" id="misschien${inschrijving.voorstelling.voorstellingId}"
+                                        <c:if test="${inschrijving.inschrijvingStatus == misschien}"> checked</c:if>>
+                                        <label class="labelMisschien" for="misschien"
+                                        onclick="beschikbaarheidStatusDoorgeven(${inschrijving.voorstelling.voorstellingId}, '${misschien}','${contextPath}') ">
+                                            <i id="icoonMisschien" class="fas fa-question" aria-hidden="true"></i>
+                                        </label>
+                                    </td>
+                                    <td>
+                                      <input class="nee" type="radio" name="beschikbaarheid" id="nee${inschrijving.voorstelling.voorstellingId}"
+                                        <c:if test="${inschrijving.inschrijvingStatus == nietBeschikbaar}"> checked</c:if>>
+                                        <label class="labelNee" for="nee"
+                                        onclick="beschikbaarheidStatusDoorgeven(${inschrijving.voorstelling.voorstellingId}, '${nietBeschikbaar}','${contextPath}') ">
+                                            <i id="icoonNee" class="fas fa-times" aria-hidden="true"></i>
+                                        </label>
                                     </td>
                                 </tr>
-                            </c:if>
                         </c:forEach>
                     </tbody>
                 </table>
