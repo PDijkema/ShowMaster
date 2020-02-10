@@ -1,8 +1,7 @@
-function beschikbaarheidStatusDoorgeven(voorstellingId, beschikbaarheidStatus, contextPath, thisObject, teVerwijderenKlasse, gewensteKlasse, yCoordinaat1, yCoordinaat2) {
+function beschikbaarheidStatusDoorgeven(voorstellingId, beschikbaarheidStatus, contextPath) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
     if (this.readyState === 4 && this.status === 200) {
-      buttonClassveranderen(teVerwijderenKlasse, gewensteKlasse, thisObject, yCoordinaat1, yCoordinaat2)
     }
   };
   xhttp.open("GET", contextPath + "/rooster/openvoorstelling/inschrijven/" + voorstellingId + "/" + beschikbaarheidStatus, true);
