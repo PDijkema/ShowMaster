@@ -49,9 +49,9 @@
                     <tr>
                         <th id="voorstellingsnaam" scope="col" onclick="sortTable(0)">Voorstelling</th>
                         <th scope="col" onclick="sortTable(1)">Datum</th>
-                        <th scope="col" onclick="sortTable(2)">Ja</th>
-                        <th scope="col" onclick="sortTable(3)">Misschien</th>
-                        <th scope="col" onclick="sortTable(4)">Nee</th>
+                        <th scope="col">Ja</th>
+                        <th scope="col">Misschien</th>
+                        <th scope="col">Nee</th>
                     </tr>
                     </thead>
 
@@ -63,30 +63,27 @@
                                 <tr>
                                     <td><h1><c:out value="${voorstelling.naam}"/></h1></td>
                                     <td><c:out value="${voorstelling.datum}"/></td>
-
-                                        <td>
-                                          <input class="ja" type="radio" name="beschikbaarheid" id="ja${voorstelling.voorstellingId}">
-                                            <label class="labelJa" for="ja"
-                                            onclick="beschikbaarheidStatusDoorgeven(${voorstelling.voorstellingId}, '${beschikbaar}','${contextPath}') ">
-                                                <i id="icoonJa" class="fas fa-check" aria-hidden="true"></i>
-                                            </label>
-                                        </td>
-                                        <td>
-                                          <input class="misschien" type="radio" name="beschikbaarheid" id="misschien${voorstelling.voorstellingId}">
-                                            <label class="labelMisschien" for="misschien"
-                                            onclick="beschikbaarheidStatusDoorgeven(${voorstelling.voorstellingId}, '${misschien}','${contextPath}') ">
-                                                <i id="icoonMisschien" class="fas fa-question" aria-hidden="true"></i>
-                                            </label>
-                                        </td>
-                                        <td>
-                                          <input class="nee" type="radio" name="beschikbaarheid" id="nee${voorstelling.voorstellingId}">
-                                            <label class="labelNee" for="nee"
-                                            onclick="beschikbaarheidStatusDoorgeven(${voorstelling.voorstellingId}, '${nietBeschikbaar}','${contextPath}') ">
-                                                <i id="icoonNee" class="fas fa-times" aria-hidden="true"></i>
-                                            </label>
-                                        </td>
-
-
+                                    <td>
+                                      <input class="ja" type="radio" name="beschikbaarheid${voorstelling.voorstellingId}" id="ja${voorstelling.voorstellingId}">
+                                        <label class="labelJa" for="ja${voorstelling.voorstellingId}"
+                                        onclick="beschikbaarheidStatusDoorgeven(${voorstelling.voorstellingId}, '${beschikbaar}','${contextPath}') ">
+                                            <i id="icoonJa" class="fas fa-check" aria-hidden="true"></i>
+                                        </label>
+                                    </td>
+                                    <td>
+                                      <input class="misschien" type="radio" name="beschikbaarheid${voorstelling.voorstellingId}" id="misschien${voorstelling.voorstellingId}">
+                                        <label class="labelMisschien" for="misschien${voorstelling.voorstellingId}"
+                                        onclick="beschikbaarheidStatusDoorgeven(${voorstelling.voorstellingId}, '${misschien}','${contextPath}') ">
+                                            <i id="icoonMisschien" class="fas fa-question" aria-hidden="true"></i>
+                                        </label>
+                                    </td>
+                                    <td>
+                                      <input class="nee" type="radio" name="beschikbaarheid${voorstelling.voorstellingId}" id="nee${voorstelling.voorstellingId}">
+                                        <label class="labelNee" for="nee${voorstelling.voorstellingId}"
+                                        onclick="beschikbaarheidStatusDoorgeven(${voorstelling.voorstellingId}, '${nietBeschikbaar}','${contextPath}') ">
+                                            <i id="icoonNee" class="fas fa-times" aria-hidden="true"></i>
+                                        </label>
+                                    </td>
                                 </tr>
                             </c:if>
                         </c:forEach>
@@ -96,25 +93,26 @@
                                 <td><c:out value="${inschrijving.voorstelling.datum}"/></td>
 
                                     <td>
-                                      <input class="ja" type="radio" name="beschikbaarheid" id="ja${inschrijving.voorstelling.voorstellingId}"
-                                        <c:if test="${inschrijving.inschrijvingStatus == beschikbaar}"> checked</c:if>>
-                                        <label class="labelJa" for="ja"
+                                      <input class="ja" type="radio" name="beschikbaarheid${inschrijving.voorstelling.voorstellingId}" id="ja${inschrijving.voorstelling.voorstellingId}"
+                                        value="Beschikbaar" ${inschrijving.inschrijvingStatus=='Beschikbaar'?'checked':''}>
+
+                                        <label class="labelJa" for="ja${inschrijving.voorstelling.voorstellingId}"
                                              onclick="beschikbaarheidStatusDoorgeven(${inschrijving.voorstelling.voorstellingId}, '${beschikbaar}','${contextPath}') ">
                                             <i id="icoonJa" class="fas fa-check" aria-hidden="true"></i>
                                         </label>
                                     </td>
                                     <td>
-                                      <input class="misschien" type="radio" name="beschikbaarheid" id="misschien${inschrijving.voorstelling.voorstellingId}"
-                                        <c:if test="${inschrijving.inschrijvingStatus == misschien}"> checked</c:if>>
-                                        <label class="labelMisschien" for="misschien"
+                                      <input class="misschien" type="radio" name="beschikbaarheid${inschrijving.voorstelling.voorstellingId}" id="misschien${inschrijving.voorstelling.voorstellingId}"
+                                        value="Misschien" ${inschrijving.inschrijvingStatus=='Misschien'?'checked':''}>
+                                        <label class="labelMisschien" for="misschien${inschrijving.voorstelling.voorstellingId}"
                                         onclick="beschikbaarheidStatusDoorgeven(${inschrijving.voorstelling.voorstellingId}, '${misschien}','${contextPath}') ">
                                             <i id="icoonMisschien" class="fas fa-question" aria-hidden="true"></i>
                                         </label>
                                     </td>
                                     <td>
-                                      <input class="nee" type="radio" name="beschikbaarheid" id="nee${inschrijving.voorstelling.voorstellingId}"
-                                        <c:if test="${inschrijving.inschrijvingStatus == nietBeschikbaar}"> checked</c:if>>
-                                        <label class="labelNee" for="nee"
+                                      <input class="nee" type="radio" name="beschikbaarheid${inschrijving.voorstelling.voorstellingId}" id="nee${inschrijving.voorstelling.voorstellingId}"
+                                        value="Niet Beschikbaar" ${inschrijving.inschrijvingStatus=='Niet Beschikbaar'?'checked':''}>
+                                        <label class="labelNee" for="nee${inschrijving.voorstelling.voorstellingId}"
                                         onclick="beschikbaarheidStatusDoorgeven(${inschrijving.voorstelling.voorstellingId}, '${nietBeschikbaar}','${contextPath}') ">
                                             <i id="icoonNee" class="fas fa-times" aria-hidden="true"></i>
                                         </label>

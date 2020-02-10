@@ -55,17 +55,17 @@ label{
 }
 
 .labelJa:hover,
-input[type="radio"]#ja:checked +label{
+.ja:checked +label{
      background-color: #63d481;
 }
 
 .labelMisschien:hover,
-input[type="radio"]#misschien:checked +label{
+.misschien:checked +label{
     background-color: #efa625;
 }
 
 .labelNee:hover,
-input[type="radio"]:checked +label{
+.nee:checked +label{
     background-color: #de4846;
 }
 
