@@ -1,8 +1,10 @@
 package nl.makeitwork.Showmaster.controller;
 
+import nl.makeitwork.Showmaster.model.MedewerkerInschrijvingVoorstelling;
 import nl.makeitwork.Showmaster.model.Taak;
 import nl.makeitwork.Showmaster.model.Voorstelling;
 import nl.makeitwork.Showmaster.model.VoorstellingsTaak;
+import nl.makeitwork.Showmaster.repository.MedewerkerInschrijvingVoorstellingRepository;
 import nl.makeitwork.Showmaster.repository.TaakRepository;
 import nl.makeitwork.Showmaster.repository.VoorstellingRepository;
 import nl.makeitwork.Showmaster.repository.VoorstellingsTaakRepository;
@@ -19,7 +21,9 @@ import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -38,21 +42,31 @@ public class VoorstellingController {
     private VoorstellingsTaakRepository voorstellingsTaakRepository;
     @Autowired
     private VoorstellingController voorstellingController;
+    @Autowired
+    private MedewerkerInschrijvingVoorstellingRepository medewerkerInschrijvingVoorstellingRepository;
 
 
     @GetMapping("/planner/voorstellingen")
     protected String alleVoorstellingen(Model model) {
-        model.addAttribute("alleVoorstellingen", voorstellingRepository.findAll());
+        model.addAttribute("alleVoorstellingen", voorstellingRepository.findAllByOrderByLocalDateTimeAsc());
+
+        Map<Integer, Integer> openstaandeTaken = new HashMap<>();
+
+        for (Voorstelling voorstelling : voorstellingRepository.findAll()) {
+            openstaandeTaken.put(voorstelling.getVoorstellingId(), voorstellingsTaakRepository.countByVoorstellingVoorstellingIdAndMedewerkerIsNull(voorstelling.getVoorstellingId()));
+        }
+        model.addAttribute("openstaandeTaken", openstaandeTaken);
+
         return "alleVoorstellingen";
     }
 
-    @GetMapping("/planner/voorstelling/toevoegen")
+    @GetMapping("/planner/voorstellingen/voorstelling/toevoegen")
     protected String toevoegenVoorstellingen(Voorstelling voorstelling, Model model) {
         model.addAttribute("alleTaken", taakRepository.findAll());
         return "toevoegenVoorstelling";
     }
 
-    @GetMapping("/planner/voorstelling/wijzigen/{voorstellingId}")
+    @GetMapping("/planner/voorstellingen/voorstelling/wijzigen/{voorstellingId}")
     protected String wijzigenVoorstellingen(@PathVariable Integer voorstellingId, Model model, HttpServletRequest request) {
 
         Optional<Voorstelling> voorstelling = voorstellingRepository.findById(voorstellingId);
@@ -66,7 +80,7 @@ public class VoorstellingController {
         }
     }
 
-    @GetMapping("/voorstelling/rooster/{voorstellingId}")
+    @GetMapping("/rooster/voorstelling/{voorstellingId}")
     protected String roosterVoorstelling(@PathVariable Integer voorstellingId, Model model) {
 
         List<VoorstellingsTaak> voorstellingOverzicht = voorstellingsTaakRepository.findByVoorstellingVoorstellingId(voorstellingId);
@@ -77,14 +91,26 @@ public class VoorstellingController {
         model.addAttribute("voorstellingOverzicht", voorstellingOverzicht);
         model.addAttribute("voorstelling", voorstelling);
 
-        return "roosterVoorstelling";
+        return "persoonlijkRoosterVoorstelling";
     }
 
-    @GetMapping("/planner/voorstelling/details/{voorstellingId}")
-    protected String detailsVoorstelling(@PathVariable Integer voorstellingId, Model model, HttpServletRequest request) {
+    @GetMapping("/planner/voorstellingen/voorstelling/rooster/{voorstellingId}")
+    protected String roosterVoorstelling(@PathVariable Integer voorstellingId, Model model, HttpServletRequest request) {
 
         model.addAttribute("alleTaken", taakRepository.findAll());
         Optional<Voorstelling> voorstelling = voorstellingRepository.findById(voorstellingId);
+
+        // Lijst alle inschrijvingen op één voorstelling met status beschikbaar
+        List<MedewerkerInschrijvingVoorstelling> inschrijvingenBijVoorstellingId =
+                medewerkerInschrijvingVoorstellingRepository.findByVoorstellingVoorstellingIdAndInschrijvingStatus(voorstellingId, "Beschikbaar");
+
+        // Lijst alle taken bij één voorstelling
+        List<VoorstellingsTaak> alleVoorstellingsTakenBijVoorstellingId =
+                voorstellingsTaakRepository.findByVoorstellingVoorstellingIdOrderByTaakTaakNaam(voorstellingId);
+
+        // Reeds ingevulde taken filteren om alle nog beschikbare medewerkers te kunnen laten zien
+        alleVoorstellingsTakenBijVoorstellingId.forEach
+                (d-> inschrijvingenBijVoorstellingId.removeIf(r-> r.getMedewerker() == d.getMedewerker()));
 
         List<VoorstellingsTaak> voorstellingsTaken = voorstellingsTaakRepository.findByVoorstellingVoorstellingIdOrderByTaakTaakNaam(voorstellingId);
 
@@ -94,11 +120,12 @@ public class VoorstellingController {
             request.getSession().setAttribute("voorstellingId", voorstellingId);
             model.addAttribute("takenBijVoorstelling", voorstellingsTaken);
             model.addAttribute("voorstelling", voorstelling.get());
-            return "detailsVoorstelling";
+            model.addAttribute("beschikbareMedewerkers", inschrijvingenBijVoorstellingId);
+            return "roosterVoorstelling";
         }
     }
 
-    @GetMapping("/planner/voorstelling/publiceren/{voorstellingId}")
+    @GetMapping("/planner/voorstellingen/voorstelling/publiceren/{voorstellingId}")
     protected String publiceerVoorstelling(@PathVariable Integer voorstellingId) {
         Optional<Voorstelling> voorstelling = voorstellingRepository.findById(voorstellingId);
 
@@ -108,8 +135,7 @@ public class VoorstellingController {
         return "redirect:/planner/voorstellingen";
     }
 
-
-    @GetMapping("/planner/voorstelling/annuleren/{voorstellingId}")
+    @GetMapping("/planner/voorstellingen/voorstelling/annuleren/{voorstellingId}")
     protected String annuleerVoorstelling(@PathVariable Integer voorstellingId) {
         Optional<Voorstelling> voorstelling = voorstellingRepository.findById(voorstellingId);
 
@@ -119,8 +145,7 @@ public class VoorstellingController {
         return "redirect:/planner/voorstellingen";
     }
 
-
-    @PostMapping("/planner/voorstelling/toevoegen")
+    @PostMapping("/planner/voorstellingen/voorstelling/toevoegen")
     protected String saveVoorstelling(@ModelAttribute("voorstelling") Voorstelling voorstelling, BindingResult result) {
 
         if (!result.hasErrors()) {
@@ -131,7 +156,7 @@ public class VoorstellingController {
         return "redirect:/planner/voorstellingen";
     }
 
-    @PostMapping("/planner/voorstelling/wijzigen")
+    @PostMapping("/planner/voorstellingen/voorstelling/wijzigen")
     protected String UpdateVoorstelling(@ModelAttribute("voorstelling") Voorstelling voorstelling, BindingResult result) {
 
         if (!result.hasErrors()) {
@@ -154,7 +179,7 @@ public class VoorstellingController {
         }
     }
 
-    @GetMapping("/planner/voorstelling/verwijderen/{voorstellingId}")
+    @GetMapping("/planner/voorstellingen/voorstelling/verwijderen/{voorstellingId}")
     protected String verwijderVoorstelling(@PathVariable Integer voorstellingId) {
         voorstellingRepository.deleteById(voorstellingId);
         return "redirect:/planner/voorstellingen";

@@ -15,8 +15,12 @@
 
     <body>
         <jsp:include page="navbar.jsp" />
-        <h1>Maak een nieuwe taak aan</h1>
-
+            <div class="jumbotron jumbotron-fluid">
+                <div class="container">
+                    <h1 class="voorstellingDisplay4">Nieuwe taak aanmaken</h1>
+                </div>
+            </div>
+        <div class="container">
         <form:form action="${contextPath}/planner/taak/aanmaken" modelAttribute="taak" method="post" novalidate="true" class="needs-validation">
             <table>
                 <tr>
@@ -42,5 +46,6 @@
                 </tr>
             </table>
         </form:form>
+        </div>
     </body>
 </html>

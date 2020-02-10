@@ -8,7 +8,6 @@ import nl.makeitwork.Showmaster.repository.VoorstellingRepository;
 import nl.makeitwork.Showmaster.repository.VoorstellingsTaakRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -43,7 +42,7 @@ public class TaakController {
         if (taak.getTaakNaam() != null && !taak.getTaakNaam().isEmpty() &&
                 taak.getStandaardBezetting() != null) {
             taakRepository.save(taak);
-            return "redirect:/planner/takenlijst";
+            return "redirect:/rooster";
         } else {
             return "taakAanmaken";
         }
@@ -64,13 +63,6 @@ public class TaakController {
             voorstellingsTaakRepository.save(voorstellingsTaak);
         }
         return "redirect:/planner/voorstelling/details/{voorstellingId}";
-    }
-
-    @GetMapping("/planner/takenlijst")
-    protected String showTakenlijst(Model model){
-        model.addAttribute("alleTaken", taakRepository.findAll());
-        model.addAttribute("taak", new Taak());
-        return "takenlijst";
     }
 
     @GetMapping("/taak/setup")
@@ -115,13 +107,13 @@ public class TaakController {
         taak8.setStandaardBezetting(0);
         taakRepository.save(taak8);
 
-        return "redirect:/planner/takenlijst";
+        return "redirect:/rooster";
     }
 
     @GetMapping("/planner/taak/verwijderen/{taakId}")
     public String verwijderStandaardTaak(@PathVariable Integer taakId) {
         taakRepository.deleteById(taakId);
-        return "redirect:/planner/takenlijst";
+        return "redirect:/rooster";
     }
 
 }

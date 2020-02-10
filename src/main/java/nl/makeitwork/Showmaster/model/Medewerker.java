@@ -31,17 +31,11 @@ public class Medewerker implements UserDetails {
     private Boolean planner;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "voorkeurstaakId", referencedColumnName = "taakId")
-    @OnDelete(action = OnDeleteAction.NO_ACTION)
-    private Taak voorkeurstaak;
-
-    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "vasteTaakId", referencedColumnName = "taakId")
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     private Taak vasteTaak;
 
-    @OneToOne(mappedBy = "medewerker", cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY, optional = false)
+    @OneToOne(mappedBy = "medewerker", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
     private MedewerkerProfielGegevens medewerkerProfielGegevens;
 
     public Medewerker() {
@@ -95,14 +89,6 @@ public class Medewerker implements UserDetails {
 
     public void setWachtwoord(String wachtwoord) {
         this.wachtwoord = wachtwoord;
-    }
-
-    public Taak getVoorkeurstaak() {
-        return voorkeurstaak;
-    }
-
-    public void setVoorkeurstaak(Taak voorkeurstaak) {
-        this.voorkeurstaak = voorkeurstaak;
     }
 
     public Taak getVasteTaak() {

@@ -1,8 +1,11 @@
 package nl.makeitwork.Showmaster.model;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 public class MedewerkerProfielGegevens {
@@ -18,7 +21,9 @@ public class MedewerkerProfielGegevens {
     private String achternaam;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate geboortedatum;
+    private LocalDate localDate;
+
+    private String geboortedatum;
 
     private String straatnaam;
 
@@ -37,6 +42,19 @@ public class MedewerkerProfielGegevens {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "medewerker_id")
     private Medewerker medewerker;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "voorkeurstaakId", referencedColumnName = "taakId")
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
+    private Taak voorkeurstaak;
+
+    public void localDateFormatterenNaarString() {
+        DateTimeFormatter aFormatter = DateTimeFormatter.ofPattern("dd MMMM yyyy");
+        LocalDate localDate = getLocalDate();
+        String formattedString = localDate.format(aFormatter);
+
+        setGeboortedatum(formattedString);
+    }
 
     public Integer getProfielId() {
         return profielId;
@@ -78,12 +96,20 @@ public class MedewerkerProfielGegevens {
         this.achternaam = achternaam;
     }
 
-    public LocalDate getGeboortedatum() {
+    public String getGeboortedatum() {
         return geboortedatum;
     }
 
-    public void setGeboortedatum(LocalDate geboortedatum) {
+    public void setGeboortedatum(String geboortedatum) {
         this.geboortedatum = geboortedatum;
+    }
+
+    public LocalDate getLocalDate() {
+        return localDate;
+    }
+
+    public void setLocalDate(LocalDate localDate) {
+        this.localDate = localDate;
     }
 
     public String getStraatnaam() {
@@ -140,5 +166,13 @@ public class MedewerkerProfielGegevens {
 
     public void setTelefoonnummer(String telefoonnummer) {
         this.telefoonnummer = telefoonnummer;
+    }
+
+    public Taak getVoorkeurstaak() {
+        return voorkeurstaak;
+    }
+
+    public void setVoorkeurstaak(Taak voorkeurstaak) {
+        this.voorkeurstaak = voorkeurstaak;
     }
 }

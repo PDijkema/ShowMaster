@@ -14,7 +14,7 @@ public class MailService {
     private MailSender mailSender;
     @Autowired
     private SimpleMailMessage mailMessage;
-    @Autowired
+
     private ErrorsController errorsController;
 
     public void verstuurMail(String emailAdres, String onderwerp, String bericht){

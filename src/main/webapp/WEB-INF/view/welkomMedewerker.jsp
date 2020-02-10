@@ -18,9 +18,9 @@
             </div>
         </div>
             <div class="container">
-                <form:hidden path="profielId" />
+                <form:hidden path="profielId"></form:hidden>
                 <jsp:include page="persoonlijkeTakenPerShow.jsp" />
-                <a href="${contextPath}/voorstelling/weergeven/openvoorstelling"> <button type="button" class="btn btn-primary">Inschrijven</button></a>
+                <a href="${contextPath}/rooster/openvoorstelling"> <button type="button" class="btn btn-primary">Inschrijven</button></a>
             </div>
     </body>
 </html>
