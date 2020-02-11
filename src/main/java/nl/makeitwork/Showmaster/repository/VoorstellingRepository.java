@@ -15,6 +15,7 @@ import java.util.List;
 
 @Repository
 public interface VoorstellingRepository extends JpaRepository<Voorstelling, Integer> {
+
     List<Voorstelling> findAllByOrderByLocalDateTimeAsc();
 
     Voorstelling findByVoorstellingId(Integer voorstellingId);

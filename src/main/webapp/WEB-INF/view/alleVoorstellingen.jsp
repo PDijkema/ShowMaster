@@ -70,8 +70,10 @@
                         </c:choose>
                     </td>
                     <td>
+                        <span class="badge badge-pill badge-danger">
                         <c:set var="voorstellingId" value="${voorstelling.voorstellingId}" />
                         <c:out value="${openstaandeTaken[voorstellingId]}"/>
+                        </span>
                     </td>
                     <td>
                         <c:choose>
