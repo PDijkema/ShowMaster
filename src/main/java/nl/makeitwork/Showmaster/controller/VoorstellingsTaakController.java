@@ -66,11 +66,9 @@ public class VoorstellingsTaakController {
         Optional<VoorstellingsTaak> voorstellingsTaak = voorstellingsTaakRepository.findById(voorstellingsTaakId);
         Optional<Voorstelling> voorstelling = voorstellingRepository.findById(voorstellingId);
 
-        // Lijst alle inschrijvingen op één voorstelling
         List<MedewerkerInschrijvingVoorstelling> inschrijvingenBijVoorstellingId =
             medewerkerInschrijvingVoorstellingRepository.findInschrijvingByVoorstellingId(voorstellingId);
 
-        // Lijst alle taken bij één voorstelling
         List<VoorstellingsTaak> alleVoorstellingsTakenBijVoorstellingId =
             voorstellingsTaakRepository.findByVoorstellingVoorstellingIdOrderByTaakTaakNaam(voorstellingId);
 
@@ -143,9 +141,10 @@ public class VoorstellingsTaakController {
                 .forEach(x -> x.setMedewerker(null));
 
         for (Taak taak : alleTaken) {
-            voorstellingsTaakController.genereerRoosterMetVoorkeursTaak(taak.getTaakNaam(), inschrijvingVoorstelling, voorstellingsTaken);
+            voorstellingsTaakController.genereerRoosterMetVoorkeursTaak(taak.getTaakNaam(),
+                    inschrijvingVoorstelling,
+                    voorstellingsTaken);
         }
-
         return "redirect:/planner/voorstellingen/voorstelling/rooster/" + voorstellingId;
     }
 
@@ -155,7 +154,7 @@ public class VoorstellingsTaakController {
 
         List<MedewerkerInschrijvingVoorstelling> inschrijvingVoorstellingVoorkeur = new ArrayList<MedewerkerInschrijvingVoorstelling>() {};
         List<VoorstellingsTaak> voorstellingsTaakVoorkeur = new ArrayList<VoorstellingsTaak>() {};
-
+        
         voorstellingsTaken
                 .stream()
                 .filter(x -> x.getTaak().getTaakNaam().equals(voorkeursTaak))

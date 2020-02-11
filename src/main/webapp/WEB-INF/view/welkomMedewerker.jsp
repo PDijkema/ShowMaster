@@ -20,7 +20,15 @@
             <div class="container">
                 <form:hidden path="profielId"></form:hidden>
                 <jsp:include page="persoonlijkeTakenPerShow.jsp" />
-                <a href="${contextPath}/rooster/openvoorstelling"> <button type="button" class="btn btn-primary">Inschrijven</button></a>
+
+                <c:choose>
+                    <c:when test="${inTevullenVoorstellingen == 0}">
+                        <a href="${contextPath}/rooster/openvoorstelling"> <button type="button" class="btn btn-primary">Inschrijven</button></a>
+                    </c:when>
+                    <c:otherwise>
+                        <a href="${contextPath}/rooster/openvoorstelling"> <button type="button" class="btn btn-primary">Inschrijven <span class="badge badge-danger">${inTevullenVoorstellingen}</span></button></a>
+                    </c:otherwise>
+                </c:choose>
             </div>
     </body>
 </html>

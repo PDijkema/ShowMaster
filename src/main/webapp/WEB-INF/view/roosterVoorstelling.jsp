@@ -81,6 +81,19 @@
                         </c:forEach>
                         </tbody>
                     </table>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dienstToevoegenButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Dienst Toevoegen
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <c:forEach items="${alleTaken}" var="taak">
+                                <a class="dropdown-item" href="${contextPath}/planner/voorstellingen/voorstellingsTaak/toevoegen/${voorstelling.voorstellingId}/
+                                <c:out value='${taak.taakId}' />">
+                                    <c:out value="${taak.taakNaam}"/>
+                                </a>
+                            </c:forEach>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-4" id="dropzoneBeschikbareMedewerkers"
                      ondragenter="enterDrag(event)"
@@ -97,18 +110,6 @@
                             <sub class="voorkeursTaakInRooster"><c:out value="${medewerkerInschrijvingVoorstelling.medewerker.medewerkerProfielGegevens.voorkeurstaak.taakNaam}"/></sub>
                         </div>
                     </c:forEach>
-                </div>
-                <div class="col-md-3 col-xl-2 py-md-3 pl-md-5 bd-sidebar">
-                    <h2>Dienst toevoegen</h2>
-                    <ul class="nav flex-column">
-                        <c:forEach items="${alleTaken}" var="taak">
-                            <li class="nav-item"><a href="${contextPath}/planner/voorstellingen/voorstellingsTaak/toevoegen/${voorstelling.voorstellingId}/
-                            <c:out value='${taak.taakId}' />">
-                                <c:out value="${taak.taakNaam}"/>
-                            </a>
-                            </li>
-                        </c:forEach>
-                    </ul>
                 </div>
             </div>
         </div>

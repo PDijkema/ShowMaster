@@ -48,7 +48,9 @@ public class VoorstellingController {
 
     @GetMapping("/planner/voorstellingen")
     protected String alleVoorstellingen(Model model) {
-        model.addAttribute("alleVoorstellingen", voorstellingRepository.findAllByOrderByLocalDateTimeAsc());
+
+        model.addAttribute("alleVoorstellingen", voorstellingRepository
+                .findAllByOrderByLocalDateTimeAsc());
 
         Map<Integer, Integer> openstaandeTaken = new HashMap<>();
 
@@ -61,8 +63,12 @@ public class VoorstellingController {
     }
 
     @GetMapping("/planner/voorstellingen/voorstelling/toevoegen")
-    protected String toevoegenVoorstellingen(Voorstelling voorstelling, Model model) {
-        model.addAttribute("alleTaken", taakRepository.findAll());
+    protected String toevoegenVoorstellingen(Voorstelling voorstelling,
+                                             Model model) {
+
+        model.addAttribute("alleTaken",
+                taakRepository.findAll());
+
         return "toevoegenVoorstelling";
     }
 
@@ -146,8 +152,9 @@ public class VoorstellingController {
     }
 
     @PostMapping("/planner/voorstellingen/voorstelling/toevoegen")
-    protected String saveVoorstelling(@ModelAttribute("voorstelling") Voorstelling voorstelling, BindingResult result) {
-
+    protected String saveVoorstelling(@ModelAttribute("voorstelling")
+                                                    Voorstelling voorstelling,
+                                                    BindingResult result) {
         if (!result.hasErrors()) {
            voorstellingOpslaanInclTaken(voorstelling);
         } else {
