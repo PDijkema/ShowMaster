@@ -102,11 +102,21 @@ public class Medewerker implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<>();
+        //TODO println's opschonen na functioneren checks
+        System.out.println("ID " + this.medewerkerId);
+        System.out.println("profiel " + this.getMedewerkerProfielGegevens().getVoornaam());
 
-        if (this.planner) {
+        if (!verplichtProfielCheck()) {
+            System.out.println("should be false" + verplichtProfielCheck());
+            authorities.add(new SimpleGrantedAuthority("ROLE_ASPIRANT"));
+        } else if (this.planner) {
+            authorities.add(new SimpleGrantedAuthority("ROLE_MEDEWERKER"));
             authorities.add(new SimpleGrantedAuthority("ROLE_PLANNER"));
+        } else {
+            authorities.add(new SimpleGrantedAuthority("ROLE_MEDEWERKER"));
+
         }
-        authorities.add(new SimpleGrantedAuthority("ROLE_MEDEWERKER"));
+        System.out.println(authorities);
         return authorities;
     }
 
@@ -138,6 +148,20 @@ public class Medewerker implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    protected boolean verplichtProfielCheck () {
+
+        boolean verplichtProfiel = false;
+
+        if (this.getMedewerkerProfielGegevens().getVoornaam() != null
+                && this.getMedewerkerProfielGegevens().getAchternaam() != null
+                && this.getMedewerkerProfielGegevens().getEmailadres() !=null
+                && this.getMedewerkerProfielGegevens().getGeboortedatum() != null
+                && this.getMedewerkerProfielGegevens().getTelefoonnummer() != null) {
+            verplichtProfiel = true;
+
+        } return verplichtProfiel;
     }
 }
 
