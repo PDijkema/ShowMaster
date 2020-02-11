@@ -64,6 +64,9 @@ public class MedewerkerController {
     @Autowired
     EmailMetTokenRepository emailMetTokenRepository;
 
+    @Autowired
+    MedewerkerInschrijvingVoorstellingRepository medewerkerInschrijvingVoorstellingRepository;
+
     @GetMapping("/registreer")
     protected String omleidenNaarLogin() {
         return "redirect:/";
@@ -132,9 +135,21 @@ public class MedewerkerController {
     public String welkomMedewerker(Model model, @AuthenticationPrincipal Medewerker ingelogdeMedewerker) {
         model.addAttribute("medewerker", medewerkerRepository.findByGebruikersnaam(ingelogdeMedewerker.getGebruikersnaam()));
         model.addAttribute("medewerkerProfielGegevens", medewerkerProfielGegevensRepository.findByMedewerker(ingelogdeMedewerker));
-        model.addAttribute("alleVoorstellingen", voorstellingRepository.findAll());
 
+
+        List<Voorstelling> voorstellingList = voorstellingRepository.findAllByStatus("Gepubliceerd");
         List<VoorstellingsTaak> voorstellingsTaken = voorstellingsTaakRepository.findByMedewerkerMedewerkerId(ingelogdeMedewerker.getMedewerkerId());
+
+        List<MedewerkerInschrijvingVoorstelling> medewerkerInschrijvingVoorstellingList =
+                medewerkerInschrijvingVoorstellingRepository.findAllByMedewerkerMedewerkerId(ingelogdeMedewerker.getMedewerkerId());
+
+        medewerkerInschrijvingVoorstellingList.forEach(medewerkerInschrijvingVoorstelling ->
+                voorstellingList.removeIf(voorstelling -> medewerkerInschrijvingVoorstelling.getVoorstelling()
+                        .getVoorstellingId().equals(voorstelling.getVoorstellingId())));
+
+        Integer inTeVullenVoorstellingen = voorstellingList.size();
+
+        model.addAttribute("inTevullenVoorstellingen", inTeVullenVoorstellingen);
         model.addAttribute("allePersoonlijkeVoorstellingsTaken", voorstellingsTaken);
 
         return "welkomMedewerker";

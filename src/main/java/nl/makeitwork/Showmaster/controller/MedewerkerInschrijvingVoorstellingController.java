@@ -32,7 +32,7 @@ public class MedewerkerInschrijvingVoorstellingController {
 
         List<Voorstelling> voorstellingen = voorstellingRepository.findAll();
 
-        List<MedewerkerInschrijvingVoorstelling> medewerkerInschrijvingVoorstellingList = medewerkerInschrijvingVoorstellingRepository.findInschrijvingByMedewerkerId(ingelogdeMedewerker.getMedewerkerId());
+        List<MedewerkerInschrijvingVoorstelling> medewerkerInschrijvingVoorstellingList = medewerkerInschrijvingVoorstellingRepository.findAllByMedewerkerMedewerkerId(ingelogdeMedewerker.getMedewerkerId());
 
         medewerkerInschrijvingVoorstellingList.forEach(r->voorstellingen.remove(r.getVoorstelling()));
 
