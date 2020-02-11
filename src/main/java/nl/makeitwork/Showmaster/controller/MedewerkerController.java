@@ -84,11 +84,7 @@ public class MedewerkerController {
                 return "registratieFormulier";
             }
         }
-
-
         return "errorTokenUitnodiging";
-
-
     }
 
     @PostMapping("/registreer/{token}")
@@ -223,7 +219,6 @@ public class MedewerkerController {
         EmailMetToken emailMetToken = emailMetTokenRepository.findByVerificatieToken(verificatieToken);
 
         Medewerker medewerkerNieuwWachtwoord = medewerkerRepository.findByGebruikersnaam(emailMetToken.getEmailadres());
-
 
         medewerkerNieuwWachtwoord.setWachtwoord(medewerker.getWachtwoord());
         medewerkerNieuwWachtwoord.setWachtwoordBevestigen(medewerker.getWachtwoordBevestigen());

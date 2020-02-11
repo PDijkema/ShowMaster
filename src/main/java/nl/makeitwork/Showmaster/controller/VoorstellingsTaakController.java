@@ -66,11 +66,9 @@ public class VoorstellingsTaakController {
         Optional<VoorstellingsTaak> voorstellingsTaak = voorstellingsTaakRepository.findById(voorstellingsTaakId);
         Optional<Voorstelling> voorstelling = voorstellingRepository.findById(voorstellingId);
 
-        // Lijst alle inschrijvingen op één voorstelling
         List<MedewerkerInschrijvingVoorstelling> inschrijvingenBijVoorstellingId =
             medewerkerInschrijvingVoorstellingRepository.findInschrijvingByVoorstellingId(voorstellingId);
 
-        // Lijst alle taken bij één voorstelling
         List<VoorstellingsTaak> alleVoorstellingsTakenBijVoorstellingId =
             voorstellingsTaakRepository.findByVoorstellingVoorstellingIdOrderByTaakTaakNaam(voorstellingId);
 
