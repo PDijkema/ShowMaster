@@ -127,7 +127,7 @@ public class MedewerkerController {
         return "login";
     }
 
-    @GetMapping("/rooster")
+    @GetMapping("/medewerker/rooster")
     public String welkomMedewerker(Model model, @AuthenticationPrincipal Medewerker ingelogdeMedewerker) {
         model.addAttribute("medewerker", medewerkerRepository.findByGebruikersnaam(ingelogdeMedewerker.getGebruikersnaam()));
         model.addAttribute("medewerkerProfielGegevens", medewerkerProfielGegevensRepository.findByMedewerker(ingelogdeMedewerker));
@@ -153,7 +153,7 @@ public class MedewerkerController {
 
     @GetMapping("/")
     public String doorverwijzenStartpagina(@AuthenticationPrincipal Medewerker medewerker) {
-        return "redirect:/rooster";
+        return "redirect:medewerker/rooster";
     }
 
     @GetMapping("/profiel")

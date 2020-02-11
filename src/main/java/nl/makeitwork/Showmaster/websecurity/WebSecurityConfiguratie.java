@@ -30,6 +30,7 @@ public class WebSecurityConfiguratie extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/resources/**","/registreer/**", "/images/**","/wachtwoord/reset/**").permitAll()
+                .antMatchers("/medewerker/**").hasRole("MEDEWERKER")
                 .antMatchers ( "/planner/**").hasRole ("PLANNER")
                 .anyRequest().authenticated()
                 .and()

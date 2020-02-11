@@ -114,7 +114,6 @@ public class Medewerker implements UserDetails {
             authorities.add(new SimpleGrantedAuthority("ROLE_PLANNER"));
         } else {
             authorities.add(new SimpleGrantedAuthority("ROLE_MEDEWERKER"));
-
         }
         System.out.println(authorities);
         return authorities;
