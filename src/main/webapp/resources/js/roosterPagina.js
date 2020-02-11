@@ -54,8 +54,6 @@ function vrijgevenIngeplandeMedewerker(event, contextPath) {
         xhttp.onreadystatechange = function() {
             if (this.readyState === 4 && this.status === 200) {
                 location.reload();
-
-
             }
         };
         xhttp.open("GET", contextPath + "/planner/voorstellingen/voorstellingsTaak/taakVrijGeven/"
