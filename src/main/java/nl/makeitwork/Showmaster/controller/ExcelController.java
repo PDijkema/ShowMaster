@@ -49,7 +49,7 @@ public class ExcelController {
         f.close();
         model.addAttribute("message", "Uploaden van bestand: " + file.getOriginalFilename()
                 + " is geslaagd.");
-        return "excel";
+        return "excelGeslaagd";
     }
 
     @GetMapping("/planner/voorstellingen/excel/toevoegen")

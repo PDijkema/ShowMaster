@@ -25,7 +25,7 @@
         </div>
         <div class="container">
             <a id="nieuweVoorstellingModalButton" class="btn btn-primary" onclick="nieuweVoorstelling('${contextPath}')" data-toggle="modal" data-target="#nieuweVoorstellingModal">Toevoegen</a>
-            <a id="voorstellingenImporterenExcelButton" class="btn btn-primary" href="${contextPath}/planner/voorstellingen/excel">Excel import</a>
+            <a id="importExcelModalButton" class="btn btn-primary" onclick="importerenExcel('${contextPath}')" data-toggle="modal" data-target="#importExcelModal">Excel import</a>
 
             <table class="table table-hover" id="myTable" >
                 <thead>
@@ -113,6 +113,21 @@
             </c:forEach>
         </table>
     </div>
+        <div class="modal fade" id="importExcelModal" tabindex="-1" role="dialog" aria-labelledby="importExcelModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title" id="importExcelModalLabel">Voorstelling(en) importeren vanuit Excel</h2>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p id="importExcel"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="modal fade" id="nieuweVoorstellingModal" tabindex="-1" role="dialog" aria-labelledby="nieuweVoorstellingModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
