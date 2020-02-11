@@ -1,0 +1,85 @@
+/* opmaak tabel openVoorstellingen */
+#myTable {
+  table-layout: fixed;
+  width:100%
+}
+
+/* ruimte geven voor naam voorstelling */
+#voorstellingsnaam{
+    width:50%
+}
+
+/* styling icoontjes bovenin pagina */
+#keuzeJa{
+    color: #63d481;
+}
+
+#keuzeMisschien{
+    color: #efa625;
+    margin-left:5em;
+}
+#keuzeNee{
+    color: #de4846;
+    margin-left:5em;
+}
+
+/* styling radiobuttons */
+input[type="radio"]{
+   -webkit-appearance: none;
+}
+
+label{
+    height: 3rem;
+    width: 3rem;
+    margin: auto;
+    border-radius: .25rem;
+    position: absolute;
+    transition: 0.5s;
+    background-color: #ddd;
+    cursor:pointer;
+    -webkit-transition: all 100ms ease-in;
+           -moz-transition: all 100ms ease-in;
+                transition: all 100ms ease-in;
+}
+
+#icoonJa, #icoonMisschien, #icoonNee {
+   color: #fff;
+ }
+
+.fas {
+   font-size: 2rem;
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+}
+
+.labelJa:hover,
+.ja:checked +label{
+     background-color: #63d481;
+}
+
+.labelMisschien:hover,
+.misschien:checked +label{
+    background-color: #efa625;
+}
+
+.labelNee:hover,
+.nee:checked +label{
+    background-color: #de4846;
+}
+
+.ja{
+    background-color: #c0c0c0;
+    display: inline-table;
+}
+
+.misschien{
+    background-color: #c0c0c0;
+    display: inline-table;
+}
+
+.nee{
+    background-color: #c0c0c0;
+    display: inline-table;
+}

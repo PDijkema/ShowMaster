@@ -1,9 +1,6 @@
 package nl.makeitwork.Showmaster.controller;
 
-import nl.makeitwork.Showmaster.model.Medewerker;
-import nl.makeitwork.Showmaster.model.MedewerkerProfielGegevens;
-import nl.makeitwork.Showmaster.model.UitnodigingMedewerker;
-import nl.makeitwork.Showmaster.model.VoorstellingsTaak;
+import nl.makeitwork.Showmaster.model.*;
 import nl.makeitwork.Showmaster.repository.*;
 import nl.makeitwork.Showmaster.service.MedewerkerService;
 import nl.makeitwork.Showmaster.service.MedewerkerServiceImplementatie;
@@ -61,14 +58,51 @@ public class MedewerkerController {
     @Autowired
     VoorstellingRepository voorstellingRepository;
 
+    @Autowired
+    VerificatieTokenRepository verificatieTokenRepository;
+
+    @Autowired
+    EmailMetTokenRepository emailMetTokenRepository;
+
+    @Autowired
+    MedewerkerInschrijvingVoorstellingRepository medewerkerInschrijvingVoorstellingRepository;
+
     @GetMapping("/registreer")
-    protected String showRegistratieFormulier(Model model) {
-        model.addAttribute("registratieFormulier", new Medewerker());
-        return "registratieFormulier";
+    protected String omleidenNaarLogin() {
+        return "redirect:/";
     }
 
-    @PostMapping("/registreer")
-    public String saveGebruiker(@ModelAttribute("registratieFormulier") Medewerker registratieFormulier, BindingResult bindingResult) {
+    @GetMapping("/registreer/{token}")
+    protected String showRegistratieFormulier(Model model, @PathVariable String token) {
+
+        VerificatieToken verificatieToken = verificatieTokenRepository.findByToken(token);
+
+
+        if (verificatieToken != null) {
+            if (!verificatieToken.getTokenGebruikt()) {
+                EmailMetToken emailMetToken = emailMetTokenRepository.findByVerificatieToken(verificatieToken);
+
+                model.addAttribute("registratieFormulier", new Medewerker());
+                model.addAttribute("gebruikersnaam", emailMetToken.getEmailadres());
+                return "registratieFormulier";
+            }
+        }
+        return "errorTokenUitnodiging";
+    }
+
+    @PostMapping("/registreer/{token}")
+    public String saveGebruiker(@PathVariable String token, Medewerker registratieFormulier, BindingResult bindingResult) {
+
+        VerificatieToken verificatieToken = verificatieTokenRepository.findByToken(token);
+        EmailMetToken emailMetToken = emailMetTokenRepository.findByVerificatieToken(verificatieToken);
+
+        if (verificatieToken.getTokenGebruikt()) {
+            return "errorTokenUitnodiging";
+        }
+
+
+        registratieFormulier.setGebruikersnaam(emailMetToken.getEmailadres());
+
         medewerkerValidator.validate(registratieFormulier, bindingResult);
         if (bindingResult.hasErrors()) {
             return "registratieFormulier";
@@ -76,6 +110,11 @@ public class MedewerkerController {
         medewerkerService.save(registratieFormulier);
         securityService.autoLogin(registratieFormulier.getGebruikersnaam(), registratieFormulier.getWachtwoordBevestigen());
         registratieFormulier.setWachtwoordBevestigen("");
+
+
+        verificatieToken.setTokenGebruikt(true);
+        verificatieTokenRepository.save(verificatieToken);
+
         return "redirect:/";
     }
 
@@ -88,13 +127,25 @@ public class MedewerkerController {
         return "login";
     }
 
-    @GetMapping("/startpagina")
+    @GetMapping("/rooster")
     public String welkomMedewerker(Model model, @AuthenticationPrincipal Medewerker ingelogdeMedewerker) {
         model.addAttribute("medewerker", medewerkerRepository.findByGebruikersnaam(ingelogdeMedewerker.getGebruikersnaam()));
         model.addAttribute("medewerkerProfielGegevens", medewerkerProfielGegevensRepository.findByMedewerker(ingelogdeMedewerker));
-        model.addAttribute("alleVoorstellingen", voorstellingRepository.findAll());
 
+
+        List<Voorstelling> voorstellingList = voorstellingRepository.findAllByStatus("Gepubliceerd");
         List<VoorstellingsTaak> voorstellingsTaken = voorstellingsTaakRepository.findByMedewerkerMedewerkerId(ingelogdeMedewerker.getMedewerkerId());
+
+        List<MedewerkerInschrijvingVoorstelling> medewerkerInschrijvingVoorstellingList =
+                medewerkerInschrijvingVoorstellingRepository.findAllByMedewerkerMedewerkerId(ingelogdeMedewerker.getMedewerkerId());
+
+        medewerkerInschrijvingVoorstellingList.forEach(medewerkerInschrijvingVoorstelling ->
+                voorstellingList.removeIf(voorstelling -> medewerkerInschrijvingVoorstelling.getVoorstelling()
+                        .getVoorstellingId().equals(voorstelling.getVoorstellingId())));
+
+        Integer inTeVullenVoorstellingen = voorstellingList.size();
+
+        model.addAttribute("inTevullenVoorstellingen", inTeVullenVoorstellingen);
         model.addAttribute("allePersoonlijkeVoorstellingsTaken", voorstellingsTaken);
 
         return "welkomMedewerker";
@@ -102,16 +153,16 @@ public class MedewerkerController {
 
     @GetMapping("/")
     public String doorverwijzenStartpagina(@AuthenticationPrincipal Medewerker medewerker) {
-        return "redirect:/startpagina";
+        return "redirect:/rooster";
     }
 
-    @GetMapping("/profielpagina")
+    @GetMapping("/profiel")
     protected String showProfielPagina(Model model, @AuthenticationPrincipal Medewerker ingelogdeMedewerker) {
         model.addAttribute("medewerkerProfielGegevens", medewerkerProfielGegevensRepository.findByMedewerker(ingelogdeMedewerker));
         return "profielPagina";
     }
 
-    @PostMapping("/profielpagina")
+    @PostMapping("/profiel")
     protected String goToProfielWijzigen(Model model, @AuthenticationPrincipal Medewerker ingelogdeMedewerker) {
         return "redirect:/profiel/wijzigen";
     }
@@ -128,13 +179,14 @@ public class MedewerkerController {
                                    BindingResult result) {
         if (result.hasErrors()) {
             return "profielWijzigen";
-        } if (medewerkerProfielGegevens.getLocalDate() == null) {
-          medewerkerProfielGegevens.setGeboortedatum("");
+        }
+        if (medewerkerProfielGegevens.getLocalDate() == null) {
+            medewerkerProfielGegevens.setGeboortedatum("");
         } else {
             medewerkerProfielGegevens.localDateFormatterenNaarString();
             medewerkerProfielGegevensRepository.save(medewerkerProfielGegevens);
         }
-        return "redirect:/profielpagina";
+        return "redirect:/profiel";
     }
 
     @GetMapping("/planner/gebruiker/overzicht")
@@ -142,17 +194,106 @@ public class MedewerkerController {
         List<Medewerker> alleGebruikers = medewerkerRepository.findAll();
         alleGebruikers.removeIf(medewerker -> medewerker.getMedewerkerId().equals(ingelogdeMedwerker.getMedewerkerId()));
         model.addAttribute("alleGebruikers", alleGebruikers);
-        model.addAttribute("uitnodigingMedewerker", new UitnodigingMedewerker());
+        model.addAttribute("emailMetToken", new EmailMetToken());
         return "gebruikerOverzicht";
     }
 
-    @GetMapping("/planner/gebruiker/verwijderen/{medewerkerId}")
+    @GetMapping("/planner/gebruiker/overzicht/verwijderen/{medewerkerId}")
     public String verwijderGebruiker(@PathVariable Integer medewerkerId) {
         medewerkerRepository.deleteById(medewerkerId);
         return "redirect:/planner/gebruiker/overzicht";
     }
 
+    @GetMapping("/wachtwoord/reset")
+    protected String wachtwoordResetPagina(Model model) {
+        String emailadres = "";
+
+
+        model.addAttribute("emailadres", emailadres);
+        return "wachtwoordResetAanvragen";
+    }
+
+    @GetMapping("/wachtwoord/reset/{token}")
+    protected String wachtwoordResetPaginaToken(@PathVariable String token, Model model) {
+        VerificatieToken verificatieToken = verificatieTokenRepository.findByToken(token);
+
+        model.addAttribute(new Medewerker());
+
+        if (verificatieToken.getTokenGebruikt()) {
+            return "errorTokenWachtwoordReset";
+        }
+
+
+        return "wachtwoordResetPagina";
+    }
+
+    @PostMapping("/wachtwoord/reset/{token}")
+    public String wachtResetPaginaToken(@PathVariable String token, Medewerker medewerker, BindingResult bindingResult) {
+
+        VerificatieToken verificatieToken = verificatieTokenRepository.findByToken(token);
+        EmailMetToken emailMetToken = emailMetTokenRepository.findByVerificatieToken(verificatieToken);
+
+        Medewerker medewerkerNieuwWachtwoord = medewerkerRepository.findByGebruikersnaam(emailMetToken.getEmailadres());
+
+        medewerkerNieuwWachtwoord.setWachtwoord(medewerker.getWachtwoord());
+        medewerkerNieuwWachtwoord.setWachtwoordBevestigen(medewerker.getWachtwoordBevestigen());
+
+        if (verificatieToken.getTokenGebruikt()) {
+            return "errorTokenUitnodiging";
+        }
+
+
+        medewerkerValidator.validateWachtwoord(medewerker, bindingResult);
+        if (bindingResult.hasErrors()) {
+            return "wachtwoordResetPagina";
+        }
+        medewerkerService.save(medewerkerNieuwWachtwoord);
+        securityService.autoLogin(medewerkerNieuwWachtwoord.getGebruikersnaam(), medewerkerNieuwWachtwoord.getWachtwoordBevestigen());
+        medewerkerNieuwWachtwoord.setWachtwoordBevestigen("");
+
+
+        verificatieToken.setTokenGebruikt(true);
+        verificatieTokenRepository.save(verificatieToken);
+
+        return "redirect:/";
+    }
+
+    @GetMapping("/medewerker/setup")
+    protected String aanmakenMedewerkers() {
+        Medewerker medewerker1 = new Medewerker();
+
+        medewerker1.setGebruikersnaam("gert@test.com");
+        medewerker1.setWachtwoord("test1234");
+        medewerker1.setWachtwoordBevestigen("test1234");
+        medewerker1.setPlanner(true);
+        medewerker1.getMedewerkerProfielGegevens().setVoornaam("Gert");
+        medewerker1.getMedewerkerProfielGegevens().setAchternaam("Postma");
+
+        Medewerker medewerker2 = new Medewerker();
+        medewerker2.setGebruikersnaam("pieter@test.com");
+        medewerker2.setWachtwoord("test1234");
+        medewerker2.setWachtwoordBevestigen("test1234");
+        medewerker2.setPlanner(true);
+        medewerker2.getMedewerkerProfielGegevens().setVoornaam("Pieter");
+        medewerker2.getMedewerkerProfielGegevens().setAchternaam("Dijkema");
+
+        Medewerker medewerker3 = new Medewerker();
+        medewerker3.setGebruikersnaam("karin@test.com");
+        medewerker3.setWachtwoord("test1234");
+        medewerker3.setWachtwoordBevestigen("test1234");
+        medewerker3.setPlanner(true);
+        medewerker3.getMedewerkerProfielGegevens().setVoornaam("Karin");
+        medewerker3.getMedewerkerProfielGegevens().setAchternaam("Zoetendal");
+
+        medewerkerService.save(medewerker1);
+        medewerkerService.save(medewerker2);
+        medewerkerService.save(medewerker3);
+
+        return "redirect:/";
+    }
 }
+
+
 
 
 

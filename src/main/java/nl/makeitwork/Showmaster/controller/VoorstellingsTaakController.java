@@ -3,11 +3,11 @@ package nl.makeitwork.Showmaster.controller;
 import nl.makeitwork.Showmaster.model.*;
 import nl.makeitwork.Showmaster.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.converter.json.GsonBuilderUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+
 import java.util.*;
 
 /**
@@ -28,18 +28,20 @@ public class VoorstellingsTaakController {
     private MedewerkerInschrijvingVoorstellingRepository medewerkerInschrijvingVoorstellingRepository;
     @Autowired
     private MedewerkerRepository medewerkerRepository;
+    @Autowired
+    private VoorstellingsTaakController voorstellingsTaakController;
 
-    @GetMapping("/planner/voorstellingsTaak/verwijderen/{voorstellingId}/{voorstellingsTaakId}")
+    @GetMapping("/planner/voorstellingen/voorstellingsTaak/verwijderen/{voorstellingId}/{voorstellingsTaakId}")
     protected String verwijderenTaakBijVoorstelling(@PathVariable("voorstellingsTaakId") Integer voorstellingsTaakId,
                                                     @PathVariable("voorstellingId") Integer voorstellingId) {
 
         Optional<VoorstellingsTaak> voorstellingsTaak = voorstellingsTaakRepository.findById(voorstellingsTaakId);
         voorstellingsTaakRepository.deleteById(voorstellingsTaakId);
 
-        return "redirect:/planner/voorstelling/details/" + voorstellingId;
+        return "redirect:/planner/voorstellingen/voorstelling/rooster/" + voorstellingId;
     }
 
-    @GetMapping("/planner/voorstellingsTaak/toevoegen/{voorstellingId}/{taakId}")
+    @GetMapping("/planner/voorstellingen/voorstellingsTaak/toevoegen/{voorstellingId}/{taakId}")
     protected String toevoegenTaakAanVoorstelling(@PathVariable("taakId") Integer taakId,
                                                   @PathVariable("voorstellingId") Integer voorstellingId) {
 
@@ -53,10 +55,10 @@ public class VoorstellingsTaakController {
 
         voorstellingsTaakRepository.save(voorstellingsTaak);
 
-        return "redirect:/planner/voorstelling/rooster/" + voorstellingId;
+        return "redirect:/planner/voorstellingen/voorstelling/rooster/" + voorstellingId;
     }
 
-    @GetMapping("/planner/voorstellingsTaak/medewerkerKoppelen/{voorstellingId}/{voorstellingsTaakId}")
+    @GetMapping("/planner/voorstellingen/voorstellingsTaak/medewerkerKoppelen/{voorstellingId}/{voorstellingsTaakId}")
     protected String koppelenMedewerkerAanVoorstellingsTaak(@PathVariable("voorstellingId") Integer voorstellingId,
                                                             @PathVariable("voorstellingsTaakId") Integer voorstellingsTaakId,
                                                             Model model) {
@@ -64,11 +66,9 @@ public class VoorstellingsTaakController {
         Optional<VoorstellingsTaak> voorstellingsTaak = voorstellingsTaakRepository.findById(voorstellingsTaakId);
         Optional<Voorstelling> voorstelling = voorstellingRepository.findById(voorstellingId);
 
-        // Lijst alle inschrijvingen op één voorstelling
         List<MedewerkerInschrijvingVoorstelling> inschrijvingenBijVoorstellingId =
             medewerkerInschrijvingVoorstellingRepository.findInschrijvingByVoorstellingId(voorstellingId);
 
-        // Lijst alle taken bij één voorstelling
         List<VoorstellingsTaak> alleVoorstellingsTakenBijVoorstellingId =
             voorstellingsTaakRepository.findByVoorstellingVoorstellingIdOrderByTaakTaakNaam(voorstellingId);
 
@@ -85,7 +85,7 @@ public class VoorstellingsTaakController {
         return "medewerkerKoppelenAanVoorstellingsTaak";
     }
 
-    @GetMapping("/planner/voorstellingsTaak/medewerkerKoppelen/{voorstellingId}/{voorstellingsTaakId}/{medewerkerId}")
+    @GetMapping("/planner/voorstellingen/voorstellingsTaak/medewerkerKoppelen/{voorstellingId}/{voorstellingsTaakId}/{medewerkerId}")
     protected String opslaanMedewerkerBijVoorstellingstaak(@PathVariable("voorstellingId") Integer voorstellingId,
                                                            @PathVariable("voorstellingsTaakId") Integer voorstellingsTaakId,
                                                            @PathVariable("medewerkerId") Integer medewerkerId) {
@@ -107,22 +107,74 @@ public class VoorstellingsTaakController {
             voorstellingsTaak.get().setMedewerker(medewerker.get());
             voorstellingsTaakRepository.save(voorstellingsTaak.get());
         }
-        return "redirect:/planner/voorstelling/rooster/" + voorstellingId;
+        return "redirect:/planner/voorstellingen/voorstelling/rooster/" + voorstellingId;
     }
 
-    @GetMapping("/planner/voorstellingsTaak/taakVrijGeven/{voorstellingId}/{voorstellingsTaakId}")
+    @GetMapping("/planner/voorstellingen/voorstellingsTaak/taakVrijGeven/{voorstellingId}/{voorstellingsTaakId}")
     protected String taakBijVoorstellingenVrijgeven(@PathVariable("voorstellingId") Integer voorstellingId,
-                                                           @PathVariable("voorstellingsTaakId") Integer voorstellingsTaakId) {
+                                                    @PathVariable("voorstellingsTaakId") Integer voorstellingsTaakId) {
 
         VoorstellingsTaak voorstellingsTaak = voorstellingsTaakRepository.findByVoorstellingsTaakId(voorstellingsTaakId);
-
-
 
         if (voorstellingsTaak.getMedewerker() != null) {
             voorstellingsTaak.setMedewerker(null);
             voorstellingsTaakRepository.save(voorstellingsTaak);
         }
-        return "redirect:/planner/voorstelling/rooster/" + voorstellingId;
+        return "redirect:/planner/voorstellingen/voorstelling/rooster/" + voorstellingId;
     }
 
+    @GetMapping("/planner/voorstellingen/voorstelling/rooster/genereer/{voorstellingId}")
+    protected String genereerRooster(@PathVariable("voorstellingId") Integer voorstellingId) {
+
+        List<Taak> alleTaken = taakRepository.findAll();
+
+        List<MedewerkerInschrijvingVoorstelling> inschrijvingVoorstelling = medewerkerInschrijvingVoorstellingRepository.
+                findByVoorstellingVoorstellingIdAndInschrijvingStatus(voorstellingId, "Beschikbaar");
+        Collections.shuffle(inschrijvingVoorstelling);
+
+        List<VoorstellingsTaak> voorstellingsTaken = voorstellingsTaakRepository.findByVoorstellingVoorstellingId(voorstellingId);
+        Collections.shuffle(voorstellingsTaken);
+
+        voorstellingsTaken
+                .stream()
+                .filter(x -> x.getMedewerker() != null)
+                .forEach(x -> x.setMedewerker(null));
+
+        for (Taak taak : alleTaken) {
+            voorstellingsTaakController.genereerRoosterMetVoorkeursTaak(taak.getTaakNaam(),
+                    inschrijvingVoorstelling,
+                    voorstellingsTaken);
+        }
+        return "redirect:/planner/voorstellingen/voorstelling/rooster/" + voorstellingId;
+    }
+
+    protected void genereerRoosterMetVoorkeursTaak(String voorkeursTaak,
+                                                   List<MedewerkerInschrijvingVoorstelling> inschrijvingVoorstelling,
+                                                   List<VoorstellingsTaak> voorstellingsTaken) {
+
+        List<MedewerkerInschrijvingVoorstelling> inschrijvingVoorstellingVoorkeur = new ArrayList<MedewerkerInschrijvingVoorstelling>() {};
+        List<VoorstellingsTaak> voorstellingsTaakVoorkeur = new ArrayList<VoorstellingsTaak>() {};
+        
+        voorstellingsTaken
+                .stream()
+                .filter(x -> x.getTaak().getTaakNaam().equals(voorkeursTaak))
+                .forEach(voorstellingsTaakVoorkeur::add);
+
+        inschrijvingVoorstelling
+                .stream()
+                .filter(y -> y.getMedewerker().getMedewerkerProfielGegevens().getVoorkeurstaak() != null)
+                .filter(z -> z.getMedewerker().getMedewerkerProfielGegevens().getVoorkeurstaak().getTaakNaam().equals(voorkeursTaak))
+                .forEach(inschrijvingVoorstellingVoorkeur::add);
+
+        for(int i = 0; i <inschrijvingVoorstellingVoorkeur.size(); i++) {
+            if( i < voorstellingsTaakVoorkeur.size()) {
+                if (voorstellingsTaakVoorkeur.get(i) != null) {
+                    voorstellingsTaakVoorkeur.get(i).setMedewerker(inschrijvingVoorstellingVoorkeur.get(i).getMedewerker());
+                    voorstellingsTaakRepository.save(voorstellingsTaken.get(i));
+                }
+            } else {
+                break;
+            }
+        }
+    }
 }

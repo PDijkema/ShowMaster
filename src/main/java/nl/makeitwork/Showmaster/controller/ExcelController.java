@@ -29,12 +29,12 @@ public class ExcelController {
 
     private String fileLocation;
 
-    @GetMapping("/planner/excelProcessing")
+    @GetMapping("/planner/voorstellingen/excel")
     public String getExcelProcessingPage() {
         return "excel";
     }
 
-    @PostMapping("/planner/uploadExcelFile")
+    @PostMapping("/planner/voorstellingen/excel/upload")
     public String uploadFile(Model model, MultipartFile file) throws IOException {
         InputStream in = file.getInputStream();
         File currDir = new File(".");
@@ -52,7 +52,7 @@ public class ExcelController {
         return "excel";
     }
 
-    @GetMapping("/planner/excel/voorstelling/toevoegen")
+    @GetMapping("/planner/voorstellingen/excel/toevoegen")
     public String excelVoorstellingToevoegen(Model model) throws SpreadsheetReadException {
 
         if (fileLocation != null) {

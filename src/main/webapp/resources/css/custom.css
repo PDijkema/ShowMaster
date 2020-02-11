@@ -1,18 +1,14 @@
 @import url("https://fonts.googleapis.com/css?family=Days+One|PT+Sans:400,400i,700,700i");
-html,footer,header,hgroup,menu,nav,{margin:0;padding:0;border:0;font:inherit;vertical-align:baseline}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}button,optgroup,select,textarea{color:inherit;font:inherit;margin:0}button{overflow:visible}
+html,footer,header,hgroup,menu,nav{margin:0;padding:0;border:0;font:inherit;vertical-align:baseline}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}button,optgroup,select,textarea{color:inherit;font:inherit;margin:0}button{overflow:visible}
 
 /* items in navbar in font als Bolwerk site */
 header .nav-item {
-  font-family: "Days One"; sans-serif;
+  font-family: "Days One", sans-serif;
   font-size: 0.7rem;
 }
 
 #headerNavbar .navbar-light .navbar-nav .nav-link:hover
 {color:rgba(11, 114, 169, 1)}
-
-#headerNavbar .navbar-light .navbar-nav li.active > a {
-    color:rgba(11, 114, 169, 1)
-}
 
 body
 {font-family:"PT Sans",sans-serif}
@@ -41,23 +37,17 @@ button,optgroup,select
 .btn-outline-primary:hover
 {color:#fff;background-color:#0B72A9;border-color:#0B72A9}
 
+.btn.btn-danger
+{font-family:"Days One", sans-serif}
+
 
 /* kleur van de link, zelfde als button kleur */
 a
 {color:#0B72A9;text-decoration:none;background-color:transparent}
 a:hover{text-decoration:underline}
 
-@namespace svg url(http://www.w3.org/2000/svg);
-/* Necessary to select only SVG <a> elemnents, and not also HTML’s.
-   See warning below */
-
-svg.a:link, svg.a:visited {
-  cursor: pointer;
-}
-
-svg.a:hover, svg.a:active {
-  outline: dotted 1px blue;
-}
+.form-control::placeholder
+{opacity:0.5}
 
 i.fas, i.far {
     color: #0B72A9;
@@ -74,7 +64,10 @@ color: #fff; font-size:1.5rem; font-weight:700}
 #voorstellingDatumDisplay4 {
 color: #fff; font-size:1rem}
 
-#voegVoorstellingToeButton, #voorstellingenImporterenExcelButton{margin-bottom: 15px}
+#voegVoorstellingToeButton, #nieuweVoorstellingModalButton, #voorstellingenImporterenExcelButton, #dienstToevoegenButton{
+  margin-bottom: 15px;
+  color: #fff
+}
 
 #medewerkerUitnodigenButton{margin-top: 15px; margin-bottom: 15px}
 
@@ -101,6 +94,21 @@ color: #fff;
   background-color: #e9ecef;
   border-radius: 15px;
   width: 200px;
+}
+
+#genereerRooster {
+  color: #fff;
+}
+
+.voorkeursTaakInRooster {
+  position: relative;
+  left: 2px;
+  text-align: right;
+  color: gray;
+}
+.naamBeschikbareMedewerker {
+  position: relative;
+  left: 2px;
 }
 
 .voorstellingsTaak {

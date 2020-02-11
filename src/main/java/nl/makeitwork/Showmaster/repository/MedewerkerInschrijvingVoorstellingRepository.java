@@ -19,8 +19,9 @@ public interface MedewerkerInschrijvingVoorstellingRepository extends JpaReposit
 
     MedewerkerInschrijvingVoorstelling findByVoorstellingVoorstellingIdAndMedewerkerMedewerkerId(Integer voorstellingId, Integer medewerkerId);
 
-    @Query(value= "select * from medewerker_inschrijving_voorstelling where medewerker_id = :medewerkerId", nativeQuery = true)
-    List<MedewerkerInschrijvingVoorstelling> findInschrijvingByMedewerkerId(@Param("medewerkerId")Integer medewerkerId);
+    List<MedewerkerInschrijvingVoorstelling> findByVoorstellingVoorstellingIdAndInschrijvingStatus(Integer voorstellingId, String status);
+
+    List<MedewerkerInschrijvingVoorstelling> findAllByMedewerkerMedewerkerId(Integer medewerkerId);
 
     @Query(value= "select * from medewerker_inschrijving_voorstelling where voorstelling_id = :voorstellingId", nativeQuery = true)
     List<MedewerkerInschrijvingVoorstelling> findInschrijvingByVoorstellingId(@Param("voorstellingId")Integer voorstellingId);

@@ -1,25 +1,6 @@
 function infoMeegeven (voorstellingsTaakId,voorstellingId, contextPath) {
-    $('#taakVrijgeven').attr("href", contextPath + "/planner/voorstellingsTaak/taakVrijGeven/" + voorstellingId + "/" + voorstellingsTaakId);
+    $('#taakVrijgeven').attr("href", contextPath + "/planner/voorstellingen/voorstellingsTaak/taakVrijGeven/" + voorstellingId + "/" + voorstellingsTaakId);
     document.getElementById('taakVrijgeven').style.visibility = 'visible';
-}
-
-function buttonClassveranderen(teVerwijderenKlasse, gewensteKlasse, thisParameter, voorstellingId, vreemdeStatus1, vreemdeStatus2, eigenStatus, contextPath, yCoordinaat1, yCoordinaat2, eigenYcoordinaat, status1, status2) {
-    var myTable = document.getElementById('myTable');
-    var x = ($(thisParameter).closest('tr').index());
-    x++;
-
-    myTable.rows[x].cells[yCoordinaat1].innerHTML = '<td><a class="btn btn-secondary btn-lg my-2" role="button" onclick="buttonClassveranderen(\'btn-secondary\',' + '\'' + status1 + '\'' + ', this, '
-        + voorstellingId + ',' + '\'' + eigenStatus + '\'' + ',' + '\'' + vreemdeStatus2 + '\'' + ',' + '\'' + vreemdeStatus1 + '\'' + ',' + '\'' + contextPath + '\'' + ',' + eigenYcoordinaat + ','
-        + yCoordinaat2 + ',' + yCoordinaat1 + ',\'' + gewensteKlasse + '\'' + ',\'' + status2 + '\'' + ');' +
-        'beschikbaarheidStatusDoorgeven(' + voorstellingId + ',' + '\'' + vreemdeStatus1 + '\'' + ',' + '\'' + contextPath + '\'' + ')">' + vreemdeStatus1 + '</a>';
-
-
-    myTable.rows[x].cells[yCoordinaat2].innerHTML = '<td><a class="btn btn-secondary btn-lg my-2" role="button" onclick="buttonClassveranderen(\'btn-secondary\',' + '\'' + status2 + '\'' + ',  this, '
-        + voorstellingId + ',' + '\'' + eigenStatus + '\'' + ',' + '\'' + vreemdeStatus1 + '\'' + ',' + '\'' + vreemdeStatus2 + '\'' + ',' + '\'' + contextPath + '\'' + ',' + eigenYcoordinaat + ','
-        + yCoordinaat1 + ',' + yCoordinaat2 + ',\'' + gewensteKlasse + '\'' + ',\'' + status1 + '\'' + '); ' +
-        'beschikbaarheidStatusDoorgeven(' + voorstellingId + ',' + '\'' + vreemdeStatus2 + '\'' + ',' + '\'' + contextPath + '\'' + ')">' + vreemdeStatus2 + '</a>';
-
-    $(thisParameter).removeClass(teVerwijderenKlasse).addClass(gewensteKlasse);
 }
 
 function sortTable(n) {
