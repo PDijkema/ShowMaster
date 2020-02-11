@@ -13,124 +13,115 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="${contextPath}\resources\css\custom.css" type="text/css" rel="stylesheet">
+    <link href="${contextPath}\resources\css\all.css" type="text/css" rel="stylesheet">
+    <link href="${contextPath}\resources\css\radioButton.css" type="text/css" rel="stylesheet">
     <script src="${contextPath}\resources\js\ajax.js"></script>
     <script src="${contextPath}\resources\js\javascript.functies.js"></script>
-
 </head>
 
-<body>
-<jsp:include page="navbar.jsp"/>
-<div class="jumbotron jumbotron-fluid">
-    <div class="container">
-        <h1 class="voorstellingDisplay4">Inschrijven</h1>
-    </div>
-</div>
-<div class="container">
-    <div class="container">
-        <h1>Open voorstellingen</h1>
-        <table class="table table-hover" id="myTable" ,>
-            <thead>
-            <tr>
-                <th scope="col" onclick="sortTable(0)">Voorstelling</th>
-                <th scope="col" onclick="sortTable(1)">Datum</th>
-                <th scope="col" onclick="sortTable(2)">Beschikbaar</th>
-                <th scope="col" onclick="sortTable(3)">Misschien</th>
-                <th scope="col" onclick="sortTable(4)">Niet Beschikbaar</th>
-            </tr>
-            </thead>
-
-            <tbody>
-
-            <c:forEach items="${voorstellingLijst}" var="voorstelling">
-                <c:if test="${voorstelling.status == 'Gepubliceerd'}">
+    <body>
+        <jsp:include page="navbar.jsp"/>
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h1 class="voorstellingDisplay4">Inschrijven open voorstellingen</h1>
+            </div>
+        </div>
+        <div class="container">
+            <div class="container">
+                <h2>Ben je beschikbaar?</h2>
+                    <p>Geef per voorstelling aan of je beschikbaar bent. Je kunt kiezen uit de volgende opties:</p>
+                   <table>
+                        <tr>
+                            <td><i id="keuzeJa" class="fa fa-check"></i>
+                            </td>
+                            <td>Ja</td>
+                            <td><i id="keuzeMisschien" class="fa fa-question"></i>
+                            </td>
+                            <td>Misschien</td>
+                            <td><i id="keuzeNee" class="fa fa-times"></i>
+                            </td>
+                            <td>Nee</td>
+                        </tr>
+                   </table>
+                <br>
+                <table class="table table-hover" id="myTable">
+                    <thead>
                     <tr>
-
-                        <td><h1><c:out value="${voorstelling.getNaam()}"/></h1></td>
-                        <td><c:out value="${voorstelling.getDatum()}"/></td>
-
-                        <td>
-                            <a class="btn btn-secondary btn-lg my-2" role="button"
-                               onclick="
-                               beschikbaarheidStatusDoorgeven(${voorstelling.getVoorstellingId()}, '${beschikbaar}','${contextPath}', this, 'btn-secondary', 'btn-success', 3, 4) ">${beschikbaar}</a>
-                        </td>
-
-                        <td>
-                            <a class="btn btn-secondary btn-lg my-2" role="button"
-                               onclick="
-                               beschikbaarheidStatusDoorgeven(${voorstelling.getVoorstellingId()}, '${misschien}','${contextPath}', this, 'btn-secondary','btn-warning',2,4 )">${misschien}</a>
-                        </td>
-                        <td>
-                            <a class="btn btn-secondary btn-lg my-2" role="button"
-                               onclick="
-                               beschikbaarheidStatusDoorgeven(${voorstelling.getVoorstellingId()}, '${nietBeschikbaar}','${contextPath}', this, 'btn-secondary','btn-danger', 2,3)">${nietBeschikbaar}</a>
-                        </td>
-
+                        <th id="voorstellingsnaam" scope="col" onclick="sortTable(0)">Voorstelling</th>
+                        <th scope="col" onclick="sortTable(1)">Datum</th>
+                        <th scope="col">Ja</th>
+                        <th scope="col">Misschien</th>
+                        <th scope="col">Nee</th>
                     </tr>
-                </c:if>
-            </c:forEach>
+                    </thead>
 
-            <c:forEach items="${inschrijvingen}" var="inschrijving">
-                <tr>
-                    <td><h1><c:out value="${inschrijving.getVoorstelling().getNaam()}"/></h1></td>
-                    <td><c:out value="${inschrijving.getVoorstelling().getDatum()}"/></td>
-                    <c:choose>
-                        <c:when test="${inschrijving.getInschrijvingStatus() == beschikbaar}">
-                            <td>
-                                <a class="btn btn-success btn-lg my-2" role="button" id='test'
-                                   onclick="
-                                           beschikbaarheidStatusDoorgeven(${inschrijving.getVoorstelling().getVoorstellingId()}, '${beschikbaar}','${contextPath}', this, 'btn-secondary', 'btn-success', 3, 4) ">${beschikbaar}</a>
-                            </td>
+                    <tbody>
 
-                            <td><a id='test4' class="btn btn-secondary btn-lg my-2" role="button"
-                                   onclick="
-                                           beschikbaarheidStatusDoorgeven(${inschrijving.getVoorstelling().getVoorstellingId()}, '${misschien}','${contextPath}', this, 'btn-secondary','btn-warning',2,4 )">${misschien}</a>
-                            </td>
+                    <input type="radio" name="fixed${indexValue}" value="Fixed"></td>
+                        <c:forEach items="${voorstellingLijst}" var="voorstelling">
+                            <c:if test="${voorstelling.status == 'Gepubliceerd'}">
+                                <tr>
+                                    <td><h1><c:out value="${voorstelling.naam}"/></h1></td>
+                                    <td><c:out value="${voorstelling.datum}"/></td>
+                                    <td>
+                                      <input class="ja" type="radio" name="beschikbaarheid${voorstelling.voorstellingId}" id="ja${voorstelling.voorstellingId}">
+                                        <label class="labelJa" for="ja${voorstelling.voorstellingId}"
+                                        onclick="beschikbaarheidStatusDoorgeven(${voorstelling.voorstellingId}, '${beschikbaar}','${contextPath}') ">
+                                            <i id="icoonJa" class="fas fa-check" aria-hidden="true"></i>
+                                        </label>
+                                    </td>
+                                    <td>
+                                      <input class="misschien" type="radio" name="beschikbaarheid${voorstelling.voorstellingId}" id="misschien${voorstelling.voorstellingId}">
+                                        <label class="labelMisschien" for="misschien${voorstelling.voorstellingId}"
+                                        onclick="beschikbaarheidStatusDoorgeven(${voorstelling.voorstellingId}, '${misschien}','${contextPath}') ">
+                                            <i id="icoonMisschien" class="fas fa-question" aria-hidden="true"></i>
+                                        </label>
+                                    </td>
+                                    <td>
+                                      <input class="nee" type="radio" name="beschikbaarheid${voorstelling.voorstellingId}" id="nee${voorstelling.voorstellingId}">
+                                        <label class="labelNee" for="nee${voorstelling.voorstellingId}"
+                                        onclick="beschikbaarheidStatusDoorgeven(${voorstelling.voorstellingId}, '${nietBeschikbaar}','${contextPath}') ">
+                                            <i id="icoonNee" class="fas fa-times" aria-hidden="true"></i>
+                                        </label>
+                                    </td>
+                                </tr>
+                            </c:if>
+                        </c:forEach>
+                        <c:forEach items="${inschrijvingen}" var="inschrijving">
+                            <tr>
+                                <td><h1><c:out value="${inschrijving.voorstelling.naam}"/></h1></td>
+                                <td><c:out value="${inschrijving.voorstelling.datum}"/></td>
 
-                            <td><a class="btn btn-secondary btn-lg my-2" role="button"
-                                   onclick="
-                                           beschikbaarheidStatusDoorgeven(${inschrijving.getVoorstelling().getVoorstellingId()}, '${nietBeschikbaar}','${contextPath}', this, 'btn-secondary','btn-danger', 2,3)">${nietBeschikbaar}</a>
-                            </td>
+                                    <td>
+                                      <input class="ja" type="radio" name="beschikbaarheid${inschrijving.voorstelling.voorstellingId}" id="ja${inschrijving.voorstelling.voorstellingId}"
+                                        value="Beschikbaar" ${inschrijving.inschrijvingStatus=='Beschikbaar'?'checked':''}>
 
-                        </c:when>
-                        <c:when test="${inschrijving.getInschrijvingStatus() == misschien}">
-                            <td>
-                                <a class="btn btn-secondary btn-lg my-2" role="button"
-                                   onclick=" beschikbaarheidStatusDoorgeven(${inschrijving.getVoorstelling().getVoorstellingId()}, '${beschikbaar}','${contextPath}', this, 'btn-secondary', 'btn-success', 3, 4)  ">${beschikbaar}</a>
-                            </td>
-
-                            <td>
-                                <a class="btn btn-warning btn-lg my-2" role="button"
-                                   onclick="
-                                           beschikbaarheidStatusDoorgeven(${inschrijving.getVoorstelling().getVoorstellingId()}, '${misschien}','${contextPath}', this, 'btn-secondary','btn-warning',2,4 )">${misschien}</a>
-                            </td>
-
-                            <td>
-                                <a class="btn btn-secondary btn-lg my-2" role="button"
-                                   onclick="
-                                           beschikbaarheidStatusDoorgeven(${inschrijving.getVoorstelling().getVoorstellingId()}, '${nietBeschikbaar}','${contextPath}', this, 'btn-secondary','btn-danger', 2,3)">${nietBeschikbaar}</a>
-                            </td>
-                        </c:when>
-                        <c:when test="${inschrijving.getInschrijvingStatus() == nietBeschikbaar}">
-                            <td>
-                                <a class="btn btn-secondary btn-lg my-2" role="button"
-                                   onclick="beschikbaarheidStatusDoorgeven(${inschrijving.getVoorstelling().getVoorstellingId()}, '${beschikbaar}','${contextPath}', this, 'btn-secondary', 'btn-success', 3, 4) ">${beschikbaar}</a>
-                            </td>
-
-                            <td><a class="btn btn-secondary btn-lg my-2" role="button"
-                                   onclick=" beschikbaarheidStatusDoorgeven(${inschrijving.getVoorstelling().getVoorstellingId()}, '${misschien}','${contextPath}', this, 'btn-secondary','btn-warning',2,4 )">${misschien}</a>
-                            </td>
-
-                            <td>
-                                <a class="btn btn-danger btn-lg my-2" role="button"
-                                   onclick="beschikbaarheidStatusDoorgeven(${inschrijving.getVoorstelling().getVoorstellingId()}, '${nietBeschikbaar}','${contextPath}', this, 'btn-secondary','btn-danger', 2,3)">${nietBeschikbaar}</a>
-                            </td>
-                        </c:when>
-                    </c:choose>
-                </tr>
-            </c:forEach>
-
-            </tbody>
-        </table>
-    </div>
-</div>
-</body>
+                                        <label class="labelJa" for="ja${inschrijving.voorstelling.voorstellingId}"
+                                             onclick="beschikbaarheidStatusDoorgeven(${inschrijving.voorstelling.voorstellingId}, '${beschikbaar}','${contextPath}') ">
+                                            <i id="icoonJa" class="fas fa-check" aria-hidden="true"></i>
+                                        </label>
+                                    </td>
+                                    <td>
+                                      <input class="misschien" type="radio" name="beschikbaarheid${inschrijving.voorstelling.voorstellingId}" id="misschien${inschrijving.voorstelling.voorstellingId}"
+                                        value="Misschien" ${inschrijving.inschrijvingStatus=='Misschien'?'checked':''}>
+                                        <label class="labelMisschien" for="misschien${inschrijving.voorstelling.voorstellingId}"
+                                        onclick="beschikbaarheidStatusDoorgeven(${inschrijving.voorstelling.voorstellingId}, '${misschien}','${contextPath}') ">
+                                            <i id="icoonMisschien" class="fas fa-question" aria-hidden="true"></i>
+                                        </label>
+                                    </td>
+                                    <td>
+                                      <input class="nee" type="radio" name="beschikbaarheid${inschrijving.voorstelling.voorstellingId}" id="nee${inschrijving.voorstelling.voorstellingId}"
+                                        value="Niet Beschikbaar" ${inschrijving.inschrijvingStatus=='Niet Beschikbaar'?'checked':''}>
+                                        <label class="labelNee" for="nee${inschrijving.voorstelling.voorstellingId}"
+                                        onclick="beschikbaarheidStatusDoorgeven(${inschrijving.voorstelling.voorstellingId}, '${nietBeschikbaar}','${contextPath}') ">
+                                            <i id="icoonNee" class="fas fa-times" aria-hidden="true"></i>
+                                        </label>
+                                    </td>
+                                </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>
