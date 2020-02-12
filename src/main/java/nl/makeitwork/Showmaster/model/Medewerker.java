@@ -151,7 +151,7 @@ public class Medewerker implements UserDetails {
 
         if (this.getMedewerkerProfielGegevens().getVoornaam() != null
                 && this.getMedewerkerProfielGegevens().getAchternaam() != null
-                && this.getMedewerkerProfielGegevens().getEmailadres() !=null
+                && this.getMedewerkerProfielGegevens().getEmailadres() != null
                 && this.getMedewerkerProfielGegevens().getGeboortedatum() != null
                 && this.getMedewerkerProfielGegevens().getTelefoonnummer() != null) {
             verplichtProfiel = true;

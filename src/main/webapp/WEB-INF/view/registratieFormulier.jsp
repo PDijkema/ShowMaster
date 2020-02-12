@@ -23,14 +23,11 @@
                     </div>
                 </div>
         <div class="container">
-            <form:form method="POST" modelAttribute="registratieFormulier" class="needs-validation" novalidate="true">
-
+            <form:form method="POST" modelAttribute="medewerker" class="needs-validation" novalidate="true">
 
                     <div class="form-group ${status.error ? 'has-error' : ''}">
                         <a class="form-control">${gebruikersnaam}</a>
                     </div>
-
-
                 <spring:bind path="wachtwoord">
                     <div class="form-group ${status.error ? 'has-error' : ''}">
                         <form:input type="password" path="wachtwoord" class="form-control ${status.error ? 'is-invalid' : ''}" placeholder="Wachtwoord" autofocus="true" required="true" pattern="[^\s]+"></form:input>

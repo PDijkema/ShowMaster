@@ -16,48 +16,42 @@
 <head>
     <title>Title</title>
 </head>
-<body>
 
-<div class="container">
-    <div class="jumbotron">
-        <div class="container" id="loginscreenJumbotron" >
+<header>
+    <div class="jumbotron" id="mainJumbotron">
+        <div class="container" id="loginscreenJumbotron"  >
             <h1 class="display-2">ShowMaster</h1>
             <h1 class="display-4">We Plan, You Party</h1>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-8">
-            <h1 class="display-4"></h1>
-        </div>
-        <div class="col-6 col-md-4">
-            <div class="container">
-                <form method="POST" action="${contextPath}/wachtwoord/reset"  class="needs-validation" novalidate="true">
-                    <div class="form-group ${error != null ? 'has-error' : ''}">
-                        <span class = "alert-success">${message}</span>
-                        <div class="my-2">
-                            <input name="emailadres" type="text" class="form-control" placeholder="emailadres"
-                                   autofocus="true" required="true">
-                            <div class="invalid-feedback">
-                                Voer een emailadres in
-                            </div>
-                        </div>
-                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                        <div class="my-2">
-                            <button class="btn btn-primary" type="submit">Stuur Email</button>
-                        </div>
-                    </div>
-                </form>
+</header>
+
+<body id="bolwerkAchtergrondFoto">
+
+<div class="container" id="containerLoginWWReset" >
+    <form method="POST" action="${contextPath}/wachtwoord/reset"  class="needs-validation" novalidate="true">
+        <div class="form-group ${error != null ? 'has-error' : ''}">
+            <span class = "alert-success">${message}</span>
+            <div class="my-2">
+                <input name="emailadres" type="text" class="form-control" placeholder="E-mailadres"
+                       autofocus="true" required="true">
+                <div class="invalid-feedback">
+                    Voer een E-mailadres in
+                </div>
+            </div>
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            <div class="my-2">
+                <button class="btn btn-primary" type="submit">Stuur E-mail</button>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-8">
-            <div class="container">
-                <h1 class="display-4"></h1>
-            </div>
-        </div>
-    </div>
+    </form>
 </div>
+
+
+</div>
+
+
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
 
