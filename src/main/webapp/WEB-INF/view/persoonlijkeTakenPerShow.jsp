@@ -27,10 +27,10 @@
 
                     <c:forEach items="${allePersoonlijkeVoorstellingsTaken}" var="allePersoonlijkeVoorstellingsTaken">
                         <tr>
-                            <td><c:out value="${allePersoonlijkeVoorstellingsTaken.getVoorstelling().getNaam()}"/></td>
+                            <td><c:out value="${allePersoonlijkeVoorstellingsTaken.voorstelling.naam}"/></td>
                             <td>
                                 <c:choose>
-                                    <c:when test="${allePersoonlijkeVoorstellingsTaken.getVoorstelling().getStatus() == 'Geannuleerd'}">
+                                    <c:when test="${allePersoonlijkeVoorstellingsTaken.voorstelling.status == 'Geannuleerd'}">
                                         <span class="badge badge-danger">Geannuleerd</span>
                                     </c:when>
                                     <c:otherwise>
@@ -38,9 +38,9 @@
                                     </c:otherwise>
                                 </c:choose>
                             </td>
-                            <td><c:out value="${allePersoonlijkeVoorstellingsTaken.getVoorstelling().getDatum()}"/></td>
-                            <td><c:out value="${allePersoonlijkeVoorstellingsTaken.getTaak().getTaakNaam()}"/></td>
-                            <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" onclick="roosterLaden(${allePersoonlijkeVoorstellingsTaken.getVoorstelling().getVoorstellingId()}, '${contextPath}')">
+                            <td><c:out value="${allePersoonlijkeVoorstellingsTaken.voorstelling.datum}"/></td>
+                            <td><c:out value="${allePersoonlijkeVoorstellingsTaken.taak.taakNaam}"/></td>
+                            <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" onclick="roosterLaden(${allePersoonlijkeVoorstellingsTaken.voorstelling.voorstellingId}, '${contextPath}')">
                                 Rooster bekijken
                             </button></td>
                         </tr>
