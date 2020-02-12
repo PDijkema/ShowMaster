@@ -1,6 +1,11 @@
 @import url("https://fonts.googleapis.com/css?family=Days+One|PT+Sans:400,400i,700,700i");
 html,footer,header,hgroup,menu,nav{margin:0;padding:0;border:0;font:inherit;vertical-align:baseline}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}button,optgroup,select,textarea{color:inherit;font:inherit;margin:0}button{overflow:visible}
 
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
 /* items in navbar in font als Bolwerk site */
 header .nav-item {
   font-family: "Days One", sans-serif;
@@ -18,7 +23,7 @@ body
 .h3,h3{font-size:1rem; font-weight:700}
 .h4,h4{font-size:0.75rem; font-weight:700}
 .h5,h5{font-size:0.5rem; font-weight:700}
-.h6,h6{font-size:0.25rem; font-weight:700}
+.h6,h6{font-size:.25rem; font-weight:700}
 
 
 /* buttons in font als Bolwerk site */
@@ -69,6 +74,23 @@ color: #fff; font-size:1rem}
   color: #fff
 }
 
+#containerLoginWWReset{
+  background-color: white;
+  border-radius: 25px;
+  padding: 1%;
+  margin: 0 auto;
+
+}
+#bolwerkAchtergrondFoto {
+  background-image: url("https://hetbolwerk.nl/wp-content/uploads/2018/08/visual-poppodiumhetbolwerk.jpg");
+
+  height: 100%;
+
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
 #medewerkerUitnodigenButton{margin-top: 15px; margin-bottom: 15px}
 
 .list-group-item{
@@ -82,6 +104,11 @@ height: 80px;
 #loginscreenJumbotron {
 color: #fff;
 }
+
+#mainJumbotron{
+  background-color:#0B72A9;
+}
+
 
 #beschikbareMedewerkers {
   margin-top: 10px;
@@ -99,6 +126,7 @@ color: #fff;
 #genereerRooster {
   color: #fff;
 }
+
 
 .voorkeursTaakInRooster {
   position: relative;
