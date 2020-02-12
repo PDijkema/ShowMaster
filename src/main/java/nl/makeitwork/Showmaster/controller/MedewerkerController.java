@@ -115,7 +115,6 @@ public class MedewerkerController {
         medewerkerValidator.validate(registratieFormulier, result);
         if (result.hasErrors()) {
            model.addAttribute("gebruikersnaam", emailMetToken.getEmailadres());
-           model.addAttribute("error", result);
             return "registratieFormulier";
         }
         medewerkerService.save(registratieFormulier);

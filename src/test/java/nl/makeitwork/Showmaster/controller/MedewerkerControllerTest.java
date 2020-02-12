@@ -29,6 +29,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.context.WebApplicationContext;
 
@@ -111,8 +112,10 @@ class MedewerkerControllerTest {
         emailMetTokenRepository.save(emailMetToken);
 
 
+
+
         //Activate
-        //medewerkerController.saveGebruiker(verificatieToken.getToken(),medewerker1, bindingResult);
+        medewerkerController.saveGebruiker(verificatieToken.getToken(),medewerker1, bindingResult, null);
 
         //Assert
         Assert.assertNotNull(medewerkerRepository.findByGebruikersnaam("test1234@test.com"));
@@ -167,7 +170,7 @@ class MedewerkerControllerTest {
             emailMetTokenRepository.save(emailMetToken);
 
             //Activate
-            //medewerkerController.saveGebruiker(verificatieToken.getToken(), medewerker1, bindingResult);
+            medewerkerController.saveGebruiker(verificatieToken.getToken(), medewerker1, bindingResult, null);
 
             medewerker1 = medewerkerRepository.findByGebruikersnaam("test1234@test.com");
 
