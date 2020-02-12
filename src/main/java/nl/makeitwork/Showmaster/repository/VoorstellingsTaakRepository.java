@@ -29,4 +29,8 @@ public interface VoorstellingsTaakRepository extends JpaRepository<Voorstellings
     List<VoorstellingsTaak> findIngeplandeVoorstellingsTakenByVoorstellingId(@Param("voorstellingId") Integer voorstellingId);
 
     Integer countByVoorstellingVoorstellingIdAndMedewerkerIsNull(Integer voorstelling);
+
+    VoorstellingsTaak findByVoorstellingIdAndTaakId(Integer voorstellingId, Integer taakId);
+
+    Integer countByVoorstellingVoorstellingIdAndTaakId(Integer voorstellingId, Integer taakId);
 }

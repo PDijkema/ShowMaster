@@ -72,6 +72,28 @@ public class VoorstellingController {
         return "toevoegenVoorstelling";
     }
 
+    @PostMapping("/planner/voorstellingen/voorstelling/toevoegen")
+    protected String saveVoorstelling(@ModelAttribute("voorstelling")
+                                              Voorstelling voorstelling,
+                                      BindingResult result) {
+        if (!result.hasErrors()) {
+            voorstellingOpslaanInclTaken(voorstelling);
+        } else {
+            return "toevoegenVoorstelling";
+        }
+        return "redirect:/planner/voorstellingen";
+    }
+
+    @GetMapping("/planner/voorstellingen/voorstelling/publiceren/{voorstellingId}")
+    protected String publiceerVoorstelling(@PathVariable Integer voorstellingId) {
+        Optional<Voorstelling> voorstelling = voorstellingRepository.findById(voorstellingId);
+
+        voorstelling.ifPresent(value -> value.setStatus("Gepubliceerd"));
+        voorstelling.ifPresent(value -> voorstellingRepository.save(value));
+
+        return "redirect:/planner/voorstellingen";
+    }
+
     @GetMapping("/planner/voorstellingen/voorstelling/wijzigen/{voorstellingId}")
     protected String wijzigenVoorstellingen(@PathVariable Integer voorstellingId, Model model, HttpServletRequest request) {
 
@@ -86,18 +108,27 @@ public class VoorstellingController {
         }
     }
 
-    @GetMapping("/rooster/voorstelling/{voorstellingId}")
-    protected String roosterVoorstelling(@PathVariable Integer voorstellingId, Model model) {
+    @PostMapping("/planner/voorstellingen/voorstelling/wijzigen")
+    protected String UpdateVoorstelling(@ModelAttribute("voorstelling") Voorstelling voorstelling, BindingResult result) {
 
-        List<VoorstellingsTaak> voorstellingOverzicht = voorstellingsTaakRepository.findByVoorstellingVoorstellingId(voorstellingId);
-        voorstellingOverzicht.removeIf(r -> r.getMedewerker() == null);
+        if (!result.hasErrors()) {
+            voorstelling.localDateTimeFormatterenNaarString();
 
-        Voorstelling voorstelling = voorstellingRepository.findByVoorstellingId(voorstellingId);
+            voorstellingRepository.save(voorstelling);
+        } else {
+            return "wijzigVoorstelling";
+        }
+        return "redirect:/planner/voorstellingen";
+    }
 
-        model.addAttribute("voorstellingOverzicht", voorstellingOverzicht);
-        model.addAttribute("voorstelling", voorstelling);
+    @GetMapping("/planner/voorstellingen/voorstelling/annuleren/{voorstellingId}")
+    protected String annuleerVoorstelling(@PathVariable Integer voorstellingId) {
+        Optional<Voorstelling> voorstelling = voorstellingRepository.findById(voorstellingId);
 
-        return "ingeplandeMedewerkersBijVoorstelling";
+        voorstelling.ifPresent(value -> value.setStatus("Geannuleerd"));
+        voorstelling.ifPresent(value -> voorstellingRepository.save(value));
+
+        return "redirect:/planner/voorstellingen";
     }
 
     @GetMapping("/planner/voorstellingen/voorstelling/rooster/{voorstellingId}")
@@ -131,59 +162,18 @@ public class VoorstellingController {
         }
     }
 
-    @GetMapping("/planner/voorstellingen/voorstelling/publiceren/{voorstellingId}")
-    protected String publiceerVoorstelling(@PathVariable Integer voorstellingId) {
-        Optional<Voorstelling> voorstelling = voorstellingRepository.findById(voorstellingId);
+    @GetMapping("/rooster/voorstelling/{voorstellingId}")
+    protected String roosterVoorstelling(@PathVariable Integer voorstellingId, Model model) {
 
-        voorstelling.ifPresent(value -> value.setStatus("Gepubliceerd"));
-        voorstelling.ifPresent(value -> voorstellingRepository.save(value));
+        List<VoorstellingsTaak> voorstellingOverzicht = voorstellingsTaakRepository.findByVoorstellingVoorstellingId(voorstellingId);
+        voorstellingOverzicht.removeIf(r -> r.getMedewerker() == null);
 
-        return "redirect:/planner/voorstellingen";
-    }
+        Voorstelling voorstelling = voorstellingRepository.findByVoorstellingId(voorstellingId);
 
-    @GetMapping("/planner/voorstellingen/voorstelling/annuleren/{voorstellingId}")
-    protected String annuleerVoorstelling(@PathVariable Integer voorstellingId) {
-        Optional<Voorstelling> voorstelling = voorstellingRepository.findById(voorstellingId);
+        model.addAttribute("voorstellingOverzicht", voorstellingOverzicht);
+        model.addAttribute("voorstelling", voorstelling);
 
-        voorstelling.ifPresent(value -> value.setStatus("Geannuleerd"));
-        voorstelling.ifPresent(value -> voorstellingRepository.save(value));
-
-        return "redirect:/planner/voorstellingen";
-    }
-
-    @PostMapping("/planner/voorstellingen/voorstelling/toevoegen")
-    protected String saveVoorstelling(@ModelAttribute("voorstelling")
-                                                    Voorstelling voorstelling,
-                                                    BindingResult result) {
-        if (!result.hasErrors()) {
-           voorstellingOpslaanInclTaken(voorstelling);
-        } else {
-            return "toevoegenVoorstelling";
-        }
-        return "redirect:/planner/voorstellingen";
-    }
-
-    @PostMapping("/planner/voorstellingen/voorstelling/wijzigen")
-    protected String UpdateVoorstelling(@ModelAttribute("voorstelling") Voorstelling voorstelling, BindingResult result) {
-
-        if (!result.hasErrors()) {
-            voorstelling.localDateTimeFormatterenNaarString();
-
-            voorstellingRepository.save(voorstelling);
-        } else {
-            return "wijzigVoorstelling";
-        }
-        return "redirect:/planner/voorstellingen";
-    }
-
-    protected void standaardTakenOpslaanBijVoorstelling(int taakAantal, Voorstelling voorstelling, Taak taak) {
-
-        for (int i = 0; i < taakAantal; i++) {
-            VoorstellingsTaak voorstellingsTaak = new VoorstellingsTaak();
-            voorstellingsTaak.setTaak(taak);
-            voorstellingsTaak.setVoorstelling(voorstelling);
-            voorstellingsTaakRepository.save(voorstellingsTaak);
-        }
+        return "ingeplandeMedewerkersBijVoorstelling";
     }
 
     @GetMapping("/planner/voorstellingen/voorstelling/verwijderen/{voorstellingId}")
@@ -195,11 +185,21 @@ public class VoorstellingController {
     public void voorstellingOpslaanInclTaken(Voorstelling voorstelling) {
         voorstelling.setStatus("Ongepubliceerd");
 
-       voorstelling.localDateTimeFormatterenNaarString();
+        voorstelling.localDateTimeFormatterenNaarString();
 
         voorstellingRepository.save(voorstelling);
         for (Taak taak : taakRepository.findAll()) {
-            standaardTakenOpslaanBijVoorstelling(taak.getStandaardBezetting(), voorstelling, taak);
+            standaardTaakOpslaanBijVoorstelling(taak.getStandaardBezetting(), voorstelling, taak);
+        }
+    }
+
+    protected void standaardTaakOpslaanBijVoorstelling(int taakAantal, Voorstelling voorstelling, Taak taak) {
+
+        for (int i = 0; i < taakAantal; i++) {
+            VoorstellingsTaak voorstellingsTaak = new VoorstellingsTaak();
+            voorstellingsTaak.setTaak(taak);
+            voorstellingsTaak.setVoorstelling(voorstelling);
+            voorstellingsTaakRepository.save(voorstellingsTaak);
         }
     }
 
@@ -223,7 +223,7 @@ public class VoorstellingController {
 
 
         for (Taak taak : taakRepository.findAll()) {
-            standaardTakenOpslaanBijVoorstelling(taak.getStandaardBezetting(), voorstelling1, taak);
+            standaardTaakOpslaanBijVoorstelling(taak.getStandaardBezetting(), voorstelling1, taak);
         }
 
         Voorstelling voorstelling2 = new Voorstelling();
@@ -241,7 +241,7 @@ public class VoorstellingController {
 
 
         for (Taak taak : taakRepository.findAll()) {
-            standaardTakenOpslaanBijVoorstelling(taak.getStandaardBezetting(), voorstelling2, taak);
+            standaardTaakOpslaanBijVoorstelling(taak.getStandaardBezetting(), voorstelling2, taak);
         }
 
 
@@ -260,7 +260,7 @@ public class VoorstellingController {
 
 
         for (Taak taak : taakRepository.findAll()) {
-            standaardTakenOpslaanBijVoorstelling(taak.getStandaardBezetting(), voorstelling2, taak);
+            standaardTaakOpslaanBijVoorstelling(taak.getStandaardBezetting(), voorstelling2, taak);
         }
         return "redirect:/planner/voorstellingen";
     }

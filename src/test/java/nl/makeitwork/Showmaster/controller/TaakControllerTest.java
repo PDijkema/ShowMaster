@@ -31,14 +31,14 @@ class TaakControllerTest {
     }
 
     @Test
-    public void testSaveOrUpdateTaakAanmaken() {
+    public void testSaveOrUpdateTaak() {
         //Arrange
         Taak testTaak = new Taak();
         testTaak.setTaakNaam("Bar");
         testTaak.setStandaardBezetting(2);
 
         //activate
-        taakController.saveOrUpdateTaakAanmaken(testTaak);
+        taakController.saveOrUpdateTaak(testTaak);
 
 
         Optional<Taak> opgehaaldeTaak = taakRepository.findById(testTaak.getTaakId());

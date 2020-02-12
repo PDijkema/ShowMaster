@@ -9,7 +9,9 @@ import nl.makeitwork.Showmaster.repository.VoorstellingsTaakRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -32,6 +34,9 @@ public class TaakController {
     @Autowired
     private VoorstellingsTaakRepository voorstellingsTaakRepository;
 
+    @Autowired
+    private VoorstellingController voorstellingController;
+
     @GetMapping("/planner/taak/beheer")
     protected String showAlleTaken(Model model) {
         model.addAttribute("alleTaken", taakRepository.findAll());
@@ -45,7 +50,7 @@ public class TaakController {
 
 
     @PostMapping("/planner/taak/aanmaken")
-    protected String saveOrUpdateTaakAanmaken(Taak taak) {
+    protected String saveOrUpdateTaak(Taak taak) {
         if (taak.getTaakNaam() != null && !taak.getTaakNaam().isEmpty() &&
                 taak.getStandaardBezetting() != null) {
             taakRepository.save(taak);
@@ -55,21 +60,50 @@ public class TaakController {
         }
     }
 
-    @GetMapping("/planner/taak/add/{taakId}")
-    protected String addTaak(@PathVariable("taakId") final Integer taakId, HttpServletRequest request ) {
+    @GetMapping("/planner/taak/wijzigen/{taakId}")
+    protected String wijzigenTaak(@PathVariable Integer taakId, Model model, HttpServletRequest request) {
+
         Optional<Taak> taak = taakRepository.findById(taakId);
-
-        Integer voorstellingId = (Integer)(request.getSession().getAttribute("voorstellingId"));
-        Voorstelling voorstelling = voorstellingRepository.findById(voorstellingId).get();
-
-        if (taak.isPresent()){
-            VoorstellingsTaak voorstellingsTaak = new VoorstellingsTaak();
-            voorstellingsTaak.setVoorstelling(voorstelling);
-            voorstellingsTaak.setTaak(taak.get());
-
-            voorstellingsTaakRepository.save(voorstellingsTaak);
+        if (!taak.isPresent()) {
+            return "redirect:/planner/taak/beheer";
+        } else {
+            request.getSession().setAttribute("taakId", taakId);
+            model.addAttribute("taak", taak.get());
+            return "wijzigTaak";
         }
-        return "redirect:/planner/voorstelling/details/{voorstellingId}";
+    }
+
+    @PostMapping("/planner/taak/wijzigen")
+    protected String UpdateTaak(@ModelAttribute("taak") Taak taak, BindingResult result) {
+
+        if (!result.hasErrors()) {
+            taakRepository.save(taak);
+
+            // Voor iedere ongepubliceerde voorstelling
+            for (Voorstelling voorstelling : voorstellingRepository.findAllByStatus("Ongepubliceerd")) {
+
+                // vergelijken of standaardbeztting van gewijzigde taak gelijk is aan aantal voorstellingstaken met dat taakId
+                if (taak.getStandaardBezetting().equals(voorstellingsTaakRepository.countByVoorstellingVoorstellingIdAndTaakId(voorstelling.getVoorstellingId(), taak.getTaakId()))) {
+                    // indien geen wijziging in bezetting, dan niets doen
+                    // anders die voorstellingstaken allen verwijderen en opnieuw aanmaken
+                } else {
+                    VoorstellingsTaak voorstellingsTaakGewijzigdeBezetting = voorstellingsTaakRepository.findByVoorstellingIdAndTaakId(voorstelling.getVoorstellingId(), taak.getTaakId());
+                    voorstellingsTaakRepository.deleteById(voorstellingsTaakGewijzigdeBezetting.getVoorstellingsTaakId());
+
+                    voorstellingController.standaardTaakOpslaanBijVoorstelling(taak.getStandaardBezetting(), voorstelling, taak);
+                }
+            }
+
+        } else {
+            return "wijzigTaak";
+        }
+        return "redirect:/planner/taak/beheer";
+    }
+
+    @GetMapping("/planner/taak/verwijderen/{taakId}")
+    public String verwijderStandaardTaak(@PathVariable Integer taakId) {
+        taakRepository.deleteById(taakId);
+        return "redirect:/rooster";
     }
 
     @GetMapping("/taak/setup")
@@ -114,12 +148,6 @@ public class TaakController {
         taak8.setStandaardBezetting(0);
         taakRepository.save(taak8);
 
-        return "redirect:/rooster";
-    }
-
-    @GetMapping("/planner/taak/verwijderen/{taakId}")
-    public String verwijderStandaardTaak(@PathVariable Integer taakId) {
-        taakRepository.deleteById(taakId);
         return "redirect:/rooster";
     }
 
