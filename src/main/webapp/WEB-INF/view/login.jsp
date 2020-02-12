@@ -33,7 +33,7 @@
                         <div class="form-group ${error != null ? 'has-error' : ''}">
                             <span class = "alert-success">${message}</span>
 
-                            <input name="username" type="text" class="form-control my-2" placeholder="Gebruikersnaam"
+                            <input name="username" type="text" class="form-control my-2" placeholder="E-mailadres"
                                    autofocus="true" required="true">
                             <div class="invalid-feedback">
                                 Voer een gebruikersnaam in
