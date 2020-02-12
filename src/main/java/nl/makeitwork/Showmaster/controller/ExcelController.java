@@ -22,9 +22,6 @@ import java.util.List;
 public class ExcelController {
 
     @Autowired
-    VoorstellingController voorstellingController;
-
-    @Autowired
     VoorstellingRepository voorstellingRepository;
 
     private String fileLocation;
@@ -81,7 +78,7 @@ public class ExcelController {
             if (voorstellingRepository.findByNaam(nieuweVoorstelling.getNaam()) != null
                     && voorstellingRepository.findByLocalDateTime(nieuweVoorstelling.getLocalDateTime()) != null) {
             } else {
-                voorstellingController.voorstellingOpslaanInclTaken(nieuweVoorstelling);
+                VoorstellingController.voorstellingOpslaanInclTaken(nieuweVoorstelling);
             }
         }
     }
@@ -98,7 +95,7 @@ public class ExcelController {
             if (voorstellingRepository.findByNaam(nieuweVoorstelling.getNaam()) != null
                     && voorstellingRepository.findByLocalDateTime(nieuweVoorstelling.getLocalDateTime()) != null) {
             } else {
-                voorstellingController.voorstellingOpslaanInclTaken(nieuweVoorstelling);
+                VoorstellingController.voorstellingOpslaanInclTaken(nieuweVoorstelling);
             }
         }
     }

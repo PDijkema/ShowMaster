@@ -183,17 +183,28 @@ public class VoorstellingController {
     }
 
     public void voorstellingOpslaanInclTaken(Voorstelling voorstelling) {
+        voorstellingOpslaanInclTaken(voorstelling, voorstellingRepository, taakRepository, voorstellingsTaakRepository);
+    }
+
+    public static void voorstellingOpslaanInclTaken(Voorstelling voorstelling,
+        VoorstellingRepository voorstellingRepository, TaakRepository taakRepository,
+        VoorstellingsTaakRepository voorstellingsTaakRepository) {
         voorstelling.setStatus("Ongepubliceerd");
 
         voorstelling.localDateTimeFormatterenNaarString();
 
         voorstellingRepository.save(voorstelling);
         for (Taak taak : taakRepository.findAll()) {
-            standaardTaakOpslaanBijVoorstelling(taak.getStandaardBezetting(), voorstelling, taak);
+            standaardTaakOpslaanBijVoorstelling(taak.getStandaardBezetting(), voorstelling, taak, voorstellingsTaakRepository);
         }
     }
 
-    protected void standaardTaakOpslaanBijVoorstelling(int taakAantal, Voorstelling voorstelling, Taak taak) {
+    public void standaardTaakOpslaanBijVoorstelling(int taakAantal, Voorstelling voorstelling, Taak taak) {
+        standaardTaakOpslaanBijVoorstelling(taakAantal, voorstelling, taak, voorstellingsTaakRepository);
+    }
+
+    public static void standaardTaakOpslaanBijVoorstelling(int taakAantal, Voorstelling voorstelling,
+       Taak taak, VoorstellingsTaakRepository voorstellingsTaakRepository) {
 
         for (int i = 0; i < taakAantal; i++) {
             VoorstellingsTaak voorstellingsTaak = new VoorstellingsTaak();
@@ -202,7 +213,6 @@ public class VoorstellingController {
             voorstellingsTaakRepository.save(voorstellingsTaak);
         }
     }
-
 
     @GetMapping("/voorstellingen/setup")
     protected String setupTakenInDatabase() {

@@ -41,7 +41,7 @@
                     <td>
                         <i class="far fa-edit" title="Wijzigen" data-toggle="modal"
                          data-target="#wijzigTaakModal"
-                         onclick="wijzigVoorstelling('${contextPath}','${taak.taakId}')">
+                         onclick="wijzigTaak('${contextPath}','${taak.taakId}')">
                          </i>
                     </td>
                     <td>

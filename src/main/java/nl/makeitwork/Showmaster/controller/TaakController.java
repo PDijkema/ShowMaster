@@ -34,10 +34,7 @@ public class TaakController {
     @Autowired
     private VoorstellingsTaakRepository voorstellingsTaakRepository;
 
-    @Autowired
-    private VoorstellingController voorstellingController;
-
-    @GetMapping("/planner/taak/beheer")
+   @GetMapping("/planner/taak/beheer")
     protected String showAlleTaken(Model model) {
         model.addAttribute("alleTaken", taakRepository.findAll());
         return "taakBeheer";
@@ -83,17 +80,16 @@ public class TaakController {
             for (Voorstelling voorstelling : voorstellingRepository.findAllByStatus("Ongepubliceerd")) {
 
                 // vergelijken of standaardbeztting van gewijzigde taak gelijk is aan aantal voorstellingstaken met dat taakId
-                if (taak.getStandaardBezetting().equals(voorstellingsTaakRepository.countByVoorstellingVoorstellingIdAndTaakId(voorstelling.getVoorstellingId(), taak.getTaakId()))) {
+                if (taak.getStandaardBezetting().equals(voorstellingsTaakRepository.countByVoorstellingVoorstellingIdAndTaakTaakId(voorstelling.getVoorstellingId(), taak.getTaakId()))) {
                     // indien geen wijziging in bezetting, dan niets doen
                     // anders die voorstellingstaken allen verwijderen en opnieuw aanmaken
                 } else {
                     VoorstellingsTaak voorstellingsTaakGewijzigdeBezetting = voorstellingsTaakRepository.findByVoorstellingIdAndTaakId(voorstelling.getVoorstellingId(), taak.getTaakId());
                     voorstellingsTaakRepository.deleteById(voorstellingsTaakGewijzigdeBezetting.getVoorstellingsTaakId());
 
-                    voorstellingController.standaardTaakOpslaanBijVoorstelling(taak.getStandaardBezetting(), voorstelling, taak);
+                    VoorstellingController.standaardTaakOpslaanBijVoorstelling(taak.getStandaardBezetting(), voorstelling, taak, voorstellingsTaakRepository);
                 }
             }
-
         } else {
             return "wijzigTaak";
         }

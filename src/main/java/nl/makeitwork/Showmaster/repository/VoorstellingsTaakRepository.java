@@ -32,5 +32,5 @@ public interface VoorstellingsTaakRepository extends JpaRepository<Voorstellings
 
     VoorstellingsTaak findByVoorstellingIdAndTaakId(Integer voorstellingId, Integer taakId);
 
-    Integer countByVoorstellingVoorstellingIdAndTaakId(Integer voorstellingId, Integer taakId);
+    Integer countByVoorstellingVoorstellingIdAndTaakTaakId(Integer voorstellingId, Integer taakId);
 }
