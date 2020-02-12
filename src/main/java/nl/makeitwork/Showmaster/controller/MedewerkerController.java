@@ -114,8 +114,6 @@ public class MedewerkerController {
 
         medewerkerValidator.validate(registratieFormulier, result);
         if (result.hasErrors()) {
-            System.out.println(result);
-           //model.addAttribute("registratieFormulier", new Medewerker());
            model.addAttribute("gebruikersnaam", emailMetToken.getEmailadres());
            model.addAttribute("error", result);
             return "registratieFormulier";
@@ -222,7 +220,7 @@ public class MedewerkerController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
         List<GrantedAuthority> updatedAuthorities = new ArrayList<>(auth.getAuthorities());
-        System.out.println("auth " + auth.getAuthorities());
+
         medewerker.ifPresent(value -> updatedAuthorities.addAll(value.getAuthorities()));
 
         Authentication newAuth = new UsernamePasswordAuthenticationToken(auth.getPrincipal(), auth.getCredentials(), updatedAuthorities);
