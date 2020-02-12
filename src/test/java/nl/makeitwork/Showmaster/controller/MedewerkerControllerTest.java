@@ -18,6 +18,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mock.web.MockServletContext;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -28,6 +34,9 @@ import org.springframework.web.context.WebApplicationContext;
 
 import javax.servlet.ServletContext;
 
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.mockito.Mockito.*;
 
@@ -66,6 +75,7 @@ class MedewerkerControllerTest {
     @Before
     public void setup() throws Exception {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
+
     }
 
     @Test
@@ -123,7 +133,11 @@ class MedewerkerControllerTest {
         MedewerkerProfielGegevens profielGegevensTestMedewerker1 =(medewerkerProfielGegevensRepository.findByMedewerker(testMedewerker1));
 
         vulProfielgegevens(profielGegevensTestMedewerker1);
-
+        
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(new SimpleGrantedAuthority("ROLE_ASPIRANT"));
+        Authentication authToken = new UsernamePasswordAuthenticationToken (testMedewerker1.getGebruikersnaam(), testMedewerker1.getWachtwoord(), authorities);
+        SecurityContextHolder.getContext().setAuthentication(authToken);
 
         // Activate
         medewerkerController.updateMedewerker(profielGegevensTestMedewerker1, result);

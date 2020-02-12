@@ -218,6 +218,7 @@ public class MedewerkerController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
         List<GrantedAuthority> updatedAuthorities = new ArrayList<>(auth.getAuthorities());
+        System.out.println("auth " + auth.getAuthorities());
         medewerker.ifPresent(value -> updatedAuthorities.addAll(value.getAuthorities()));
 
         Authentication newAuth = new UsernamePasswordAuthenticationToken(auth.getPrincipal(), auth.getCredentials(), updatedAuthorities);
