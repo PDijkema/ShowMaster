@@ -13,12 +13,22 @@
 </head>
 
 <body>
+<c:if test="${empty aspirant}">
 <jsp:include page="navbar.jsp" />
+</c:if>
 <div class="jumbotron jumbotron-fluid">
     <div class="container">
         <h1 class="voorstellingDisplay4">Profiel wijzigen</h1>
     </div>
 </div>
+<c:if test="${not empty aspirant}">
+<div id="profielGegevensAlert" class="alert alert-primary" role="alert">
+    <div class="container" >
+    Vul eerst je profielgegevens aan voordat je verder kunt
+    </div>
+</div>
+</c:if>
+
 <div class="container">
     <form:form method="POST" modelAttribute="medewerkerProfielGegevens" novalidate="true" class="was-validated needs-validation">
         <h2 class="form-signin-heading">Persoonlijke gegevens</h2>
@@ -156,7 +166,9 @@
     </div>
 
         <button class="btn btn-primary" type="submit">Opslaan</button>
+        <c:if test="${empty aspirant}">
         <a class="btn btn-primary" href="${contextPath}/profiel">Annuleren</a>
+        </c:if>
     </form:form>
 </div>
 

@@ -8,7 +8,12 @@ import nl.makeitwork.Showmaster.service.SecurityService;
 import nl.makeitwork.Showmaster.service.SecurityServiceImplementatie;
 import nl.makeitwork.Showmaster.validator.MedewerkerValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,7 +22,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.swing.text.html.Option;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 
 /**
@@ -127,7 +136,7 @@ public class MedewerkerController {
         return "login";
     }
 
-    @GetMapping("/rooster")
+    @GetMapping("/medewerker/rooster")
     public String welkomMedewerker(Model model, @AuthenticationPrincipal Medewerker ingelogdeMedewerker) {
         model.addAttribute("medewerker", medewerkerRepository.findByGebruikersnaam(ingelogdeMedewerker.getGebruikersnaam()));
         model.addAttribute("medewerkerProfielGegevens", medewerkerProfielGegevensRepository.findByMedewerker(ingelogdeMedewerker));
@@ -153,7 +162,14 @@ public class MedewerkerController {
 
     @GetMapping("/")
     public String doorverwijzenStartpagina(@AuthenticationPrincipal Medewerker medewerker) {
-        return "redirect:/rooster";
+        SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority("ROLE_ASPIRANT");
+
+        if (medewerker.getAuthorities().contains(simpleGrantedAuthority)) {
+            return "redirect:/profiel/wijzigen";
+
+        } else {
+            return "redirect:/medewerker/rooster";
+        }
     }
 
     @GetMapping("/profiel")
@@ -169,23 +185,45 @@ public class MedewerkerController {
 
     @GetMapping("/profiel/wijzigen")
     protected String showProfielWijzigen(Model model, @AuthenticationPrincipal Medewerker ingelogdeMedewerker) {
+
+        SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority("ROLE_ASPIRANT");
+
+        if (ingelogdeMedewerker.getAuthorities().contains(simpleGrantedAuthority)) {
+            model.addAttribute("aspirant", simpleGrantedAuthority);
+        }
+
         model.addAttribute("medewerkerProfielGegevens", medewerkerProfielGegevensRepository.findByMedewerker(ingelogdeMedewerker));
         model.addAttribute("takenLijst", taakRepository.findAll());
+
         return "profielWijzigen";
     }
 
     @PostMapping("/profiel/wijzigen")
     public String updateMedewerker(@ModelAttribute("medewerkerProfielGegevens") MedewerkerProfielGegevens medewerkerProfielGegevens,
                                    BindingResult result) {
+
         if (result.hasErrors()) {
             return "profielWijzigen";
         }
+
         if (medewerkerProfielGegevens.getLocalDate() == null) {
             medewerkerProfielGegevens.setGeboortedatum("");
         } else {
             medewerkerProfielGegevens.localDateFormatterenNaarString();
             medewerkerProfielGegevensRepository.save(medewerkerProfielGegevens);
         }
+
+        Optional<Medewerker> medewerker = medewerkerRepository.findById(medewerkerProfielGegevens.getMedewerker().getMedewerkerId());
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        List<GrantedAuthority> updatedAuthorities = new ArrayList<>(auth.getAuthorities());
+        System.out.println("auth " + auth.getAuthorities());
+        medewerker.ifPresent(value -> updatedAuthorities.addAll(value.getAuthorities()));
+
+        Authentication newAuth = new UsernamePasswordAuthenticationToken(auth.getPrincipal(), auth.getCredentials(), updatedAuthorities);
+        SecurityContextHolder.getContext().setAuthentication(newAuth);
+
         return "redirect:/profiel";
     }
 
