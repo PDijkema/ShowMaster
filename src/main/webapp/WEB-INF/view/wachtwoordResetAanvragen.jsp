@@ -33,15 +33,15 @@
         <div class="form-group ${error != null ? 'has-error' : ''}">
             <span class = "alert-success">${message}</span>
             <div class="my-2">
-                <input name="emailadres" type="text" class="form-control" placeholder="emailadres"
+                <input name="emailadres" type="text" class="form-control" placeholder="E-mailadres"
                        autofocus="true" required="true">
                 <div class="invalid-feedback">
-                    Voer een emailadres in
+                    Voer een E-mailadres in
                 </div>
             </div>
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             <div class="my-2">
-                <button class="btn btn-primary" type="submit">Stuur Email</button>
+                <button class="btn btn-primary" type="submit">Stuur E-mail</button>
             </div>
         </div>
     </form>

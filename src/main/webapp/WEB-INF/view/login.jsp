@@ -36,7 +36,7 @@
                             <input name="username" type="text" class="form-control my-2" placeholder="E-mailadres"
                                    autofocus="true" required="true">
                             <div class="invalid-feedback">
-                                Voer een gebruikersnaam in
+                                Voer een E-mailadres in
                             </div>
 
 

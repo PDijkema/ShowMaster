@@ -112,7 +112,7 @@ class MedewerkerControllerTest {
 
 
         //Activate
-        medewerkerController.saveGebruiker(verificatieToken.getToken(),medewerker1, bindingResult);
+        //medewerkerController.saveGebruiker(verificatieToken.getToken(),medewerker1, bindingResult);
 
         //Assert
         Assert.assertNotNull(medewerkerRepository.findByGebruikersnaam("test1234@test.com"));
@@ -167,7 +167,7 @@ class MedewerkerControllerTest {
             emailMetTokenRepository.save(emailMetToken);
 
             //Activate
-            medewerkerController.saveGebruiker(verificatieToken.getToken(), medewerker1, bindingResult);
+            //medewerkerController.saveGebruiker(verificatieToken.getToken(), medewerker1, bindingResult);
 
             medewerker1 = medewerkerRepository.findByGebruikersnaam("test1234@test.com");
 

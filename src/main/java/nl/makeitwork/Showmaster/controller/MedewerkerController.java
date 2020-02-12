@@ -91,7 +91,7 @@ public class MedewerkerController {
             if (!verificatieToken.getTokenGebruikt()) {
                 EmailMetToken emailMetToken = emailMetTokenRepository.findByVerificatieToken(verificatieToken);
 
-                model.addAttribute("registratieFormulier", new Medewerker());
+                model.addAttribute(new Medewerker());
                 model.addAttribute("gebruikersnaam", emailMetToken.getEmailadres());
                 return "registratieFormulier";
             }
@@ -100,7 +100,7 @@ public class MedewerkerController {
     }
 
     @PostMapping("/registreer/{token}")
-    public String saveGebruiker(@PathVariable String token, Medewerker registratieFormulier, BindingResult bindingResult) {
+    public String saveGebruiker(@PathVariable String token, Medewerker registratieFormulier, BindingResult result, Model model) {
 
         VerificatieToken verificatieToken = verificatieTokenRepository.findByToken(token);
         EmailMetToken emailMetToken = emailMetTokenRepository.findByVerificatieToken(verificatieToken);
@@ -112,8 +112,12 @@ public class MedewerkerController {
 
         registratieFormulier.setGebruikersnaam(emailMetToken.getEmailadres());
 
-        medewerkerValidator.validate(registratieFormulier, bindingResult);
-        if (bindingResult.hasErrors()) {
+        medewerkerValidator.validate(registratieFormulier, result);
+        if (result.hasErrors()) {
+            System.out.println(result);
+           //model.addAttribute("registratieFormulier", new Medewerker());
+           model.addAttribute("gebruikersnaam", emailMetToken.getEmailadres());
+           model.addAttribute("error", result);
             return "registratieFormulier";
         }
         medewerkerService.save(registratieFormulier);
