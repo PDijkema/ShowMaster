@@ -33,7 +33,7 @@
                         <div class="collapse navbar-collapse" id="navbarNav">
                             <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link" href="${contextPath}/rooster">ROOSTER</a>
+                                <a class="nav-link" href="${contextPath}/medewerker/rooster">ROOSTER</a>
                             </li>
                                 <sec:authorize access="hasRole('PLANNER')">
                                     <li class="nav-item">

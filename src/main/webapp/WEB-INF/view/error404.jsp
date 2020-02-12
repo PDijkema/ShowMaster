@@ -12,6 +12,6 @@
 
 <jsp:include page="navbar.jsp" />
 <h1>De pagina die u probeert te bereiken bestaat niet.</h1>
-<a class="btn btn-primary" href="${contextPath}/rooster">Terug naar de startpagina</a>
+<a class="btn btn-primary" href="${contextPath}medewerker/rooster">Terug naar de startpagina</a>
 </body>
 </html>
