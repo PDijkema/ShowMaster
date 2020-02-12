@@ -8,7 +8,9 @@ import nl.makeitwork.Showmaster.service.SecurityService;
 import nl.makeitwork.Showmaster.service.SecurityServiceImplementatie;
 import nl.makeitwork.Showmaster.validator.MedewerkerValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -153,7 +155,14 @@ public class MedewerkerController {
 
     @GetMapping("/")
     public String doorverwijzenStartpagina(@AuthenticationPrincipal Medewerker medewerker) {
-        return "redirect:medewerker/rooster";
+        SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority("ROLE_ASPIRANT");
+
+        if (medewerker.getAuthorities().contains(simpleGrantedAuthority)) {
+            return "redirect:/profiel/wijzigen";
+
+        } else {
+            return "redirect:/medewerker/rooster";
+        }
     }
 
     @GetMapping("/profiel")
@@ -169,8 +178,18 @@ public class MedewerkerController {
 
     @GetMapping("/profiel/wijzigen")
     protected String showProfielWijzigen(Model model, @AuthenticationPrincipal Medewerker ingelogdeMedewerker) {
+
+        SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority("ROLE_ASPIRANT");
+
+        if (ingelogdeMedewerker.getAuthorities().contains(simpleGrantedAuthority)) {
+            System.out.println("nog aanvullen");
+            model.addAttribute("aspirant", simpleGrantedAuthority);
+            System.out.println("authority " + simpleGrantedAuthority);
+        }
+
         model.addAttribute("medewerkerProfielGegevens", medewerkerProfielGegevensRepository.findByMedewerker(ingelogdeMedewerker));
         model.addAttribute("takenLijst", taakRepository.findAll());
+
         return "profielWijzigen";
     }
 
@@ -180,12 +199,17 @@ public class MedewerkerController {
         if (result.hasErrors()) {
             return "profielWijzigen";
         }
+
         if (medewerkerProfielGegevens.getLocalDate() == null) {
             medewerkerProfielGegevens.setGeboortedatum("");
         } else {
             medewerkerProfielGegevens.localDateFormatterenNaarString();
             medewerkerProfielGegevensRepository.save(medewerkerProfielGegevens);
         }
+
+        medewerkerProfielGegevens.getMedewerker().getAuthorities();
+        System.out.println("authorities " + medewerkerProfielGegevens.getMedewerker().getAuthorities());
+
         return "redirect:/profiel";
     }
 

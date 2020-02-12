@@ -102,12 +102,8 @@ public class Medewerker implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<>();
-        //TODO println's opschonen na functioneren checks
-        System.out.println("ID " + this.medewerkerId);
-        System.out.println("profiel " + this.getMedewerkerProfielGegevens().getVoornaam());
 
         if (!verplichtProfielCheck()) {
-            System.out.println("should be false" + verplichtProfielCheck());
             authorities.add(new SimpleGrantedAuthority("ROLE_ASPIRANT"));
         } else if (this.planner) {
             authorities.add(new SimpleGrantedAuthority("ROLE_MEDEWERKER"));
@@ -115,7 +111,6 @@ public class Medewerker implements UserDetails {
         } else {
             authorities.add(new SimpleGrantedAuthority("ROLE_MEDEWERKER"));
         }
-        System.out.println(authorities);
         return authorities;
     }
 
