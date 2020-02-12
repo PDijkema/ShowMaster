@@ -17,7 +17,11 @@
         <tr>
             <td><c:out value="${voorstellingOverzicht.getTaak().getTaakNaam()}"/></td>
             <td>
-                <c:out value="${voorstellingOverzicht.getMedewerker().getGebruikersnaam()}"/>
+                <c:out value="${voorstellingOverzicht.medewerker.medewerkerProfielGegevens.voornaam} " />
+                <c:if test="${not empty voorstellingOverzicht.medewerker.medewerkerProfielGegevens.tussenvoegsel}">
+                <c:out value="${voorstellingOverzicht.medewerker.medewerkerProfielGegevens.tussenvoegsel} "/>
+                </c:if>
+                <c:out value="${voorstellingOverzicht.medewerker.medewerkerProfielGegevens.achternaam}" />
             </td>
         </tr>
     </c:forEach>

@@ -97,7 +97,7 @@ public class VoorstellingController {
         model.addAttribute("voorstellingOverzicht", voorstellingOverzicht);
         model.addAttribute("voorstelling", voorstelling);
 
-        return "persoonlijkRoosterVoorstelling";
+        return "ingeplandeMedewerkersBijVoorstelling";
     }
 
     @GetMapping("/planner/voorstellingen/voorstelling/rooster/{voorstellingId}")
