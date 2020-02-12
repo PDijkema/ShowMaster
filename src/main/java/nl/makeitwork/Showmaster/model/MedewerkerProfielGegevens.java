@@ -39,6 +39,8 @@ public class MedewerkerProfielGegevens {
 
     private String telefoonnummer;
 
+
+
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "medewerker_id")
     private Medewerker medewerker;
