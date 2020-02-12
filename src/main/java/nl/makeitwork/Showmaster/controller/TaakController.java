@@ -8,6 +8,7 @@ import nl.makeitwork.Showmaster.repository.VoorstellingRepository;
 import nl.makeitwork.Showmaster.repository.VoorstellingsTaakRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,6 +31,12 @@ public class TaakController {
     private VoorstellingRepository voorstellingRepository;
     @Autowired
     private VoorstellingsTaakRepository voorstellingsTaakRepository;
+
+    @GetMapping("/planner/taak/beheer")
+    protected String showAlleTaken(Model model) {
+        model.addAttribute("alleTaken", taakRepository.findAll());
+        return "taakBeheer";
+    }
 
     @GetMapping("/planner/taak/aanmaken")
     protected String showTaakAanmaken(Taak taak) {

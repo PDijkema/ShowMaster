@@ -40,7 +40,7 @@
                                         <a class="nav-link" href="${contextPath}/planner/voorstellingen">VOORSTELLINGEN</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="${contextPath}/planner/taak/aanmaken">TAAK AANMAKEN</a>
+                                        <a class="nav-link" href="${contextPath}/planner/taak/beheer">TAAKBEHEER</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="${contextPath}/planner/gebruiker/overzicht">GEBRUIKERS</a>
