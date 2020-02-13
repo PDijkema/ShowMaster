@@ -9,7 +9,7 @@
                     <tr>
                         <td>Taaknaam:</td>
                         <td>
-                            <form:input type="text" id="taakNaam" class="form-control mb-2 mr-sm-2" path="naam" required="required" />
+                            <form:input type="text" id="taakNaam" class="form-control mb-2 mr-sm-2" path="taakNaam" required="required" />
                         </td>
                     </tr>
                     <tr>
@@ -19,21 +19,13 @@
                         </td>
                     </tr>
                     <tr>
+                        <div id="waarschuwing"><div>
+                    </tr>
+                    <tr>
                         <td>
-                            <button type="button" class="btn btn-danger" data-dismiss="modal" data-toggle="modal" data-target="#waarschuwingsModal"
-                            data-target="#waarschuwingsModal"
-                            <c:if test=
-                            onclick="vullenModal(
-                            'Taak wijzigen',
-                            '<strong>Let op!</strong> Deze wijziging wordt doorgevoerd bij alle nog niet gepubliceerde voorstellingen! Weet je zeker dat je dit wilt?',
-                            'Wijzigingen opslaan',
-                            '/planner/taak/wijzigen/<c:out value= '${taak.taakId}'/>','btn btn-danger')">
-                            Wijzigingen opslaan
-                            </button>
+                            <input id="wijzigingenTaakOpslaan" type="" class="btn btn-danger" value="Wijzigen"/>
                         </td>
                     </tr>
                 </div>
             </table>
-            <jsp:include page="waarschuwingsPopups.jsp" />
-            <script type="text/javascript" src="${contextPath}\resources\js\modal.functies.js"></script>
         </form:form>

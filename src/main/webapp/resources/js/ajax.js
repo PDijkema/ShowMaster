@@ -118,6 +118,10 @@ function wijzigTaak(contextPath, taakId) {
   xhttp.onreadystatechange = function() {
     if (this.readyState === 4 && this.status === 200) {
       document.getElementById("taakWijzigen").innerHTML = this.responseText;
+      $('#wijzigingenTaakOpslaan').bind('click', function() {
+            $('#waarschuwing').text('Let op! Deze wijziging wordt doorgevoerd bij alle nog niet gepubliceerde voorstellingen! Weet je zeker dat je dit wilt?');
+            $('#wijzigingenTaakOpslaan').clone().attr('type','submit').insertAfter('#wijzigingenTaakOpslaan').prev().remove();
+      });
     }
   };
   xhttp.open("GET", contextPath + "/planner/taak/wijzigen/" + taakId, true);
