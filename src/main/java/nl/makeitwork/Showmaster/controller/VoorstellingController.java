@@ -8,7 +8,9 @@ import nl.makeitwork.Showmaster.repository.MedewerkerInschrijvingVoorstellingRep
 import nl.makeitwork.Showmaster.repository.TaakRepository;
 import nl.makeitwork.Showmaster.repository.VoorstellingRepository;
 import nl.makeitwork.Showmaster.repository.VoorstellingsTaakRepository;
+import nl.makeitwork.Showmaster.service.VoorstellingsTaakService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -44,6 +46,9 @@ public class VoorstellingController {
     private VoorstellingController voorstellingController;
     @Autowired
     private MedewerkerInschrijvingVoorstellingRepository medewerkerInschrijvingVoorstellingRepository;
+    @Autowired
+    @Qualifier("voorstellingsTaakService")
+    private VoorstellingsTaakService voorstellingsTaakService;
 
 
     @GetMapping("/planner/voorstellingen")
@@ -55,7 +60,8 @@ public class VoorstellingController {
         Map<Integer, Integer> openstaandeTaken = new HashMap<>();
 
         for (Voorstelling voorstelling : voorstellingRepository.findAll()) {
-            openstaandeTaken.put(voorstelling.getVoorstellingId(), voorstellingsTaakRepository.countByVoorstellingVoorstellingIdAndMedewerkerIsNull(voorstelling.getVoorstellingId()));
+            openstaandeTaken.put(voorstelling.getVoorstellingId(),
+                    voorstellingsTaakRepository.countByVoorstellingVoorstellingIdAndMedewerkerIsNull(voorstelling.getVoorstellingId()));
         }
         model.addAttribute("openstaandeTaken", openstaandeTaken);
 
@@ -77,7 +83,7 @@ public class VoorstellingController {
                                               Voorstelling voorstelling,
                                       BindingResult result) {
         if (!result.hasErrors()) {
-            voorstellingOpslaanInclTaken(voorstelling);
+            voorstellingsTaakService.voorstellingOpslaanInclTaken(voorstelling);
         } else {
             return "toevoegenVoorstelling";
         }
@@ -147,7 +153,7 @@ public class VoorstellingController {
 
         // Reeds ingevulde taken filteren om alle nog beschikbare medewerkers te kunnen laten zien
         alleVoorstellingsTakenBijVoorstellingId.forEach
-                (d-> inschrijvingenBijVoorstellingId.removeIf(r-> r.getMedewerker() == d.getMedewerker()));
+                (d -> inschrijvingenBijVoorstellingId.removeIf(r -> r.getMedewerker() == d.getMedewerker()));
 
         List<VoorstellingsTaak> voorstellingsTaken = voorstellingsTaakRepository.findByVoorstellingVoorstellingIdOrderByTaakTaakNaam(voorstellingId);
 
@@ -182,38 +188,6 @@ public class VoorstellingController {
         return "redirect:/planner/voorstellingen";
     }
 
-    public void voorstellingOpslaanInclTaken(Voorstelling voorstelling) {
-        voorstellingOpslaanInclTaken(voorstelling, voorstellingRepository, taakRepository, voorstellingsTaakRepository);
-    }
-
-    public static void voorstellingOpslaanInclTaken(Voorstelling voorstelling,
-        VoorstellingRepository voorstellingRepository, TaakRepository taakRepository,
-        VoorstellingsTaakRepository voorstellingsTaakRepository) {
-        voorstelling.setStatus("Ongepubliceerd");
-
-        voorstelling.localDateTimeFormatterenNaarString();
-
-        voorstellingRepository.save(voorstelling);
-        for (Taak taak : taakRepository.findAll()) {
-            standaardTaakOpslaanBijVoorstelling(taak.getStandaardBezetting(), voorstelling, taak, voorstellingsTaakRepository);
-        }
-    }
-
-    public void standaardTaakOpslaanBijVoorstelling(int taakAantal, Voorstelling voorstelling, Taak taak) {
-        standaardTaakOpslaanBijVoorstelling(taakAantal, voorstelling, taak, voorstellingsTaakRepository);
-    }
-
-    public static void standaardTaakOpslaanBijVoorstelling(int taakAantal, Voorstelling voorstelling,
-       Taak taak, VoorstellingsTaakRepository voorstellingsTaakRepository) {
-
-        for (int i = 0; i < taakAantal; i++) {
-            VoorstellingsTaak voorstellingsTaak = new VoorstellingsTaak();
-            voorstellingsTaak.setTaak(taak);
-            voorstellingsTaak.setVoorstelling(voorstelling);
-            voorstellingsTaakRepository.save(voorstellingsTaak);
-        }
-    }
-
     @GetMapping("/voorstellingen/setup")
     protected String setupTakenInDatabase() {
 
@@ -233,7 +207,7 @@ public class VoorstellingController {
 
 
         for (Taak taak : taakRepository.findAll()) {
-            standaardTaakOpslaanBijVoorstelling(taak.getStandaardBezetting(), voorstelling1, taak);
+            voorstellingsTaakService.standaardTaakOpslaanBijVoorstelling(taak.getStandaardBezetting(), voorstelling1, taak);
         }
 
         Voorstelling voorstelling2 = new Voorstelling();
@@ -251,7 +225,7 @@ public class VoorstellingController {
 
 
         for (Taak taak : taakRepository.findAll()) {
-            standaardTaakOpslaanBijVoorstelling(taak.getStandaardBezetting(), voorstelling2, taak);
+            voorstellingsTaakService.standaardTaakOpslaanBijVoorstelling(taak.getStandaardBezetting(), voorstelling2, taak);
         }
 
 
@@ -270,7 +244,7 @@ public class VoorstellingController {
 
 
         for (Taak taak : taakRepository.findAll()) {
-            standaardTaakOpslaanBijVoorstelling(taak.getStandaardBezetting(), voorstelling2, taak);
+            voorstellingsTaakService.standaardTaakOpslaanBijVoorstelling(taak.getStandaardBezetting(), voorstelling2, taak);
         }
         return "redirect:/planner/voorstellingen";
     }

@@ -6,7 +6,9 @@ import nl.makeitwork.Showmaster.model.VoorstellingsTaak;
 import nl.makeitwork.Showmaster.repository.TaakRepository;
 import nl.makeitwork.Showmaster.repository.VoorstellingRepository;
 import nl.makeitwork.Showmaster.repository.VoorstellingsTaakRepository;
+import nl.makeitwork.Showmaster.service.VoorstellingsTaakService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,21 +22,23 @@ import java.util.Optional;
 
 /**
  * @author Karin Zoetendal
- * 11-12-19: deze klasse checkt of alle tekstvelden zijn ingevuld en zorgt er dan voor dat een taak wordt opgeslagen in
- * de database.
+ * 13-02-20: met deze klasse kan een standaardtaak worden aangemaakt, gewijzigd of verwijderd
  */
 
 @Controller
 public class TaakController {
 
     @Autowired
-    public TaakRepository taakRepository;
+    private TaakRepository taakRepository;
     @Autowired
     private VoorstellingRepository voorstellingRepository;
     @Autowired
     private VoorstellingsTaakRepository voorstellingsTaakRepository;
+    @Autowired
+    @Qualifier("voorstellingsTaakService")
+    private VoorstellingsTaakService voorstellingsTaakService;
 
-   @GetMapping("/planner/taak/beheer")
+    @GetMapping("/planner/taak/beheer")
     protected String showAlleTaken(Model model) {
         model.addAttribute("alleTaken", taakRepository.findAll());
         return "taakBeheer";
@@ -84,10 +88,10 @@ public class TaakController {
                     // indien geen wijziging in bezetting, dan niets doen
                     // anders die voorstellingstaken allen verwijderen en opnieuw aanmaken
                 } else {
-                    VoorstellingsTaak voorstellingsTaakGewijzigdeBezetting = voorstellingsTaakRepository.findByVoorstellingIdAndTaakId(voorstelling.getVoorstellingId(), taak.getTaakId());
+                    VoorstellingsTaak voorstellingsTaakGewijzigdeBezetting = voorstellingsTaakRepository.findByVoorstellingVoorstellingIdAndTaakTaakId(voorstelling.getVoorstellingId(), taak.getTaakId());
                     voorstellingsTaakRepository.deleteById(voorstellingsTaakGewijzigdeBezetting.getVoorstellingsTaakId());
 
-                    VoorstellingController.standaardTaakOpslaanBijVoorstelling(taak.getStandaardBezetting(), voorstelling, taak, voorstellingsTaakRepository);
+                    voorstellingsTaakService.standaardTaakOpslaanBijVoorstelling(taak.getStandaardBezetting(), voorstelling, taak);
                 }
             }
         } else {

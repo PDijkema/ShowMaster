@@ -5,7 +5,9 @@ import io.github.millij.poi.ss.reader.XlsReader;
 import io.github.millij.poi.ss.reader.XlsxReader;
 import nl.makeitwork.Showmaster.model.Voorstelling;
 import nl.makeitwork.Showmaster.repository.VoorstellingRepository;
+import nl.makeitwork.Showmaster.service.VoorstellingsTaakService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +24,10 @@ import java.util.List;
 public class ExcelController {
 
     @Autowired
-    VoorstellingRepository voorstellingRepository;
+    private VoorstellingRepository voorstellingRepository;
+    @Autowired
+    @Qualifier("voorstellingsTaakService")
+    private VoorstellingsTaakService voorstellingsTaakService;
 
     private String fileLocation;
 
@@ -78,7 +83,7 @@ public class ExcelController {
             if (voorstellingRepository.findByNaam(nieuweVoorstelling.getNaam()) != null
                     && voorstellingRepository.findByLocalDateTime(nieuweVoorstelling.getLocalDateTime()) != null) {
             } else {
-                VoorstellingController.voorstellingOpslaanInclTaken(nieuweVoorstelling);
+                voorstellingsTaakService.voorstellingOpslaanInclTaken(nieuweVoorstelling);
             }
         }
     }
@@ -95,7 +100,7 @@ public class ExcelController {
             if (voorstellingRepository.findByNaam(nieuweVoorstelling.getNaam()) != null
                     && voorstellingRepository.findByLocalDateTime(nieuweVoorstelling.getLocalDateTime()) != null) {
             } else {
-                VoorstellingController.voorstellingOpslaanInclTaken(nieuweVoorstelling);
+                voorstellingsTaakService.voorstellingOpslaanInclTaken(nieuweVoorstelling);
             }
         }
     }
