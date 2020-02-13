@@ -2,7 +2,6 @@ package nl.makeitwork.Showmaster.controller;
 
 import nl.makeitwork.Showmaster.model.Taak;
 import nl.makeitwork.Showmaster.model.Voorstelling;
-import nl.makeitwork.Showmaster.model.VoorstellingsTaak;
 import nl.makeitwork.Showmaster.repository.TaakRepository;
 import nl.makeitwork.Showmaster.repository.VoorstellingRepository;
 import nl.makeitwork.Showmaster.repository.VoorstellingsTaakRepository;
@@ -78,19 +77,13 @@ public class TaakController {
     protected String UpdateTaak(@ModelAttribute("taak") Taak taak, BindingResult result) {
 
         if (!result.hasErrors()) {
+
             taakRepository.save(taak);
 
-            // Voor iedere ongepubliceerde voorstelling
             for (Voorstelling voorstelling : voorstellingRepository.findAllByStatus("Ongepubliceerd")) {
-
-                // vergelijken of standaardbeztting van gewijzigde taak gelijk is aan aantal voorstellingstaken met dat taakId
                 if (taak.getStandaardBezetting().equals(voorstellingsTaakRepository.countByVoorstellingVoorstellingIdAndTaakTaakId(voorstelling.getVoorstellingId(), taak.getTaakId()))) {
-                    // indien geen wijziging in bezetting, dan niets doen
-                    // anders die voorstellingstaken allen verwijderen en opnieuw aanmaken
                 } else {
-                    VoorstellingsTaak voorstellingsTaakGewijzigdeBezetting = voorstellingsTaakRepository.findByVoorstellingVoorstellingIdAndTaakTaakId(voorstelling.getVoorstellingId(), taak.getTaakId());
-                    voorstellingsTaakRepository.deleteById(voorstellingsTaakGewijzigdeBezetting.getVoorstellingsTaakId());
-
+                    voorstellingsTaakRepository.deleteByTaakAndVoorstelling(taak, voorstelling);
                     voorstellingsTaakService.standaardTaakOpslaanBijVoorstelling(taak.getStandaardBezetting(), voorstelling, taak);
                 }
             }
