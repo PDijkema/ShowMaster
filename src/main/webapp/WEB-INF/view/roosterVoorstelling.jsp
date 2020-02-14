@@ -19,6 +19,7 @@
 
         <title>Rooster</title>
     </head>
+
     <body>
     <jsp:include page="navbar.jsp"/>
         <div class="jumbotron jumbotron-fluid">
@@ -121,12 +122,12 @@
                 </div>
             </div>
         </div>
-    <div class="container">
-        <div>
-            <a class="btn btn-primary" href="${contextPath}/planner/voorstellingen">Overzicht Voorstellingen</a>
-            <a class="btn btn-primary" id="genereerRooster" onclick="genereerRooster(${voorstelling.voorstellingId}, '${contextPath}')">Genereer Rooster</a>
+        <div class="container">
+            <div>
+                <a class="btn btn-primary" href="${contextPath}/planner/voorstellingen">Overzicht Voorstellingen</a>
+                <a class="btn btn-primary" id="genereerRooster" onclick="genereerRooster(${voorstelling.voorstellingId}, '${contextPath}')">Genereer Rooster</a>
+            </div>
         </div>
-    </div>
 
         <jsp:include page="waarschuwingsPopups.jsp" />
         <script type="text/javascript" src="${contextPath}\resources\js\modal.functies.js"></script>

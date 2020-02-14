@@ -2,14 +2,14 @@
 html,footer,header,hgroup,menu,nav{margin:0;padding:0;border:0;font:inherit;vertical-align:baseline}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}button,optgroup,select,textarea{color:inherit;font:inherit;margin:0}button{overflow:visible}
 
 html, body {
-  height: 100%;
-  margin: 0;
+    height: 100%;
+    margin: 0;
 }
 
 /* items in navbar in font als Bolwerk site */
 header .nav-item {
-  font-family: "Days One", sans-serif;
-  font-size: 0.7rem;
+    font-family: "Days One", sans-serif;
+    font-size: 0.7rem;
 }
 
 #headerNavbar .navbar-light .navbar-nav .nav-link:hover

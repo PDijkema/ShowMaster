@@ -17,6 +17,10 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 
+/**
+ * @author Karin Zoetendal
+ */
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @TestPropertySource(locations = "classpath:test.properties")
@@ -45,7 +49,6 @@ class TaakControllerTest {
 
         //activate
         taakController.saveOrUpdateTaak(testTaak, result);
-
 
         Optional<Taak> opgehaaldeTaak = taakRepository.findById(testTaak.getTaakId());
 

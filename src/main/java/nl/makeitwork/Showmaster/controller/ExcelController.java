@@ -20,6 +20,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
+/**
+ * @author Karin Zoetendal
+ * deze klasse zorgt ervoor dat er Excel bestanden kunnen worden geselecteerd, geupdated en uitgelezen
+ * op die manier kunnen voorstellingen worden ingelezen
+ */
+
 @Controller
 public class ExcelController {
 
@@ -31,10 +37,12 @@ public class ExcelController {
 
     private String fileLocation;
 
+
     @GetMapping("/planner/voorstellingen/excel")
     public String getExcelProcessingPage() {
         return "excel";
     }
+
 
     @PostMapping("/planner/voorstellingen/excel/upload")
     public String uploadFile(Model model, MultipartFile file) throws IOException {
@@ -54,6 +62,7 @@ public class ExcelController {
         return "excelGeslaagd";
     }
 
+
     @GetMapping("/planner/voorstellingen/excel/toevoegen")
     public String excelVoorstellingToevoegen(Model model) throws SpreadsheetReadException {
 
@@ -71,6 +80,7 @@ public class ExcelController {
         return "redirect:/planner/voorstellingen";
     }
 
+
     public void readExcelXlsx(String fileLocation) throws SpreadsheetReadException {
 
         final File xlsxFile = new File(fileLocation);
@@ -87,6 +97,7 @@ public class ExcelController {
             }
         }
     }
+
 
     public void readExcelXls(String fileLocation) throws SpreadsheetReadException {
 

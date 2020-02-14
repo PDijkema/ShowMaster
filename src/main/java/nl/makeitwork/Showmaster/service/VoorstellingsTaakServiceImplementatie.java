@@ -9,6 +9,11 @@ import nl.makeitwork.Showmaster.repository.VoorstellingsTaakRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * @author Karin Zoetendal
+ * aangemaakt zodat onderstaande methodes vanuit meerdere controllers kunnen worden aangeroepen
+ */
+
 @Service("voorstellingsTaakService")
 public class VoorstellingsTaakServiceImplementatie implements VoorstellingsTaakService {
 

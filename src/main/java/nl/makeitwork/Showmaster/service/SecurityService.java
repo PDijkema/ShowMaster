@@ -1,5 +1,9 @@
 package nl.makeitwork.Showmaster.service;
 
+/**
+ * @author Gert Postma
+ */
+
 public interface SecurityService {
     String findLoggedInUsername();
 

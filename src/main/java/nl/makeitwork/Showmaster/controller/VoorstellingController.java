@@ -68,6 +68,7 @@ public class VoorstellingController {
         return "alleVoorstellingen";
     }
 
+
     @GetMapping("/planner/voorstellingen/voorstelling/toevoegen")
     protected String toevoegenVoorstellingen(Voorstelling voorstelling,
                                              Model model) {
@@ -77,6 +78,7 @@ public class VoorstellingController {
 
         return "toevoegenVoorstelling";
     }
+
 
     @PostMapping("/planner/voorstellingen/voorstelling/toevoegen")
     protected String saveVoorstelling(@ModelAttribute("voorstelling")
@@ -90,6 +92,7 @@ public class VoorstellingController {
         return "redirect:/planner/voorstellingen";
     }
 
+
     @GetMapping("/planner/voorstellingen/voorstelling/publiceren/{voorstellingId}")
     protected String publiceerVoorstelling(@PathVariable Integer voorstellingId) {
         Optional<Voorstelling> voorstelling = voorstellingRepository.findById(voorstellingId);
@@ -99,6 +102,7 @@ public class VoorstellingController {
 
         return "redirect:/planner/voorstellingen";
     }
+
 
     @GetMapping("/planner/voorstellingen/voorstelling/wijzigen/{voorstellingId}")
     protected String wijzigenVoorstellingen(@PathVariable Integer voorstellingId, Model model, HttpServletRequest request) {
@@ -114,6 +118,7 @@ public class VoorstellingController {
         }
     }
 
+
     @PostMapping("/planner/voorstellingen/voorstelling/wijzigen")
     protected String UpdateVoorstelling(@ModelAttribute("voorstelling") Voorstelling voorstelling, BindingResult result) {
 
@@ -127,6 +132,7 @@ public class VoorstellingController {
         return "redirect:/planner/voorstellingen";
     }
 
+
     @GetMapping("/planner/voorstellingen/voorstelling/annuleren/{voorstellingId}")
     protected String annuleerVoorstelling(@PathVariable Integer voorstellingId) {
         Optional<Voorstelling> voorstelling = voorstellingRepository.findById(voorstellingId);
@@ -136,6 +142,7 @@ public class VoorstellingController {
 
         return "redirect:/planner/voorstellingen";
     }
+
 
     @GetMapping("/planner/voorstellingen/voorstelling/rooster/{voorstellingId}")
     protected String roosterVoorstelling(@PathVariable Integer voorstellingId, Model model, HttpServletRequest request) {
@@ -168,6 +175,7 @@ public class VoorstellingController {
         }
     }
 
+
     @GetMapping("/rooster/voorstelling/{voorstellingId}")
     protected String roosterVoorstelling(@PathVariable Integer voorstellingId, Model model) {
 
@@ -182,11 +190,13 @@ public class VoorstellingController {
         return "ingeplandeMedewerkersBijVoorstelling";
     }
 
+
     @GetMapping("/planner/voorstellingen/voorstelling/verwijderen/{voorstellingId}")
     protected String verwijderVoorstelling(@PathVariable Integer voorstellingId) {
         voorstellingRepository.deleteById(voorstellingId);
         return "redirect:/planner/voorstellingen";
     }
+
 
     @GetMapping("/voorstellingen/setup")
     protected String setupTakenInDatabase() {
@@ -205,7 +215,6 @@ public class VoorstellingController {
 
         voorstellingRepository.save(voorstelling1);
 
-
         for (Taak taak : taakRepository.findAll()) {
             voorstellingsTaakService.standaardTaakOpslaanBijVoorstelling(taak.getStandaardBezetting(), voorstelling1, taak);
         }
@@ -223,11 +232,9 @@ public class VoorstellingController {
 
         voorstellingRepository.save(voorstelling2);
 
-
         for (Taak taak : taakRepository.findAll()) {
             voorstellingsTaakService.standaardTaakOpslaanBijVoorstelling(taak.getStandaardBezetting(), voorstelling2, taak);
         }
-
 
         Voorstelling voorstelling3 = new Voorstelling();
 
@@ -241,7 +248,6 @@ public class VoorstellingController {
         voorstelling3.setDatum(formattedString3);
 
         voorstellingRepository.save(voorstelling3);
-
 
         for (Taak taak : taakRepository.findAll()) {
             voorstellingsTaakService.standaardTaakOpslaanBijVoorstelling(taak.getStandaardBezetting(), voorstelling2, taak);

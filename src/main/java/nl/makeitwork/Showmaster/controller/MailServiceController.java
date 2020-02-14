@@ -45,8 +45,6 @@ public class MailServiceController {
 
         medewerkerValidator.validateEmail(uitnodiging, result);
 
-
-
         if (result.hasErrors()) {
             List<Medewerker> alleGebruikers = medewerkerRepository.findAll();
             alleGebruikers.removeIf(medewerker -> medewerker.getMedewerkerId().equals(ingelogdeMedewerker.getMedewerkerId()));
@@ -75,10 +73,8 @@ public class MailServiceController {
     }
 
 
-
     @PostMapping("/wachtwoord/reset")
     protected String wachtwoordResetEmail(@ModelAttribute("emailadres") String emailadres){
-
 
         if (medewerkerRepository.findByGebruikersnaam(emailadres) != null) {
             VerificatieToken verificatieToken = new VerificatieToken();
@@ -98,18 +94,8 @@ public class MailServiceController {
             bean.verstuurMail(emailadres, onderwerp, emailBody);
 
             emailMetTokenRepository.save(emailMetToken);
-
         }
-
         return "login";
-
-
-
-
-
-
-
-
     }
 }
 

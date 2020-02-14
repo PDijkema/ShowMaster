@@ -7,6 +7,9 @@ import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Component;
 
+/**
+ * @author Pieter Dijkema
+ */
 @Component
 public class MailService {
 
@@ -17,7 +20,7 @@ public class MailService {
 
     private ErrorsController errorsController;
 
-    public void verstuurMail(String emailAdres, String onderwerp, String bericht){
+    public void verstuurMail(String emailAdres, String onderwerp, String bericht) {
 
         SimpleMailMessage uitnodiging = new SimpleMailMessage(mailMessage);
         uitnodiging.setTo(emailAdres);
@@ -25,8 +28,7 @@ public class MailService {
         uitnodiging.setText(bericht);
         try {
             mailSender.send(uitnodiging);
-        }
-        catch (MailException exception) {
+        } catch (MailException exception) {
             errorsController.getErrorPath();
         }
     }

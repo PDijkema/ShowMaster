@@ -6,6 +6,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.UUID;
 
+/**
+ * @author Gert Postma
+ */
+
 @Entity
 public class VerificatieToken {
     private static final int EXPIRATION = 60 * 24;
