@@ -42,17 +42,20 @@ public class TaakController {
 
     @GetMapping("/planner/taak/beheer")
     protected String showAlleTaken(Model model) {
+        // Alle voorstellingstaken bij ongepubliceerde voorstellingen ophalen
         List<VoorstellingsTaak> voorstellingsTaakBijGepubliceerdeVoorstelling = voorstellingsTaakRepository.findByVoorstellingStatus("Gepubliceerd");
         List<Taak> alleTaken = taakRepository.findAll();
 
         model.addAttribute("alleTaken", alleTaken);
 
+        // Voor iedere voorstellingstaak de bijbehorende taak in een lijst zetten
         List<Taak> takenBijVoorstellingstaak = new ArrayList<>();
 
         for (VoorstellingsTaak voorstellingstaak : voorstellingsTaakBijGepubliceerdeVoorstelling) {
             takenBijVoorstellingstaak.add(voorstellingstaak.getTaak());
         }
 
+        // HashMap aanmaken met alle taken met bijbehorende boolean, welke aangeeft of taak voorkomt in voorstellingstaken ongepubliceerde voorstellingen
         Map<Taak, Boolean> takenIngeplandBijGepubliceerdeVoorstellingen = new HashMap<>();
 
         for (Taak taak : alleTaken) {
@@ -61,9 +64,9 @@ public class TaakController {
         }
         model.addAttribute("takenIngeplandBijGepubliceerdeVoorstellingen", takenIngeplandBijGepubliceerdeVoorstellingen);
 
-
         return "taakBeheer";
     }
+
 
     @GetMapping("/planner/taak/aanmaken")
     protected String showTaakAanmaken(Taak taak) {
@@ -86,6 +89,7 @@ public class TaakController {
         }
     }
 
+
     @GetMapping("/planner/taak/wijzigen/{taakId}")
     protected String wijzigenTaak(@PathVariable Integer taakId, Model model, HttpServletRequest request) {
 
@@ -98,6 +102,7 @@ public class TaakController {
             return "wijzigTaak";
         }
     }
+
 
     @PostMapping("/planner/taak/wijzigen")
     protected String UpdateTaak(@ModelAttribute("taak") Taak taak, BindingResult result) {
@@ -113,7 +118,7 @@ public class TaakController {
                         voorstellingsTaakRepository.countByVoorstellingVoorstellingIdAndTaakTaakId(voorstelling.getVoorstellingId(), taak.getTaakId());
 
                 if (nieuweStandaardBezetting > aantalKeerIngeplandAlsVoorstellingsTaak) {
-                    voorstellingsTaakService.standaardTaakOpslaanBijVoorstelling((nieuweStandaardBezetting-aantalKeerIngeplandAlsVoorstellingsTaak), voorstelling, taak);
+                    voorstellingsTaakService.standaardTaakOpslaanBijVoorstelling((nieuweStandaardBezetting - aantalKeerIngeplandAlsVoorstellingsTaak), voorstelling, taak);
                 } else if (nieuweStandaardBezetting.equals(aantalKeerIngeplandAlsVoorstellingsTaak)) {
 
                 } else {
@@ -127,12 +132,14 @@ public class TaakController {
         return "redirect:/planner/taak/beheer";
     }
 
+
     @GetMapping("/planner/taak/verwijderen/{taakId}")
     public String verwijderStandaardTaak(@PathVariable Integer taakId) {
         voorstellingsTaakRepository.deleteByTaakTaakIdAndVoorstellingStatus(taakId, "Ongepubliceerd");
         taakRepository.deleteById(taakId);
         return "redirect:/planner/taak/beheer";
     }
+
 
     @GetMapping("/taak/setup")
     protected String setupTakenInDatabase() {
