@@ -47,7 +47,7 @@ public class MedewerkerProfielGegevens {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "voorkeurstaakId", referencedColumnName = "taakId")
-    @OnDelete(action = OnDeleteAction.NO_ACTION)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Taak voorkeurstaak;
 
     public void localDateFormatterenNaarString() {
