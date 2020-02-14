@@ -22,6 +22,8 @@ import java.util.Optional;
 /**
  * @author Karin Zoetendal
  * 13-02-20: met deze klasse kan een standaardtaak worden aangemaakt, gewijzigd of verwijderd
+ * Bij het aanpassen van standaardbezetting, of verwijderen van een standaardtaak, worden deze veranderingen ook
+ * doorgevoerd bij ongepubliceerde voorstellingen
  */
 
 @Controller
@@ -81,10 +83,18 @@ public class TaakController {
             taakRepository.save(taak);
 
             for (Voorstelling voorstelling : voorstellingRepository.findAllByStatus("Ongepubliceerd")) {
-                if (taak.getStandaardBezetting().equals(voorstellingsTaakRepository.countByVoorstellingVoorstellingIdAndTaakTaakId(voorstelling.getVoorstellingId(), taak.getTaakId()))) {
+
+                Integer nieuweStandaardBezetting = taak.getStandaardBezetting();
+                Integer aantalKeerIngeplandAlsVoorstellingsTaak =
+                        voorstellingsTaakRepository.countByVoorstellingVoorstellingIdAndTaakTaakId(voorstelling.getVoorstellingId(), taak.getTaakId());
+
+                if (nieuweStandaardBezetting > aantalKeerIngeplandAlsVoorstellingsTaak) {
+                    voorstellingsTaakService.standaardTaakOpslaanBijVoorstelling((nieuweStandaardBezetting-aantalKeerIngeplandAlsVoorstellingsTaak), voorstelling, taak);
+                } else if (nieuweStandaardBezetting.equals(aantalKeerIngeplandAlsVoorstellingsTaak)) {
+
                 } else {
                     voorstellingsTaakRepository.deleteByTaakAndVoorstelling(taak, voorstelling);
-                    voorstellingsTaakService.standaardTaakOpslaanBijVoorstelling(taak.getStandaardBezetting(), voorstelling, taak);
+                    voorstellingsTaakService.standaardTaakOpslaanBijVoorstelling(nieuweStandaardBezetting, voorstelling, taak);
                 }
             }
         } else {
