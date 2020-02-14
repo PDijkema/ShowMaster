@@ -21,6 +21,56 @@ function roosterLaden(voorstellingId, contextPath) {
 }
 
 
+function importerenExcel(contextPath) {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState === 4 && this.status === 200) {
+
+      document.getElementById("importExcel").innerHTML = this.responseText;
+        $(function() {
+                  $('#btn-gekozenBestand-reset').on('click', function(e) {
+                      var $el = $('#gekozenBestand');
+                      $el.wrap('<form>').closest('form').get(0).reset();
+                      $el.unwrap();
+                  });
+              });
+
+        $(function() {
+          $('#gekozenBestand').on('input change', function () {
+              if ($(this).val() != '') {
+                  $('#uploaden').prop('disabled', false);
+              } else {
+                  $('#uploaden').prop('disabled', true);
+              }
+          });
+        });
+
+        $(function() {
+            $('#uploaden').on('click', function(e) {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState === 4 && this.status === 200) {
+                        var $el = $('#gekozenBestand');
+                        $el.wrap('<form>').closest('form').get(0).reset();
+                        $el.unwrap();
+                        $('#uploaden').prop('disabled', true);
+                        document.getElementById('geslaagdMessage').innerHTML = this.responseText;
+                    }
+                };
+                    var formData = new FormData();
+                    formData.append("file", document.getElementById("gekozenBestand").files[0])
+                    var csrf = document.getElementById("csrf").value;
+                    xhttp.open("POST", contextPath + "/planner/voorstellingen/excel/upload" + csrf, true);
+                    xhttp.send(formData);
+              });
+          });
+    }
+  };
+  xhttp.open("GET", contextPath + "/planner/voorstellingen/excel", true);
+  xhttp.send();
+}
+
+
 function nieuweVoorstelling(contextPath) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
@@ -49,6 +99,7 @@ function wijzigVoorstelling(contextPath, voorstellingId) {
   xhttp.open("GET", contextPath + "/planner/voorstellingen/voorstelling/wijzigen/" + voorstellingId, true);
   xhttp.send();
 }
+
 
 function genereerRooster(voorstellingId, contextPath) {
   var xhttp = new XMLHttpRequest();

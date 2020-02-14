@@ -101,7 +101,6 @@
                             <form:textarea type="email" class="form-control" path="bericht" placeholder="Typ hier je bericht, de inschrijflink wordt automatisch meegestuurd" required="true" id="tekstVeld" />
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>
                             <input  type="submit" class="btn btn-primary" value="Verstuur"/>
                         </div>
                     </form:form>
