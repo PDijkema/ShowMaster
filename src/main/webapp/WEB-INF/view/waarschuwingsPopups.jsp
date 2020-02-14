@@ -11,7 +11,6 @@
                 <div class="modal-body" id="waarschuwingsModalBody">
                 </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>
                 <a class="btn btn-primary btn" id="doorgaan" href="${contextPath} />"></a>
             </div>
         </div>
@@ -31,7 +30,6 @@
                 Weet je zeker dat je wilt uitloggen?
                 </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>
                     <c:if test="${pageContext.request.userPrincipal.name != null}">
                         <form class="form-inline" id="logoutform" action="${contextPath}/logout" method="post">
                             <input name="utf8" type="hidden" value="✓">
@@ -45,4 +43,5 @@
         </div>
     </div>
 </div>
+
 <script src="${contextPath}\resources\js\jquery.js" type='text/javascript'></script>
