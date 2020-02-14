@@ -43,4 +43,5 @@ public interface VoorstellingsTaakRepository extends JpaRepository<Voorstellings
     void deleteByTaakTaakIdAndVoorstellingStatus(Integer taakId, String voorstellingStatus);
 
     List<VoorstellingsTaak> findByVoorstellingStatus(String voorstellingStatus);
+
 }
