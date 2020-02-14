@@ -76,7 +76,7 @@ public class TaakController {
         if (taak.getTaakNaam() != null && !taak.getTaakNaam().isEmpty() &&
                 taak.getStandaardBezetting() != null) {
             taakRepository.save(taak);
-            return "redirect:/rooster";
+            return "redirect:/planner/taak/beheer";
         } else {
             return "taakAanmaken";
         }

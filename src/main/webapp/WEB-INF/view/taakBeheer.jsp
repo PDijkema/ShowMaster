@@ -16,11 +16,12 @@
         <jsp:include page="navbar.jsp" />
             <div class="jumbotron jumbotron-fluid">
                 <div class="container">
-                    <h1 class="voorstellingDisplay4">Taakbeheer</h1>
+                    <h1 class="voorstellingDisplay4">Taakbeheer standaardtaken</h1>
                 </div>
             </div>
         <div class="container">
-            <h2>Standaard taken</h2>
+
+            <a id="nieuweTaakModalButton" class="btn btn-primary" onclick="taakAanmaken('${contextPath}')" data-toggle="modal" data-target="#nieuweTaakModal">Taak aanmaken</a>
 
             <table class="table table-hover">
                 <thead>
@@ -63,6 +64,21 @@
             </table>
         </div>
 
+        <div class="modal fade" id="nieuweTaakModal" tabindex="-1" role="dialog" aria-labelledby="nieuweTaakModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title" id="nieuweTaakModalLabel">Nieuwe standaardtaak aanmaken</h2>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p id="taakAanmaken"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="modal fade" id="wijzigTaakModal" tabindex="-1" role="dialog" aria-labelledby="wijzigTaakModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">

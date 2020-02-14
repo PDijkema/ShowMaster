@@ -23,9 +23,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <c:if test="">
                             <input id="wijzigingenTaakOpslaan" type="" class="btn btn-danger" value="Wijzigen"/>
-                            </c:if>
                         </td>
                     </tr>
                 </div>
