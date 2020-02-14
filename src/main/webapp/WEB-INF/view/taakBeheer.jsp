@@ -45,7 +45,8 @@
                          </i>
                     </td>
                     <td>
-                        <c:if test="$(alleTaken.ingeplandBijGepubliceerdeVoorstelling)==='false'">
+                        <c:set var="taak" value="${taak}" />
+                        <c:if test="${!takenIngeplandBijGepubliceerdeVoorstellingen[taak]}">
                         <i class="fas fa-trash" title="Verwijderen" data-toggle="modal"
                         data-target="#waarschuwingsModal"
                         onclick="vullenModal(

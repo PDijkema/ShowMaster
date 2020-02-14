@@ -18,8 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * @author Karin Zoetendal
@@ -42,20 +41,27 @@ public class TaakController {
     private VoorstellingsTaakService voorstellingsTaakService;
 
     @GetMapping("/planner/taak/beheer")
-    protected String showAlleTaken(Model model, Boolean ingeplandBijGepubliceerdeVoorstelling) {
+    protected String showAlleTaken(Model model) {
         List<VoorstellingsTaak> voorstellingsTaakBijGepubliceerdeVoorstelling = voorstellingsTaakRepository.findByVoorstellingStatus("Gepubliceerd");
         List<Taak> alleTaken = taakRepository.findAll();
 
-            for (Taak taak : alleTaken) {
-                if (voorstellingsTaakBijGepubliceerdeVoorstelling.contains(taak)) {
-                    ingeplandBijGepubliceerdeVoorstelling = true;
-                } else {
-                    ingeplandBijGepubliceerdeVoorstelling = false;
-                }
-                model.addAttribute("ingeplandBijGepubliceerdeVoorstelling", ingeplandBijGepubliceerdeVoorstelling);
-            }
-
         model.addAttribute("alleTaken", alleTaken);
+
+        List<Taak> takenBijVoorstellingstaak = new ArrayList<>();
+
+        for (VoorstellingsTaak voorstellingstaak : voorstellingsTaakBijGepubliceerdeVoorstelling) {
+            takenBijVoorstellingstaak.add(voorstellingstaak.getTaak());
+        }
+
+        Map<Taak, Boolean> takenIngeplandBijGepubliceerdeVoorstellingen = new HashMap<>();
+
+        for (Taak taak : alleTaken) {
+            boolean ingeplandBijGepubliceerdeVoorstelling = takenBijVoorstellingstaak.contains(taak);
+            takenIngeplandBijGepubliceerdeVoorstellingen.put(taak, ingeplandBijGepubliceerdeVoorstelling);
+        }
+        model.addAttribute("takenIngeplandBijGepubliceerdeVoorstellingen", takenIngeplandBijGepubliceerdeVoorstellingen);
+
+
         return "taakBeheer";
     }
 
