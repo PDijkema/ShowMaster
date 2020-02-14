@@ -106,6 +106,7 @@ public class TaakController {
     @GetMapping("/planner/taak/verwijderen/{taakId}")
     public String verwijderStandaardTaak(@PathVariable Integer taakId) {
         taakRepository.deleteById(taakId);
+        voorstellingsTaakRepository.deleteByTaakIdAndVoorstellingStatus(taakId, "Ongepubliceerd");
         return "redirect:/rooster";
     }
 
