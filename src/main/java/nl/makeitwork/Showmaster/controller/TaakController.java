@@ -75,13 +75,15 @@ public class TaakController {
 
 
     @PostMapping("/planner/taak/aanmaken")
-    protected String saveOrUpdateTaak(Taak taak) {
-        if (taak.getTaakNaam() != null && !taak.getTaakNaam().isEmpty() &&
-                taak.getStandaardBezetting() != null) {
-            taakRepository.save(taak);
+    protected String saveOrUpdateTaak(Taak taak, BindingResult result) {
+        if (!result.hasErrors()) {
+            if (taak.getTaakNaam() != null && !taak.getTaakNaam().isEmpty() &&
+                    taak.getStandaardBezetting() != null) {
+                taakRepository.save(taak);
 
-            for (Voorstelling voorstelling : voorstellingRepository.findAllByStatus("Ongepubliceerd")) {
-                voorstellingsTaakService.standaardTaakOpslaanBijVoorstelling(taak.getStandaardBezetting(), voorstelling, taak);
+                for (Voorstelling voorstelling : voorstellingRepository.findAllByStatus("Ongepubliceerd")) {
+                    voorstellingsTaakService.standaardTaakOpslaanBijVoorstelling(taak.getStandaardBezetting(), voorstelling, taak);
+                }
             }
             return "redirect:/planner/taak/beheer";
         } else {
