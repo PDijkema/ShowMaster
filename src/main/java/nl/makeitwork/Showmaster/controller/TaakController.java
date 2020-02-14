@@ -76,6 +76,10 @@ public class TaakController {
         if (taak.getTaakNaam() != null && !taak.getTaakNaam().isEmpty() &&
                 taak.getStandaardBezetting() != null) {
             taakRepository.save(taak);
+
+            for (Voorstelling voorstelling : voorstellingRepository.findAllByStatus("Ongepubliceerd")) {
+                voorstellingsTaakService.standaardTaakOpslaanBijVoorstelling(taak.getStandaardBezetting(), voorstelling, taak);
+            }
             return "redirect:/planner/taak/beheer";
         } else {
             return "taakAanmaken";
