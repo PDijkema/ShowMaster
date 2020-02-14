@@ -2,6 +2,7 @@ package nl.makeitwork.Showmaster.controller;
 
 import nl.makeitwork.Showmaster.model.Taak;
 import nl.makeitwork.Showmaster.model.Voorstelling;
+import nl.makeitwork.Showmaster.model.VoorstellingsTaak;
 import nl.makeitwork.Showmaster.repository.TaakRepository;
 import nl.makeitwork.Showmaster.repository.VoorstellingRepository;
 import nl.makeitwork.Showmaster.repository.VoorstellingsTaakRepository;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -40,8 +42,20 @@ public class TaakController {
     private VoorstellingsTaakService voorstellingsTaakService;
 
     @GetMapping("/planner/taak/beheer")
-    protected String showAlleTaken(Model model) {
-        model.addAttribute("alleTaken", taakRepository.findAll());
+    protected String showAlleTaken(Model model, Boolean ingeplandBijGepubliceerdeVoorstelling) {
+        List<VoorstellingsTaak> voorstellingsTaakBijGepubliceerdeVoorstelling = voorstellingsTaakRepository.findByVoorstellingStatus("Gepubliceerd");
+        List<Taak> alleTaken = taakRepository.findAll();
+
+            for (Taak taak : alleTaken) {
+                if (voorstellingsTaakBijGepubliceerdeVoorstelling.contains(taak)) {
+                    ingeplandBijGepubliceerdeVoorstelling = true;
+                } else {
+                    ingeplandBijGepubliceerdeVoorstelling = false;
+                }
+                model.addAttribute("ingeplandBijGepubliceerdeVoorstelling", ingeplandBijGepubliceerdeVoorstelling);
+            }
+
+        model.addAttribute("alleTaken", alleTaken);
         return "taakBeheer";
     }
 
@@ -105,9 +119,9 @@ public class TaakController {
 
     @GetMapping("/planner/taak/verwijderen/{taakId}")
     public String verwijderStandaardTaak(@PathVariable Integer taakId) {
+        voorstellingsTaakRepository.deleteByTaakTaakIdAndVoorstellingStatus(taakId, "Ongepubliceerd");
         taakRepository.deleteById(taakId);
-        voorstellingsTaakRepository.deleteByTaakIdAndVoorstellingStatus(taakId, "Ongepubliceerd");
-        return "redirect:/rooster";
+        return "redirect:/planner/taak/beheer";
     }
 
     @GetMapping("/taak/setup")

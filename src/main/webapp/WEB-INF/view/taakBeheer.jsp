@@ -45,14 +45,16 @@
                          </i>
                     </td>
                     <td>
+                        <c:if test="$(alleTaken.ingeplandBijGepubliceerdeVoorstelling)==='false'">
                         <i class="fas fa-trash" title="Verwijderen" data-toggle="modal"
                         data-target="#waarschuwingsModal"
                         onclick="vullenModal(
                         'Taak verwijderen',
-                        'Deze taak wordt nu bij alle nog niet geplubiceerde taken verwijderd. Weet je zeker dat je wilt verwijderen?',
+                        'Deze taak wordt nu ook bij alle nog niet gepubliceerde taken verwijderd. Weet je zeker dat je wilt verwijderen?',
                         'Verwijderen',
-                        '/planner/taak/verwijderen/<c:out value= '${taak.taakId}'/>')">
+                        '/planner/taak/verwijderen/<c:out value= '${taak.taakId}'/>','btn btn-danger')">
                         </i>
+                        </c:if>
                     </td>
 
                 </tbody>

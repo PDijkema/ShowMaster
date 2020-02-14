@@ -39,5 +39,8 @@ public interface VoorstellingsTaakRepository extends JpaRepository<Voorstellings
     @Transactional
     void deleteByTaakAndVoorstelling(Taak taak,Voorstelling voorstelling);
 
-    void deleteByTaakIdAndVoorstellingStatus(Integer taakId, String VoorstellingStatus);
+    @Transactional
+    void deleteByTaakTaakIdAndVoorstellingStatus(Integer taakId, String voorstellingStatus);
+
+    List<VoorstellingsTaak> findByVoorstellingStatus(String voorstellingStatus);
 }
