@@ -10,12 +10,11 @@
 
 </head>
 <body>
-
-
 <jsp:include page="navbar.jsp" />
-<h1>Oeps, er ging iets fout.</h1>
 
-<a class="btn btn-primary" href="${contextPath}/startpagina">Terug naar de startpagina</a>
+<h1>${errorBericht}</h1>
+
+<a class="btn btn-primary" href="${contextPath}/medewerker/rooster">Terug naar de startpagina</a>
 
 </body>
 
