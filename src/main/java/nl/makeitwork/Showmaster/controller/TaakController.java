@@ -49,17 +49,17 @@ public class TaakController {
         model.addAttribute("alleTaken", alleTaken);
 
         // Voor iedere voorstellingstaak de bijbehorende taak in een lijst zetten
-        List<Taak> takenBijVoorstellingstaak = new ArrayList<>();
+        List<Taak> taakBijVoorstellingsTaak = new ArrayList<>();
 
         for (VoorstellingsTaak voorstellingstaak : voorstellingsTaakBijGepubliceerdeVoorstelling) {
-            takenBijVoorstellingstaak.add(voorstellingstaak.getTaak());
+            taakBijVoorstellingsTaak.add(voorstellingstaak.getTaak());
         }
 
         // HashMap aanmaken met alle taken met bijbehorende boolean, welke aangeeft of taak voorkomt in voorstellingstaken ongepubliceerde voorstellingen
         Map<Taak, Boolean> takenIngeplandBijGepubliceerdeVoorstellingen = new HashMap<>();
 
         for (Taak taak : alleTaken) {
-            boolean ingeplandBijGepubliceerdeVoorstelling = takenBijVoorstellingstaak.contains(taak);
+            boolean ingeplandBijGepubliceerdeVoorstelling = taakBijVoorstellingsTaak.contains(taak);
             takenIngeplandBijGepubliceerdeVoorstellingen.put(taak, ingeplandBijGepubliceerdeVoorstelling);
         }
         model.addAttribute("takenIngeplandBijGepubliceerdeVoorstellingen", takenIngeplandBijGepubliceerdeVoorstellingen);
@@ -81,8 +81,8 @@ public class TaakController {
                     taak.getStandaardBezetting() != null) {
                 taakRepository.save(taak);
 
-                for (Voorstelling voorstelling : voorstellingRepository.findAllByStatus("Ongepubliceerd")) {
-                    voorstellingsTaakService.standaardTaakOpslaanBijVoorstelling(taak.getStandaardBezetting(), voorstelling, taak);
+                for (Voorstelling ongepubliceerdeVoorstelling : voorstellingRepository.findAllByStatus("Ongepubliceerd")) {
+                    voorstellingsTaakService.standaardTaakOpslaanBijVoorstelling(taak.getStandaardBezetting(), ongepubliceerdeVoorstelling, taak);
                 }
             }
             return "redirect:/planner/taak/beheer";
