@@ -121,9 +121,7 @@ public class TaakController {
 
                 if (nieuweStandaardBezetting > aantalKeerIngeplandAlsVoorstellingsTaak) {
                     voorstellingsTaakService.standaardTaakOpslaanBijVoorstelling((nieuweStandaardBezetting - aantalKeerIngeplandAlsVoorstellingsTaak), voorstelling, taak);
-                } else if (nieuweStandaardBezetting.equals(aantalKeerIngeplandAlsVoorstellingsTaak)) {
-
-                } else {
+                } else if (nieuweStandaardBezetting < aantalKeerIngeplandAlsVoorstellingsTaak) {
                     voorstellingsTaakRepository.deleteByTaakAndVoorstelling(taak, voorstelling);
                     voorstellingsTaakService.standaardTaakOpslaanBijVoorstelling(nieuweStandaardBezetting, voorstelling, taak);
                 }
