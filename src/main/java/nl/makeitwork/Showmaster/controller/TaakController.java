@@ -93,7 +93,7 @@ public class TaakController {
 
 
     @GetMapping("/planner/taak/wijzigen/{taakId}")
-    protected String wijzigenTaak(@PathVariable Integer taakId, Model model, HttpServletRequest request) {
+    protected String wijzigTaak(@PathVariable Integer taakId, Model model, HttpServletRequest request) {
 
         Optional<Taak> taak = taakRepository.findById(taakId);
         if (!taak.isPresent()) {
