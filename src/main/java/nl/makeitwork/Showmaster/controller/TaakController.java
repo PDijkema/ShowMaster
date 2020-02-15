@@ -107,7 +107,7 @@ public class TaakController {
 
 
     @PostMapping("/planner/taak/wijzigen")
-    protected String UpdateTaak(@ModelAttribute("taak") Taak taak, BindingResult result) {
+    protected String updateTaak(@ModelAttribute("taak") Taak taak, BindingResult result) {
 
         if (!result.hasErrors()) {
 
