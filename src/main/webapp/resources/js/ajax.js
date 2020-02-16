@@ -112,3 +112,35 @@ function genereerRooster(voorstellingId, contextPath) {
   xhttp.open("GET",  contextPath + "/planner/voorstellingen/voorstelling/rooster/genereer/" + voorstellingId, true);
   xhttp.send();
 }
+
+
+function wijzigTaak(contextPath, taakId) {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState === 4 && this.status === 200) {
+      document.getElementById("taakWijzigen").innerHTML = this.responseText;
+      $('#wijzigingenTaakOpslaan').bind('click', function() {
+            $('#waarschuwing').text('Let op! Deze wijziging wordt doorgevoerd bij alle nog niet gepubliceerde voorstellingen! Weet je zeker dat je dit wilt?');
+            $('#wijzigingenTaakOpslaan').clone().attr('type','submit').insertAfter('#wijzigingenTaakOpslaan').prev().remove();
+      });
+    }
+  };
+  xhttp.open("GET", contextPath + "/planner/taak/wijzigen/" + taakId, true);
+  xhttp.send();
+}
+
+
+function taakAanmaken(contextPath) {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState === 4 && this.status === 200) {
+      document.getElementById("taakAanmaken").innerHTML = this.responseText;
+      $('#taakOpslaan').bind('click', function() {
+            $('#waarschuwingNieuweStandaardTaak').text('Let op! Deze taak wordt toegevoegd bij alle nog niet gepubliceerde voorstellingen! Weet je zeker dat je dit wilt?');
+            $('#taakOpslaan').clone().attr('type','submit').insertAfter('#taakOpslaan').prev().remove();
+      });
+    }
+  };
+  xhttp.open("GET", contextPath + "/planner/taak/aanmaken", true);
+  xhttp.send();
+}

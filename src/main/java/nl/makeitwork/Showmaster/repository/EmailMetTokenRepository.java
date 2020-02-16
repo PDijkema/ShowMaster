@@ -4,10 +4,11 @@ import nl.makeitwork.Showmaster.model.EmailMetToken;
 import nl.makeitwork.Showmaster.model.VerificatieToken;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+/**
+ * @author Pieter Dijkema
+ */
+
 public interface EmailMetTokenRepository extends JpaRepository<EmailMetToken, Integer> {
 
     EmailMetToken findByVerificatieToken(VerificatieToken verificatieToken);
-
-
-
 }

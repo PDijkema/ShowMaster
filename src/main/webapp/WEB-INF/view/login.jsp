@@ -17,48 +17,41 @@
 	</head>
 
    <header>
-                    <div class="jumbotron" id="mainJumbotron">
-                        <div class="container" id="loginscreenJumbotron"  >
-                            <h1 class="display-2">ShowMaster</h1>
-                            <h1 class="display-4">We Plan, You Party</h1>
-                        </div>
-                    </div>
+        <div class="jumbotron" id="mainJumbotron">
+            <div class="container" id="loginscreenJumbotron"  >
+                <h1 class="display-2">ShowMaster</h1>
+                <h1 class="display-4">We Plan, You Party</h1>
+            </div>
+        </div>
    </header>
 
     <body id="bolwerkAchtergrondFoto">
+        <div class="container" id="containerLoginWWReset" >
+            <form method="POST" action="${contextPath}/login"  class="needs-validation" novalidate="true">
 
-                <div class="container" id="containerLoginWWReset" >
-                    <form method="POST" action="${contextPath}/login"  class="needs-validation" novalidate="true">
+                <div class="form-group ${error != null ? 'has-error' : ''}">
+                    <span class = "alert-success">${message}</span>
 
-                        <div class="form-group ${error != null ? 'has-error' : ''}">
-                            <span class = "alert-success">${message}</span>
+                    <input name="username" type="text" class="form-control my-2" placeholder="E-mailadres"
+                           autofocus="true" required="true">
+                    <div class="invalid-feedback">
+                        Voer een E-mailadres in
+                    </div>
 
-                            <input name="username" type="text" class="form-control my-2" placeholder="E-mailadres"
-                                   autofocus="true" required="true">
-                            <div class="invalid-feedback">
-                                Voer een E-mailadres in
-                            </div>
+                    <input name="password" type="password" class="form-control my-2" placeholder="Wachtwoord" required="true"/>
+                    <div class="invalid-feedback">
+                        Voer een wachtwoord in
+                    </div>
 
+                    <div class="text-danger">
+                        <small>${error}</small> </div>
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
-
-                            <input name="password" type="password" class="form-control my-2" placeholder="Wachtwoord" required="true"/>
-                            <div class="invalid-feedback">
-                                Voer een wachtwoord in
-                            </div>
-
-
-                            <div class="text-danger">
-                                <small>${error}</small> </div>
-                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-
-
-                            <button class="btn btn-primary my-2" type="submit">Log in</button>
-                            <a href="${contextPath}/wachtwoord/reset"><button class="btn btn-primary my-2" type="button" >Wachtwoord Vergeten</button></a>
-                        </div>
-                    </form>
-</div>
-
-
+                    <button class="btn btn-primary my-2" type="submit">Log in</button>
+                    <a href="${contextPath}/wachtwoord/reset"><button class="btn btn-primary my-2" type="button" >Wachtwoord Vergeten</button></a>
+                </div>
+            </form>
+        </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
   </body>
