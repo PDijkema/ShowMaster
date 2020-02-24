@@ -69,7 +69,7 @@ public class VoorstellingsTaakController {
         Optional<Voorstelling> voorstelling = voorstellingRepository.findById(voorstellingId);
 
         List<MedewerkerInschrijvingVoorstelling> inschrijvingenBijVoorstellingId =
-                medewerkerInschrijvingVoorstellingRepository.findInschrijvingByVoorstellingId(voorstellingId);
+                medewerkerInschrijvingVoorstellingRepository.findByVoorstellingVoorstellingId(voorstellingId);
 
         List<VoorstellingsTaak> alleVoorstellingsTakenBijVoorstellingId =
                 voorstellingsTaakRepository.findByVoorstellingVoorstellingIdOrderByTaakTaakNaam(voorstellingId);
