@@ -27,8 +27,10 @@ public interface VoorstellingsTaakRepository extends JpaRepository<Voorstellings
 
     List<VoorstellingsTaak> findByMedewerkerMedewerkerId(Integer medewerkerId);
 
+    // telt het aantal openstaande taken per voorstelling op
     Integer countByVoorstellingVoorstellingIdAndMedewerkerIsNull(Integer voorstelling);
 
+    // telt hoe vaak een bepaalde taak toegevoegd is als voorstellingstaak
     Integer countByVoorstellingVoorstellingIdAndTaakTaakId(Integer voorstellingId, Integer taakId);
 
     @Transactional
