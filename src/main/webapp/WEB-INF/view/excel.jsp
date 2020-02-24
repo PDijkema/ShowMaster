@@ -18,7 +18,10 @@
     <br />
 
     <form action="${excelVoorstellingToevoegen }">
-        <button class="btn btn-primary" type="submit">Voorstelling(en) toevoegen</button>
+        <button class="btn btn-primary" type="submit">
+            <span id="excelVoorstellingenToevoegen"></span>
+            Voorstelling(en) toevoegen
+        </button>
     </form>
     <br />
     <br />
