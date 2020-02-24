@@ -17,11 +17,11 @@
     </head>
 
     <body>
-                <div class="jumbotron jumbotron-fluid">
-                    <div class="container">
-                        <h1 class="voorstellingDisplay4">Account aanmaken</h1>
-                    </div>
-                </div>
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h1 class="voorstellingDisplay4">Account aanmaken</h1>
+            </div>
+        </div>
         <div class="container">
             <form:form method="POST" modelAttribute="medewerker" class="needs-validation" novalidate="true">
 

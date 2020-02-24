@@ -22,9 +22,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import javax.swing.text.html.Option;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,40 +37,28 @@ public class MedewerkerController {
 
     @Autowired
     SecurityServiceImplementatie securityServiceImplementatie;
-
     @Autowired
     private MedewerkerService medewerkerService;
-
     @Autowired
     private MedewerkerServiceImplementatie medewerkerServiceImplementatie;
-
     @Autowired
     private SecurityService securityService;
-
     @Autowired
     private MedewerkerValidator medewerkerValidator;
-
     @Autowired
     private MedewerkerRepository medewerkerRepository;
-
     @Autowired
     private MedewerkerProfielGegevensRepository medewerkerProfielGegevensRepository;
-
     @Autowired
     VoorstellingsTaakRepository voorstellingsTaakRepository;
-
     @Autowired
     TaakRepository taakRepository;
-
     @Autowired
     VoorstellingRepository voorstellingRepository;
-
     @Autowired
     VerificatieTokenRepository verificatieTokenRepository;
-
     @Autowired
     EmailMetTokenRepository emailMetTokenRepository;
-
     @Autowired
     MedewerkerInschrijvingVoorstellingRepository medewerkerInschrijvingVoorstellingRepository;
 
@@ -81,11 +67,11 @@ public class MedewerkerController {
         return "redirect:/";
     }
 
+
     @GetMapping("/registreer/{token}")
     protected String showRegistratieFormulier(Model model, @PathVariable String token) {
 
         VerificatieToken verificatieToken = verificatieTokenRepository.findByToken(token);
-
 
         if (verificatieToken != null) {
             if (!verificatieToken.getTokenGebruikt()) {
@@ -99,6 +85,7 @@ public class MedewerkerController {
         return "errorTokenUitnodiging";
     }
 
+
     @PostMapping("/registreer/{token}")
     public String saveGebruiker(@PathVariable String token, Medewerker registratieFormulier, BindingResult result, Model model) {
 
@@ -109,12 +96,11 @@ public class MedewerkerController {
             return "errorTokenUitnodiging";
         }
 
-
         registratieFormulier.setGebruikersnaam(emailMetToken.getEmailadres());
 
         medewerkerValidator.validate(registratieFormulier, result);
         if (result.hasErrors()) {
-           model.addAttribute("gebruikersnaam", emailMetToken.getEmailadres());
+            model.addAttribute("gebruikersnaam", emailMetToken.getEmailadres());
             return "registratieFormulier";
         }
         medewerkerService.save(registratieFormulier);
@@ -128,6 +114,7 @@ public class MedewerkerController {
         return "redirect:/";
     }
 
+
     @GetMapping("/login")
     public String login(Model model, String error, String logout) {
         if (error != null)
@@ -137,11 +124,11 @@ public class MedewerkerController {
         return "login";
     }
 
+
     @GetMapping("/medewerker/rooster")
     public String welkomMedewerker(Model model, @AuthenticationPrincipal Medewerker ingelogdeMedewerker) {
         model.addAttribute("medewerker", medewerkerRepository.findByGebruikersnaam(ingelogdeMedewerker.getGebruikersnaam()));
         model.addAttribute("medewerkerProfielGegevens", medewerkerProfielGegevensRepository.findByMedewerker(ingelogdeMedewerker));
-
 
         List<Voorstelling> voorstellingList = voorstellingRepository.findAllByStatus("Gepubliceerd");
         List<VoorstellingsTaak> voorstellingsTaken = voorstellingsTaakRepository.findByMedewerkerMedewerkerId(ingelogdeMedewerker.getMedewerkerId());
@@ -161,6 +148,7 @@ public class MedewerkerController {
         return "welkomMedewerker";
     }
 
+
     @GetMapping("/")
     public String doorverwijzenStartpagina(@AuthenticationPrincipal Medewerker medewerker) {
         SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority("ROLE_ASPIRANT");
@@ -173,16 +161,19 @@ public class MedewerkerController {
         }
     }
 
+
     @GetMapping("/profiel")
     protected String showProfielPagina(Model model, @AuthenticationPrincipal Medewerker ingelogdeMedewerker) {
         model.addAttribute("medewerkerProfielGegevens", medewerkerProfielGegevensRepository.findByMedewerker(ingelogdeMedewerker));
         return "profielPagina";
     }
 
+
     @PostMapping("/profiel")
     protected String goToProfielWijzigen(Model model, @AuthenticationPrincipal Medewerker ingelogdeMedewerker) {
         return "redirect:/profiel/wijzigen";
     }
+
 
     @GetMapping("/profiel/wijzigen")
     protected String showProfielWijzigen(Model model, @AuthenticationPrincipal Medewerker ingelogdeMedewerker) {
@@ -198,6 +189,7 @@ public class MedewerkerController {
 
         return "profielWijzigen";
     }
+
 
     @PostMapping("/profiel/wijzigen")
     public String updateMedewerker(@ModelAttribute("medewerkerProfielGegevens") MedewerkerProfielGegevens medewerkerProfielGegevens,
@@ -228,6 +220,7 @@ public class MedewerkerController {
         return "redirect:/profiel";
     }
 
+
     @GetMapping("/planner/gebruiker/overzicht")
     public String gebruikerOverzicht(Model model, @AuthenticationPrincipal Medewerker ingelogdeMedwerker) {
         List<Medewerker> alleGebruikers = medewerkerRepository.findAll();
@@ -237,11 +230,13 @@ public class MedewerkerController {
         return "gebruikerOverzicht";
     }
 
+
     @GetMapping("/planner/gebruiker/overzicht/verwijderen/{medewerkerId}")
     public String verwijderGebruiker(@PathVariable Integer medewerkerId) {
         medewerkerRepository.deleteById(medewerkerId);
         return "redirect:/planner/gebruiker/overzicht";
     }
+
 
     @GetMapping("/wachtwoord/reset")
     protected String wachtwoordResetPagina(Model model) {
@@ -251,6 +246,7 @@ public class MedewerkerController {
         model.addAttribute("emailadres", emailadres);
         return "wachtwoordResetAanvragen";
     }
+
 
     @GetMapping("/wachtwoord/reset/{token}")
     protected String wachtwoordResetPaginaToken(@PathVariable String token, Model model) {
@@ -262,9 +258,9 @@ public class MedewerkerController {
             return "errorTokenWachtwoordReset";
         }
 
-
         return "wachtwoordResetPagina";
     }
+
 
     @PostMapping("/wachtwoord/reset/{token}")
     public String wachtResetPaginaToken(@PathVariable String token, Medewerker medewerker, BindingResult bindingResult) {
@@ -281,7 +277,6 @@ public class MedewerkerController {
             return "errorTokenUitnodiging";
         }
 
-
         medewerkerValidator.validateWachtwoord(medewerker, bindingResult);
         if (bindingResult.hasErrors()) {
             return "wachtwoordResetPagina";
@@ -290,12 +285,12 @@ public class MedewerkerController {
         securityService.autoLogin(medewerkerNieuwWachtwoord.getGebruikersnaam(), medewerkerNieuwWachtwoord.getWachtwoordBevestigen());
         medewerkerNieuwWachtwoord.setWachtwoordBevestigen("");
 
-
         verificatieToken.setTokenGebruikt(true);
         verificatieTokenRepository.save(verificatieToken);
 
         return "redirect:/";
     }
+
 
     @GetMapping("/medewerker/setup")
     protected String aanmakenMedewerkers() {

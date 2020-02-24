@@ -12,8 +12,14 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
+
+/**
+ * @author Gert Postma
+ * deze klasse behandelt inschrijvingen van medewerkers op gepubliceerde voorstellingen
+ */
 
 @Controller
 public class MedewerkerInschrijvingVoorstellingController {
@@ -27,6 +33,7 @@ public class MedewerkerInschrijvingVoorstellingController {
     @Autowired
     private MedewerkerInschrijvingVoorstellingRepository medewerkerInschrijvingVoorstellingRepository;
 
+
     @GetMapping("/rooster/openvoorstelling")
     public String openVoorstellingenOphalen(Model model, @AuthenticationPrincipal Medewerker ingelogdeMedewerker) {
 
@@ -34,20 +41,21 @@ public class MedewerkerInschrijvingVoorstellingController {
 
         List<MedewerkerInschrijvingVoorstelling> medewerkerInschrijvingVoorstellingList = medewerkerInschrijvingVoorstellingRepository.findAllByMedewerkerMedewerkerId(ingelogdeMedewerker.getMedewerkerId());
 
-        medewerkerInschrijvingVoorstellingList.forEach(r->voorstellingen.remove(r.getVoorstelling()));
+        medewerkerInschrijvingVoorstellingList.forEach(r -> voorstellingen.remove(r.getVoorstelling()));
 
-        medewerkerInschrijvingVoorstellingList.forEach(r->r.getVoorstelling().getNaam());
+        medewerkerInschrijvingVoorstellingList.forEach(r -> r.getVoorstelling().getNaam());
 
-        model.addAttribute("inschrijvingen",medewerkerInschrijvingVoorstellingList);
+        model.addAttribute("inschrijvingen", medewerkerInschrijvingVoorstellingList);
         model.addAttribute("voorstellingLijst", voorstellingen);
 
         return "openVoorstellingen";
     }
 
+
     @GetMapping("/rooster/openvoorstelling/inschrijven/{voorstellingId}/{inschrijvingStatus}")
     public String inschrijvenVoorstelling(@PathVariable Integer voorstellingId, @PathVariable String inschrijvingStatus, @AuthenticationPrincipal Medewerker ingelogdeMedewerker) {
 
-        MedewerkerInschrijvingVoorstelling alIngeschrevenMedewerker = medewerkerInschrijvingVoorstellingRepository.findByVoorstellingVoorstellingIdAndMedewerkerMedewerkerId(voorstellingId,ingelogdeMedewerker.getMedewerkerId());
+        MedewerkerInschrijvingVoorstelling alIngeschrevenMedewerker = medewerkerInschrijvingVoorstellingRepository.findByVoorstellingVoorstellingIdAndMedewerkerMedewerkerId(voorstellingId, ingelogdeMedewerker.getMedewerkerId());
 
         if (inschrijvingStatus.matches("Beschikbaar|Misschien|Niet Beschikbaar")) {
             if (alIngeschrevenMedewerker != null) {
@@ -56,7 +64,7 @@ public class MedewerkerInschrijvingVoorstellingController {
             } else {
                 Voorstelling voorstelling = voorstellingRepository.findByVoorstellingId(voorstellingId);
                 MedewerkerInschrijvingVoorstelling medewerkerInschrijvingVoorstelling =
-                        new MedewerkerInschrijvingVoorstelling(ingelogdeMedewerker,voorstelling,inschrijvingStatus);
+                        new MedewerkerInschrijvingVoorstelling(ingelogdeMedewerker, voorstelling, inschrijvingStatus);
                 medewerkerInschrijvingVoorstellingRepository.save(medewerkerInschrijvingVoorstelling);
             }
         }

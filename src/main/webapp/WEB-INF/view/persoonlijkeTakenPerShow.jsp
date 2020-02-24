@@ -3,12 +3,13 @@
 
 <!doctype html>
 <html lang="en" xmlns:c="http://www.w3.org/1999/XSL/Transform">
-<head>
-    <title></title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link href="${contextPath}\resources\css\custom.css" type="text/css" rel="stylesheet">
-    <script src="${contextPath}\resources\js\ajax.js"></script>
-</head>
+    <head>
+        <title></title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link href="${contextPath}\resources\css\custom.css" type="text/css" rel="stylesheet">
+        <script src="${contextPath}\resources\js\ajax.js"></script>
+    </head>
+
     <body>
         <h2>Wanneer moet je werken?</h2>
             <form:hidden path="profielId" />

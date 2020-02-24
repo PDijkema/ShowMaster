@@ -3,18 +3,22 @@ function dragStartBeschikbareMedewerker(event, medewerkerId) {
     event.dataTransfer.setData("medewerkerId", medewerkerId)
 }
 
+
 function dragStartIngeplandeMedewerker(event, voorstellingId, voorstellingsTaakId, medewerkerId) {
     event.dataTransfer.setData("medewerkerId", medewerkerId)
     event.dataTransfer.setData("voorstellingId", voorstellingId);
     event.dataTransfer.setData("voorstellingsTaakId", voorstellingsTaakId);
 }
 
+
 function dragging(event) {
 }
+
 
 function allowDrop(event) {
     event.preventDefault();
 }
+
 
 function enterDrag(event) {
     if (event.target.className === "voorstellingsTaak" || "col-4" ) {
@@ -22,11 +26,13 @@ function enterDrag(event) {
     }
 }
 
+
 function leaveDrag(event) {
     if (event.target.className === "voorstellingsTaak" || "col-4") {
         event.target.style.background = "";
     }
 }
+
 
 function dropBeschikbareMedewerker(event, voorstellingsTaakId, voorstellingId, contextPath) {
     event.preventDefault();
@@ -42,6 +48,7 @@ function dropBeschikbareMedewerker(event, voorstellingsTaakId, voorstellingId, c
         + voorstellingId + "/" + voorstellingsTaakId + "/" + medewerkerId, true);
     xhttp.send();
 }
+
 
 function vrijgevenIngeplandeMedewerker(event, contextPath) {
     event.preventDefault();

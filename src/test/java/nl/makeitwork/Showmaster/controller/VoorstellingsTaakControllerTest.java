@@ -21,7 +21,10 @@ import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.List;
 
-import static org.mockito.Mockito.mock;
+
+/**
+ * @author Pieter Dijkema
+ */
 
 @RunWith(SpringRunner.class)
 @WebAppConfiguration

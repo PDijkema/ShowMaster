@@ -12,7 +12,6 @@ import java.util.List;
  * repo voor voorstellingenManagement
  */
 
-
 @Repository
 public interface VoorstellingRepository extends JpaRepository<Voorstelling, Integer> {
 
