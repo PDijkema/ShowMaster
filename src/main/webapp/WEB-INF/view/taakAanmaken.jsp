@@ -2,7 +2,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
-        <form:form action="${contextPath}/planner/taak/aanmaken" modelAttribute="taak" method="post" novalidate="true" class="needs-validation">
+        <form:form action="${contextPath}/planner/taak/aanmaken" modelAttribute="taak" method="post" novalidate="true" class="needs-validation" autocomplete="off">
             <table>
                 <tr>
                     <td>Taaknaam:</td>

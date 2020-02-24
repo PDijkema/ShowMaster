@@ -91,7 +91,7 @@ function wijzigVoorstelling(contextPath, voorstellingId) {
   xhttp.onreadystatechange = function() {
     if (this.readyState === 4 && this.status === 200) {
       document.getElementById("voorstellingWijzigen").innerHTML = this.responseText;
-        $("#kalender").datetimepicker({
+        $("#wijzigVoorstellingKalender").datetimepicker({
           format: "d-m-Y H:i",
         });
     }

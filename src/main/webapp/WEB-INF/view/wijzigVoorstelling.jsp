@@ -2,7 +2,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
-        <form:form action="${contextPath}/planner/voorstellingen/voorstelling/wijzigen" modelAttribute="voorstelling" method="post">
+        <form:form action="${contextPath}/planner/voorstellingen/voorstelling/wijzigen" modelAttribute="voorstelling" method="post" autocomplete="off">
             <form:hidden path="voorstellingId"></form:hidden>
             <form:hidden path="status"></form:hidden>
             <table>
@@ -10,13 +10,13 @@
                     <tr>
                         <td>Naam voorstelling:</td>
                         <td>
-                            <form:input class="form-control mb-2 mr-sm-2" path="naam" required="required" />
+                            <form:input class="form-control mb-2 mr-sm-2" path="naam" required="required"/>
                         </td>
                     </tr>
                     <tr>
                         <td>Datum en tijdstip: </td>
                         <td>
-                            <form:input id="kalender" class="form-control mb-2 mr-sm-2" path="localDateTime" value="${dateString}" required="required" />
+                            <form:input id="wijzigVoorstellingKalender" class="form-control mb-2 mr-sm-2" path="localDateTime" value="${dateString}" required="required"/>
                         </td>
                     </tr>
                     <tr>
