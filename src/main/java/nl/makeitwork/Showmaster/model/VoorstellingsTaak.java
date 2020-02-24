@@ -2,6 +2,7 @@ package nl.makeitwork.Showmaster.model;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 
 /**
@@ -17,21 +18,20 @@ public class VoorstellingsTaak {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer voorstellingsTaakId;
 
-        @ManyToOne
-        @JoinColumn(name = "voorstellingId", referencedColumnName = "voorstellingId")
-        @OnDelete(action = OnDeleteAction.CASCADE)
-        private Voorstelling voorstelling;
+    @ManyToOne
+    @JoinColumn(name = "voorstellingId", referencedColumnName = "voorstellingId")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Voorstelling voorstelling;
 
-        @ManyToOne
-        @JoinColumn(name = "taakId", referencedColumnName = "taakId")
-        @OnDelete(action = OnDeleteAction.CASCADE)
-        private Taak taak;
+    @ManyToOne
+    @JoinColumn(name = "taakId", referencedColumnName = "taakId")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Taak taak;
 
-        @OneToOne(fetch = FetchType.LAZY)
-        @JoinColumn(name = "medewerkerId", referencedColumnName = "medewerkerId")
-        @OnDelete(action = OnDeleteAction.CASCADE)
-        private Medewerker medewerker;
-
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "medewerkerId", referencedColumnName = "medewerkerId")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Medewerker medewerker;
 
     public Voorstelling getVoorstelling() {
         return voorstelling;
@@ -68,10 +68,10 @@ public class VoorstellingsTaak {
     @Override
     public String toString() {
         return "VoorstellingsTaak{" +
-            "voorstellingsTaakId=" + voorstellingsTaakId +
-            ", voorstelling=" + voorstelling +
-            ", taak=" + taak +
-            ", medewerker=" + medewerker +
-            '}';
+                "voorstellingsTaakId=" + voorstellingsTaakId +
+                ", voorstelling=" + voorstelling +
+                ", taak=" + taak +
+                ", medewerker=" + medewerker +
+                '}';
     }
 }

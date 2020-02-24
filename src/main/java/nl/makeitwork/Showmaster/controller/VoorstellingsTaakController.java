@@ -41,6 +41,7 @@ public class VoorstellingsTaakController {
         return "redirect:/planner/voorstellingen/voorstelling/rooster/" + voorstellingId;
     }
 
+
     @GetMapping("/planner/voorstellingen/voorstellingsTaak/toevoegen/{voorstellingId}/{taakId}")
     protected String toevoegenTaakAanVoorstelling(@PathVariable("taakId") Integer taakId,
                                                   @PathVariable("voorstellingId") Integer voorstellingId) {
@@ -58,6 +59,7 @@ public class VoorstellingsTaakController {
         return "redirect:/planner/voorstellingen/voorstelling/rooster/" + voorstellingId;
     }
 
+
     @GetMapping("/planner/voorstellingen/voorstellingsTaak/medewerkerKoppelen/{voorstellingId}/{voorstellingsTaakId}")
     protected String koppelenMedewerkerAanVoorstellingsTaak(@PathVariable("voorstellingId") Integer voorstellingId,
                                                             @PathVariable("voorstellingsTaakId") Integer voorstellingsTaakId,
@@ -67,14 +69,14 @@ public class VoorstellingsTaakController {
         Optional<Voorstelling> voorstelling = voorstellingRepository.findById(voorstellingId);
 
         List<MedewerkerInschrijvingVoorstelling> inschrijvingenBijVoorstellingId =
-            medewerkerInschrijvingVoorstellingRepository.findInschrijvingByVoorstellingId(voorstellingId);
+                medewerkerInschrijvingVoorstellingRepository.findInschrijvingByVoorstellingId(voorstellingId);
 
         List<VoorstellingsTaak> alleVoorstellingsTakenBijVoorstellingId =
-            voorstellingsTaakRepository.findByVoorstellingVoorstellingIdOrderByTaakTaakNaam(voorstellingId);
+                voorstellingsTaakRepository.findByVoorstellingVoorstellingIdOrderByTaakTaakNaam(voorstellingId);
 
         // Reeds ingevulde taken filteren om alle nog beschikbare medewerkers te kunnen laten zien
         alleVoorstellingsTakenBijVoorstellingId.forEach
-            (d-> inschrijvingenBijVoorstellingId.removeIf(r-> r.getMedewerker() == d.getMedewerker()));
+                (d -> inschrijvingenBijVoorstellingId.removeIf(r -> r.getMedewerker() == d.getMedewerker()));
 
         voorstellingsTaak.ifPresent(taak -> model.addAttribute("voorstellingsTaak", taak));
         model.addAttribute("voorstellingId", voorstellingId);
@@ -85,6 +87,7 @@ public class VoorstellingsTaakController {
         return "medewerkerKoppelenAanVoorstellingsTaak";
     }
 
+
     @GetMapping("/planner/voorstellingen/voorstellingsTaak/medewerkerKoppelen/{voorstellingId}/{voorstellingsTaakId}/{medewerkerId}")
     protected String opslaanMedewerkerBijVoorstellingstaak(@PathVariable("voorstellingId") Integer voorstellingId,
                                                            @PathVariable("voorstellingsTaakId") Integer voorstellingsTaakId,
@@ -94,7 +97,7 @@ public class VoorstellingsTaakController {
         Optional<Medewerker> medewerker = medewerkerRepository.findById(medewerkerId);
 
         List<VoorstellingsTaak> takenBijVoorstelling = voorstellingsTaakRepository.findByVoorstellingVoorstellingId(voorstellingId);
-        for (VoorstellingsTaak taak: takenBijVoorstelling) {
+        for (VoorstellingsTaak taak : takenBijVoorstelling) {
             if (taak.getMedewerker() != null) {
                 if (taak.getMedewerker().getMedewerkerId().equals(medewerkerId)) {
                     taak.setMedewerker(null);
@@ -110,6 +113,7 @@ public class VoorstellingsTaakController {
         return "redirect:/planner/voorstellingen/voorstelling/rooster/" + voorstellingId;
     }
 
+
     @GetMapping("/planner/voorstellingen/voorstellingsTaak/taakVrijGeven/{voorstellingId}/{voorstellingsTaakId}")
     protected String taakBijVoorstellingenVrijgeven(@PathVariable("voorstellingId") Integer voorstellingId,
                                                     @PathVariable("voorstellingsTaakId") Integer voorstellingsTaakId) {
@@ -122,6 +126,7 @@ public class VoorstellingsTaakController {
         }
         return "redirect:/planner/voorstellingen/voorstelling/rooster/" + voorstellingId;
     }
+
 
     @GetMapping("/planner/voorstellingen/voorstelling/rooster/genereer/{voorstellingId}")
     protected String genereerRooster(@PathVariable("voorstellingId") Integer voorstellingId) {
@@ -148,13 +153,16 @@ public class VoorstellingsTaakController {
         return "redirect:/planner/voorstellingen/voorstelling/rooster/" + voorstellingId;
     }
 
+
     protected void genereerRoosterMetVoorkeursTaak(String voorkeursTaak,
                                                    List<MedewerkerInschrijvingVoorstelling> inschrijvingVoorstelling,
                                                    List<VoorstellingsTaak> voorstellingsTaken) {
 
-        List<MedewerkerInschrijvingVoorstelling> inschrijvingVoorstellingVoorkeur = new ArrayList<MedewerkerInschrijvingVoorstelling>() {};
-        List<VoorstellingsTaak> voorstellingsTaakVoorkeur = new ArrayList<VoorstellingsTaak>() {};
-        
+        List<MedewerkerInschrijvingVoorstelling> inschrijvingVoorstellingVoorkeur = new ArrayList<MedewerkerInschrijvingVoorstelling>() {
+        };
+        List<VoorstellingsTaak> voorstellingsTaakVoorkeur = new ArrayList<VoorstellingsTaak>() {
+        };
+
         voorstellingsTaken
                 .stream()
                 .filter(x -> x.getTaak().getTaakNaam().equals(voorkeursTaak))
@@ -166,8 +174,8 @@ public class VoorstellingsTaakController {
                 .filter(z -> z.getMedewerker().getMedewerkerProfielGegevens().getVoorkeurstaak().getTaakNaam().equals(voorkeursTaak))
                 .forEach(inschrijvingVoorstellingVoorkeur::add);
 
-        for(int i = 0; i <inschrijvingVoorstellingVoorkeur.size(); i++) {
-            if( i < voorstellingsTaakVoorkeur.size()) {
+        for (int i = 0; i < inschrijvingVoorstellingVoorkeur.size(); i++) {
+            if (i < voorstellingsTaakVoorkeur.size()) {
                 if (voorstellingsTaakVoorkeur.get(i) != null) {
                     voorstellingsTaakVoorkeur.get(i).setMedewerker(inschrijvingVoorstellingVoorkeur.get(i).getMedewerker());
                     voorstellingsTaakRepository.save(voorstellingsTaken.get(i));

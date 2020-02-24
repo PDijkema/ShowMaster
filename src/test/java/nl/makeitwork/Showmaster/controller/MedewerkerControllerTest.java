@@ -1,6 +1,5 @@
 package nl.makeitwork.Showmaster.controller;
 
-
 import nl.makeitwork.Showmaster.model.EmailMetToken;
 import nl.makeitwork.Showmaster.model.Medewerker;
 import nl.makeitwork.Showmaster.model.MedewerkerProfielGegevens;
@@ -23,13 +22,11 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.context.WebApplicationContext;
 
@@ -40,6 +37,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.mockito.Mockito.*;
+
+/**
+ * @author Gert Postma
+ */
 
 @RunWith(SpringRunner.class)
 @WebAppConfiguration
@@ -112,10 +113,8 @@ class MedewerkerControllerTest {
         emailMetTokenRepository.save(emailMetToken);
 
 
-
-
         //Activate
-        medewerkerController.saveGebruiker(verificatieToken.getToken(),medewerker1, bindingResult, null);
+        medewerkerController.saveGebruiker(verificatieToken.getToken(), medewerker1, bindingResult, null);
 
         //Assert
         Assert.assertNotNull(medewerkerRepository.findByGebruikersnaam("test1234@test.com"));
@@ -133,13 +132,13 @@ class MedewerkerControllerTest {
         when(result.hasErrors()).thenReturn(false);
         String verwachteAchternaam = "Vries";
 
-        MedewerkerProfielGegevens profielGegevensTestMedewerker1 =(medewerkerProfielGegevensRepository.findByMedewerker(testMedewerker1));
+        MedewerkerProfielGegevens profielGegevensTestMedewerker1 = (medewerkerProfielGegevensRepository.findByMedewerker(testMedewerker1));
 
         vulProfielgegevens(profielGegevensTestMedewerker1);
-        
+
         List<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority("ROLE_ASPIRANT"));
-        Authentication authToken = new UsernamePasswordAuthenticationToken (testMedewerker1.getGebruikersnaam(), testMedewerker1.getWachtwoord(), authorities);
+        Authentication authToken = new UsernamePasswordAuthenticationToken(testMedewerker1.getGebruikersnaam(), testMedewerker1.getWachtwoord(), authorities);
         SecurityContextHolder.getContext().setAuthentication(authToken);
 
         // Activate
@@ -150,36 +149,36 @@ class MedewerkerControllerTest {
     }
 
 
-        @Test
-        public void verwijderGebruikerTest () throws Exception {
-            //Arrange
-            BindingResult bindingResult = mock(BindingResult.class);
-            when(bindingResult.hasErrors()).thenReturn(false);
-            Medewerker medewerker1 = new Medewerker();
+    @Test
+    public void verwijderGebruikerTest() throws Exception {
+        //Arrange
+        BindingResult bindingResult = mock(BindingResult.class);
+        when(bindingResult.hasErrors()).thenReturn(false);
+        Medewerker medewerker1 = new Medewerker();
 
-            medewerker1.setGebruikersnaam("test1234@test.com");
-            medewerker1.setWachtwoord("test12345");
-            medewerker1.setWachtwoordBevestigen("test12345");
-            medewerker1.setPlanner(false);
-            VerificatieToken verificatieToken = new VerificatieToken();
-            verificatieTokenRepository.save(verificatieToken);
+        medewerker1.setGebruikersnaam("test1234@test.com");
+        medewerker1.setWachtwoord("test12345");
+        medewerker1.setWachtwoordBevestigen("test12345");
+        medewerker1.setPlanner(false);
+        VerificatieToken verificatieToken = new VerificatieToken();
+        verificatieTokenRepository.save(verificatieToken);
 
-            EmailMetToken emailMetToken = new EmailMetToken();
-            emailMetToken.setEmailadres("test1234@test.com");
-            emailMetToken.setVerificatieToken(verificatieToken);
-            emailMetTokenRepository.save(emailMetToken);
+        EmailMetToken emailMetToken = new EmailMetToken();
+        emailMetToken.setEmailadres("test1234@test.com");
+        emailMetToken.setVerificatieToken(verificatieToken);
+        emailMetTokenRepository.save(emailMetToken);
 
-            //Activate
-            medewerkerController.saveGebruiker(verificatieToken.getToken(), medewerker1, bindingResult, null);
+        //Activate
+        medewerkerController.saveGebruiker(verificatieToken.getToken(), medewerker1, bindingResult, null);
 
-            medewerker1 = medewerkerRepository.findByGebruikersnaam("test1234@test.com");
+        medewerker1 = medewerkerRepository.findByGebruikersnaam("test1234@test.com");
 
-            medewerkerController.verwijderGebruiker(medewerker1.getMedewerkerId());
+        medewerkerController.verwijderGebruiker(medewerker1.getMedewerkerId());
 
-            //Assert
-            Assert.assertNull(medewerkerRepository.findByGebruikersnaam("test1234@test.com"));
+        //Assert
+        Assert.assertNull(medewerkerRepository.findByGebruikersnaam("test1234@test.com"));
 
-        }
+    }
 
     public void setGebruikersgegevensTestMedewerker1(Medewerker testMedewerker) {
         testMedewerker.setGebruikersnaam("test4567");

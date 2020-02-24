@@ -13,25 +13,30 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 
 
+/**
+ * @author Gert Postma
+ */
+
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfiguratie extends WebSecurityConfigurerAdapter {
-    @Autowired
-     private UserDetailsService userDetailsService;
 
+    @Autowired
+    private UserDetailsService userDetailsService;
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/resources/**","/registreer/**", "/images/**","/wachtwoord/reset/**").permitAll()
+                .antMatchers("/resources/**", "/registreer/**", "/images/**", "/wachtwoord/reset/**").permitAll()
                 .antMatchers("/medewerker/**").hasRole("MEDEWERKER")
-                .antMatchers ( "/planner/**").hasRole ("PLANNER")
+                .antMatchers("/planner/**").hasRole("PLANNER")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -42,20 +47,25 @@ public class WebSecurityConfiguratie extends WebSecurityConfigurerAdapter {
                 .permitAll();
     }
 
+
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/403.html").setViewName("403");}
+        registry.addViewController("/403.html").setViewName("403");
+    }
+
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
-                .withUser("admin").password(bCryptPasswordEncoder().encode("admin")).roles("USER","ADMIN","PLANNER");
+                .withUser("admin").password(bCryptPasswordEncoder().encode("admin")).roles("USER", "ADMIN", "PLANNER");
         configureGlobal(auth);
     }
+
 
     @Bean
     public AuthenticationManager customAuthenticationManager() throws Exception {
         return authenticationManager();
     }
+
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {

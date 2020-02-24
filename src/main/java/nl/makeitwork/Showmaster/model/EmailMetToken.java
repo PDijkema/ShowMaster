@@ -1,11 +1,13 @@
 package nl.makeitwork.Showmaster.model;
 
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 
 import javax.persistence.*;
+
+/**
+ * @author Pieter Dijkema
+ */
 
 @Entity
 public class EmailMetToken {
