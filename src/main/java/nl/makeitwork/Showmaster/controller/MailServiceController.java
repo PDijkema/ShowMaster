@@ -10,6 +10,7 @@ import nl.makeitwork.Showmaster.repository.EmailMetTokenRepository;
 import nl.makeitwork.Showmaster.repository.VerificatieTokenRepository;
 import nl.makeitwork.Showmaster.validator.MedewerkerValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -37,11 +38,19 @@ public class MailServiceController {
     MedewerkerValidator medewerkerValidator;
 
     @Autowired
+    MailService mailService;
+
+    @Autowired
     private MedewerkerRepository medewerkerRepository;
+
+    @Value("${email.wachtwoord}")
+    private String wachtwoord;
 
 
     @PostMapping("/planner/gebruiker/overzicht/uitnodigen")
     protected String verstuurUitnodiging(@ModelAttribute("emailMetToken") EmailMetToken uitnodiging, BindingResult result, Model model, @AuthenticationPrincipal Medewerker ingelogdeMedewerker) {
+
+        System.out.println("test 3 "+wachtwoord);
 
         medewerkerValidator.validateEmail(uitnodiging, result);
 
@@ -65,9 +74,7 @@ public class MailServiceController {
                     + "\n\nMet vriendelijke groet,\n\nPlanning Showmaster";
             // String emailBody = uitnodiging.getBericht() + "klik op deze link om je in te schrijven " + "192.168.1.126:8080/registreer";
 
-            AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(MailServiceConfiguratie.class);
-            MailService bean = context.getBean(MailService.class);
-            bean.verstuurMail(uitnodiging.getEmailadres(), onderwerp, emailBody);
+            mailService.verstuurMail(uitnodiging.getEmailadres(), onderwerp, emailBody);
             return "redirect:/planner/gebruiker/overzicht";
         }
     }

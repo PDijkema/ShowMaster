@@ -34,7 +34,6 @@ import java.util.Optional;
 @Controller
 public class MedewerkerController {
 
-
     @Autowired
     SecurityServiceImplementatie securityServiceImplementatie;
     @Autowired
@@ -61,6 +60,7 @@ public class MedewerkerController {
     EmailMetTokenRepository emailMetTokenRepository;
     @Autowired
     MedewerkerInschrijvingVoorstellingRepository medewerkerInschrijvingVoorstellingRepository;
+
 
     @GetMapping("/registreer")
     protected String omleidenNaarLogin() {
@@ -117,6 +117,7 @@ public class MedewerkerController {
 
     @GetMapping("/login")
     public String login(Model model, String error, String logout) {
+
         if (error != null)
             model.addAttribute("error", "Uw gebruikersnaam en/of wachtwoord is ongeldig");
         if (logout != null)
