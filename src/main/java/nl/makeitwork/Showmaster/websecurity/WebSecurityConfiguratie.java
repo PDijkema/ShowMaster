@@ -1,6 +1,7 @@
 package nl.makeitwork.Showmaster.websecurity;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,6 +22,7 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 @EnableWebSecurity
 public class WebSecurityConfiguratie extends WebSecurityConfigurerAdapter {
 
+    @Qualifier("medewerkerDetailsService")
     @Autowired
     private UserDetailsService userDetailsService;
 
@@ -71,6 +73,5 @@ public class WebSecurityConfiguratie extends WebSecurityConfigurerAdapter {
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
     }
-
 }
 

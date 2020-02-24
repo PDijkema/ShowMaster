@@ -97,8 +97,6 @@
                                     <c:out value="${taak.taakNaam}"/>
                                 </a>
                             </c:forEach>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" id="nieuweVoorstellingsSpecTaak" onclick="voorstellingsSpecifiekeTaak('${contextPath}', ${voorstelling.voorstellingId})" data-toggle="modal" data-target="#voorstellingsSpecifiekeTaakModal">Specifieke Taak</a>
                         </div>
                     </div>
                 </div>
@@ -130,23 +128,6 @@
                 <a class="btn btn-primary" id="genereerRooster" onclick="genereerRooster(${voorstelling.voorstellingId}, '${contextPath}')">Genereer Rooster</a>
             </div>
         </div>
-
-    <div class="modal fade" id="voorstellingsSpecifiekeTaakModal" tabindex="-1" role="dialog" aria-labelledby="voorstellingsSpecifiekeTaakModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2 class="modal-title" id="voorstellingsSpecifiekeTaakModalLabel">Taak bij deze voorstelling toevoegen</h2>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p id="nieuweVoorstellingsSpecifiekeTaakToevoegen"></p>
-                </div>
-            </div>
-        </div>
-    </div>
-
         <jsp:include page="waarschuwingsPopups.jsp" />
         <script type="text/javascript" src="${contextPath}\resources\js\modal.functies.js"></script>
     </body>

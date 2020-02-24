@@ -47,11 +47,11 @@
                 <table class="table table-hover" id="myTable">
                     <thead>
                     <tr>
-                        <th id="voorstellingsnaam" scope="col" onclick="sortTable(0)">Voorstelling</th>
-                        <th scope="col" onclick="sortTable(1)">Datum</th>
-                        <th scope="col">Ja</th>
-                        <th scope="col">Misschien</th>
-                        <th scope="col">Nee</th>
+                        <th class="sticky-top" id="voorstellingsnaam" scope="col" onclick="sortTable(0)">Voorstelling</th>
+                        <th class="sticky-top" scope="col" onclick="sortTable(1)">Datum</th>
+                        <th class="sticky-top" scope="col">Ja</th>
+                        <th class="sticky-top" scope="col">Misschien</th>
+                        <th class="sticky-top" scope="col">Nee</th>
                     </tr>
                     </thead>
 
