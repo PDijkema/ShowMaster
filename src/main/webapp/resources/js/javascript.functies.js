@@ -3,6 +3,16 @@ function infoMeegeven (voorstellingsTaakId,voorstellingId, contextPath) {
     document.getElementById('taakVrijgeven').style.visibility = 'visible';
 }
 
+$.noConflict();
+            jQuery(document).ready(function($) {
+                var modelAttr = $("#modelAttr").val();
+                console.log(modelAttr !== "")
+                if (modelAttr !== ""){
+
+                    $("#uitnodigingModal").modal();
+                }
+            });
+
 function sortTable(n) {
     var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
     table = document.getElementById("myTable");
