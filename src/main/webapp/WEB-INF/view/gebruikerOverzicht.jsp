@@ -28,12 +28,19 @@
                     <thead>
                         <tr>
                             <th scope ="col">Naam</th>
+                            <th scope ="col">E-mailadres</th>
                             <th scope ="col">Verwijderen</th>
                         </tr>
                     </thead>
                     <tbody>
                         <c:forEach items="${alleGebruikers}" var="gebruiker">
                             <tr>
+                                <td>${gebruiker.medewerkerProfielGegevens.voornaam}
+                                    <c:if test="${empty gebruiker.medewerkerProfielGegevens.tussenvoegsel}"></c:if>
+                                    <c:if test="${not empty gebruiker.medewerkerProfielGegevens.tussenvoegsel}">
+                                        ${gebruiker.medewerkerProfielGegevens.tussenvoegsel}</c:if>
+                                        ${gebruiker.medewerkerProfielGegevens.achternaam}
+                                </td>
                                 <td><c:out value="${gebruiker.gebruikersnaam}"/></td>
                                 <td>
                                     <i class="fas fa-trash" title="Verwijderen" data-toggle="modal"
