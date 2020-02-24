@@ -24,7 +24,7 @@
 
     <body id="bolwerkAchtergrondFoto">
         <div class="container" id="containerLoginWWReset" >
-            <form method="POST" action="${contextPath}/login"  class="needs-validation" novalidate="true">
+            <form method="POST" action="${contextPath}/login"  class="needs-validation" novalidate="true" autocomplete="off">
 
                 <div class="form-group ${error != null ? 'has-error' : ''}">
                     <span class = "alert-success">${message}</span>
