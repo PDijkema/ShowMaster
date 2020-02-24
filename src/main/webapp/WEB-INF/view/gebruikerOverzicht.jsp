@@ -15,21 +15,14 @@
     <link href="${contextPath}\resources\css\custom.css" type="text/css" rel="stylesheet">
     <link href="${contextPath}\resources\css\all.css" type="text/css" rel="stylesheet">
     <script>
-
         $.noConflict();
         jQuery(document).ready(function($) {
             var modelAttr = $("#modelAttr").val();
             console.log(modelAttr !== "")
             if (modelAttr !== ""){
-
                 $("#uitnodigingModal").modal();
             }
-
-
-
         });
-
-
     </script>
 
 

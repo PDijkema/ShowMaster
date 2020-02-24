@@ -24,6 +24,7 @@ public class EmailMetToken {
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(nullable = false, name = "verificatieTokenId")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private VerificatieToken verificatieToken;
 
     public VerificatieToken getVerificatieToken() {
