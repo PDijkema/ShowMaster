@@ -80,7 +80,7 @@
                                 <spring:bind path="emailadres">
                                     <div class="form-group ${status.error ? 'has-error' : ''}">
                                         <label class="col-form-label">E-mailadres:</label>
-                                        <form:input type="email" path="emailadres" class="form-control" placeholder="Emailadres" required="true" id="emailveld" />
+                                        <form:input type="email" path="emailadres" class="form-control" placeholder="E-mailadres" required="true" id="emailveld" />
                                         <div class="invalid-feedback">
                                             Voer het e-mailadres van de ontvanger in
                                         </div>
@@ -99,10 +99,4 @@
                 </div>
             </div>
         </div>
-    <script>
-        function clearModal() {
-            $("#emailveld")[0].value = "";
-            $("#tekstVeld")[0].value = "";
-        }
-    </script>
 </html>
