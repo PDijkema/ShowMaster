@@ -128,7 +128,6 @@
                 <a class="btn btn-primary" id="genereerRooster" onclick="genereerRooster(${voorstelling.voorstellingId}, '${contextPath}')">Genereer Rooster</a>
             </div>
         </div>
-
         <jsp:include page="waarschuwingsPopups.jsp" />
         <script type="text/javascript" src="${contextPath}\resources\js\modal.functies.js"></script>
     </body>
