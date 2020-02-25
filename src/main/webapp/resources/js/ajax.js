@@ -63,7 +63,16 @@ function importerenExcel(contextPath) {
                     xhttp.open("POST", contextPath + "/planner/voorstellingen/excel/upload" + csrf, true);
                     xhttp.send(formData);
               });
+        });
+
+
+        $(function() {
+          $('#buttonExcelVoorstellingenToevoegen').on('click', function () {
+             var toevoegen = $('#buttonExcelVoorstellingenToevoegen');
+               toevoegen.html(toevoegen.data('loading-text'));
           });
+        });
+
     }
   };
   xhttp.open("GET", contextPath + "/planner/voorstellingen/excel", true);
