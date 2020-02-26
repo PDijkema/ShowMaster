@@ -30,7 +30,7 @@
         </c:if>
 
         <div class="container">
-            <form:form method="POST" modelAttribute="medewerkerProfielGegevens" novalidate="true" class="was-validated needs-validation">
+            <form:form method="POST" modelAttribute="medewerkerProfielGegevens" novalidate="true" class="was-validated needs-validation" autocomplete="off">
                 <h2 class="form-signin-heading">Persoonlijke gegevens</h2>
 
                 <form:hidden path="profielId"></form:hidden>

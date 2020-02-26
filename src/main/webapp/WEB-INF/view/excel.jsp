@@ -18,7 +18,11 @@
     <br />
 
     <form action="${excelVoorstellingToevoegen }">
-        <button class="btn btn-primary" type="submit">Voorstelling(en) toevoegen</button>
+        <button id="buttonExcelVoorstellingenToevoegen" class="btn btn-primary" type="submit"
+        data-loading-text="<i class='fa fa-spinner fa-spin fa-fw' aria-hidden='true'></i>
+        Bezig, even geduld...">
+        Voorstelling(en) toevoegen
+        </button>
     </form>
     <br />
     <br />

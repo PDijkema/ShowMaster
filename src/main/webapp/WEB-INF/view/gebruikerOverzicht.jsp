@@ -2,8 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
-
-
 <!doctype html>
 <html lang="en">
     <head>
@@ -20,7 +18,6 @@
                 var modelAttr = $("#modelAttr").val();
                 console.log(modelAttr !== "")
                 if (modelAttr !== ""){
-
                     $("#uitnodigingModal").modal();
                 }
             });
@@ -41,12 +38,19 @@
                     <thead>
                         <tr>
                             <th scope ="col">Naam</th>
+                            <th scope ="col">E-mailadres</th>
                             <th scope ="col">Verwijderen</th>
                         </tr>
                     </thead>
                     <tbody>
                         <c:forEach items="${alleGebruikers}" var="gebruiker">
                             <tr>
+                                <td>${gebruiker.medewerkerProfielGegevens.voornaam}
+                                    <c:if test="${empty gebruiker.medewerkerProfielGegevens.tussenvoegsel}"></c:if>
+                                    <c:if test="${not empty gebruiker.medewerkerProfielGegevens.tussenvoegsel}">
+                                        ${gebruiker.medewerkerProfielGegevens.tussenvoegsel}</c:if>
+                                        ${gebruiker.medewerkerProfielGegevens.achternaam}
+                                </td>
                                 <td><c:out value="${gebruiker.gebruikersnaam}"/></td>
                                 <td>
                                     <i class="fas fa-trash" title="Verwijderen" data-toggle="modal"
@@ -80,7 +84,7 @@
                                 <spring:bind path="emailadres">
                                     <div class="form-group ${status.error ? 'has-error' : ''}">
                                         <label class="col-form-label">E-mailadres:</label>
-                                        <form:input type="email" path="emailadres" class="form-control" placeholder="Emailadres" required="true" id="emailveld" />
+                                        <form:input type="email" path="emailadres" class="form-control" placeholder="E-mailadres" required="true" id="emailveld" />
                                         <div class="invalid-feedback">
                                             Voer het e-mailadres van de ontvanger in
                                         </div>
@@ -99,10 +103,4 @@
                 </div>
             </div>
         </div>
-    <script>
-        function clearModal() {
-            $("#emailveld")[0].value = "";
-            $("#tekstVeld")[0].value = "";
-        }
-    </script>
 </html>
