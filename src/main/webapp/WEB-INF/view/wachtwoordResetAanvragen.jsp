@@ -33,7 +33,7 @@
                     <span class = "alert-success">${message}</span>
                     <div class="my-2">
                         <input name="emailadres" type="text" class="form-control" placeholder="E-mailadres"
-                               autofocus="true" required="true">
+                               autofocus="true" required="true" autocomplete="off">
                         <div class="invalid-feedback">
                             Voer een E-mailadres in
                         </div>
