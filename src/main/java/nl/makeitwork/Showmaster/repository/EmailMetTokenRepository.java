@@ -11,4 +11,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface EmailMetTokenRepository extends JpaRepository<EmailMetToken, Integer> {
 
     EmailMetToken findByVerificatieToken(VerificatieToken verificatieToken);
+
 }

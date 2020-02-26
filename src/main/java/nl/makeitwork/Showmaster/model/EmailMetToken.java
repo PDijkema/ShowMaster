@@ -1,5 +1,7 @@
 package nl.makeitwork.Showmaster.model;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 
@@ -26,6 +28,7 @@ public class EmailMetToken {
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(nullable = false, name = "verificatieTokenId")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private VerificatieToken verificatieToken;
 
     public VerificatieToken getVerificatieToken() {
