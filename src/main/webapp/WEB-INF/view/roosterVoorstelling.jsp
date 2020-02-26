@@ -28,11 +28,10 @@
                 <h3 id="voorstellingDatumDisplay4" class="display-4"> ${voorstelling.datum}</h3>
             </div>
         </div>
-
         <div class="container">
+            <a id="overzichtVoorstellingenButton" class="btn btn-primary" href="${contextPath}/planner/voorstellingen">Overzicht Voorstellingen</a>
             <div class="row flex-xl-nowrap">
                 <div class="col-8" role="main">
-                    <h1>Diensten bij voorstelling</h1>
                     <table class="table table-hover">
                         <thead>
                         <tr>
@@ -86,19 +85,28 @@
                         </c:forEach>
                         </tbody>
                     </table>
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dienstToevoegenButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Dienst Toevoegen
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <c:forEach items="${alleTaken}" var="taak">
-                                <a class="dropdown-item" href="${contextPath}/planner/voorstellingen/voorstellingsTaak/toevoegen/${voorstelling.voorstellingId}/
-                                <c:out value='${taak.taakId}' />">
-                                    <c:out value="${taak.taakNaam}"/>
-                                </a>
-                            </c:forEach>
-                        </div>
-                    </div>
+                    <table>
+                        <tr>
+                            <td>
+                                <div class="dropdown">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dienstToevoegenButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Dienst Toevoegen
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <c:forEach items="${alleTaken}" var="taak">
+                                            <a class="dropdown-item" href="${contextPath}/planner/voorstellingen/voorstellingsTaak/toevoegen/${voorstelling.voorstellingId}/
+                                            <c:out value='${taak.taakId}' />">
+                                                <c:out value="${taak.taakNaam}"/>
+                                            </a>
+                                        </c:forEach>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <a class="btn btn-primary" id="genereerRooster" onclick="genereerRooster(${voorstelling.voorstellingId}, '${contextPath}')">Genereer Rooster</a>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
                 <div class="col-4" id="dropzoneBeschikbareMedewerkers"
                      ondragenter="enterDrag(event)"
@@ -120,12 +128,6 @@
                         </div>
                     </c:forEach>
                 </div>
-            </div>
-        </div>
-        <div class="container">
-            <div>
-                <a class="btn btn-primary" href="${contextPath}/planner/voorstellingen">Overzicht Voorstellingen</a>
-                <a class="btn btn-primary" id="genereerRooster" onclick="genereerRooster(${voorstelling.voorstellingId}, '${contextPath}')">Genereer Rooster</a>
             </div>
         </div>
         <jsp:include page="waarschuwingsPopups.jsp" />
