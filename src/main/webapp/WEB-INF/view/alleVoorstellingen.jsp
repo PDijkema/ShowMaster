@@ -13,7 +13,6 @@
         <link href="${contextPath}\resources\css\all.css" type="text/css" rel="stylesheet">
         <script src="${contextPath}\resources\js\ajax.js"></script>
         <script src="${contextPath}\resources\js\javascript.functies.js"></script>
-
     </head>
 
     <body>
