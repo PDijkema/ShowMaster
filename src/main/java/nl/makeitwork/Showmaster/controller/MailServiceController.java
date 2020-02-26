@@ -50,8 +50,6 @@ public class MailServiceController {
     @PostMapping("/planner/gebruiker/overzicht/uitnodigen")
     protected String verstuurUitnodiging(@ModelAttribute("emailMetToken") EmailMetToken uitnodiging, BindingResult result, Model model, @AuthenticationPrincipal Medewerker ingelogdeMedewerker) {
 
-        System.out.println("test 3 "+wachtwoord);
-
         medewerkerValidator.validateEmail(uitnodiging, result);
 
         if (result.hasErrors()) {
@@ -72,7 +70,7 @@ public class MailServiceController {
             String onderwerp = "Uitnodiging";
             String emailBody = uitnodiging.getBericht() + "\n\nKlik op deze link om je in te schrijven: http://localhost:8080/registreer/" + verificatieToken.getToken()
                     + "\n\nMet vriendelijke groet,\n\nPlanning Showmaster";
-            // String emailBody = uitnodiging.getBericht() + "klik op deze link om je in te schrijven " + "192.168.1.126:8080/registreer";
+
 
             mailService.verstuurMail(uitnodiging.getEmailadres(), onderwerp, emailBody);
             return "redirect:/planner/gebruiker/overzicht";
@@ -94,12 +92,8 @@ public class MailServiceController {
             String onderwerp = "Wachtwoord Reset";
             String emailBody = "\n\nKlik op deze link om je wachtwoord te resetten: http://localhost:8080/wachtwoord/reset/" + verificatieToken.getToken()
                     + "\n\nMet vriendelijke groet,\n\n Showmaster";
-            // String emailBody = uitnodiging.getBericht() + "klik op deze link om je in te schrijven " + "192.168.1.126:8080/registreer";
 
-            AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(MailServiceConfiguratie.class);
-            MailService bean = context.getBean(MailService.class);
-            bean.verstuurMail(emailadres, onderwerp, emailBody);
-
+            mailService.verstuurMail(emailadres, onderwerp, emailBody);
             emailMetTokenRepository.save(emailMetToken);
         }
         return "login";

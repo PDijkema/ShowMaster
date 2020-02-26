@@ -7,9 +7,9 @@ html, body {
 }
 
 /* items in navbar in font als Bolwerk site */
-header .nav-item {
+.nav-item {
     font-family: "Days One", sans-serif;
-    font-size: 0.7rem;
+    font-size: 0.8rem;
 }
 
 #headerNavbar .navbar-light .navbar-nav .nav-link:hover

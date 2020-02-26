@@ -56,7 +56,7 @@
                                         data-target="#waarschuwingsModal"
                                         onclick="vullenModal(
                                         'Voorstelling publiceren',
-                                        'Medewerkers kunnen zicht nu inschrijven voor deze voorstelling. Weet je het zeker?',
+                                        'Medewerkers kunnen zich nu inschrijven voor deze voorstelling. Weet je het zeker?',
                                         'Publiceer',
                                         '/planner/voorstellingen/voorstelling/publiceren/<c:out value= '${voorstelling.voorstellingId}'/>')">
                                         Publiceer
