@@ -1,7 +1,6 @@
 package nl.makeitwork.Showmaster.controller;
 
 import nl.makeitwork.Showmaster.mail.MailService;
-import nl.makeitwork.Showmaster.mail.MailServiceConfiguratie;
 import nl.makeitwork.Showmaster.model.EmailMetToken;
 import nl.makeitwork.Showmaster.model.Medewerker;
 import nl.makeitwork.Showmaster.model.VerificatieToken;
@@ -10,8 +9,6 @@ import nl.makeitwork.Showmaster.repository.EmailMetTokenRepository;
 import nl.makeitwork.Showmaster.repository.VerificatieTokenRepository;
 import nl.makeitwork.Showmaster.validator.MedewerkerValidator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,9 +39,6 @@ public class MailServiceController {
 
     @Autowired
     private MedewerkerRepository medewerkerRepository;
-
-    @Value("${email.wachtwoord}")
-    private String wachtwoord;
 
 
     @PostMapping("/planner/gebruiker/overzicht/uitnodigen")

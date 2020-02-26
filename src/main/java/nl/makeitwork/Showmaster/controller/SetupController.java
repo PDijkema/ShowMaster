@@ -4,12 +4,9 @@ import nl.makeitwork.Showmaster.model.Medewerker;
 import nl.makeitwork.Showmaster.model.MedewerkerInschrijvingVoorstelling;
 import nl.makeitwork.Showmaster.model.Taak;
 import nl.makeitwork.Showmaster.model.Voorstelling;
-import nl.makeitwork.Showmaster.repository.MedewerkerInschrijvingVoorstellingRepository;
-import nl.makeitwork.Showmaster.repository.MedewerkerRepository;
-import nl.makeitwork.Showmaster.repository.TaakRepository;
-import nl.makeitwork.Showmaster.repository.VoorstellingRepository;
-import nl.makeitwork.Showmaster.service.MedewerkerService;
-import nl.makeitwork.Showmaster.service.VoorstellingsTaakService;
+import nl.makeitwork.Showmaster.repository.*;
+import nl.makeitwork.Showmaster.service.*;
+import nl.makeitwork.Showmaster.validator.MedewerkerValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -23,18 +20,35 @@ import java.time.format.DateTimeFormatter;
 public class SetupController {
 
     @Autowired
+    SecurityServiceImplementatie securityServiceImplementatie;
+    @Autowired
     private MedewerkerService medewerkerService;
+    @Autowired
+    private MedewerkerServiceImplementatie medewerkerServiceImplementatie;
+    @Autowired
+    private SecurityService securityService;
+    @Autowired
+    private MedewerkerValidator medewerkerValidator;
+    @Autowired
+    private MedewerkerRepository medewerkerRepository;
+    @Autowired
+    private MedewerkerProfielGegevensRepository medewerkerProfielGegevensRepository;
+    @Autowired
+    VoorstellingsTaakRepository voorstellingsTaakRepository;
     @Autowired
     TaakRepository taakRepository;
     @Autowired
-    private VoorstellingRepository voorstellingRepository;
+    VoorstellingRepository voorstellingRepository;
+    @Autowired
+    VerificatieTokenRepository verificatieTokenRepository;
+    @Autowired
+    EmailMetTokenRepository emailMetTokenRepository;
+    @Autowired
+    MedewerkerInschrijvingVoorstellingRepository medewerkerInschrijvingVoorstellingRepository;
     @Autowired
     @Qualifier("voorstellingsTaakService")
     private VoorstellingsTaakService voorstellingsTaakService;
-    @Autowired
-    private MedewerkerInschrijvingVoorstellingRepository medewerkerInschrijvingVoorstellingRepository;
-    @Autowired
-    MedewerkerRepository medewerkerRepository;
+
 
     @GetMapping("/setup")
     protected String setupTakenVoorstellingenMedewerkersInschrijvingen() {
@@ -60,7 +74,6 @@ public class SetupController {
         taakRepository.save(taak3);
         taakRepository.save(taak4);
 
-
         Medewerker medewerker1 = new Medewerker();
         medewerker1.setGebruikersnaam("gert@test.com");
         medewerker1.setWachtwoord("test1234");
@@ -68,7 +81,8 @@ public class SetupController {
         medewerker1.setPlanner(true);
         medewerker1.getMedewerkerProfielGegevens().setVoornaam("Gert");
         medewerker1.getMedewerkerProfielGegevens().setAchternaam("Postma");
-        medewerker1.getMedewerkerProfielGegevens().setVoorkeurstaak(taakRepository.findByTaakTaakNaam("Bar"));
+        medewerker1.getMedewerkerProfielGegevens().setEmailadres(medewerker1.getGebruikersnaam());
+        medewerker1.getMedewerkerProfielGegevens().setVoorkeurstaak(taakRepository.findByTaakNaam("Bar"));
 
         Medewerker medewerker2 = new Medewerker();
         medewerker2.setGebruikersnaam("pieter@test.com");
@@ -77,7 +91,8 @@ public class SetupController {
         medewerker2.setPlanner(true);
         medewerker2.getMedewerkerProfielGegevens().setVoornaam("Pieter");
         medewerker2.getMedewerkerProfielGegevens().setAchternaam("Dijkema");
-        medewerker1.getMedewerkerProfielGegevens().setVoorkeurstaak(taakRepository.findByTaakTaakNaam("Bar"));
+        medewerker2.getMedewerkerProfielGegevens().setEmailadres(medewerker2.getGebruikersnaam());
+        medewerker2.getMedewerkerProfielGegevens().setVoorkeurstaak(taakRepository.findByTaakNaam("Bar"));
 
         Medewerker medewerker3 = new Medewerker();
         medewerker3.setGebruikersnaam("karin@test.com");
@@ -86,32 +101,35 @@ public class SetupController {
         medewerker3.setPlanner(true);
         medewerker3.getMedewerkerProfielGegevens().setVoornaam("Karin");
         medewerker3.getMedewerkerProfielGegevens().setAchternaam("Zoetendal");
-        medewerker1.getMedewerkerProfielGegevens().setVoorkeurstaak(taakRepository.findByTaakTaakNaam("Bar"));
+        medewerker3.getMedewerkerProfielGegevens().setEmailadres(medewerker3.getGebruikersnaam());
+        medewerker3.getMedewerkerProfielGegevens().setVoorkeurstaak(taakRepository.findByTaakNaam("Bar"));
 
         Medewerker medewerker4 = new Medewerker();
-        medewerker4.setGebruikersnaam("tabitha@test.com");
+        medewerker4.setGebruikersnaam("gerard@test.com");
         medewerker4.setWachtwoord("test1234");
         medewerker4.setWachtwoordBevestigen("test1234");
         medewerker4.setPlanner(true);
-        medewerker4.getMedewerkerProfielGegevens().setVoornaam("Tabitha");
-        medewerker4.getMedewerkerProfielGegevens().setAchternaam("Krist-Kainama");
-        medewerker4.getMedewerkerProfielGegevens().setVoorkeurstaak(taakRepository.findByTaakTaakNaam("Kaartverkoop"));
+        medewerker4.getMedewerkerProfielGegevens().setVoornaam("Gerda");
+        medewerker4.getMedewerkerProfielGegevens().setTussenvoegsel("de");
+        medewerker4.getMedewerkerProfielGegevens().setAchternaam("Jong");
+        medewerker4.getMedewerkerProfielGegevens().setVoorkeurstaak(taakRepository.findByTaakNaam("Kaartverkoop"));
 
         Medewerker medewerker5 = new Medewerker();
-        medewerker5.setGebruikersnaam("wouter@test.com");
+        medewerker5.setGebruikersnaam("kees@test.com");
         medewerker5.setWachtwoord("test1234");
         medewerker5.setWachtwoordBevestigen("test1234");
         medewerker5.setPlanner(true);
-        medewerker5.getMedewerkerProfielGegevens().setVoornaam("Wouter");
-        medewerker5.getMedewerkerProfielGegevens().setAchternaam("Meindertsma");
+        medewerker5.getMedewerkerProfielGegevens().setVoornaam("Kees");
+        medewerker5.getMedewerkerProfielGegevens().setTussenvoegsel("de");
+        medewerker5.getMedewerkerProfielGegevens().setAchternaam("Vries");
 
         Medewerker medewerker6 = new Medewerker();
-        medewerker6.setGebruikersnaam("daniel@test.com");
+        medewerker6.setGebruikersnaam("piet@test.com");
         medewerker6.setWachtwoord("test1234");
         medewerker6.setWachtwoordBevestigen("test1234");
         medewerker6.setPlanner(true);
-        medewerker6.getMedewerkerProfielGegevens().setVoornaam("Daniël");
-        medewerker6.getMedewerkerProfielGegevens().setAchternaam("Kuperus");
+        medewerker6.getMedewerkerProfielGegevens().setVoornaam("Piet");
+        medewerker6.getMedewerkerProfielGegevens().setAchternaam("Janssen");
 
         medewerkerService.save(medewerker1);
         medewerkerService.save(medewerker2);
@@ -169,7 +187,7 @@ public class SetupController {
         voorstellingRepository.save(voorstelling3);
 
         for (Taak taak : taakRepository.findAll()) {
-            voorstellingsTaakService.standaardTaakOpslaanBijVoorstelling(taak.getStandaardBezetting(), voorstelling2, taak);
+            voorstellingsTaakService.standaardTaakOpslaanBijVoorstelling(taak.getStandaardBezetting(), voorstelling3, taak);
         }
 
         for (Medewerker medewerker :medewerkerRepository.findAll()) {
@@ -177,6 +195,14 @@ public class SetupController {
                     new MedewerkerInschrijvingVoorstelling(medewerker, voorstelling1, "Beschikbaar");
             medewerkerInschrijvingVoorstellingRepository.save(medewerkerInschrijvingVoorstelling);
         }
+
+        MedewerkerInschrijvingVoorstelling medewerkerInschrijvingVoorstelling2 =
+                new MedewerkerInschrijvingVoorstelling(medewerker1, voorstelling2, "Misschien");
+        medewerkerInschrijvingVoorstellingRepository.save(medewerkerInschrijvingVoorstelling2);
+
+        MedewerkerInschrijvingVoorstelling medewerkerInschrijvingVoorstelling3 =
+                new MedewerkerInschrijvingVoorstelling(medewerker1, voorstelling3, "Niet Beschikbaar");
+        medewerkerInschrijvingVoorstellingRepository.save(medewerkerInschrijvingVoorstelling3);
 
         return "redirect:/";
     }
