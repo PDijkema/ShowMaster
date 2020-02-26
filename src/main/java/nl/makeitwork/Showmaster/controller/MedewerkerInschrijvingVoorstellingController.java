@@ -34,7 +34,7 @@ public class MedewerkerInschrijvingVoorstellingController {
     private MedewerkerInschrijvingVoorstellingRepository medewerkerInschrijvingVoorstellingRepository;
 
 
-    @GetMapping("/rooster/openvoorstelling")
+    @GetMapping("/medewerker/rooster/openvoorstelling")
     public String openVoorstellingenOphalen(Model model, @AuthenticationPrincipal Medewerker ingelogdeMedewerker) {
 
         List<Voorstelling> voorstellingen = voorstellingRepository.findAll();
@@ -52,7 +52,7 @@ public class MedewerkerInschrijvingVoorstellingController {
     }
 
 
-    @GetMapping("/rooster/openvoorstelling/inschrijven/{voorstellingId}/{inschrijvingStatus}")
+    @GetMapping("/medewerker/rooster/openvoorstelling/inschrijven/{voorstellingId}/{inschrijvingStatus}")
     public String inschrijvenVoorstelling(@PathVariable Integer voorstellingId, @PathVariable String inschrijvingStatus, @AuthenticationPrincipal Medewerker ingelogdeMedewerker) {
 
         MedewerkerInschrijvingVoorstelling alIngeschrevenMedewerker = medewerkerInschrijvingVoorstellingRepository.findByVoorstellingVoorstellingIdAndMedewerkerMedewerkerId(voorstellingId, ingelogdeMedewerker.getMedewerkerId());
@@ -68,7 +68,7 @@ public class MedewerkerInschrijvingVoorstellingController {
                 medewerkerInschrijvingVoorstellingRepository.save(medewerkerInschrijvingVoorstelling);
             }
         }
-        return "redirect:/rooster/openvoorstelling";
+        return "redirect:/medewerker/rooster/openvoorstelling";
     }
 }
 

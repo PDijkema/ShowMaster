@@ -13,7 +13,6 @@
         <link href="${contextPath}\resources\css\all.css" type="text/css" rel="stylesheet">
         <script src="${contextPath}\resources\js\ajax.js"></script>
         <script src="${contextPath}\resources\js\javascript.functies.js"></script>
-
     </head>
 
     <body>
@@ -70,10 +69,12 @@
                             </c:choose>
                         </td>
                         <td>
-                            <span class="badge badge-pill badge-danger">
                             <c:set var="voorstellingId" value="${voorstelling.voorstellingId}" />
-                            <c:out value="${openstaandeTaken[voorstellingId]}"/>
-                            </span>
+                            <c:if test="${openstaandeTaken[voorstellingId] != 0}">
+                                <span class="badge badge-pill badge-danger">
+                                    <c:out value="${openstaandeTaken[voorstellingId]}"/>
+                                </span>
+                            </c:if>
                         </td>
                         <td>
                             <c:choose>
