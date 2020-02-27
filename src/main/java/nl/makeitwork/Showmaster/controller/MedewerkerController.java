@@ -291,41 +291,6 @@ public class MedewerkerController {
 
         return "redirect:/";
     }
-
-
-    @GetMapping("/medewerker/setup")
-    protected String aanmakenMedewerkers() {
-        Medewerker medewerker1 = new Medewerker();
-
-        medewerker1.setGebruikersnaam("gert@test.com");
-        medewerker1.setWachtwoord("test1234");
-        medewerker1.setWachtwoordBevestigen("test1234");
-        medewerker1.setPlanner(true);
-        medewerker1.getMedewerkerProfielGegevens().setVoornaam("Gert");
-        medewerker1.getMedewerkerProfielGegevens().setAchternaam("Postma");
-
-        Medewerker medewerker2 = new Medewerker();
-        medewerker2.setGebruikersnaam("pieter@test.com");
-        medewerker2.setWachtwoord("test1234");
-        medewerker2.setWachtwoordBevestigen("test1234");
-        medewerker2.setPlanner(true);
-        medewerker2.getMedewerkerProfielGegevens().setVoornaam("Pieter");
-        medewerker2.getMedewerkerProfielGegevens().setAchternaam("Dijkema");
-
-        Medewerker medewerker3 = new Medewerker();
-        medewerker3.setGebruikersnaam("karin@test.com");
-        medewerker3.setWachtwoord("test1234");
-        medewerker3.setWachtwoordBevestigen("test1234");
-        medewerker3.setPlanner(true);
-        medewerker3.getMedewerkerProfielGegevens().setVoornaam("Karin");
-        medewerker3.getMedewerkerProfielGegevens().setAchternaam("Zoetendal");
-
-        medewerkerService.save(medewerker1);
-        medewerkerService.save(medewerker2);
-        medewerkerService.save(medewerker3);
-
-        return "redirect:/";
-    }
 }
 
 

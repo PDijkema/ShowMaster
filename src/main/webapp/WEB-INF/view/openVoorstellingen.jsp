@@ -44,6 +44,7 @@
                         </tr>
                    </table>
                 <br>
+                <a id="terugNaarRooster" class="btn btn-primary" href="${contextPath}/medewerker/rooster">Terug naar rooster</a>
                 <table class="table table-hover" id="myTable">
                     <thead>
                     <tr>

@@ -36,7 +36,7 @@ public class WebSecurityConfiguratie extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/resources/**", "/registreer/**", "/images/**", "/wachtwoord/reset/**").permitAll()
+                .antMatchers("/resources/**", "/registreer/**", "/images/**", "/wachtwoord/reset/**", "/setup").permitAll()
                 .antMatchers("/medewerker/**").hasRole("MEDEWERKER")
                 .antMatchers("/planner/**").hasRole("PLANNER")
                 .anyRequest().authenticated()

@@ -1,7 +1,6 @@
 package nl.makeitwork.Showmaster.controller;
 
 import nl.makeitwork.Showmaster.model.MedewerkerInschrijvingVoorstelling;
-import nl.makeitwork.Showmaster.model.Taak;
 import nl.makeitwork.Showmaster.model.Voorstelling;
 import nl.makeitwork.Showmaster.model.VoorstellingsTaak;
 import nl.makeitwork.Showmaster.repository.MedewerkerInschrijvingVoorstellingRepository;
@@ -20,9 +19,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletRequest;
-import java.time.LocalDateTime;
-import java.time.Month;
-import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -194,64 +190,6 @@ public class VoorstellingController {
     @GetMapping("/planner/voorstellingen/voorstelling/verwijderen/{voorstellingId}")
     protected String verwijderVoorstelling(@PathVariable Integer voorstellingId) {
         voorstellingRepository.deleteById(voorstellingId);
-        return "redirect:/planner/voorstellingen";
-    }
-
-
-    @GetMapping("/voorstellingen/setup")
-    protected String setupTakenInDatabase() {
-
-        Voorstelling voorstelling1 = new Voorstelling();
-
-        voorstelling1.setNaam("Lion King");
-        voorstelling1.setLocalDateTime(LocalDateTime.of(2020, Month.JANUARY, 18, 20, 30));
-        voorstelling1.setStatus("Gepubliceerd");
-
-        DateTimeFormatter aFormatter = DateTimeFormatter.ofPattern("dd MMMM yyyy HH:mm");
-        LocalDateTime localDateTime = voorstelling1.getLocalDateTime();
-        String formattedString = localDateTime.format(aFormatter);
-
-        voorstelling1.setDatum(formattedString);
-
-        voorstellingRepository.save(voorstelling1);
-
-        for (Taak taak : taakRepository.findAll()) {
-            voorstellingsTaakService.standaardTaakOpslaanBijVoorstelling(taak.getStandaardBezetting(), voorstelling1, taak);
-        }
-
-        Voorstelling voorstelling2 = new Voorstelling();
-
-        voorstelling2.setNaam("Soldaat van Oranje");
-        voorstelling2.setLocalDateTime(LocalDateTime.of(2020, Month.JANUARY, 16, 20, 0));
-        voorstelling2.setStatus("Gepubliceerd");
-
-        LocalDateTime localDateTime2 = voorstelling2.getLocalDateTime();
-        String formattedString2 = localDateTime2.format(aFormatter);
-
-        voorstelling2.setDatum(formattedString2);
-
-        voorstellingRepository.save(voorstelling2);
-
-        for (Taak taak : taakRepository.findAll()) {
-            voorstellingsTaakService.standaardTaakOpslaanBijVoorstelling(taak.getStandaardBezetting(), voorstelling2, taak);
-        }
-
-        Voorstelling voorstelling3 = new Voorstelling();
-
-        voorstelling3.setNaam("Assepoester");
-        voorstelling3.setLocalDateTime(LocalDateTime.of(2020, Month.FEBRUARY, 8, 21, 0));
-        voorstelling3.setStatus("Ongepubliceerd");
-
-        LocalDateTime localDateTime3 = voorstelling3.getLocalDateTime();
-        String formattedString3 = localDateTime3.format(aFormatter);
-
-        voorstelling3.setDatum(formattedString3);
-
-        voorstellingRepository.save(voorstelling3);
-
-        for (Taak taak : taakRepository.findAll()) {
-            voorstellingsTaakService.standaardTaakOpslaanBijVoorstelling(taak.getStandaardBezetting(), voorstelling2, taak);
-        }
         return "redirect:/planner/voorstellingen";
     }
 }
