@@ -88,6 +88,7 @@ public class SetupController {
         medewerker1.getMedewerkerProfielGegevens().setAchternaam("Postma");
         medewerker1.getMedewerkerProfielGegevens().setEmailadres(medewerker1.getGebruikersnaam());
         medewerker1.getMedewerkerProfielGegevens().setLocalDate(LocalDate.of(1993,11,12));
+        medewerker1.getMedewerkerProfielGegevens().localDateFormatterenNaarString();
         medewerker1.getMedewerkerProfielGegevens().setTelefoonnummer("0612345678");
         medewerker1.getMedewerkerProfielGegevens().setVoorkeurstaak(taakRepository.findByTaakNaam("Bar"));
 
@@ -100,6 +101,7 @@ public class SetupController {
         medewerker2.getMedewerkerProfielGegevens().setAchternaam("Dijkema");
         medewerker2.getMedewerkerProfielGegevens().setEmailadres(medewerker2.getGebruikersnaam());
         medewerker2.getMedewerkerProfielGegevens().setLocalDate(LocalDate.of(1985,1,3));
+        medewerker2.getMedewerkerProfielGegevens().localDateFormatterenNaarString();
         medewerker2.getMedewerkerProfielGegevens().setTelefoonnummer("0623456789");
         medewerker2.getMedewerkerProfielGegevens().setVoorkeurstaak(taakRepository.findByTaakNaam("Bar"));
 
@@ -112,6 +114,7 @@ public class SetupController {
         medewerker3.getMedewerkerProfielGegevens().setAchternaam("Zoetendal");
         medewerker3.getMedewerkerProfielGegevens().setEmailadres(medewerker3.getGebruikersnaam());
         medewerker3.getMedewerkerProfielGegevens().setLocalDate(LocalDate.of(1981,1,19));
+        medewerker3.getMedewerkerProfielGegevens().localDateFormatterenNaarString();
         medewerker3.getMedewerkerProfielGegevens().setTelefoonnummer("0634567891");
         medewerker3.getMedewerkerProfielGegevens().setVoorkeurstaak(taakRepository.findByTaakNaam("Bar"));
 
