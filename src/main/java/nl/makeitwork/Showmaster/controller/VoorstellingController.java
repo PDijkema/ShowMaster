@@ -175,8 +175,8 @@ public class VoorstellingController {
     @GetMapping("/rooster/voorstelling/{voorstellingId}")
     protected String roosterVoorstelling(@PathVariable Integer voorstellingId, Model model) {
 
-        List<VoorstellingsTaak> voorstellingOverzicht = voorstellingsTaakRepository.findByVoorstellingVoorstellingId(voorstellingId);
-        voorstellingOverzicht.removeIf(r -> r.getMedewerker() == null);
+        List<VoorstellingsTaak> voorstellingOverzicht =
+                voorstellingsTaakRepository.findByVoorstellingVoorstellingIdAndMedewerkerIsNotNull(voorstellingId);
 
         Voorstelling voorstelling = voorstellingRepository.findByVoorstellingId(voorstellingId);
 

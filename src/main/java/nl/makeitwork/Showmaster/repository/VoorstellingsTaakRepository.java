@@ -25,6 +25,8 @@ public interface VoorstellingsTaakRepository extends JpaRepository<Voorstellings
 
     CopyOnWriteArrayList<VoorstellingsTaak> findByVoorstellingVoorstellingId(Integer voorstellingId);
 
+    List<VoorstellingsTaak> findByVoorstellingVoorstellingIdAndMedewerkerIsNotNull(Integer voorstellingId);
+
     List<VoorstellingsTaak> findByMedewerkerMedewerkerId(Integer medewerkerId);
 
     // telt het aantal openstaande taken per voorstelling op
